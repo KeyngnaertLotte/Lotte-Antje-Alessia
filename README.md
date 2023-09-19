@@ -32,4 +32,4 @@
 - qr-codes ipv nfc
 - ticket kopen overslaan
 - kassabeheer, artiestenbeheer, bezoekersbeheer
-- personeel: vip, podia, 
+- personeel: standjes met eten en bezoekers, artiesten en benodigdheden, VIP
