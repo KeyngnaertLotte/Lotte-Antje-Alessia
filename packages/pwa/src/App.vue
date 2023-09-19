@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="bg-pink-500">
+  <div>
     <RouterView />
   </div>
 </template>
