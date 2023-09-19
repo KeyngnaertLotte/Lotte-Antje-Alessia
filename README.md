@@ -17,16 +17,10 @@
 - Backstage drank en eten
 - Vip lijst
 
-### Personeel
+### Personeel (Materiaal, Artiesten, Bezoeker)
 - Eigen takenlijst (met podia)
 - Uurrooster
 - Materiaal benodigdheden
-- Probleem melden aan manager
-
-### Podia
-- Maakt takenlijst personeel
-- Kan aanpassingen maken voor line up
-- Manager krijgt meldingen van problemen binnen
 
 ## Ideeën
 - qr-codes ipv nfc
