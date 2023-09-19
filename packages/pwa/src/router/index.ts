@@ -8,28 +8,25 @@ const router = createRouter({
       component: () => import('../views/Home.vue'),
     },
     {
-      path: '/temp',
-      component: () => import('../views/Temp.vue'),
-    },
-    {
       path: '/festival',
       component: () => import('../views/Festival.vue'),
     },
     {
-      path: '/events',
-      component: () => import('../views/EventsWrapper.vue'),
+      path: '/bezoeker',
+      component: () => import('../components/wrapper/EventsWrapper.vue'),
+      meta: { shouldBeAuthenticated: true},
       children: [
+        // {
+        //   path: '',
+        //   component: () => import('../views/protected/events/Events.vue'),
+        // },
+        // {
+        //   path: 'new',
+        //   component: () => import('../views/protected/events/AddEvent.vue'),
+        // },
         {
-          path: '',
-          component: () => import('../views/Events.vue'),
-        },
-        {
-          path: 'new',
-          component: () => import('../views/AddEvent.vue'),
-        },
-        {
-          path: ':id',
-          component: () => import('../views/Event.vue'),
+          path: ':eventId',
+          component: () => import('../views/protected/bezoeker/Detail.vue'),
         },
       ],
     },
