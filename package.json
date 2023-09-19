@@ -1,0 +1,32 @@
+{
+  "name": "lotte-antje-alessia",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "todo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeyngnaertLotte/Lotte-Antje-Alessia.git"
+  },
+  "author": "MCT",
+  "bugs": {
+    "url": "https://github.com/KeyngnaertLotte/Lotte-Antje-Alessia/issues"
+  },
+  "homepage": "https://github.com/KeyngnaertLotte/Lotte-Antje-Alessia#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "prettier": {
+    "arrowParens": "avoid",
+    "endOfLine": "lf",
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "proseWrap": "preserve",
+    "htmlWhitespaceSensitivity": "css",
+    "useTabs": false
+  }
+}
