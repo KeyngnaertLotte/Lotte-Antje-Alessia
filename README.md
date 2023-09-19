@@ -5,8 +5,8 @@
 ## IDEAS
 
 ### Bezoekers
--  Ticket kopen & zichtbaar
-(-  Geld op bandje plaatsen voor eten en drinken)
+-  Ticket kopen & zichtbaar </br>
+-  (Geld op bandje plaatsen voor eten en drinken)
 -  Overzicht line-up en podia
 -  Favo optreden toevoegen + melding wanneer optreden begint en waar
 
