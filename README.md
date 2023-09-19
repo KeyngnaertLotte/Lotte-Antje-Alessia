@@ -18,12 +18,18 @@
 - Vip lijst
 
 ### Personeel
-- Eigen takenlijst
+- Eigen takenlijst (met podia)
 - Uurrooster
 - Materiaal benodigdheden
 - Probleem melden aan manager
 
-### Manager
+### Podia
 - Maakt takenlijst personeel
 - Kan aanpassingen maken voor line up
 - Manager krijgt meldingen van problemen binnen
+
+## Ideeën
+- qr-codes ipv nfc
+- ticket kopen overslaan
+- kassabeheer, artiestenbeheer, bezoekersbeheer
+- personeel: vip, podia, 
