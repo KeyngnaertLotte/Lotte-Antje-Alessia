@@ -21,7 +21,7 @@
         name="email"
         id="email"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-        v-model="LoginCredentials.email"
+        v-model="loginCredentials.email"
       />
     </div>
     <div class="mt-6">
@@ -36,7 +36,7 @@
         name="password"
         id="password"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-        v-model="LoginCredentials.password"
+        v-model="loginCredentials.password"
       />
       <RouterLink
         to="/auth/forgot-password"
@@ -65,35 +65,40 @@
 
 
 <script lang="ts">
-import { ref } from 'vue';
-import useFirebase from "@/composables/useFirebase"
+import { ref } from 'vue'
+import { type AuthError } from 'firebase/auth'
 
-export default{
-    setup(){
-        // composables
-        const { login, firebaseUser } = useFirebase()
+import useFirebase from '@/composables/useFirebase'
 
-        // variabele
-        const LoginCredentials = ref({
-            email: 'heheh@gmail.com',
-            password: '123456'
-        });
+export default {
+  setup() {
+    // Composables
+    const { login, firebaseUser } = useFirebase()
 
-        // functie
-        const handleLogin = () => {
-            console.log(LoginCredentials.value);
-            login(LoginCredentials.value.email, LoginCredentials.value.password).then(() => {
-                console.log("logged in");
-            })
-        }
+    // Logic
+    const loginCredentials = ref({
+      email: 'heheh@gmail.com',
+      password: '123456',
+    })
+    const error = ref<AuthError | null>(null)
 
-        return {
-            LoginCredentials,
-            firebaseUser,
-            handleLogin
-        }
+    const handleLogin = () => {
+      login(loginCredentials.value.email, loginCredentials.value.password)
+        .then(() => {
+          console.log('logged in')
+        })
+        .catch((err: AuthError) => {
+          error.value = err
+        })
     }
+
+    return {
+      loginCredentials,
+      firebaseUser,
+
+      error,
+      handleLogin,
+    }
+  },
 }
 </script>
-
-

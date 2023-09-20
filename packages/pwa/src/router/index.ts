@@ -55,8 +55,10 @@ router.beforeEach(async (to, from, next) => {
   const { firebaseUser } = useFirebase()
 
   if (to.meta.shouldBeAuthenticated && !firebaseUser.value) {
-    console.log('HACKER')
     next({ path: '/auth/login' })
+  }
+  if (to.meta.preventLoggedIn && firebaseUser.value) {
+    next({ path: '/' })
   } else {
     next()
   }
