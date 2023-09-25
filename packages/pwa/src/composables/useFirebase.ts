@@ -107,7 +107,6 @@ export default () => {
   // State for each composable
   return {
     firebaseUser,
-
     login,
     logout,
     register,

@@ -1,6 +1,6 @@
 <template>
-  <form @submit="" class="w-full">
-    <h1 class="text-4xl font-bold tracking-wider">Register</h1>
+  <form @submit.prevent="handleRegister" class="w-full">
+    <h1 class="text-4xl font-bold tracking-wider">Register {{ firebaseUser }}</h1>
     <p class="text-neutral-500 mb-4">
       Create an account and keep track of your birds.
     </p>
@@ -21,7 +21,8 @@
         name="nickname"
         id="nickname"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
-      />
+        v-model="newUser.name"
+        />
     </div>
 
     <div class="mt-6">
@@ -52,7 +53,8 @@
         name="password"
         id="password"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-      />
+        v-model="newUser.password"
+        />
     </div>
 
     <button
@@ -78,31 +80,32 @@ import { type AuthError } from 'firebase/auth'
 import useFirebase from '@/composables/useFirebase'
 
 export default {
-  script() {
+  setup() {
     // Composables
-    const { register } = useFirebase()
+    const { register, firebaseUser } = useFirebase()
 
     const newUser = ref({
       name: '',
       password: '',
       email: '',
     })
+
     const error = ref<AuthError | null>(null)
 
     const handleRegister = () => {
       register(
-        newUser.value.name,
-        newUser.value.email,
+        newUser.value.name, 
+        newUser.value.email, 
         newUser.value.password,
-      ).catch(err => {
+      ).catch((err) => {
         error.value = err
       })
     }
 
     return {
       newUser,
+      firebaseUser,
       error,
-
       handleRegister,
     }
   },
