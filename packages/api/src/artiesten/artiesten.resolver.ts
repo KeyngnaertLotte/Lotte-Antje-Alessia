@@ -15,14 +15,14 @@ export class ArtiestenResolver {
 
   @Query(() => [Artiesten], { name: 'artiesten' })
   findAll() {
-    return [
-      {
-        id: '1',
-        name: 'Be Right Back',
-        stage: 'Antje'
-      },
-    ]
-    // return this.artiestenService.findAll();
+    // return [
+    //   {
+    //     id: '1',
+    //     name: 'Be Right Back',
+    //     stage: 'Antje'
+    //   },
+    // ]
+    return this.artiestenService.findAll();
   }
 
   @Query(() => Artiesten, { name: 'artiest' })
