@@ -1,0 +1,16 @@
+version: '3.1'
+name: api
+
+services:
+  mongodb:
+    image: mongo
+    restart: on-failure:5 # On error, try to restart for a maximum of 5 times
+    ports:
+      - 27027:27017
+    environment:
+      MONGO_INITDB_DATABASE: api
+    volumes:
+      - dbvolume:/data/db
+
+volumes:
+  dbvolume:
