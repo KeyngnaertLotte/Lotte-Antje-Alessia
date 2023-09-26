@@ -15,8 +15,7 @@ export class BezoekersResolver {
 
   @Query(() => [Bezoeker], { name: 'bezoekers' })
   findAll() {
-    // return this.bezoekersService.findAll();
-    return [{id: '1', name: 'test'}]
+    return this.bezoekersService.findAll();
   }
 
   @Query(() => Bezoeker, { name: 'bezoeker' })

@@ -1,15 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBezoekerInput } from './dto/create-bezoeker.input';
 import { UpdateBezoekerInput } from './dto/update-bezoeker.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Bezoeker } from './entities/bezoeker.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class BezoekersService {
+  constructor(
+    @InjectRepository(Bezoeker)
+    private readonly bezoekerRepository: Repository<Bezoeker>,
+  ) {}
+
   create(createBezoekerInput: CreateBezoekerInput) {
     return 'This action adds a new bezoeker';
   }
 
   findAll() {
-    return `This action returns all bezoekers`;
+    return this.bezoekerRepository.find();
   }
 
   findOne(id: number) {
