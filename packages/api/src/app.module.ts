@@ -4,6 +4,8 @@ import { AppService } from './app.service'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ArtiestenModule } from './artiesten/artiesten.module';
+import { PersoneelModule } from './personeel/personeel.module';
+import { BezoekersModule } from './bezoekers/bezoekers.module';
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import { ArtiestenModule } from './artiesten/artiesten.module';
       autoSchemaFile: true,
     }),
     ArtiestenModule,
+    BezoekersModule,
+    PersoneelModule,
   ],
   controllers: [AppController],
   providers: [AppService],
