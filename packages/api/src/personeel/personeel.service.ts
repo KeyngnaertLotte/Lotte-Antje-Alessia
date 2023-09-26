@@ -1,15 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePersoneelInput } from './dto/create-personeel.input';
 import { UpdatePersoneelInput } from './dto/update-personeel.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Personeel } from './entities/personeel.entity';
 
 @Injectable()
 export class PersoneelService {
+  constructor(
+    @InjectRepository(Personeel)
+    private readonly personeelRepository: Repository<Personeel>,
+  ) {}
+
   create(createPersoneelInput: CreatePersoneelInput) {
     return 'This action adds a new personeel';
   }
 
   findAll() {
-    return `This action returns all personeel`;
+    return this.personeelRepository.find();
   }
 
   findOne(id: number) {

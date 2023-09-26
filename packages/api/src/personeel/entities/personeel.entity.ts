@@ -1,12 +1,18 @@
-import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { Entity, Column, ObjectIdColumn } from 'typeorm'
 
+@Entity() // Database link - Typeorm
 @ObjectType()
 export class Personeel {
-  // @Field(() => Int, { description: 'Example field (placeholder)' })
-  // exampleField: number;
-  @Field(() => ID)
+  @ObjectIdColumn() // Database link - Typeorm
+  @Field(() => ID) // Graphql
   id: string
 
-  @Field()
-  name: string
+  @Column() // Database link - Typeorm
+  @Field() //graphql
+  voornaam: string
+
+  @Column() // Database link - Typeorm
+  @Field() //graphql
+  achternaam: string
 }
