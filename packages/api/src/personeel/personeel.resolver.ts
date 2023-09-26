@@ -32,7 +32,7 @@ export class PersoneelResolver {
     ]
   }
 
-  @Query(() => Personeel, { name: 'personeel' })
+  @Query(() => Personeel, { name: 'personeelLid' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.personeelService.findOne(id);
   }
