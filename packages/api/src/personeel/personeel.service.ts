@@ -1,19 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePersoneelInput } from './dto/create-personeel.input';
 import { UpdatePersoneelInput } from './dto/update-personeel.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Personeel } from './entities/personeel.entity';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class PersoneelService {
-  create(createPersoneelInput: CreatePersoneelInput) {
-    return 'This action adds a new personeel';
+  constructor(
+    @InjectRepository(Personeel)
+    private readonly personeelRepository: Repository<Personeel>,
+  ) {}
+
+
+  create(createPersoneelInput: CreatePersoneelInput): Promise<Personeel> {
+    const p = new Personeel()
+    p.voornaam = createPersoneelInput.voornaam
+    p.achternaam = createPersoneelInput.achternaam
+    p.telefoon = createPersoneelInput.telefoon
+
+    return this.personeelRepository.save(p)
   }
 
   findAll() {
-    return `This action returns all personeel`;
+    return this.personeelRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} personeel`;
+  findOneById(id: string): Promise<Personeel> {
+    const obj = new Object(id)
+    console.log(obj)
+    // @ts-ignore
+    return this.personeelRepository.findOne({_id: new ObjectId(id)})
   }
 
   update(id: number, updatePersoneelInput: UpdatePersoneelInput) {
