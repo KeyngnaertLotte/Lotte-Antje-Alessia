@@ -27,9 +27,9 @@ export class ArtiestenResolver {
     return this.artiestenService.findAll()
   }
 
-  @Query(() => Artiesten, { name: 'artiest' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.artiestenService.findOne(id)
+  @Query(() => Artiesten, { name: 'artiest', nullable: true })
+  findOneById(@Args('id') id: string): Promise<Artiesten> {
+    return this.artiestenService.findOneById(id)
   }
 
   @Mutation(() => Artiesten)

@@ -4,6 +4,7 @@ import { UpdateArtiestenInput } from './dto/update-artiesten.input'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Artiesten } from './entities/artiesten.entity'
+import { ObjectId } from 'mongodb'
 
 @Injectable()
 export class ArtiestenService {
@@ -26,6 +27,12 @@ export class ArtiestenService {
 
   findOne(id: number) {
     return `This action returns a #${id} artiesten`
+  }
+
+  findOneById(id: string): Promise<Artiesten> {
+    const obj = new ObjectId(id)
+    // @ts-ignore
+    return this.artiestRepository.findOne({ _id: new ObjectId(id) })
   }
 
   update(id: number, updateArtiestenInput: UpdateArtiestenInput) {
