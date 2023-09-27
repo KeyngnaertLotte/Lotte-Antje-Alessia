@@ -8,11 +8,6 @@ import { CreatePersoneelInput } from './dto/create-personeel.input'
 export class PersoneelResolver {
   constructor(private readonly personeelService: PersoneelService) {}
 
-  // @Mutation(() => Personeel, { name: 'create personeel'})
-  // createPersoneel(@Args('createPersoneelInput') createPersoneelInput: CreatePersoneelInput) {
-  //   return this.personeelService.create(createPersoneelInput);
-  // }
-
   @Mutation(() => Personeel, { description: 'Create a bird using the DTO.' })
   createPersoneel(
     @Args('createPersoneelInput') createPersoneelInput: CreatePersoneelInput,
@@ -25,9 +20,9 @@ export class PersoneelResolver {
     return this.personeelService.findAll()
   }
 
-  @Query(() => Personeel, { name: 'personeelLid' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.personeelService.findOne(id)
+  @Query(() => Personeel, { name: 'personeelLid', nullable: true })
+  findOneById(@Args('id') id: string): Promise<Personeel> {
+    return this.personeelService.findOneById(id)
   }
 
   // @Mutation(() => Personeel)

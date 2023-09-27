@@ -6,7 +6,7 @@ import { Entity, Column, ObjectIdColumn } from 'typeorm'
 export class Personeel {
   @ObjectIdColumn() // Database link - Typeorm
   @Field(() => ID) // Graphql
-  id: string
+  id: number
 
   @Column() // Database link - Typeorm
   @Field() //graphql

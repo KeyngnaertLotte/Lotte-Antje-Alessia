@@ -4,6 +4,7 @@ import { UpdatePersoneelInput } from './dto/update-personeel.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Personeel } from './entities/personeel.entity';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class PersoneelService {
@@ -28,8 +29,11 @@ export class PersoneelService {
     return this.personeelRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} personeel`;
+  findOneById(id: string): Promise<Personeel> {
+    const obj = new Object(id)
+    console.log(obj)
+    // @ts-ignore
+    return this.personeelRepository.findOne({_id: new ObjectId(id)})
   }
 
   update(id: number, updatePersoneelInput: UpdatePersoneelInput) {
