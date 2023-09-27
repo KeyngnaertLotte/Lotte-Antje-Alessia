@@ -25,16 +25,6 @@ export class PersoneelResolver {
     return this.personeelService.findOneById(id)
   }
 
-  // @Mutation(() => Personeel)
-  // updatePersoneel(
-  //   @Args('updatePersoneelInput') updatePersoneelInput: UpdatePersoneelInput,
-  // ) {
-  //   return this.personeelService.update(
-  //     updatePersoneelInput.id,
-  //     updatePersoneelInput,
-  //   )
-  // }
-
   @Mutation(() => Personeel)
   removePersoneel(@Args('id', { type: () => Int }) id: number) {
     return this.personeelService.remove(id)

@@ -13,9 +13,7 @@ export class PersoneelService {
     private readonly personeelRepository: Repository<Personeel>,
   ) {}
 
-  // create(createPersoneelInput: CreatePersoneelInput) {
-  //   return 'This action adds a new personeel';
-  // }
+
   create(createPersoneelInput: CreatePersoneelInput): Promise<Personeel> {
     const p = new Personeel()
     p.voornaam = createPersoneelInput.voornaam
