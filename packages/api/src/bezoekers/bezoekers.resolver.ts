@@ -8,20 +8,19 @@ import { UpdateBezoekerInput } from './dto/update-bezoeker.input';
 export class BezoekersResolver {
   constructor(private readonly bezoekersService: BezoekersService) {}
 
-  @Mutation(() => Bezoeker)
-  createBezoeker(@Args('createBezoekerInput') createBezoekerInput: CreateBezoekerInput) {
+  @Mutation(() => Bezoeker, { description: 'Create a bezoeker using DTO' })
+  createBezoeker(@Args('createBezoekerInput') createBezoekerInput: CreateBezoekerInput): Promise<Bezoeker> {
     return this.bezoekersService.create(createBezoekerInput);
   }
 
   @Query(() => [Bezoeker], { name: 'bezoekers' })
   findAll() {
-    // return this.bezoekersService.findAll();
-    return [{id: '1', name: 'test'}]
+    return this.bezoekersService.findAll();
   }
 
-  @Query(() => Bezoeker, { name: 'bezoeker' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.bezoekersService.findOne(id);
+  @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })
+  findOneById(@Args('id') id: string): Promise<Bezoeker> {
+    return this.bezoekersService.findOneById(id);
   }
 
   @Mutation(() => Bezoeker)
