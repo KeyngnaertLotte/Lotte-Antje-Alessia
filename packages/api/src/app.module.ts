@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ArtiestenModule } from './artiesten/artiesten.module'
 import { PersoneelModule } from './personeel/personeel.module'
 import { BezoekersModule } from './bezoekers/bezoekers.module'
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { BezoekersModule } from './bezoekers/bezoekers.module'
     ArtiestenModule,
     BezoekersModule,
     PersoneelModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
