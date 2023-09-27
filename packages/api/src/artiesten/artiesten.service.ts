@@ -12,7 +12,7 @@ export class ArtiestenService {
     private readonly artiestRepository: Repository<Artiesten>,
   ) {}
 
-  create(createArtiestenInput: CreateArtiestenInput) {
+  create(createArtiestenInput: CreateArtiestenInput): Promise<Artiesten> {
     const a = new Artiesten()
     a.naam = createArtiestenInput.naam
     a.podium = createArtiestenInput.podium
