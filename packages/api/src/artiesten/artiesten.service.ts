@@ -14,8 +14,8 @@ export class ArtiestenService {
 
   create(createArtiestenInput: CreateArtiestenInput) {
     const a = new Artiesten()
-    a.name = createArtiestenInput.name
-    a.stage = createArtiestenInput.stage
+    a.naam = createArtiestenInput.naam
+    a.podium = createArtiestenInput.podium
     // return 'This action adds a new artiesten'
     return this.artiestRepository.save(a)
   }

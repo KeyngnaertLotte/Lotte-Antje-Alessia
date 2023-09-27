@@ -9,9 +9,9 @@ export class Artiesten {
 
   @Column()
   @Field()
-  name: string
+  naam: string
 
   @Column()
   @Field()
-  stage: string
+  podium: string
 }

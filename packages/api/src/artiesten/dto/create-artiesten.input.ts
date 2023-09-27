@@ -5,8 +5,8 @@ export class CreateArtiestenInput {
   // @Field(() => Int, { description: 'Example field (placeholder)' })
   // exampleField: number;
   @Field()
-  name: string
+  naam: string
 
   @Field()
-  stage: string
+  podium: string
 }
