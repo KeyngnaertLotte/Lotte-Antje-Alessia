@@ -18,9 +18,9 @@ export class BezoekersResolver {
     return this.bezoekersService.findAll();
   }
 
-  @Query(() => Bezoeker, { name: 'bezoeker' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.bezoekersService.findOne(id);
+  @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })
+  findOneById(@Args('id') id: string): Promise<Bezoeker> {
+    return this.bezoekersService.findOneById(id);
   }
 
   @Mutation(() => Bezoeker)
