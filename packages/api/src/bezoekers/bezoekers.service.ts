@@ -12,8 +12,15 @@ export class BezoekersService {
     private readonly bezoekerRepository: Repository<Bezoeker>,
   ) {}
 
-  create(createBezoekerInput: CreateBezoekerInput) {
-    return 'This action adds a new bezoeker';
+  create(createBezoekerInput: CreateBezoekerInput): Promise<Bezoeker> {	
+    const b = new Bezoeker();
+    b.voornaam = createBezoekerInput.voornaam;
+    b.achternaam = createBezoekerInput.achternaam;
+    b.email = createBezoekerInput.email;
+    b.saldo = createBezoekerInput.saldo;
+    // b.favoartiest = createBezoekerInput.favoartiest;
+
+    return this.bezoekerRepository.save(b);
   }
 
   findAll() {

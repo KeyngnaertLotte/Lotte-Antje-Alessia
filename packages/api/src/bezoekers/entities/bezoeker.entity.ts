@@ -6,7 +6,7 @@ import { Column, Entity, ObjectIdColumn } from 'typeorm';
 export class Bezoeker {
   @ObjectIdColumn()
   @Field(() => ID)
-  id: string
+  id: number
 
   @Column()
   @Field()
@@ -22,7 +22,7 @@ export class Bezoeker {
 
   @Column()
   @Field()
-  saldo: string
+  saldo: number
 
   // @Column()
   // @Field()
