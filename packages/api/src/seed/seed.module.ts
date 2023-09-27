@@ -4,10 +4,10 @@ import { CommandModule } from 'nestjs-command'
 import { BezoekersModule } from 'src/bezoekers/bezoekers.module';
 import { PersoneelModule } from 'src/personeel/personeel.module';
 import { SeedService } from './seed.service';
+import { DatabaseSeedCommand } from './seed.command';
 
 @Module({
     imports: [ArtiestenModule, BezoekersModule, PersoneelModule, CommandModule],
-    providers: [SeedService],
-
+    providers: [DatabaseSeedCommand, SeedService],
 })
 export class SeedModule {}

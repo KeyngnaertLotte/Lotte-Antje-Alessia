@@ -42,4 +42,12 @@ export class ArtiestenService {
   remove(id: number) {
     return `This action removes a #${id} artiesten`
   }
+
+  saveAll(artiesten: Artiesten[]) {
+    return this.artiestRepository.save(artiesten)
+  }
+
+  truncate() {
+    return this.artiestRepository.clear()
+  }
 }
