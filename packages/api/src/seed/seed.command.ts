@@ -20,9 +20,30 @@ export class DatabaseSeedCommand {
     command: 'seed:reset:artiesten',
     describe: 'delete all data from the artiesten table',
   })
-  async delete() {
+  async deleteArtiesten() {
     console.info('deleting artiesten')
     await this.seedService.deleteAllArtiesten()
     console.info('deleted artiesten')
   }
+
+  @Command({
+    command: 'seed:database:bezoekers',
+    describe: 'seed the database with bezoekers',
+  })
+  async seedBezoekers() {
+    console.info('seeding bezoekers')
+    const bezoekers = await this.seedService.addBezoekersFromJson()
+    console.info(`Seeded ${bezoekers.length} bezoekers`)
+  }
+
+  @Command({
+    command: 'seed:reset:bezoekers',
+    describe: 'delete all data from the bezoekers table',
+  })
+  async deleteBezoekers() {
+    console.info('deleting bezoekers')
+    await this.seedService.deleteAllBezoekers()
+    console.info('deleted bezoekers')
+  }
+
 }

@@ -46,4 +46,12 @@ export class BezoekersService {
   remove(id: number) {
     return `This action removes a #${id} bezoeker`;
   }
+
+  saveAll(bezoekers: Bezoeker[]) {
+    return this.bezoekerRepository.save(bezoekers)
+  }
+
+  truncate() {
+    return this.bezoekerRepository.clear()
+  }
 }

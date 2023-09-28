@@ -1,0 +1,14 @@
+[
+    {
+        "voornaam": "Jeroen",
+        "achternaam": "van der Heijden",
+        "email": "iets@gmail.com",
+        "saldo": 100
+    },
+    {
+        "voornaam": "Henk",
+        "achternaam": "chocolade",
+        "email": "kweenie@gmail.com",
+        "saldo": 134
+    }
+]
