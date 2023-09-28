@@ -46,4 +46,24 @@ export class DatabaseSeedCommand {
     console.info('deleted bezoekers')
   }
 
+  @Command({
+    command: 'seed:database:personeel',
+    describe: 'seed the database with personeel',
+  })
+  async seedPersoneel() {
+    console.info('seeding personeel')
+    const personeel = await this.seedService.addPersoneelFromJson()
+    console.info(`Seeded ${personeel.length} personeel`)
+  }
+
+  @Command({
+    command: 'seed:reset:personeel',
+    describe: 'delete all data from the personeel table',
+  })
+  async deletePersoneel() {
+    console.info('deleting personeel')
+    await this.seedService.deleteAllPersoneel()
+    console.info('deleted personeel')
+  }
+
 }

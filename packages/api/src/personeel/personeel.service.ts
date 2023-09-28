@@ -41,4 +41,13 @@ export class PersoneelService {
   remove(id: number) {
     return `This action removes a #${id} personeel`;
   }
+
+  saveAll(personeel: Personeel[]) {
+    return this.personeelRepository.save(personeel)
+  }
+
+  truncate() {
+    return this.personeelRepository.clear()
+  }
+  
 }
