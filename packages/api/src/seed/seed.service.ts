@@ -3,15 +3,19 @@ import { ArtiestenService } from 'src/artiesten/artiesten.service'
 import { Artiesten } from 'src/artiesten/entities/artiesten.entity'
 import { Bezoeker } from 'src/bezoekers/entities/bezoeker.entity'
 import { BezoekersService } from 'src/bezoekers/bezoekers.service'
+import { PersoneelService } from 'src/personeel/personeel.service'
+import { Personeel } from 'src/personeel/entities/personeel.entity'
 
 import * as artiesten from './data/artiesten.json'
 import * as bezoekers from './data/bezoekers.json'
+import * as personeel from './data/personeel.json'
 
 @Injectable()
 export class SeedService {
   constructor(
     private artiestenService: ArtiestenService, 
-    private bezoekersService: BezoekersService
+    private bezoekersService: BezoekersService,
+    private personeelService: PersoneelService,
     ) {}
 
   async addArtiestenFromJson(): Promise<Artiesten[]> {
@@ -47,6 +51,23 @@ export class SeedService {
 
   async deleteAllBezoekers(): Promise<void> {
     return this.bezoekersService.truncate()
+  }
+
+  async addPersoneelFromJson(): Promise<Personeel[]> {
+    let hetPersoneel: Personeel[] = []
+    for (let personeelLid of personeel) {
+      const p = new Personeel()
+      p.achternaam = personeelLid.achternaam
+      p.voornaam = personeelLid.voornaam
+      p.telefoon = personeelLid.telefoon
+
+      hetPersoneel.push(p)
+    }
+    return this.personeelService.saveAll(hetPersoneel)
+  }
+
+  async deleteAllPersoneel(): Promise<void> {
+    return this.personeelService.truncate()
   }
 
 }
