@@ -19,7 +19,7 @@ export class ArtiestenResolver {
     return this.artiestenService.create(createArtiestenInput)
   }
 
-  @UseGuards(FirebaseGuard)
+  // @UseGuards(FirebaseGuard)
   @Query(() => [Artiesten], { name: 'artiesten' })
   findAll(@FirebaseUser() currentUser: UserRecord) {
     console.log(currentUser)
