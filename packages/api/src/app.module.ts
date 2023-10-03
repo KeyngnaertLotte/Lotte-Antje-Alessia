@@ -7,10 +7,14 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ArtiestenModule } from './artiesten/artiesten.module'
 import { PersoneelModule } from './personeel/personeel.module'
 import { BezoekersModule } from './bezoekers/bezoekers.module'
-import { SeedModule } from './seed/seed.module';
+import { SeedModule } from './seed/seed.module'
+import { AuthenticationModule } from './authentication/authentication.module'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
+
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
@@ -24,11 +28,12 @@ import { SeedModule } from './seed/seed.module';
       useNewUrlParser: true,
       useUnifiedTopology: true, // Disable deprecated warnings
     }),
-    
+
     ArtiestenModule,
     BezoekersModule,
     PersoneelModule,
     SeedModule,
+    AuthenticationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
