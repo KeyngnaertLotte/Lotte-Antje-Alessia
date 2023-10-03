@@ -5,6 +5,8 @@ import { CreateArtiestenInput } from './dto/create-artiesten.input'
 import { UpdateArtiestenInput } from './dto/update-artiesten.input'
 import { UseGuards } from '@nestjs/common'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
+import { FirebaseUser } from 'src/authentication/decoraters/user.decorator'
+import { UserRecord } from 'firebase-admin/auth'
 
 @Resolver(() => Artiesten)
 export class ArtiestenResolver {
@@ -19,7 +21,8 @@ export class ArtiestenResolver {
 
   @UseGuards(FirebaseGuard)
   @Query(() => [Artiesten], { name: 'artiesten' })
-  findAll() {
+  findAll(@FirebaseUser() currentUser: UserRecord) {
+    console.log(currentUser)
     return this.artiestenService.findAll()
   }
 
