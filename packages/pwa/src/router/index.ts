@@ -17,10 +17,16 @@ const router = createRouter({
       path: '/festival',
       component: () => import('../views/Festival.vue'),
     },
+
+    {
+      path: '/artiest',
+      component: () =>import('../views/protected/artiest/index.vue'),
+    },
+
     {
       path: '/bezoeker',
       component: () => import('../components/wrapper/EventsWrapper.vue'),
-      meta: { shouldBeAuthenticated: true},
+      meta: { shouldBeAuthenticated: true },
       children: [
         // {
         //   path: '',
