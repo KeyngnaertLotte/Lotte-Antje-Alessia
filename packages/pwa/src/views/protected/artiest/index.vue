@@ -16,8 +16,8 @@
           <h2 class="text-lg font-semibold tracking-wide">
             {{ artiest.naam }}
           </h2>
-          <p class="text-xs tracking-wide mb-2">{{ artiest.category }}</p>
-          <p class="text-sm">{{ artiest.observations }} times spotted</p>
+          <p class="text-xs tracking-wide mb-2">{{ artiest.podium }}</p>
+          <p class="text-sm">{{ artiest.podium }} times spotted</p>
 
           <RouterLink
             class="flex items-center text-sm text-blue-600 hover:underline mt-2"
