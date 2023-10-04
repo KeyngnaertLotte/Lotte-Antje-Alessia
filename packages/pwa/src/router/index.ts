@@ -24,6 +24,11 @@ const router = createRouter({
     },
 
     {
+      path: '/artiest/dashboard',
+      component: () =>import('../views/protected/artiest/dashboard.vue'),
+    },
+
+    {
       path: '/bezoeker',
       component: () => import('../components/wrapper/EventsWrapper.vue'),
       meta: { shouldBeAuthenticated: true },

@@ -3,18 +3,18 @@ import { CreateArtiestenInput } from './dto/create-artiesten.input'
 import { UpdateArtiestenInput } from './dto/update-artiesten.input'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Artiesten } from './entities/artiesten.entity'
+import { Artiest } from './entities/artiesten.entity'
 import { ObjectId } from 'mongodb'
 
 @Injectable()
 export class ArtiestenService {
   constructor(
-    @InjectRepository(Artiesten)
-    private readonly artiestRepository: Repository<Artiesten>,
+    @InjectRepository(Artiest)
+    private readonly artiestRepository: Repository<Artiest>,
   ) {}
 
-  create(createArtiestenInput: CreateArtiestenInput): Promise<Artiesten> {
-    const a = new Artiesten()
+  create(createArtiestenInput: CreateArtiestenInput): Promise<Artiest> {
+    const a = new Artiest()
     a.naam = createArtiestenInput.naam
     a.podium = createArtiestenInput.podium
     // return 'This action adds a new artiesten'
@@ -29,7 +29,7 @@ export class ArtiestenService {
     return `This action returns a #${id} artiesten`
   }
 
-  findOneById(id: string): Promise<Artiesten> {
+  findOneById(id: string): Promise<Artiest> {
     const obj = new ObjectId(id)
     // @ts-ignore
     return this.artiestRepository.findOne({ _id: new ObjectId(id) })
@@ -43,7 +43,7 @@ export class ArtiestenService {
     return `This action removes a #${id} artiesten`
   }
 
-  saveAll(artiesten: Artiesten[]) {
+  saveAll(artiesten: Artiest[]) {
     return this.artiestRepository.save(artiesten)
   }
 
