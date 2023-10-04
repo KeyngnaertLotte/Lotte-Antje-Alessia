@@ -2,8 +2,11 @@
 import { provide } from 'vue';
 import { DefaultApolloClient} from '@vue/apollo-composable';
 import useGraphql from './composables/useGraphql';
+import useLanguage from './composables/useLanguage';
+
 
 const { apolloClient } = useGraphql();
+const { locale } = useLanguage();
 
 // maak alles beschikbaar in de scope
 provide(DefaultApolloClient, apolloClient);
@@ -14,5 +17,8 @@ provide(DefaultApolloClient, apolloClient);
 <template>
   <div>
     <RouterView />
+
+    {{ locale }}
+    {{ $t('hello world') }}
   </div>
 </template>
