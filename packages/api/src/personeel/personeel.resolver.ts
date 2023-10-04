@@ -7,6 +7,7 @@ import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard
 import { FirebaseUser } from 'src/authentication/decoraters/user.decorator'
 import { UserRecord } from 'firebase-admin/auth'
 import { UseGuards } from '@nestjs/common'
+import { UpdatePersoneelInput } from './dto/update-personeel.input'
 
 @Resolver(() => Personeel)
 export class PersoneelResolver {
@@ -21,15 +22,28 @@ export class PersoneelResolver {
   }
 
   // get all personeel
+  @UseGuards(FirebaseGuard)
   @Query(() => [Personeel], { name: 'personeel' })
-  findAll() {
+  findAll(@FirebaseUser() currentUser: UserRecord) {
+    console.log(currentUser)
     return this.personeelService.findAll()
   }
 
-  // get one personeel
+  // get one personeelslid
   @Query(() => Personeel, { name: 'personeelLid', nullable: true })
   findOneById(@Args('id') id: string): Promise<Personeel> {
     return this.personeelService.findOneById(id)
+  }
+
+  // update personeel
+  @Mutation(() => Personeel)
+  updatePersoneel(
+    @Args('updatePersoneelInput') updatePersoneelInput: UpdatePersoneelInput,
+  ) {
+    return this.personeelService.update(
+      updatePersoneelInput.id,
+      updatePersoneelInput,
+    )
   }
 
   // delete personeel
