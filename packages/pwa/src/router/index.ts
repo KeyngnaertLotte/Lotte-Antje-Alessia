@@ -22,6 +22,10 @@ const router = createRouter({
       path: '/artiest',
       component: () =>import('../views/protected/artiest/index.vue'),
     },
+    {
+      path: '/bezoeker',
+      component: () =>import('../views/protected/bezoeker/Dashboard.vue'),
+    },
 
     {
       path: '/bezoeker',
