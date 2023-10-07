@@ -46,7 +46,10 @@ const router = createRouter({
         },
       ],
     },
-
+    {
+      path: '/personeel',
+      component: () => import('../views/protected/personeel/index.vue'),
+    },
     {
       path: '/auth',
       component: () => import('../components/wrapper/AuthWrap.vue'),
