@@ -1,10 +1,14 @@
 import { defineConfig } from 'unocss'
-import presetWebFonts from '@unocss/preset-web-fonts'
-import presetUno from '@unocss/preset-uno'
-
 
 export default defineConfig({
   // GEEN THEME!!!
   // wel, manieren van genereren van CSS
-  
+  theme: {
+    fontFamily: {
+      header: ['strenuous-3d', 'sans-serif'],
+      body: ['gravesend-sans', 'sans-serif'],
+      pop: ['poppins', 'sans-serif'],
+    },
+  },
+
 })
