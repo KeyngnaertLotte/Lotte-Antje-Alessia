@@ -18,7 +18,7 @@
     const isVisible = ref(false); // Set it to true initially to show the AppHeader
 
     function toggleVisibility() {
-    isVisible.value = !isVisible.value;
-    console.log(isVisible.value);
+        isVisible.value = !isVisible.value;
+        console.log(isVisible.value);
     }
   </script>
