@@ -3,3 +3,4 @@ tailwind.config.cjs
 **/.env
 packages/api/credentials.json
 credentials.json
+packages/pwa/src/utils/token.json
