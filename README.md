@@ -18,8 +18,13 @@ npx nestjs-command seed:reset:personeel // delete alle personeelsleden uit de da
 npx nestjs-command seed:database:artiesten // voegt alle artiesten uit de json toe aan de database
 npx nestjs-command seed:reset:artiesten // delete alle artiesten uit de database
 ```
+## vertalingen
+bij het aanpassen van de vertalingen in de spreadsheet, moet je naar `/packages/pwa` en deze commando runnen
+```
+npx tsx ./src/utils/sheets.ts
+```
 
-## IDEAS
+## ideas
 
 ### Bezoekers
 -  (Ticket kopen) </br>

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { ArtiestenService } from 'src/artiesten/artiesten.service'
-import { Artiesten } from 'src/artiesten/entities/artiesten.entity'
+import { Artiest } from 'src/artiesten/entities/artiesten.entity'
 import { Bezoeker } from 'src/bezoekers/entities/bezoeker.entity'
 import { BezoekersService } from 'src/bezoekers/bezoekers.service'
 import { PersoneelService } from 'src/personeel/personeel.service'
@@ -18,12 +18,16 @@ export class SeedService {
     private personeelService: PersoneelService,
     ) {}
 
-  async addArtiestenFromJson(): Promise<Artiesten[]> {
-    let deArtiesten: Artiesten[] = []
+  async addArtiestenFromJson(): Promise<Artiest[]> {
+    let deArtiesten: Artiest[] = []
     for (let artiest of artiesten) {
-      const a = new Artiesten()
+      const a = new Artiest()
       a.naam = artiest.naam
       a.podium = artiest.podium
+      // a.agenda = artiest.agenda
+      // for (let opdracht of artiest.agenda){
+      //   a.agenda.push(opdracht)
+      // }
 
       deArtiesten.push(a)
     }

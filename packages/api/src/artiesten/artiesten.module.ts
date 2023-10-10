@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common'
 import { ArtiestenService } from './artiesten.service'
 import { ArtiestenResolver } from './artiesten.resolver'
-import { Artiesten } from './entities/artiesten.entity'
+import { Artiest } from './entities/artiesten.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Artiesten])],
+  imports: [TypeOrmModule.forFeature([Artiest])],
   providers: [ArtiestenResolver, ArtiestenService],
 
   exports: [ArtiestenService],
