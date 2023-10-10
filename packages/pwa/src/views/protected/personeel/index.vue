@@ -5,13 +5,13 @@
     <div v-if="PersoneelLoading">Loading</div>
     <div v-if="PersoneelError">{{ PersoneelError }}</div>
     <div v-if="PersoneelData">
-      <card-sm title="drinken & eten" url="/artiest"/>
-      <card-sm title="materiaal" url="/auth/login"/>
-      <card-sm title="uurrooster" url=""/>
-      <card-sm title="item toevoegen" />
+      <card-sm title="drinken & eten"/>
+      <card-sm title="materiaal" url="/personeel/materiaal"/>
+      <card-sm title="uurrooster" url="/personeel/uurrooster"/>
+      <card-sm title="item toevoegen" url="/artiest/item-toevoegen"/>
       <card-sm title="vip lijst"/>
-      <card-sm title="saldo" value="500"/>
-      <card-sm title="scanner" />
+      <card-sm title="saldo" value="500" url="/bezoeker/saldo"/>
+      <card-sm title="scanner"/>
     </div>
   </container>
 </template>
