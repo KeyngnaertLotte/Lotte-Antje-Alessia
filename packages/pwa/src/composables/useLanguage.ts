@@ -1,8 +1,9 @@
 // const loadMessages = async ()
+import { SUPPORTED_LOCALES } from '@/bootstrap/i18n'
 import { useI18n } from 'vue-i18n'
 
 export default () => {
-  const { locale, t } = useI18n()
+  const { locale, t, setLocaleMessage } = useI18n()
 
   console.log(t('hello'))
 
@@ -18,8 +19,8 @@ export default () => {
     throw new Error(`unsupported locale: {locale}`);
   }
 
-  const setLocale = async (locale:string) => {
-    const messages = await loadMessages(locale)
+  const setLocale = async (targetLocale: string) => {
+    const messages = await loadMessages(targetLocale)
 
     setLocaleMessage(targetLocale, messages)
     locale.value = targetLocale
