@@ -4,8 +4,7 @@ import { PlusCircle } from 'lucide-vue-next';
 import { QrCode, PackageOpen, Clock3 } from 'lucide-vue-next';
 import { computed, defineProps } from 'vue';
 
-
-// DF = Drink & Food
+// icon aan de hand van de titel
 const icons: Record<string, any> = {
     'uurrooster': Clock3,
     'materiaal': PackageOpen,
@@ -15,14 +14,26 @@ const icons: Record<string, any> = {
     'item toevoegen': PlusCircle,
 }
 
+// kleur kaartje aan de hand van de titel
 const color: Record<string, any> = {
     'uurrooster': 'bg-custom-brown',
-    'materiaal': 'bg-custom-red',
-    'drinken & eten': 'bg-custom-blue',
-    'vip lijst': 'bg-custom-brown',
-    'scanner': 'bg-custom-brown',
+    'materiaal': 'bg-custom-greenblue',
+    'drinken & eten': 'bg-custom-green',
+    'vip lijst': 'bg-custom-green',
+    'scanner': 'bg-custom-green',
     'item toevoegen': 'bg-custom-brown',
-    'saldo': 'bg-custom-brown',
+    'saldo': 'bg-custom-blue',
+}
+
+// kleur text aan de hand van de titel
+const textColor: Record<string, any> = {
+    'uurrooster': 'text-white',
+    'materiaal': 'text-black',
+    'drinken & eten': 'text-black',
+    'vip lijst': 'text-black',
+    'scanner': 'text-black',
+    'item toevoegen': 'text-white',
+    'saldo': 'text-white',
 }
 
 const props = defineProps({
@@ -36,15 +47,14 @@ const props = defineProps({
 })
 
 const icon = computed(() => {
-    // Look up the icon based on the title
     return icons[props.title] || null;
 })
 </script>
 
 <template>
   <div
-    class="w-48 h-28 text-white rounded-md m-5 flex flex-col items-center justify-center"
-    :class="color[$props.title]"
+    class="w-48 h-28 rounded-md m-5 flex flex-col items-center justify-center"
+    :class="color[$props.title], textColor[$props.title]"
   >
     <p class="font-bold text-xl">{{ $props.title.toLocaleUpperCase() }}</p>
     <div class="flex justify-center items-center my-2">
