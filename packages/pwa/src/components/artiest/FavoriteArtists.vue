@@ -15,14 +15,14 @@
     </div>
   </template>
   
-  <script setup>
+  <script setup lang="ts">
     import { ref, computed } from 'vue';
 
     const activeButton = ref(null);
 
-    const handleButtonClick = (buttonIndex) => {
+    const handleButtonClick = (buttonIndex: any) => {
         if (activeButton.value === buttonIndex) {
-            activeButton.value = 0;
+            activeButton.value == 0;
         } else {
             activeButton.value = buttonIndex;
         }
