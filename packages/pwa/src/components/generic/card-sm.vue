@@ -56,7 +56,7 @@ const icon = computed(() => {
 
 <template>
   <button
-    class="w-48 h-28 rounded-md m-5 flex flex-col items-center justify-center"
+    class="w-48 h-28 rounded-md m-5 flex flex-col items-center justify-center shadow-md"
     :class="color[$props.title], textColor[$props.title]"
     @click="() => $router.push(`${$props.url}`)"
   >
@@ -68,16 +68,4 @@ const icon = computed(() => {
       <component v-else :is="icon" class="w-12 h-12" />
     </div>
   </button>
-  <!-- <div
-    class="w-48 h-28 rounded-md m-5 flex flex-col items-center justify-center"
-    :class="color[$props.title], textColor[$props.title]"
-  >
-    <p class="font-bold text-xl">{{ $props.title.toLocaleUpperCase() }}</p>
-    <div class="flex justify-center items-center my-2">
-      <p v-if="$props.title === 'saldo'" class="font-bold text-3xl h-12">
-        € {{ $props.value }}
-      </p>
-      <component v-else :is="icon" class="w-12 h-12" />
-    </div>
-  </div> -->
 </template>
