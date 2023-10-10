@@ -8,8 +8,9 @@ import {
 } from 'typeorm'
 
 export enum Role {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
+  BEZOEKER = 'BEZOEKER',
+  ARTIEST = 'ARTIEST',
+  PERSONEEL = 'PERSONEEL',
 }
 
 @Entity()
@@ -27,7 +28,7 @@ export class User {
   @Field()
   locale?: string
 
-  @Column({ default: Role.USER })
+  @Column({ default: Role.BEZOEKER })
   @Field(() => String)
   role: Role
 
