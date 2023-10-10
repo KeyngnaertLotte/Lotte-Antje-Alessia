@@ -22,7 +22,7 @@
     </div>
   </template>
   
-  <script setup>
+  <script setup lang="ts">
     import { AlignJustify, X, Clock3, MapPin, Coins, LogOut  } from 'lucide-vue-next';
   
       const { isVisible } = defineProps(['isVisible']);
