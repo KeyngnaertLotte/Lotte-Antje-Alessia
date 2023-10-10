@@ -41,6 +41,9 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    url: {
+        type: String,
+    },
     value: {
         type: String,
     },
@@ -52,7 +55,20 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <div
+  <button
+    class="w-48 h-28 rounded-md m-5 flex flex-col items-center justify-center"
+    :class="color[$props.title], textColor[$props.title]"
+    @click="() => $router.push(`${$props.url}`)"
+  >
+    <p class="font-bold text-xl">{{ $props.title.toLocaleUpperCase() }}</p>
+    <div class="flex justify-center items-center my-2">
+      <p v-if="$props.title === 'saldo'" class="font-bold text-3xl h-12">
+        € {{ $props.value }}
+      </p>
+      <component v-else :is="icon" class="w-12 h-12" />
+    </div>
+  </button>
+  <!-- <div
     class="w-48 h-28 rounded-md m-5 flex flex-col items-center justify-center"
     :class="color[$props.title], textColor[$props.title]"
   >
@@ -63,5 +79,5 @@ const icon = computed(() => {
       </p>
       <component v-else :is="icon" class="w-12 h-12" />
     </div>
-  </div>
+  </div> -->
 </template>
