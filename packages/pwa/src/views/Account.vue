@@ -1,25 +1,10 @@
 <template>
   <Container>
     <h1 class="text-4xl font-bold tracking-wide mb-6">
-      {{ $t('account.welcome', { user: verzonnenNaam.displayName }) }}
-      <!-- {{ $t('account.welcome', { user: firebaseUser?.displayName }) }} -->
+      {{ $t('account.welcome', { user: firebaseUser?.displayName }) }}
     </h1>
-    <!-- <h1 class="text-4xl font-bold tracking-wide mb-6">
-      Hi, {{ firebaseUser?.displayName }}
-    </h1> -->
 
     <form @submit.prevent="">
-      <!-- <div class="flex">
-          <div class="w-2/3">
-            <img src="" alt="" />
-          </div>
-  
-          <div class="w-1/3">
-            <label class="block" for="name">Name</label>
-            <input class="block w-full" type="text" id="name" />
-          </div>
-        </div> -->
-
       <button
         @click="logoutUser"
         class="px-6 py-2 text-white bg-red-600 rounded-md focus:outline-none focus-visible:ring-4 ring-red-300 hover:bg-red-800"
@@ -49,10 +34,6 @@ const { firebaseUser, logout } = useFirebase()
 const { replace } = useRouter()
 const { setLocale } = useLanguage()
 const { locale } = useI18n()
-
-const verzonnenNaam = {
-  displayName: 'Jeroen',
-}
 
 firebaseUser.value?.getIdToken().then(token => {
   console.log(`{"Authorization": "Bearer ${token}"}`)
