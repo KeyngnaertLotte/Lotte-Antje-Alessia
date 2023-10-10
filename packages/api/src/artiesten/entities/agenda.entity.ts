@@ -1,25 +1,23 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql'
 import { Column, Entity, ObjectIdColumn } from 'typeorm'
 
-import { Agenda } from './agenda.entity'
 @Entity()
 @ObjectType()
-export class Artiest {
+export class Agenda {
+  
   @ObjectIdColumn()
   @Field(() => ID)
-  id: string
-
+  id: string  
+    
   @Column()
   @Field()
-  naam: string
+  Opdracht: string
 
   @Column()
   @Field()
   podium: string
 
-  @Field(() => [Agenda])
-  agenda: Agenda[]
-
-
-
+  @Column()
+  @Field()
+  tijd: string
 }

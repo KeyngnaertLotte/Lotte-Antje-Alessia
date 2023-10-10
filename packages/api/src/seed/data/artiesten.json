@@ -1,7 +1,14 @@
 [
     {
         "naam": "Koekjes",
-        "podium": "Koekjespodium"
+        "podium": "Koekjespodium",
+        "agenda": [
+            {
+                "tijd": "10:00",
+                "podium": "Koekjespodium",
+                "opdracht": "opzetten"
+            }
+        ]
     },
     {
         "naam": "taart",
