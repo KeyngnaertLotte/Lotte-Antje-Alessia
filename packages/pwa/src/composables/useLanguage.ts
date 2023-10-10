@@ -9,14 +9,14 @@ export default () => {
 
   const loadMessages = async (locale: string) => {
     if (locale in SUPPORTED_LOCALES) {
-        const messages = await import(`../locales/${locale}.json`).then(
-            m => m.default[locale],
-        )
+      const messages = await import(`../locales/${locale}.json`).then(
+        m => m.default[locale],
+      )
 
-        return messages
+      return messages
     }
 
-    throw new Error(`unsupported locale: {locale}`);
+    throw new Error(`Unsupported locale: ${locale}`)
   }
 
   const setLocale = async (targetLocale: string) => {
