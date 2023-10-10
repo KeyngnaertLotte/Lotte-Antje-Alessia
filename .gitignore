@@ -2,3 +2,4 @@
 tailwind.config.cjs
 **/.env
 packages/api/credentials.json
+credentials.json

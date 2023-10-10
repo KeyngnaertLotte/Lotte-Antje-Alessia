@@ -13,7 +13,7 @@ import { useI18n } from 'vue-i18n'
 
 const app = createApp(App)
 const { restoreUser } = useFirebase()
-const setLocale = useI18n()
+// const setLocale = useI18n()
 
 app.use(i18n) // ALTIJD VOOR DE ROUTER
 ;(async () => {
