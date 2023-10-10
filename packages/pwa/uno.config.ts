@@ -11,6 +11,10 @@ export default defineConfig({
         secondary: '#EFEFEF',
       },
       custom: {
+        lightGreen: '#94C9A9',
+        purple: '#777DA7',
+        orange: '#D5573B',
+        
         red: '#D5573B',
         brown: '#885053',
         green: '#C6ECAE',
