@@ -13,10 +13,6 @@ const router = createRouter({
       path: '/account',
       component: () => import('../views/Account.vue'),
     },
-    {
-      path: '/festival',
-      component: () => import('../views/Festival.vue'),
-    },
 
     {
       path: '/artiest',
