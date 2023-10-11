@@ -13,23 +13,23 @@ export class BezoekersResolver {
     return this.bezoekersService.create(createBezoekerInput);
   }
 
-  @Query(() => [Bezoeker], { name: 'bezoekers' })
-  findAll() {
-    return this.bezoekersService.findAll();
-  }
+  // @Query(() => [Bezoeker], { name: 'bezoekers' })
+  // findAll() {
+  //   return this.bezoekersService.findAll();
+  // }
 
-  @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })
-  findOneById(@Args('id') id: string): Promise<Bezoeker> {
-    return this.bezoekersService.findOneById(id);
-  }
+  // @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })
+  // findOneById(@Args('id') id: string): Promise<Bezoeker> {
+  //   return this.bezoekersService.findOneById(id);
+  // }
 
-  @Mutation(() => Bezoeker)
-  updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {
-    return this.bezoekersService.update(updateBezoekerInput.id, updateBezoekerInput);
-  }
+  // @Mutation(() => Bezoeker)
+  // updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {
+  //   return this.bezoekersService.update(updateBezoekerInput.id, updateBezoekerInput);
+  // }
 
-  @Mutation(() => Bezoeker)
-  removeBezoeker(@Args('id', { type: () => Int }) id: number) {
-    return this.bezoekersService.remove(id);
-  }
+  // @Mutation(() => Bezoeker)
+  // removeBezoeker(@Args('id', { type: () => Int }) id: number) {
+  //   return this.bezoekersService.remove(id);
+  // }
 }

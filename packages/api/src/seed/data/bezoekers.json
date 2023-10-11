@@ -1,14 +1,12 @@
 [
     {
-        "voornaam": "Jeroen",
-        "achternaam": "van der Heijden",
-        "email": "iets@gmail.com",
-        "saldo": 100
+        "uid": "RS9AJZS6n3PAZGYtUL915knEXr33",
+        "saldo": 100,
+        "favoartiest": ["plop", "k3", "kabouter wesley"]
     },
     {
-        "voornaam": "Henk",
-        "achternaam": "chocolade",
-        "email": "kweenie@gmail.com",
-        "saldo": 134
+        "uid": "RS9AJZS6n3PAZGYtUL915knEXr34",
+        "saldo": 250,
+        "favoartiest": ["spring", "howest", "Niels De Stadsbader"]
     }
 ]

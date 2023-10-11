@@ -10,21 +10,13 @@ export class Bezoeker {
 
   @Column()
   @Field()
-  voornaam: string
-
-  @Column()
-  @Field()
-  achternaam: string
-
-  @Column()
-  @Field()
-  email: string
+  uid: string
 
   @Column()
   @Field()
   saldo: number
 
-  // @Column()
-  // @Field()
-  // favoartiest: Array<string>
+  @Column()
+  @Field() // Specify the array type
+  favoartiest: string[];
 }

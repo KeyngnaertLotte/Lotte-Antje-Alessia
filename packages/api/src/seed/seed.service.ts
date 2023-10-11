@@ -43,10 +43,9 @@ export class SeedService {
     let deBezoekers: Bezoeker[] = []
     for (let bezoeker of bezoekers) {
       const b = new Bezoeker()
-      b.achternaam = bezoeker.achternaam
-      b.voornaam = bezoeker.voornaam
-      b.email = bezoeker.email
+      b.uid = bezoeker.uid
       b.saldo = bezoeker.saldo
+      b.favoartiest = bezoeker.favoartiest
 
       deBezoekers.push(b)
     }
