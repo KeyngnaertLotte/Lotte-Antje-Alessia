@@ -1,6 +1,6 @@
 <template>
-    <form @submit.prevent="handleLogin" class="w-full">
-    <h1 class="text-4xl font-bold tracking-wider">Login {{ firebaseUser }}</h1>
+  <form @submit.prevent="handleLogin" class="w-full">
+    <h1 class="text-4xl font-bold tracking-wider">Login</h1>
     <p class="text-neutral-500 mb-4">
       Login to your account, check your birds.
     </p>
@@ -62,22 +62,25 @@
   </form>
 </template>
 
-
-
 <script lang="ts">
-import { ref } from 'vue'
+import { pushScopeId, ref } from 'vue'
 import { type AuthError } from 'firebase/auth'
 
 import useFirebase from '@/composables/useFirebase'
+import useCustomUser from '@/composables/useCustomUser'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
     // Composables
     const { login, firebaseUser } = useFirebase()
+    const { restoreCustomUser } = useCustomUser()
+    const { customUser } = useCustomUser()
+    const { push } = useRouter()
 
     // Logic
     const loginCredentials = ref({
-      email: 'heheh@gmail.com',
+      email: 'artiest@gmail.com',
       password: '123456',
     })
     const error = ref<AuthError | null>(null)
@@ -86,6 +89,12 @@ export default {
       login(loginCredentials.value.email, loginCredentials.value.password)
         .then(() => {
           console.log('logged in')
+          restoreCustomUser().then(() => {
+            console.log('custom user restored')
+            const role = customUser.value?.role.toLowerCase()
+            console.log('role: ', role)
+            push(`/${role}`)
+          })
         })
         .catch((err: AuthError) => {
           error.value = err
