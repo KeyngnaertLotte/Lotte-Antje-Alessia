@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent="handleRegister" class="w-full">
-    <h1 class="text-4xl font-bold tracking-wider">Register {{ firebaseUser }}</h1>
+  <form @submit.prevent="submitForm" class="w-full">
+    <h1 class="text-4xl font-bold tracking-wider">Register </h1>
     <p class="text-neutral-500 mb-4">
       Create an account and keep track of your birds.
     </p>
 
-    <div v-if="error">
-      <p class="text-red-600">{{ error.message }}</p>
+    <div v-if="errorMessage">
+      <p class="text-red-600">{{ errorMessage}}</p>
     </div>
 
     <div class="mt-6">
@@ -74,40 +74,72 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
-import { type AuthError } from 'firebase/auth'
+import { ref, reactive, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useMutation } from '@vue/apollo-composable'
 
 import useFirebase from '@/composables/useFirebase'
+import { ADD_USER } from '@/graphql/user.mutation'
+
+
 
 export default {
   setup() {
-    // Composables
-    const { register, firebaseUser } = useFirebase()
+    const { register } = useFirebase()
+    const { mutate: addUser } = useMutation(ADD_USER)
+    const errorMessage: Ref<string> = ref('')
 
-    const newUser = ref({
+    const newUser = reactive({
       name: '',
-      password: '',
       email: '',
+      password: '',
     })
 
-    const error = ref<AuthError | null>(null)
+    const submitForm = () => {
+      if (
+        newUser.name === '' ||
+        newUser.email === '' ||
+        newUser.password === ''
+      ) {
+        errorMessage.value = 'Please fill in all fields.'
+        return
+      }
 
-    const handleRegister = () => {
-      register(
-        newUser.value.name, 
-        newUser.value.email, 
-        newUser.value.password,
-      ).catch((err) => {
-        error.value = err
-      })
+      // User the register function from the useFirebase composable
+      register(newUser.name, newUser.email, newUser.password)
+        .then((newFireBaseUser: any) => {
+          console.log('🎉 new firebase user created in firebase')
+          console.log(newFireBaseUser)
+          console.log('uid', newFireBaseUser.uid)
+
+          //create user in our own database with the same uid
+          //use the mutation we created in the graphql folder
+          addUser({
+            createUserInput: {locale: 'nl', uid: newFireBaseUser.uid}
+          }).then((graphqlresult) => {
+            console.log('🎉 new user created in our database')
+            console.log(graphqlresult)
+            //redirect to the home page
+          }).catch((error) => {
+            errorMessage.value = error.message
+          })
+        })
+        .catch((error) => {
+          errorMessage.value = error.message
+        })
+        .finally(() => {
+        })
     }
 
     return {
+      errorMessage,
       newUser,
-      firebaseUser,
-      error,
-      handleRegister,
+      submitForm,
     }
   },
 }
 </script>
+
+
+
+
