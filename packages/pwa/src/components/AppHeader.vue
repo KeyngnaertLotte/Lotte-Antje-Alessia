@@ -10,8 +10,8 @@
       </div>
 </template>
 
-<script setup>
-    import AppBurgerMenu from '../components/AppBurgerMenu.vue';
+<script lang="ts">
+    import AppBurgerMenu from '@/components/AppBurgerMenu.vue';
     import { AlignJustify } from 'lucide-vue-next';
     import { ref } from 'vue';
     const isVisible = ref(false); // Set it to true initially to show the AppHeader
@@ -20,4 +20,15 @@
         isVisible.value = !isVisible.value;
         console.log(isVisible.value);
     }
+
+    export default {
+        components: { AppBurgerMenu, AlignJustify },
+        setup() {
+            return {
+                isVisible,
+                toggleVisibility,
+            };
+        },
+    };
+    
   </script>
