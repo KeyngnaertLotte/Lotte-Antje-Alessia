@@ -6,17 +6,17 @@ export default defineConfig({
     
   theme: {
     colors:{
-      bg: {
         primary: '#DFE6DA',
         secondary: '#EFEFEF',
-      },
       custom: {
-        lightGreen: '#94C9A9',
+        lightGreen: '#C6ECAE',
+        darkGreen: '#94C9A9',
         purple: '#777DA7',
         orange: '#D5573B',
+        brown: '#885053',
+
         
         red: '#D5573B',
-        brown: '#885053',
         green: '#C6ECAE',
         blue: '#777DA7',
         grey: '#C7C7C7',
