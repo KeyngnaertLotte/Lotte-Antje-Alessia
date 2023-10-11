@@ -124,7 +124,7 @@ export default {
             console.log(graphqlresult)
             //redirect to the home page
             addBezoeker({
-              createBezoekerInput: {uid: newFireBaseUser.uid}
+              createBezoekerInput: {uid: newFireBaseUser.uid, naam: newUser.name}
             }).then((graphqlresult) => {
               console.log('🎉 new bezoeker created in our database')
               console.log(graphqlresult)

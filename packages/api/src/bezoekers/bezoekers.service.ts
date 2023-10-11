@@ -16,18 +16,19 @@ export class BezoekersService {
   create(createBezoekerInput: CreateBezoekerInput): Promise<Bezoeker> {	
     const b = new Bezoeker();
     b.uid = createBezoekerInput.uid;
+    b.naam = createBezoekerInput.naam;
     b.saldo =  0;
     b.favoartiest =  [];
 
     return this.bezoekerRepository.save(b);
   }
 
-  // findOneById(id: string): Promise<Bezoeker> {
-  //   const obj = new ObjectId(id)
-  //   // console.log(obj)
-  //   // @ts-ignore
-  //   return this.bezoekerRepository.findOne({ _id: new ObjectId(id) })
-  // }
+  findOneById(id: string): Promise<Bezoeker> {
+    const obj = new ObjectId(id)
+    // console.log(obj)
+    // @ts-ignore
+    return this.bezoekerRepository.findOne({ _id: new ObjectId(id) })
+  }
 
   // findAll() {
   //   return this.bezoekerRepository.find();

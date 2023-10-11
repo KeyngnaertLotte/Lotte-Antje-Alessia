@@ -18,10 +18,10 @@ export class BezoekersResolver {
   //   return this.bezoekersService.findAll();
   // }
 
-  // @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })
-  // findOneById(@Args('id') id: string): Promise<Bezoeker> {
-  //   return this.bezoekersService.findOneById(id);
-  // }
+  @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })
+  findOneById(@Args('id') id: string): Promise<Bezoeker> {
+    return this.bezoekersService.findOneById(id);
+  }
 
   // @Mutation(() => Bezoeker)
   // updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {

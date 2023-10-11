@@ -1,11 +1,13 @@
 [
     {
         "uid": "RS9AJZS6n3PAZGYtUL915knEXr33",
+        "naam": "Jens",
         "saldo": 100,
         "favoartiest": ["plop", "k3", "kabouter wesley"]
     },
     {
         "uid": "RS9AJZS6n3PAZGYtUL915knEXr34",
+        "naam": "Niels",
         "saldo": 250,
         "favoartiest": ["spring", "howest", "Niels De Stadsbader"]
     }

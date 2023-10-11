@@ -14,6 +14,10 @@ export class Bezoeker {
 
   @Column()
   @Field()
+  naam: string
+
+  @Column()
+  @Field()
   saldo?: number
 
   @Column()

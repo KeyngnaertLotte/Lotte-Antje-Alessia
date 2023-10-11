@@ -44,6 +44,7 @@ export class SeedService {
     for (let bezoeker of bezoekers) {
       const b = new Bezoeker()
       b.uid = bezoeker.uid
+      b.naam = bezoeker.naam
       b.saldo = bezoeker.saldo
       b.favoartiest = bezoeker.favoartiest
 
