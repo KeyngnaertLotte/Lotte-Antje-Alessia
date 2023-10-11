@@ -48,22 +48,41 @@
                 <p class="font-body text-xl text-white leading-none">23:45 - 00:45</p>
             </button>
         </div>
-        <DetailArtiest v-if="isModalOpen" :artist="artist"/>
+        <DetailArtiest v-if="isModalOpen" :artist="artist" :modalState="isModalOpen" @close-modal="handleCloseModal"/>
     
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" >
     import DetailArtiest from './DetailArtiest.vue'
-    import { ref } from 'vue';
+    import { ref, } from 'vue';
 
     const isModalOpen = ref(false)
     const artist = ref('Lotte')
 
+    export default{
+        components: {
+            DetailArtiest
+        },
+        setup(){
+            return {
+                isModalOpen,
+                artist,
+                openModal,
+            }
+        },
+        methods: {
+            handleCloseModal() {
+            isModalOpen.value = false;
+        }
+  }
+    }
+
     function openModal(artistName: string){
         isModalOpen.value = true
-        console.log(isModalOpen.value)
-        console.log(artistName)
         artist.value = artistName
     }
+
+
+    
     
 </script>

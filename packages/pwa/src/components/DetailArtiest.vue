@@ -1,7 +1,8 @@
 <template>
     <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
-        <div class=" bg-white w-9/10 h-3/4 rounded-lg flex flex-col  items-center p-6">
-            <button @click="" class="w-full h-full flex justify-end"><p class="font-body text-4xl">X</p></button>
+        <div class="relative bg-white w-9/10 h-3/4 rounded-lg flex flex-col  items-center p-6">
+            <!-- <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg"> <X class="z-5 h-12 w-12 fill-white"/></button> -->
+            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"> <p class="text-white font-bold font-body text-2xl">X</p></button>
             <h1 class="font-body font-bold text-3xl">{{ currentArtist.artistName }}</h1>
             <p class="font-body text-xl">{{ currentArtist.time }}</p>
             <img :src=currentArtist.imgLink alt="aaaaaaaaaaaaaaa" class="my-6">
@@ -13,8 +14,8 @@
 </template>
 
 <script lang="ts" >
-    import { ref, } from 'vue';
-    import { X, Clock} from 'lucide-vue-next';
+    import { ref,getCurrentInstance  } from 'vue';
+    import { X } from 'lucide-vue-next';
 
     const artistList = [
        {
@@ -96,11 +97,19 @@
         artist: {
         type: String,
         required: true
+        },
+        modalState: {
+            type: Boolean,
+            required: true
         }
     },
+    methods: {
+        closeModal() {
+            this.$emit('close-modal');
+        }
+  },
 
     setup(props){
-        console.log(props.artist)
         const currentArtist = ref();
 
         artistList.forEach(element => {
@@ -110,11 +119,14 @@
             
         });
 
+
         return {
             currentArtist
         }
 
     }
+
+    
 
 };
 
