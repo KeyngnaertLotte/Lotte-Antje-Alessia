@@ -18,17 +18,17 @@ const router = createRouter({
       component: () => import('../views/Festival.vue'),
     },
 
-    {
-      path: '/artiest',
-      component: () =>import('../views/protected/artiest/index.vue'),
-    },
+    // {
+    //   path: '/artiest',
+    //   component: () =>import('../views/protected/artiest/index.vue'),
+    // },
     {
       path: '/bezoeker',
       component: () =>import('../views/protected/bezoeker/Dashboard.vue'),
     },
 
     {
-      path: '/artiest/dashboard',
+      path: '/artiest',
       component: () =>import('../views/protected/artiest/dashboard.vue'),
     },
 
