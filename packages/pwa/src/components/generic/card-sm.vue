@@ -20,7 +20,7 @@ const color: Record<string, any> = {
     'materiaal': 'bg-custom-greenblue',
     'drinken & eten': 'bg-custom-green',
     'vip lijst': 'bg-custom-green',
-    'scanner': 'bg-custom-green',
+    'scanner': 'bg-custom-blue',
     'item toevoegen': 'bg-custom-brown',
     'saldo': 'bg-custom-blue',
 }
@@ -31,7 +31,7 @@ const textColor: Record<string, any> = {
     'materiaal': 'text-black',
     'drinken & eten': 'text-black',
     'vip lijst': 'text-black',
-    'scanner': 'text-black',
+    'scanner': 'text-white',
     'item toevoegen': 'text-white',
     'saldo': 'text-white',
 }
