@@ -16,8 +16,8 @@ export class BezoekersService {
   create(createBezoekerInput: CreateBezoekerInput): Promise<Bezoeker> {	
     const b = new Bezoeker();
     b.uid = createBezoekerInput.uid;
-    b.saldo = createBezoekerInput.saldo;
-    b.favoartiest = createBezoekerInput.favoartiest;
+    b.saldo =  0;
+    b.favoartiest =  [];
 
     return this.bezoekerRepository.save(b);
   }

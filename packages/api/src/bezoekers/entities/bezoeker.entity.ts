@@ -14,9 +14,9 @@ export class Bezoeker {
 
   @Column()
   @Field()
-  saldo: number
+  saldo?: number
 
   @Column()
-  @Field() // Specify the array type
-  favoartiest: string[];
+  @Field(() => [String]) // Specify the array type
+  favoartiest?: string[];
 }
