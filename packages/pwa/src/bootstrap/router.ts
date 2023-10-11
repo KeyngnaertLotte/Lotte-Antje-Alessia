@@ -17,6 +17,7 @@ const router = createRouter({
     {
       path: '/bezoeker',
       component: () => import('../views/protected/bezoeker/Dashboard.vue'),
+      meta: { shouldBeAuthenticated: true },
     },
     {
       path: '/bezoeker',
@@ -37,6 +38,7 @@ const router = createRouter({
     {
       path: '/artiest',
       component: () => import('../views/protected/artiest/Dashboard.vue'),
+      meta: { shouldBeAuthenticated: true },
     },
     {
       path: '/artiest',
@@ -48,6 +50,7 @@ const router = createRouter({
     {
       path: '/personeel',
       component: () => import('../views/protected/personeel/Dashboard.vue'),
+      meta: { shouldBeAuthenticated: true },
     },
     {
       path: '/personeel',
