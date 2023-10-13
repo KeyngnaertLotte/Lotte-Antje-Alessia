@@ -11,7 +11,7 @@
             <p class="font-bold font-body text-2xl p-2">DRINK&FOOD</p>
             <p class=""><QrCode class="w-16 h-16"/></p>
         </div>
-        <FavoriteArtists/>
+        <FavoriteArtists :artiest="bezoekerInfo.bezoekerByUid.favoartiest"/>
     </div>
   </template>
   
