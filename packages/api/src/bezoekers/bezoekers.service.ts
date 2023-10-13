@@ -18,7 +18,7 @@ export class BezoekersService {
     b.uid = createBezoekerInput.uid;
     b.naam = createBezoekerInput.naam;
     b.saldo =  0;
-    b.favoartiest =  [];
+    b.favoartiest = [];
 
     return this.bezoekerRepository.save(b);
   }
@@ -29,6 +29,10 @@ export class BezoekersService {
     // @ts-ignore
     return this.bezoekerRepository.findOne({ _id: new ObjectId(id) })
   }
+  findOneByUid(uid: string): Promise<Bezoeker> {
+    return this.bezoekerRepository.findOneByOrFail({ uid })
+  }
+
 
   // findAll() {
   //   return this.bezoekerRepository.find();

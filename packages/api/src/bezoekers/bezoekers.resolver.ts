@@ -23,6 +23,12 @@ export class BezoekersResolver {
     return this.bezoekersService.findOneById(id);
   }
 
+
+  @Query(() => Bezoeker, { name: 'bezoekerByUid' })
+  findOneByUid(@Args('uid', { type: () => String }) uid: string): Promise<Bezoeker> {
+    return this.bezoekersService.findOneByUid(uid);
+  }
+
   // @Mutation(() => Bezoeker)
   // updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {
   //   return this.bezoekersService.update(updateBezoekerInput.id, updateBezoekerInput);
@@ -33,3 +39,10 @@ export class BezoekersResolver {
   //   return this.bezoekersService.remove(id);
   // }
 }
+
+
+// web shop met spacial music?
+
+// via tekening ai beweging maken
+
+// hoe bouw je een realtime animatie generator aan de hand van animejs en chatgpt

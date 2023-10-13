@@ -45,8 +45,6 @@ export class SeedService {
       const b = new Bezoeker()
       b.uid = bezoeker.uid
       b.naam = bezoeker.naam
-      b.saldo = bezoeker.saldo
-      b.favoartiest = bezoeker.favoartiest
 
       deBezoekers.push(b)
     }
