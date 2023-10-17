@@ -4,7 +4,6 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 
 import useGraphql from './composables/useGraphql'
 import useLanguage from './composables/useLanguage'
-import { useI18n } from 'vue-i18n'
 
 export default {
 

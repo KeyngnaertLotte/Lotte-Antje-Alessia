@@ -1,15 +1,15 @@
 <template>
     <div class="flex flex-col items-center mx-4 mb-8">
-            <h1 class="font-header text-custom-lightGreen text-5xl mb-4">Antje</h1>
-            <button @click="() => openModal('Tom Mish')" class="bg-custom-lightGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full">
+            <h1 class="font-header text-custom-darkGreen text-5xl mb-4">Antje</h1>
+            <button @click="() => openModal('Tom Mish')" class="bg-custom-darkGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full">
                 <p class="font-body text-2xl font-bold text-white leading-none">TOM MISH</p>
                 <p class="font-body text-xl text-white leading-none">20:15 - 21:30</p>
             </button>
-            <button @click="() => openModal('Brihang')" class="bg-custom-lightGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full">
+            <button @click="() => openModal('Brihang')" class="bg-custom-darkGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full">
                 <p class="font-body text-2xl font-bold text-white leading-none">BRIHANG</p>
                 <p class="font-body text-xl text-white leading-none">22:00 - 23:15</p>
             </button>
-            <button @click="() => openModal('BeRightBack')" class="bg-custom-lightGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full">
+            <button @click="() => openModal('BeRightBack')" class="bg-custom-darkGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full">
                 <p class="font-body text-2xl font-bold text-white leading-none">BERIGHTBACK</p>
                 <p class="font-body text-xl text-white leading-none">23:45 - 01:00</p>
             </button>

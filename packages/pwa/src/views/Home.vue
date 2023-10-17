@@ -9,7 +9,7 @@
         </div>
         <img src="../images/bg-small.png" alt="" class="w-screen">
     </div>
-    <div class="bg-bg-primary">
+    <div class="bg-primary">
         <AppLineUp/>
         <AppFooter/>
     </div>
