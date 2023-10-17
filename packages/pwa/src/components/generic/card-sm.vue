@@ -21,8 +21,8 @@ const color: Record<string, any> = {
     'bonnetjes': 'bg-custom-green',
     'vip lijst': 'bg-custom-green',
     'scanner': 'bg-custom-blue',
-    'saldo': 'bg-custom-brown',
     'item': 'bg-custom-brown',
+    'saldo': 'bg-custom-brown',
 }
 
 // kleur text aan de hand van de titel
