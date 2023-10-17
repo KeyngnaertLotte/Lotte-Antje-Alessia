@@ -1,5 +1,5 @@
 <template>
-        <cardSm title="saldo" url="/bezoeker/saldo" :value="bezoekerInfo.bezoekerByUid.saldo" class="col-span-1 row-start-4 row-span-4 bg-[#885053]"/>
+        <cardSm title="saldo" url="/bezoeker/saldo" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :artiest="bezoekerInfo.bezoekerByUid.favoartiest" :value="bezoekerInfo.bezoekerByUid.saldo" class="col-span-1 row-start-4 row-span-4 bg-[#885053]"/>
         <cardSm title="bonnetjes" class="col-span-1 row-start-4 row-span-4 bg-custom-lightGreen "/>
         <FavoriteArtists v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :artiest="bezoekerInfo.bezoekerByUid.favoartiest"/>
   </template>
@@ -22,6 +22,8 @@
     provideApolloClient(apolloClient)
     const uid = customUser.value?.uid;
     const bezoekerInfo = ref<any | null>(null);
+
+
     export default {
         components: {
             AppHeader,
