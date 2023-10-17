@@ -6,7 +6,7 @@
       <AppHeader />
     </div>
     <div
-      class="flex flex-row items-center justify-center col-span-2 row-start-6"
+      class="flex flex-row items-center justify-center col-span-2 row-start-7"
     >
       <CardSm title="materiaal" />
       <CardSm title="uurrooster" />
