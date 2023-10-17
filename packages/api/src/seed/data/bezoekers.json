@@ -1,14 +1,24 @@
 [
     {
-        "voornaam": "Jeroen",
-        "achternaam": "van der Heijden",
-        "email": "iets@gmail.com",
-        "saldo": 100
+        "uid": "RS9AJZS6n3PAZGYtUL915knEXr33",
+        "naam": "Jens",
+        "saldo": 100,
+        "favoartiest": [
+            { "artiest": "BOHNES", "time": "20:00 - 21:30", "color": "purple" },
+            { "artiest": "NEFFEX", "time": "21:15 - 22:15", "color": "orange" },
+            { "artiest": "BOYWITHUKE", "time": "22:30 - 23:30", "color": "orange" },
+            { "artiest": "BERIGHTBACK", "time": "23:45 - 01:00", "color": "darkGreen" }
+        ]
     },
     {
-        "voornaam": "Henk",
-        "achternaam": "chocolade",
-        "email": "kweenie@gmail.com",
-        "saldo": 134
+        "uid": "RS9AJZS6n3PAZGYtUL915knEXr34",
+        "naam": "Niels",
+        "saldo": 250,
+        "favoartiest": [
+            { "artiest": "BOHNES", "time": "20:00 - 21:30", "color": "purple" },
+            { "artiest": "NEFFEX", "time": "21:15 - 22:15", "color": "orange" },
+            { "artiest": "BOYWITHUKE", "time": "22:30 - 23:30", "color": "orange" },
+            { "artiest": "BERIGHTBACK", "time": "23:45 - 01:00", "color": "darkGreen" }
+        ]
     }
 ]

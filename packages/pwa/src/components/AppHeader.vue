@@ -2,7 +2,7 @@
     <AppBurgerMenu :isVisible="isVisible" @toggleVisibility="toggleVisibility"/>
       <div class="absolute top-0 left-0 right-0 px-8 py-6 bg-[#D5573B]">
           <div class=" text-3xl text-white flex justify-between content-center font-header">
-              <p>Hey <br> Jane!</p>
+              <p>Hey <br> {{naam}}!</p>
               <button @click="toggleVisibility">
                   <AlignJustify class="h-12 w-12 fill-white" />
               </button>
@@ -23,10 +23,19 @@
 
     export default {
         components: { AppBurgerMenu, AlignJustify },
-        setup() {
+        props: {
+            naam: {
+                type: String,
+                required: true,
+            },
+        },
+        setup(props) {
+            const naam = props.naam;
+            console.log(props);
             return {
                 isVisible,
                 toggleVisibility,
+                naam
             };
         },
     };
