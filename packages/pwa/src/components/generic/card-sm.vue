@@ -8,10 +8,10 @@ import { computed, defineProps } from 'vue';
 const icons: Record<string, any> = {
     'uurrooster': Clock3,
     'materiaal': PackageOpen,
-    'drinken & eten': QrCode,
+    'bonnetjes': QrCode,
     'vip lijst': Crown,
     'scanner': QrCode,
-    'item toevoegen': PlusCircle,
+    'item': PlusCircle,
 }
 
 // kleur kaartje aan de hand van de titel
@@ -21,7 +21,7 @@ const color: Record<string, any> = {
     'drinken & eten': 'bg-custom-green',
     'vip lijst': 'bg-custom-green',
     'scanner': 'bg-custom-blue',
-    'item toevoegen': 'bg-custom-brown',
+    'item': 'bg-custom-brown',
     'saldo': 'bg-custom-blue',
 }
 
@@ -32,7 +32,7 @@ const textColor: Record<string, any> = {
     'drinken & eten': 'text-black',
     'vip lijst': 'text-black',
     'scanner': 'text-white',
-    'item toevoegen': 'text-white',
+    'item': 'text-white',
     'saldo': 'text-white',
 }
 
