@@ -76,7 +76,7 @@ export default {
     const { login, firebaseUser } = useFirebase()
     const { restoreCustomUser } = useCustomUser()
     const { customUser } = useCustomUser()
-    const { push } = useRouter()
+    const { replace } = useRouter()
 
     // Logic
     const loginCredentials = ref({
@@ -93,7 +93,7 @@ export default {
             console.log('custom user restored')
             const role = customUser.value?.role.toLowerCase()
             console.log('role: ', role)
-            push(`/${role}`)
+            replace(`/${role}`)
           })
         })
         .catch((err: AuthError) => {

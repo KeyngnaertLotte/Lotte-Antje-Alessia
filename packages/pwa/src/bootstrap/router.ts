@@ -56,7 +56,16 @@ const router = createRouter({
       path: '/personeel',
       component: () => import('../components/wrapper/EventsWrapper.vue'),
       meta: { shouldBeAuthenticated: true },
-      children: [],
+      children: [
+        {
+          path: 'materiaal',
+          component: () => import('../views/protected/personeel/Materiaal.vue'),
+        },
+        {
+          path: 'uurrooster',
+          component: () => import('../views/protected/personeel/Uurrooster.vue'),
+        },
+      ],
     },
     {
       path: '/auth',

@@ -1,38 +1,46 @@
 <template>
-  <container>
-    <h1>dashboard Personeel</h1>
-
-    <div v-if="PersoneelLoading">Loading</div>
-    <div v-if="PersoneelError">{{ PersoneelError }}</div>
-    <card-sm title="drinken & eten"/>
-    <task-list/>
-    <!-- <div v-if="PersoneelData">
-      <card-sm title="materiaal" url="/personeel/materiaal"/>
-      <card-sm title="uurrooster" url="/personeel/uurrooster"/>
-      <card-sm title="item toevoegen" url="/artiest/item-toevoegen"/>
-      <card-sm title="vip lijst"/>
-      <card-sm title="saldo" value="500" url="/bezoeker/saldo"/>
-      <card-sm title="scanner"/>
-    </div> -->
-  </container>
+  <div
+    class="max-h-screen grid grid-cols-2 grid-rows-24 h-screen bg-secondary overflow-hidden"
+  >
+    <div class="col-span-2 row-span-3">
+      <AppHeader />
+    </div>
+    <div
+      class="flex flex-row items-center justify-center col-span-2 row-start-7"
+    >
+      <CardSm title="materiaal" />
+      <!-- <CardSm title="uurrooster" /> -->
+      <CardSm title="scanner" />
+    </div>
+    <div class="col-span-2 row-start-10 justify-center items-center m-5">
+      <task-list />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
 import Container from '@/components/generic/Container.vue'
-import { ALL_Personeel } from '@/graphql/personeel.query'
+import { ALL_PERSONEEL } from '@/graphql/personeel.query'
 import CardSm from '@/components/generic/card-sm.vue'
 import TaskList from '@/components/generic/task-list.vue'
+import AppHeader from '@/components/AppHeader.vue'
+
+import useFirebase from '@/composables/useFirebase'
+const { firebaseUser, logout } = useFirebase()
+firebaseUser.value?.getIdToken().then(token => {
+  console.log(`{"Authorization": "Bearer ${token}"}`)
+})
 
 export default {
-  components: { Container, CardSm, TaskList },
+  components: { Container, CardSm, TaskList, AppHeader },
 
   setup() {
     const {
       loading: PersoneelLoading,
       error: PersoneelError,
       result: PersoneelData,
-    } = useQuery(ALL_Personeel)
+    } = useQuery(ALL_PERSONEEL)
     return {
       PersoneelLoading,
       PersoneelError,
