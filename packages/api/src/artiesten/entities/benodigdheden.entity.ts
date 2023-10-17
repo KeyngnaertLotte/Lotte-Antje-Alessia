@@ -1,10 +1,10 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql'
-import { Column, Entity, ObjectIdColumn } from 'typeorm'
+import { Column } from 'typeorm'
 @ObjectType()
-export class Agenda {
+export class Benodigdheden {
   @Column()
   @Field()
-  taak: string
+  item: string
 
   @Column()
   @Field()
@@ -12,5 +12,9 @@ export class Agenda {
 
   @Column()
   @Field()
-  tijd: string
+  categorie: string
+
+    @Column()
+    @Field()
+    aantal: number
 }

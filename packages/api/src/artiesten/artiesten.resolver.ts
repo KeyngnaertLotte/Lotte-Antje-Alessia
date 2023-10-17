@@ -7,6 +7,7 @@ import { UseGuards } from '@nestjs/common'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
 import { FirebaseUser } from 'src/authentication/decoraters/user.decorator'
 import { UserRecord } from 'firebase-admin/auth'
+import { Agenda } from './entities/agenda.entity'
 
 @Resolver(() => Artiest)
 export class ArtiestenResolver {
@@ -19,6 +20,13 @@ export class ArtiestenResolver {
     return this.artiestenService.create(createArtiestenInput)
   }
 
+  // @Mutation(() => Artiest)
+  // createAgendaItem(
+  //   @Args('createArtiestenInput') uid: string,
+  // ): Promise<Artiest> {
+    
+  // }
+
   @UseGuards(FirebaseGuard)
   @Query(() => [Artiest], { name: 'artiesten' })
   findAll(@FirebaseUser() currentUser: UserRecord) {
@@ -29,6 +37,11 @@ export class ArtiestenResolver {
   @Query(() => Artiest, { name: 'artiest', nullable: true })
   findOneById(@Args('id') id: string): Promise<Artiest> {
     return this.artiestenService.findOneById(id)
+  }
+
+  @Query(() => Artiest, { name: 'artiestByUid' })
+  findOneByUid(@Args('string', { type: () => String }) id: string) {
+    return this.artiestenService.findOneByUid(id)
   }
 
   @Mutation(() => Artiest)
