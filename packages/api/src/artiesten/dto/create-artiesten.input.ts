@@ -1,4 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql'
+import { Agenda } from '../entities/agenda.entity'
 
 @InputType()
 export class CreateArtiestenInput {
@@ -9,4 +10,7 @@ export class CreateArtiestenInput {
 
   @Field()
   podium: string
+
+  @Field()
+  uid: string
 }

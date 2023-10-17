@@ -9,3 +9,24 @@ export const ALL_Artiesten = gql`
     }
   }
 `
+
+export const GET_Artiest_By_Uid = gql`
+  query artiestByUid($uid: String!) {
+    artiestByUid(string: $uid) {
+      naam
+      podium
+      benodigdheden {
+        item
+        aantal
+        categorie
+        podium
+      }
+      uid
+      agenda {
+        taak
+        podium
+        tijd
+      }
+    }
+  }
+`
