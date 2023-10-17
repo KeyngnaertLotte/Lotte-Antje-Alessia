@@ -7,6 +7,13 @@ export const GET_PERSONEEL_BY_UID = gql`
       uid
       voornaam
       achternaam
+      takenlijst {
+        wie
+        naam
+        category
+        aantal
+        urgent
+      }
     }
   }
 `

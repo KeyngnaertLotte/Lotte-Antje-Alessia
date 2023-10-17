@@ -3,7 +3,10 @@
     class="max-h-screen grid grid-cols-2 grid-rows-24 h-screen bg-secondary overflow-hidden"
   >
     <div class="col-span-2 row-span-3">
-      <AppHeader v-if="personeelInfo && personeelInfo.personeelByUid" :naam="personeelInfo.personeelByUid.voornaam"/>
+      <AppHeader
+        v-if="personeelInfo && personeelInfo.personeelByUid"
+        :naam="personeelInfo.personeelByUid.voornaam"
+      />
     </div>
     <div
       class="flex flex-row items-center justify-center col-span-2 row-start-7"
@@ -12,8 +15,8 @@
       <!-- <CardSm title="uurrooster" /> -->
       <CardSm title="scanner" />
     </div>
-    <div class="col-span-2 row-start-10 justify-center items-center m-5">
-      <task-list />
+    <div class="col-span-2 row-start-10 justify-center items-center m-5" v-for="taak in personeelInfo.personeelByUid.takenlijst">
+      {{ taak.naam }}
     </div>
   </div>
 </template>
@@ -55,12 +58,15 @@ export default {
     const getPersoneelInfo = async () => {
       console.log('uid:', uid)
       try {
-        const { onResult } = useQuery(GET_PERSONEEL_BY_UID, { uid });
+        const { onResult } = useQuery(GET_PERSONEEL_BY_UID, { uid })
         onResult((result) => {
           if (result.data) {
             console.log('Data:', result.data)
-            personeelInfo.value = result.data;  // Update the ref with the fetched data
-            console.log('personeelInfo:', personeelInfo.value.personeelByUid.voornaam);
+            personeelInfo.value = result.data // Update the ref with the fetched data
+            console.log(
+              'personeelInfo:',
+              personeelInfo.value.personeelByUid.achternaam,
+            )
           }
         })
       } catch (error) {
@@ -70,7 +76,9 @@ export default {
 
     getPersoneelInfo() // Call the function to fetch the data
     return {
-      customUser, getPersoneelInfo, personeelInfo
+      customUser,
+      getPersoneelInfo,
+      personeelInfo,
       // PersoneelLoading,
       // PersoneelError,
       // PersoneelData,
