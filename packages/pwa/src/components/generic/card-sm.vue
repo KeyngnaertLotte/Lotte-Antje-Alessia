@@ -11,7 +11,7 @@ const icons: Record<string, any> = {
     'bonnetjes': QrCode,
     'vip lijst': Crown,
     'scanner': QrCode,
-    'item toevoegen': PlusCircle,
+    'item': PlusCircle,
 }
 
 // kleur kaartje aan de hand van de titel
@@ -21,8 +21,8 @@ const color: Record<string, any> = {
     'bonnetjes': 'bg-custom-green',
     'vip lijst': 'bg-custom-green',
     'scanner': 'bg-custom-blue',
-    'item toevoegen': 'bg-custom-brown',
     'saldo': 'bg-custom-brown',
+    'item': 'bg-custom-brown',
 }
 
 // kleur text aan de hand van de titel
@@ -32,7 +32,7 @@ const textColor: Record<string, any> = {
     'bonnetjes': 'text-black',
     'vip lijst': 'text-black',
     'scanner': 'text-white',
-    'item toevoegen': 'text-white',
+    'item': 'text-white',
     'saldo': 'text-white',
 }
 

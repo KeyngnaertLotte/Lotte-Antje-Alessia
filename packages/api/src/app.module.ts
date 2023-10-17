@@ -25,7 +25,7 @@ import { UsersModule } from './users/users.module';
       type: 'mongodb',
       url: 'mongodb://localhost:27027/api',
       entities: [__dirname + '/**/*.entity.{js,ts}'],
-      synchronize: true, // Careful with this in production
+      synchronize: process.env.NODE_ENV == 'production' ? false : true, // Careful with this in production
       useNewUrlParser: true,
       useUnifiedTopology: true, // Disable deprecated warnings
     }),
