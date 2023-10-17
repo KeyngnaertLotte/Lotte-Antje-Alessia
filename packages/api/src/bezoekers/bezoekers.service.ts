@@ -15,11 +15,10 @@ export class BezoekersService {
 
   create(createBezoekerInput: CreateBezoekerInput): Promise<Bezoeker> {	
     const b = new Bezoeker();
-    b.voornaam = createBezoekerInput.voornaam;
-    b.achternaam = createBezoekerInput.achternaam;
-    b.email = createBezoekerInput.email;
-    b.saldo = createBezoekerInput.saldo;
-    // b.favoartiest = createBezoekerInput.favoartiest;
+    b.uid = createBezoekerInput.uid;
+    b.naam = createBezoekerInput.naam;
+    b.saldo =  0;
+    b.favoartiest = [];
 
     return this.bezoekerRepository.save(b);
   }
@@ -30,22 +29,26 @@ export class BezoekersService {
     // @ts-ignore
     return this.bezoekerRepository.findOne({ _id: new ObjectId(id) })
   }
-
-  findAll() {
-    return this.bezoekerRepository.find();
+  findOneByUid(uid: string): Promise<Bezoeker> {
+    return this.bezoekerRepository.findOneByOrFail({ uid })
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} bezoeker`;
+
+  // findAll() {
+  //   return this.bezoekerRepository.find();
   // }
 
-  update(id: number, updateBezoekerInput: UpdateBezoekerInput) {
-    return `This action updates a #${id} bezoeker`;
-  }
+  // // findOne(id: number) {
+  // //   return `This action returns a #${id} bezoeker`;
+  // // }
 
-  remove(id: number) {
-    return `This action removes a #${id} bezoeker`;
-  }
+  // update(id: number, updateBezoekerInput: UpdateBezoekerInput) {
+  //   return `This action updates a #${id} bezoeker`;
+  // }
+
+  // remove(id: number) {
+  //   return `This action removes a #${id} bezoeker`;
+  // }
 
   saveAll(bezoekers: Bezoeker[]) {
     return this.bezoekerRepository.save(bezoekers)

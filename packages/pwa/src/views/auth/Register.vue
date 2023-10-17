@@ -80,6 +80,7 @@ import { useMutation } from '@vue/apollo-composable'
 
 import useFirebase from '@/composables/useFirebase'
 import { ADD_USER } from '@/graphql/user.mutation'
+import { ADD_BEZOEKER } from '@/graphql/bezoeker.mutation'
 
 
 
@@ -87,7 +88,9 @@ export default {
   setup() {
     const { register } = useFirebase()
     const { mutate: addUser } = useMutation(ADD_USER)
+    const { mutate: addBezoeker } = useMutation(ADD_BEZOEKER)
     const errorMessage: Ref<string> = ref('')
+    const { push } = useRouter()
 
     const newUser = reactive({
       name: '',
@@ -120,6 +123,16 @@ export default {
             console.log('🎉 new user created in our database')
             console.log(graphqlresult)
             //redirect to the home page
+            addBezoeker({
+              createBezoekerInput: {uid: newFireBaseUser.uid, naam: newUser.name}
+            }).then((graphqlresult) => {
+              console.log('🎉 new bezoeker created in our database')
+              console.log(graphqlresult)
+              //redirect to the home page
+              push({ path: '/bezoeker' })
+            }).catch((error) => {
+              errorMessage.value = error.message
+            })
           }).catch((error) => {
             errorMessage.value = error.message
           })

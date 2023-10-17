@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import useFirebase from '@/composables/useFirebase'
+import useCustomUser from '@/composables/useCustomUser'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,12 +18,12 @@ const router = createRouter({
     {
       path: '/bezoeker',
       component: () => import('../views/protected/bezoeker/Dashboard.vue'),
-      meta: { shouldBeAuthenticated: true },
+      meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
     },
     {
       path: '/bezoeker',
       component: () => import('../components/wrapper/EventsWrapper.vue'),
-      meta: { shouldBeAuthenticated: true },
+      meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
       children: [
         // {
         //   path: '',
@@ -38,24 +39,24 @@ const router = createRouter({
     {
       path: '/artiest',
       component: () => import('../views/protected/artiest/Dashboard.vue'),
-      meta: { shouldBeAuthenticated: true },
+      meta: { shouldBeAuthenticated: true, allowedRole: 'artiest' },
     },
     {
       path: '/artiest',
       component: () => import('../components/wrapper/EventsWrapper.vue'),
-      meta: { shouldBeAuthenticated: true },
+      meta: { shouldBeAuthenticated: true, allowedRole: 'artiest' },
       children: [],
     },
 
     {
       path: '/personeel',
       component: () => import('../views/protected/personeel/Dashboard.vue'),
-      meta: { shouldBeAuthenticated: true },
+      meta: { shouldBeAuthenticated: true, allowedRole: 'personeel' },
     },
     {
       path: '/personeel',
       component: () => import('../components/wrapper/EventsWrapper.vue'),
-      meta: { shouldBeAuthenticated: true },
+      meta: { shouldBeAuthenticated: true, allowedRole: 'personeel' },
       children: [
         {
           path: 'materiaal',
@@ -95,9 +96,17 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const { firebaseUser } = useFirebase()
+  const { customUser } = useCustomUser()
+
+  const role = customUser.value?.role.toLowerCase()
+  console.log('inlog rol: ', role)
+  console.log(to.meta.allowedRole)
 
   if (to.meta.shouldBeAuthenticated && !firebaseUser.value) {
     next({ path: '/auth/login' })
+  }
+  if (to.meta.allowedRole && to.meta.allowedRole !== role) {
+    next({ path: '/:pathMatch(.*)*' })
   }
   if (to.meta.preventLoggedIn && firebaseUser.value) {
     next({ path: '/' })

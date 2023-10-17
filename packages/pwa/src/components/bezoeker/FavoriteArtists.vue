@@ -19,9 +19,19 @@
     import { ref, computed } from 'vue';
 
     const activeButton = ref(0);
+    const favoritesData = ref([]);
 
     export default {
-        setup() {
+        props: {
+            artiest: {
+                type: Array,
+                required: true,
+            },
+        },
+        setup(props) {
+            console.log(props.artiest);
+            favoritesData.value = props.artiest;
+            console.log("aaaaa:", favoritesData.value.artiest);
             const handleButtonClick = (buttonIndex: any) => {
                 console.log(buttonIndex);
                 console.log(activeButton.value);
@@ -32,22 +42,22 @@
                 }
     };
 
-        const favorites = ref([
-            { artiest: 'BOHNES', time: '20:00 - 21:30', color: 'purple' },
-            { artiest: 'NEFFEX', time: '21:15 - 22:15', color: 'orange' },
-            { artiest: 'BOYWITHUKE', time: '22:30 - 23:30', color: 'orange' },
-            { artiest: 'BERIGHTBACK', time: '23:45 - 01:00', color: 'darkGreen' }
-        ]);
+        // const favorites = ref([
+        //     { artiest: 'BOHNES', time: '20:00 - 21:30', color: 'purple' },
+        //     { artiest: 'NEFFEX', time: '21:15 - 22:15', color: 'orange' },
+        //     { artiest: 'BOYWITHUKE', time: '22:30 - 23:30', color: 'orange' },
+        //     { artiest: 'BERIGHTBACK', time: '23:45 - 01:00', color: 'darkGreen' }
+        // ]);
 
         const filteredFavorites = computed(() => {
             if (activeButton.value === 1) {
-                return favorites.value.filter((favorite) => favorite.color === 'darkGreen');
+                return favoritesData.value.filter((favorite) => favorite.color === 'darkGreen');
             } else if (activeButton.value === 2) {
-                return favorites.value.filter((favorite) => favorite.color === 'purple');
+                return favoritesData.value.filter((favorite) => favorite.color === 'purple');
             } else if (activeButton.value === 3) {
-                return favorites.value.filter((favorite) => favorite.color === 'orange');
+                return favoritesData.value.filter((favorite) => favorite.color === 'orange');
             } else {
-                return favorites.value;
+                return favoritesData.value;
             }
         });
 

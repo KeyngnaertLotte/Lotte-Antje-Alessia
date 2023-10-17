@@ -13,23 +13,36 @@ export class BezoekersResolver {
     return this.bezoekersService.create(createBezoekerInput);
   }
 
-  @Query(() => [Bezoeker], { name: 'bezoekers' })
-  findAll() {
-    return this.bezoekersService.findAll();
-  }
+  // @Query(() => [Bezoeker], { name: 'bezoekers' })
+  // findAll() {
+  //   return this.bezoekersService.findAll();
+  // }
 
   @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })
   findOneById(@Args('id') id: string): Promise<Bezoeker> {
     return this.bezoekersService.findOneById(id);
   }
 
-  @Mutation(() => Bezoeker)
-  updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {
-    return this.bezoekersService.update(updateBezoekerInput.id, updateBezoekerInput);
+
+  @Query(() => Bezoeker, { name: 'bezoekerByUid' })
+  findOneByUid(@Args('uid', { type: () => String }) uid: string): Promise<Bezoeker> {
+    return this.bezoekersService.findOneByUid(uid);
   }
 
-  @Mutation(() => Bezoeker)
-  removeBezoeker(@Args('id', { type: () => Int }) id: number) {
-    return this.bezoekersService.remove(id);
-  }
+  // @Mutation(() => Bezoeker)
+  // updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {
+  //   return this.bezoekersService.update(updateBezoekerInput.id, updateBezoekerInput);
+  // }
+
+  // @Mutation(() => Bezoeker)
+  // removeBezoeker(@Args('id', { type: () => Int }) id: number) {
+  //   return this.bezoekersService.remove(id);
+  // }
 }
+
+
+// web shop met spacial music?
+
+// via tekening ai beweging maken
+
+// hoe bouw je een realtime animatie generator aan de hand van animejs en chatgpt
