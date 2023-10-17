@@ -14,12 +14,7 @@ const router = createRouter({
     //   path: '/account',
     //   component: () => import('../views/Account.vue'),
     // },
-
-    // {
-    //   path: '/bezoeker',
-    //   component: () => import('../views/protected/bezoeker/Dashboard.vue'),
-    //   meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
-    // },
+    
     {
       path: '/bezoeker',
       component: () => import('../components/wrapper/BezoekerWrap.vue'),
@@ -47,22 +42,6 @@ const router = createRouter({
         // },
       ],
     },
-
-    // {
-    //   path: '/bezoeker',
-    //   component: () => import('../components/wrapper/EventsWrapper.vue'),
-    //   meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
-    //   children: [
-    //     // {
-    //     //   path: '',
-    //     //   component: () => import('../views/protected/events/Events.vue'),
-    //     // },
-    //     // {
-    //     //   path: 'new',
-    //     //   component: () => import('../views/protected/events/AddEvent.vue'),
-    //     // },
-    //   ],
-    // },
 
     {
       path: '/artiest',
