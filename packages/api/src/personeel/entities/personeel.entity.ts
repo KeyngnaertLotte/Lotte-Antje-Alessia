@@ -8,6 +8,10 @@ export class Personeel {
   @Field(() => ID) // Graphql
   id: number
 
+  @Column()
+  @Field()
+  uid: string
+
   @Column() // Database link - Typeorm
   @Field() //graphql
   voornaam: string
@@ -15,8 +19,4 @@ export class Personeel {
   @Column() // Database link - Typeorm
   @Field() //graphql
   achternaam: string
-
-  @Column() // Database link - Typeorm
-  @Field() //graphql
-  telefoon: number
 }

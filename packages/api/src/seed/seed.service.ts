@@ -61,7 +61,6 @@ export class SeedService {
       const p = new Personeel()
       p.achternaam = personeelLid.achternaam
       p.voornaam = personeelLid.voornaam
-      p.telefoon = personeelLid.telefoon
 
       hetPersoneel.push(p)
     }
