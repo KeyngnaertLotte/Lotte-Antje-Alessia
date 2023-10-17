@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleLogin" class="w-full">
+  <form @submit.prevent="handleLogin" class="w-full h-screen flex flex-col justify-center items-center bg-cover" style="background-image: url('../../images/bg.png')">
     <h1 class="text-4xl font-bold tracking-wider">Login</h1>
     <p class="text-neutral-500 mb-4">
       Login to your account, check your birds.
