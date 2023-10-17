@@ -14,21 +14,28 @@ const router = createRouter({
     //   path: '/account',
     //   component: () => import('../views/Account.vue'),
     // },
-
+    
     {
       path: '/bezoeker',
-      component: () => import('../views/protected/bezoeker/Dashboard.vue'),
-      meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
-    },
-    {
-      path: '/bezoeker',
-      component: () => import('../components/wrapper/EventsWrapper.vue'),
+      component: () => import('../components/wrapper/BezoekerWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
       children: [
-        // {
-        //   path: '',
-        //   component: () => import('../views/protected/events/Events.vue'),
-        // },
+        {
+          path: 'dashboard',
+          component: () => import('../views/protected/bezoeker/Dashboard.vue'),
+        },
+        {
+          path: 'lineup',
+          component: () => import('../views/protected/bezoeker/LineUp.vue'),
+        },
+        {
+          path: 'map',
+          component: () => import('../views/protected/bezoeker/Map.vue'),
+        },
+        {
+          path: 'saldo',
+          component: () => import('../views/protected/bezoeker/MyCoins.vue'),
+        },
         // {
         //   path: 'new',
         //   component: () => import('../views/protected/events/AddEvent.vue'),

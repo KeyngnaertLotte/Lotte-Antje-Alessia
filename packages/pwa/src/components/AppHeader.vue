@@ -18,7 +18,7 @@
 
     function toggleVisibility() {
         isVisible.value = !isVisible.value;
-        console.log(isVisible.value);
+        // console.log(isVisible.value);
     }
 
     export default {
@@ -31,7 +31,7 @@
         },
         setup(props) {
             const naam = props.naam;
-            console.log(props);
+            // console.log(props);
             return {
                 isVisible,
                 toggleVisibility,

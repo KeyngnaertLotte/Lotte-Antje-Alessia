@@ -19,19 +19,29 @@
     <div class="px-6 py-12">
       <div class="flex flex-col justify-center gap-8">
         <router-link
-          to="/dashboard"
+          @click="toggleVisibility"
+          to="/bezoeker/dashboard"
+          class="flex flex-row items-center text-3xl text-white gap-4 font-body"
+        >
+          <LayoutDashboard  class="stroke-white h-8 w-8" />DASHBOARD</router-link
+        >
+        <router-link
+          @click="toggleVisibility"
+          to="/bezoeker/lineup"
           class="flex flex-row items-center text-3xl text-white gap-4 font-body"
         >
           <Clock3 class="stroke-white h-8 w-8" />LINE UP</router-link
         >
-        <router-link
-          to="/dashboard"
+        <!-- <router-link
+          @click="toggleVisibility"
+          to="/bezoeker/map"
           class="flex flex-row items-center text-3xl text-white gap-4 font-body"
         >
           <MapPin class="stroke-white h-8 w-8" />MAP</router-link
-        >
+        > -->
         <router-link
-          to="/dashboard"
+          @click="toggleVisibility"
+          to="/bezoeker/saldo"
           class="flex flex-row items-center text-3xl text-white gap-4 font-body"
         >
           <Coins class="stroke-white h-8 w-8" />SALDO</router-link
@@ -51,13 +61,13 @@
 </template>
 
 <script setup lang="ts">
-import { AlignJustify, X, Clock3, MapPin, Coins, LogOut } from 'lucide-vue-next'
+import { LayoutDashboard , X, Clock3, MapPin, Coins, LogOut } from 'lucide-vue-next'
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
 
 const { isVisible } = defineProps(['isVisible'])
 const emit = defineEmits()
-const { firebaseUser, logout } = useFirebase()
+const { logout } = useFirebase()
 const { replace } = useRouter()
 
 function toggleVisibility() {

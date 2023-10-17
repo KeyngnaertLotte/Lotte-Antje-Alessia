@@ -8,7 +8,7 @@ import { computed, defineProps } from 'vue';
 const icons: Record<string, any> = {
     'uurrooster': Clock3,
     'materiaal': PackageOpen,
-    'drinken & eten': QrCode,
+    'bonnetjes': QrCode,
     'vip lijst': Crown,
     'scanner': QrCode,
     'item toevoegen': PlusCircle,
@@ -18,18 +18,18 @@ const icons: Record<string, any> = {
 const color: Record<string, any> = {
     'uurrooster': 'bg-custom-brown',
     'materiaal': 'bg-custom-greenblue',
-    'drinken & eten': 'bg-custom-green',
+    'bonnetjes': 'bg-custom-green',
     'vip lijst': 'bg-custom-green',
     'scanner': 'bg-custom-blue',
     'item toevoegen': 'bg-custom-brown',
-    'saldo': 'bg-custom-blue',
+    'saldo': 'bg-custom-brown',
 }
 
 // kleur text aan de hand van de titel
 const textColor: Record<string, any> = {
     'uurrooster': 'text-white',
     'materiaal': 'text-black',
-    'drinken & eten': 'text-black',
+    'bonnetjes': 'text-black',
     'vip lijst': 'text-black',
     'scanner': 'text-white',
     'item toevoegen': 'text-white',
@@ -56,13 +56,13 @@ const icon = computed(() => {
 
 <template>
   <button
-    class="w-48 h-28 rounded-md m-5 flex flex-col items-center justify-center shadow-md"
+    class="rounded-md m-5 flex flex-col items-center justify-center shadow-md"
     :class="color[$props.title], textColor[$props.title]"
     @click="() => $router.push(`${$props.url}`)"
   >
-    <p class="font-bold text-xl">{{ $props.title.toLocaleUpperCase() }}</p>
+    <p class="font-bold text-2xl self-start font-body px-3">{{ $props.title.toLocaleUpperCase() }}</p>
     <div class="flex justify-center items-center my-2">
-      <p v-if="$props.title === 'saldo'" class="font-bold text-3xl h-12">
+      <p v-if="$props.title === 'saldo'" class="font-pop font-extrabold text-3xl pt-4">
         € {{ $props.value }}
       </p>
       <component v-else :is="icon" class="w-12 h-12" />

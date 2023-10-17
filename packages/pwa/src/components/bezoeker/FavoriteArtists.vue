@@ -33,8 +33,8 @@
             favoritesData.value = props.artiest;
             console.log("aaaaa:", favoritesData.value.artiest);
             const handleButtonClick = (buttonIndex: any) => {
-                console.log(buttonIndex);
-                console.log(activeButton.value);
+                // console.log(buttonIndex);
+                // console.log(activeButton.value);
                 if (activeButton.value === buttonIndex) {
                     activeButton.value = 0;
                 } else {
