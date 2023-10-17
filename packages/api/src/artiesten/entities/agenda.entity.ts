@@ -4,14 +4,13 @@ import { Column, Entity, ObjectIdColumn } from 'typeorm'
 @Entity()
 @ObjectType()
 export class Agenda {
-  
   @ObjectIdColumn()
   @Field(() => ID)
   id: string  
     
   @Column()
   @Field()
-  Opdracht: string
+  taak: string
 
   @Column()
   @Field()

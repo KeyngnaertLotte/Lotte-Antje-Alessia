@@ -11,15 +11,21 @@ export class Artiest {
 
   @Column()
   @Field()
+  uid: string
+
+  @Column()
+  @Field()
   naam: string
 
   @Column()
   @Field()
   podium: string
 
+  @Column()
+  @Field(() => [String])
+  benodigdheden: String[]
+
+  @Column({ nullable: true })
   @Field(() => [Agenda])
-  agenda: Agenda[]
-
-
-
+  kalender: Agenda[]
 }
