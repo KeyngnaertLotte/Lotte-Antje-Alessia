@@ -14,8 +14,13 @@
       <CardSm title="materiaal" />
       <CardSm title="scanner" />
     </div>
-    <div class="col-span-2 row-start-11 md:row-start-12 flex items-center justify-center mx-6 md:mx-24">
-      <TaskList v-if="personeelInfo && personeelInfo.personeelByUid" :takenlijst="personeelInfo.personeelByUid.takenlijst"/>
+    <div
+      class="col-span-2 row-start-11 md:row-start-12 flex items-center justify-center mx-6 md:mx-24"
+    >
+      <TaskList
+        v-if="personeelInfo && personeelInfo.personeelByUid"
+        :takenlijst="personeelInfo.personeelByUid.takenlijst"
+      />
     </div>
   </div>
 </template>
@@ -25,7 +30,7 @@ import { useQuery } from '@vue/apollo-composable'
 import Container from '@/components/generic/Container.vue'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
 import CardSm from '@/components/generic/card-sm.vue'
-import TaskList from '@/components/generic/task-list.vue'
+import TaskList from '@/components/personeel/task-list.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import useCustomUser from '@/composables/useCustomUser'
 import useGraphql from '@/composables/useGraphql'
@@ -58,7 +63,7 @@ export default {
       console.log('uid:', uid)
       try {
         const { onResult } = useQuery(GET_PERSONEEL_BY_UID, { uid })
-        onResult((result) => {
+        onResult(result => {
           if (result.data) {
             console.log('Data:', result.data)
             personeelInfo.value = result.data // Update the ref with the fetched data
