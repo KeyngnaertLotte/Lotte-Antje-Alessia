@@ -12,11 +12,10 @@
       class="flex flex-row items-center justify-center col-span-2 row-start-7"
     >
       <CardSm title="materiaal" />
-      <!-- <CardSm title="uurrooster" /> -->
       <CardSm title="scanner" />
     </div>
-    <div class="col-span-2 row-start-10 justify-center items-center m-5" v-for="taak in personeelInfo.personeelByUid.takenlijst">
-      {{ taak.naam }}
+    <div class="col-span-2 row-start-11 md:row-start-12 flex items-center justify-center mx-6 md:mx-24">
+      <TaskList v-if="personeelInfo && personeelInfo.personeelByUid" :takenlijst="personeelInfo.personeelByUid.takenlijst"/>
     </div>
   </div>
 </template>

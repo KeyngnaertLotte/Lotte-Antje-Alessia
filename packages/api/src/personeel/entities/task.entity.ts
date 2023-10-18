@@ -4,7 +4,7 @@ import { Entity, Column, ObjectIdColumn } from 'typeorm'
 @ObjectType()
 export class Takenlijst {
   @Field()
-  wie: string
+  plaats: string
 
   @Field()
   naam: string
@@ -16,5 +16,5 @@ export class Takenlijst {
   aantal: number
 
   @Field()
-  urgent: boolean
+  deadline: string
 }

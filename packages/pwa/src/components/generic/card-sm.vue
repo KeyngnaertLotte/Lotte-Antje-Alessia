@@ -6,7 +6,6 @@ import { computed, defineProps } from 'vue';
 
 // icon aan de hand van de titel
 const icons: Record<string, any> = {
-    'uurrooster': Clock3,
     'materiaal': PackageOpen,
     'bonnetjes': QrCode,
     'vip lijst': Crown,
@@ -16,7 +15,6 @@ const icons: Record<string, any> = {
 
 // kleur kaartje aan de hand van de titel
 const color: Record<string, any> = {
-    'uurrooster': 'bg-custom-brown',
     'materiaal': 'bg-custom-greenblue',
     'bonnetjes': 'bg-custom-green',
     'vip lijst': 'bg-custom-green',
@@ -27,7 +25,6 @@ const color: Record<string, any> = {
 
 // kleur text aan de hand van de titel
 const textColor: Record<string, any> = {
-    'uurrooster': 'text-white',
     'materiaal': 'text-black',
     'bonnetjes': 'text-black',
     'vip lijst': 'text-black',

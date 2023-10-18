@@ -22,6 +22,11 @@ export class Personeel {
   @Field()
   achternaam: string
 
+  // type personeel
+  @Column()
+  @Field()
+  type: string
+
   @Column()
   @Field(() => [Takenlijst])
   takenlijst?: Takenlijst[];
