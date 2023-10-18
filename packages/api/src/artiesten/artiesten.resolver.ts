@@ -7,6 +7,8 @@ import { UseGuards } from '@nestjs/common'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
 import { FirebaseUser } from 'src/authentication/decoraters/user.decorator'
 import { UserRecord } from 'firebase-admin/auth'
+import { Agenda } from './entities/agenda.entity'
+import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 
 @Resolver(() => Artiest)
 export class ArtiestenResolver {
@@ -18,6 +20,13 @@ export class ArtiestenResolver {
   ): Promise<Artiest> {
     return this.artiestenService.create(createArtiestenInput)
   }
+
+  // @Mutation(() => Artiest)
+  // createAgendaItem(
+  //   @Args('createArtiestenInput') uid: string,
+  // ): Promise<Artiest> {
+
+  // }
 
   @UseGuards(FirebaseGuard)
   @Query(() => [Artiest], { name: 'artiesten' })
@@ -31,13 +40,30 @@ export class ArtiestenResolver {
     return this.artiestenService.findOneById(id)
   }
 
+  @Query(() => Artiest, { name: 'artiestByUid' })
+  findOneByUid(@Args('string', { type: () => String }) id: string) {
+    return this.artiestenService.findOneByUid(id)
+  }
+
+  // @Mutation(() => Artiest)
+  // updateArtiesten(
+  //   @Args('updateArtiestenInput') updateArtiestenInput: UpdateArtiestenInput,
+  // ) {
+  //   return this.artiestenService.update(
+  //     updateArtiestenInput.id,
+  //     updateArtiestenInput,
+  //   )
+  // }
+
   @Mutation(() => Artiest)
-  updateArtiesten(
-    @Args('updateArtiestenInput') updateArtiestenInput: UpdateArtiestenInput,
+  createBenodigdhedenInput(
+    @Args('createBenodigdhedenInput')
+    createBenodigdhedenInput: CreateBenodigdhedenInput,
+    @Args('uid') uid: string,
   ) {
-    return this.artiestenService.update(
-      updateArtiestenInput.id,
-      updateArtiestenInput,
+    return this.artiestenService.AddMateriaaltoArtiest(
+      uid,
+      createBenodigdhedenInput,
     )
   }
 

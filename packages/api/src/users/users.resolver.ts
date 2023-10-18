@@ -23,7 +23,7 @@ export class UsersResolver {
     return this.usersService.create(user.uid, createUserInput)
   }
 
-  @AllowedRoles(Role.PERSONEEL)
+  @AllowedRoles(Role.BEZOEKER)
   @UseGuards(FirebaseGuard, RolesGuard)
   @Query(() => [User], { name: 'users' })
   findAll() {
