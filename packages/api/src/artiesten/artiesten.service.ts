@@ -80,7 +80,10 @@ export class ArtiestenService {
     newbenodigdheden.categorie = materiaal.categorie
     newbenodigdheden.podium = currentArtiest.podium
 
-    updateArtiest.benodigdheden = [...currentArtiest.benodigdheden, newbenodigdheden]
+    updateArtiest.benodigdheden = [
+      ...currentArtiest.benodigdheden,
+      newbenodigdheden,
+    ]
 
     // updateArtiest.benodigdheden = [
     //   ...currentArtiest.benodigdheden,
