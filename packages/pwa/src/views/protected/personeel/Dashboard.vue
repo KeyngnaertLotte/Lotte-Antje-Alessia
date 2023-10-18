@@ -1,21 +1,8 @@
 <template>
-  <div
-    class="max-h-screen grid grid-cols-2 grid-rows-24 h-screen bg-secondary overflow-hidden"
-  >
-    <div class="col-span-2 row-span-3">
-      <AppHeader />
-    </div>
-    <div
-      class="flex flex-row items-center justify-center col-span-2 row-start-7"
-    >
-      <CardSm title="materiaal" />
+      <CardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4"/>
       <!-- <CardSm title="uurrooster" /> -->
-      <CardSm title="scanner" />
-    </div>
-    <div class="col-span-2 row-start-10 justify-center items-center m-5">
+      <CardSm title="scanner"  class="col-span-1 row-start-4 row-span-4"/>
       <task-list />
-    </div>
-  </div>
 </template>
 
 <script lang="ts">

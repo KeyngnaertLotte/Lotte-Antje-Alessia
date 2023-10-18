@@ -17,7 +17,7 @@ const router = createRouter({
     
     {
       path: '/bezoeker',
-      component: () => import('../components/wrapper/BezoekerWrap.vue'),
+      component: () => import('../components/wrapper/AccountWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
       children: [
         {
@@ -45,21 +45,28 @@ const router = createRouter({
 
     {
       path: '/artiest',
-      component: () => import('../views/protected/artiest/Dashboard.vue'),
+      component: () => import('../components/wrapper/AccountWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'artiest' },
-    },
-    {
-      path: '/artiest',
-      component: () => import('../components/wrapper/EventsWrapper.vue'),
-      meta: { shouldBeAuthenticated: true, allowedRole: 'artiest' },
-      children: [],
+      children: [
+        {
+          path: 'dashboard',
+          component: () => import('../views/protected/artiest/dashboard.vue'),
+        },
+      ],
     },
 
     {
       path: '/personeel',
-      component: () => import('../views/protected/personeel/Dashboard.vue'),
+      component: () => import('../components/wrapper/AccountWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'personeel' },
+      children: [
+        {
+          path: 'dashboard',
+          component: () => import('../views/protected/personeel/Dashboard.vue'),
+        },
+      ],
     },
+
     {
       path: '/personeel',
       component: () => import('../components/wrapper/EventsWrapper.vue'),

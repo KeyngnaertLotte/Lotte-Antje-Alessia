@@ -31,7 +31,7 @@
         },
         setup(props) {
             const naam = props.naam;
-            // console.log(props);
+            // console.log("scream and shout",props);
             return {
                 isVisible,
                 toggleVisibility,
