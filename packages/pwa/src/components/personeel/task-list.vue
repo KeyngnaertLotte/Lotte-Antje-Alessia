@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import { PlusCircle }  from 'lucide-vue-next'
 
 const props = defineProps({
   takenlijst: {
@@ -11,7 +12,12 @@ const props = defineProps({
 
 <template>
   <div class="bg-white shadow-md w-full p-4 rounded-2xl" v-for="taak in takenlijst">
-    <h1 class="font-bold text-xl">Takenlijst</h1>
+    <div class="flex items-center justify-between">
+      <h1 class="font-bold text-xl">Takenlijst</h1>
+      <button>
+        <PlusCircle class="stroke-custom-blue"/>
+      </button>
+    </div>
     <div class="mt-3">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-2">
         <div class="flex items-center col-span-4">
