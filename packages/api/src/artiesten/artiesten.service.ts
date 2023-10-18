@@ -7,6 +7,7 @@ import { Artiest } from './entities/artiesten.entity'
 import { ObjectId } from 'mongodb'
 import { Agenda } from './entities/agenda.entity'
 import { Benodigdheden } from './entities/benodigdheden.entity'
+import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 
 @Injectable()
 export class ArtiestenService {
@@ -20,12 +21,11 @@ export class ArtiestenService {
     a.naam = createArtiestenInput.naam
     a.podium = createArtiestenInput.podium
 
-    const newBenodigdheden: Benodigdheden ={
+    const newBenodigdheden: Benodigdheden = {
       item: 'Gitaar',
       aantal: 1,
       categorie: 'Instrumenten',
       podium: createArtiestenInput.podium,
-
     }
 
     a.benodigdheden = [newBenodigdheden]
@@ -60,6 +60,38 @@ export class ArtiestenService {
   //   artiest.agenda.push(agendaItem)
   //   return this.artiestRepository.save(artiest)
   // }
+
+  async AddMateriaaltoArtiest(
+    uid: string,
+    materiaal: CreateBenodigdhedenInput,
+  ) {
+    const currentArtiest = await this.findOneByUid(uid)
+
+    const updateArtiest = new Artiest()
+
+    updateArtiest.naam = currentArtiest.naam
+    updateArtiest.podium = currentArtiest.podium
+    updateArtiest.uid = currentArtiest.uid
+    updateArtiest.agenda = currentArtiest.agenda
+
+    const newbenodigdheden = new Benodigdheden()
+    newbenodigdheden.item = materiaal.item
+    newbenodigdheden.aantal = materiaal.aantal
+    newbenodigdheden.categorie = materiaal.categorie
+    newbenodigdheden.podium = currentArtiest.podium
+
+    updateArtiest.benodigdheden = [
+      ...currentArtiest.benodigdheden,
+      newbenodigdheden,
+    ]
+
+    // updateArtiest.benodigdheden = [
+    //   ...currentArtiest.benodigdheden,
+    //   ...updatedArtiestenInput.benodigdheden,
+    // ]
+
+    return this.artiestRepository.save(updateArtiest)
+  }
 
   findAll() {
     return this.artiestRepository.find()

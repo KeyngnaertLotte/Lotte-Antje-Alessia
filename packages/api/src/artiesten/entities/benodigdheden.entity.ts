@@ -14,7 +14,7 @@ export class Benodigdheden {
   @Field()
   categorie: string
 
-    @Column()
-    @Field()
-    aantal: number
+  @Column()
+  @Field()
+  aantal: number
 }
