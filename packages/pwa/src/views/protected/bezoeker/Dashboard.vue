@@ -9,7 +9,7 @@
     import AppHeader from '@/components/AppHeader.vue';
     import FavoriteArtists from '@/components/bezoeker/FavoriteArtists.vue';
     import useCustomUser from '@/composables/useCustomUser'
-    import cardSm from '@/components/generic/card-sm.vue';
+    import cardSm from '@/components/generic/CardSm.vue';
 
     import { provideApolloClient, useQuery } from '@vue/apollo-composable'
     import { GET_BEZOEKER_BY_UID } from '@/graphql/bezoeker.query'

@@ -1,23 +1,20 @@
 import gql from 'graphql-tag'
 
-export const ALL_PERSONEEL = gql`
-  query personeel {
-    personeel {
-      id
-      voornaam
-      achternaam
-      telefoon
-    }
-  }
-`
-
-const GET_PERSONEEL_BY_UID = gql`
+export const GET_PERSONEEL_BY_UID = gql`
   query personeelByUid($uid: String!) {
-    personeelByUid(string: $uid) {
+    personeelByUid(uid: $uid) {
       id
+      uid
       voornaam
       achternaam
-      telefoon
+      type
+      takenlijst {
+        plaats
+        naam
+        category
+        aantal
+        deadline
+      }
     }
   }
 `
