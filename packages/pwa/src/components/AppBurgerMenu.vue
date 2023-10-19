@@ -19,34 +19,15 @@
     <div class="px-6 py-12">
       <div class="flex flex-col justify-center gap-8">
         <router-link
+          v-for="(menuItem, index) in menuList" :key="index"
+          :to="menuItem.path"
           @click="toggleVisibility"
-          to="/bezoeker/dashboard"
           class="flex flex-row items-center text-3xl text-white gap-4 font-body"
-        >
-          <LayoutDashboard  class="stroke-white h-8 w-8" />DASHBOARD</router-link
-        >
-        <router-link
-          @click="toggleVisibility"
-          to="/bezoeker/lineup"
-          class="flex flex-row items-center text-3xl text-white gap-4 font-body"
-        >
-          <Clock3 class="stroke-white h-8 w-8" />LINE UP</router-link
-        >
-        <!-- <router-link
-          @click="toggleVisibility"
-          to="/bezoeker/map"
-          class="flex flex-row items-center text-3xl text-white gap-4 font-body"
-        >
-          <MapPin class="stroke-white h-8 w-8" />MAP</router-link
-        > -->
-        <router-link
-          @click="toggleVisibility"
-          to="/bezoeker/saldo"
-          class="flex flex-row items-center text-3xl text-white gap-4 font-body"
-        >
-          <Coins class="stroke-white h-8 w-8" />SALDO</router-link
-        >
+         >
+          <component :is="menuItem.icon"  class="stroke-white h-8 w-8" /> {{ menuItem.name }}
+        </router-link>
       </div>
+      
     </div>
     <div class="h-full flex justify-center items-end pb-12">
       <button
@@ -65,10 +46,72 @@ import { LayoutDashboard , X, Clock3, MapPin, Coins, LogOut } from 'lucide-vue-n
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
 
-const { isVisible } = defineProps(['isVisible'])
+const props = defineProps(
+  {
+    isVisible: {
+      type: Boolean,
+      required: true,
+    },
+    roleShow: {
+      type: String,
+      required: true,
+    },
+  },
+)
 const emit = defineEmits()
 const { logout } = useFirebase()
 const { replace } = useRouter()
+
+const roleMenuList = [
+  {
+    role: 'BEZOEKER',
+    menuList: [
+      {
+        name: 'Dashboard',
+        path: '/bezoeker/dashboard',
+        icon: LayoutDashboard,
+      },
+      {
+        name: 'Line Up',
+        path: '/bezoeker/lineup',
+        icon: Clock3,
+      },
+      {
+        name: 'Saldo',
+        path: '/bezoeker/saldo',
+        icon: Coins,
+      },
+    ],
+  },
+  {
+    role: 'ARTIEST',
+    menuList: [
+      {
+        name: 'Dashboard',
+        path: '/artiest/dashboard',
+        icon: LayoutDashboard,
+      },
+    ],
+  },
+  {
+    role: 'PERSONEEL',
+    menuList: [
+      {
+        name: 'Dashboard',
+        path: '/personeel/dashboard',
+        icon: LayoutDashboard,
+      },
+    ],
+  },
+]
+
+const menuList = roleMenuList.find((roleMenu) => roleMenu.role === props.roleShow)?.menuList
+console.log('menuList:', menuList)
+
+menuList?.forEach(element => {
+  
+  
+});
 
 function toggleVisibility() {
   emit('toggle-visibility') // Emit event to toggle visibility
