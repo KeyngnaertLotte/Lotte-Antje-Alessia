@@ -20,7 +20,7 @@
     const { customUser } = useCustomUser()
     function toggleVisibility() {
         isVisible.value = !isVisible.value;
-        console.log("state menu", isVisible.value);
+        // console.log("state menu", isVisible.value);
     }
 
     export default {
@@ -32,9 +32,9 @@
             },
         },
         setup(props) {
-            console.log('customUser:', customUser.value?.role);
+            // console.log('customUser:', customUser.value?.role);
             const role = customUser.value?.role
-            console.log('role:', role);
+            // console.log('role:', role);
             const naam = props.naam;
             // console.log("scream and shout",props);
             return {

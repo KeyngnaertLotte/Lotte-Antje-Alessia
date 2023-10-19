@@ -106,7 +106,7 @@ const roleMenuList = [
 ]
 
 const menuList = roleMenuList.find((roleMenu) => roleMenu.role === props.roleShow)?.menuList
-console.log('menuList:', menuList)
+// console.log('menuList:', menuList)
 
 menuList?.forEach(element => {
   

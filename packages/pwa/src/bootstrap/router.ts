@@ -10,10 +10,6 @@ const router = createRouter({
       path: '/',
       component: () => import('../views/Home.vue'),
     },
-    // {
-    //   path: '/account',
-    //   component: () => import('../views/Account.vue'),
-    // },
     
     {
       path: '/bezoeker',
@@ -99,8 +95,8 @@ router.beforeEach(async (to, from, next) => {
   const { customUser } = useCustomUser()
 
   const role = customUser.value?.role.toLowerCase()
-  console.log('inlog rol: ', role)
-  console.log(to.meta.allowedRole)
+  // console.log('inlog rol: ', role)
+  // console.log(to.meta.allowedRole)
 
   if (to.meta.shouldBeAuthenticated && !firebaseUser.value) {
     next({ path: '/auth/login' })
@@ -114,5 +110,5 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
 })
-
+ 
 export default router

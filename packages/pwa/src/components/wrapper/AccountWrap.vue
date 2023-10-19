@@ -25,7 +25,7 @@
               QrCode,
           },
             setup() {
-                console.log('userName:', userName);
+                // console.log('userName:', userName);
                 userName = customUser.value?.naam
                 return {
                     userName
@@ -35,7 +35,7 @@
         computed: {
             bgColorClass() {
                 const routeSegment = this.$route.path.split('/')[2];
-                console.log('routeSegment:', routeSegment);
+                // console.log('routeSegment:', routeSegment);
                 return routeSegment === 'lineup' ? 'primary' : 'secondary';
             }
             },
