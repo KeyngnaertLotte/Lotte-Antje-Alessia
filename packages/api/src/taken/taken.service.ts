@@ -3,7 +3,7 @@ import { CreateTakenInput } from './dto/create-taken.input'
 import { UpdateTakenInput } from './dto/update-taken.input'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Taak } from './entities/taken.entity'
-import { Repository } from 'typeorm'
+import { FindOneOptions, Repository } from 'typeorm'
 import { ObjectId } from 'mongodb'
 
 @Injectable()
@@ -35,11 +35,29 @@ export class TakenService {
     return `This action updates a #${id} taken`
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} taken`
+  async remove(id: string) {
+    // check if taak exists
+    const taakObj = await this.findOneById(id)
+    if (!taakObj) throw new Error('Taak niet gevonden')
+    else {
+      console.log('taakObj', taakObj)
+
+      this.taakRepository.remove(taakObj)
+
+      return taakObj
+    }
   }
 
   saveAll(taken: Taak[]) {
     return this.taakRepository.save(taken)
+  }
+
+  findOneById(id: string): Promise<Taak> {
+    try {
+      // @ts-ignore
+      return this.taakRepository.findOne({ _id: new ObjectId(id) })
+    } catch (e) {
+      throw new Error('Taak niet gevonden')
+    }
   }
 }

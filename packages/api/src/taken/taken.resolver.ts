@@ -3,6 +3,7 @@ import { TakenService } from './taken.service'
 import { Taak } from './entities/taken.entity'
 import { CreateTakenInput } from './dto/create-taken.input'
 import { UpdateTakenInput } from './dto/update-taken.input'
+import { query } from 'express'
 
 @Resolver(() => Taak)
 export class TakenResolver {
@@ -18,10 +19,22 @@ export class TakenResolver {
     return this.takenService.findAll()
   }
 
-  @Query(() => Taak, { name: 'taken' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.takenService.findOne(id)
+  // @Query(() => Taak, { name: 'taak' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.takenService.findOne(id)
+  // }
+
+  @Query(() => Taak, { name: 'taak' })
+  findOne(@Args('id', { type: () => String }) id: string) {
+    return this.takenService.findOneById(id)
   }
+
+  // @Query(() => Taak, { name: 'taakbyid' })
+  // async findOneById(@Args('id', { type: () => String }) id: string) {
+  //   console.log('id (resolver)', id)
+  //   console.log('test',await this.takenService.findOneById(id))
+  //   return await this.takenService.findOneById(id)
+  // }
 
   @Mutation(() => Taak)
   updateTaken(@Args('updateTakenInput') updateTakenInput: UpdateTakenInput) {
@@ -29,8 +42,7 @@ export class TakenResolver {
   }
 
   @Mutation(() => Taak)
-  removeTaken(@Args('id', { type: () => Int }) id: number) {
+  removeTaak(@Args('id', { type: () => String }) id: string) {
     return this.takenService.remove(id)
   }
-
 }

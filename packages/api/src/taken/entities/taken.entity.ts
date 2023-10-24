@@ -1,5 +1,6 @@
-import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
-import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { ObjectType, Field, Int, ID } from '@nestjs/graphql'
+import { Column, Entity, ObjectIdColumn } from 'typeorm'
+import { ObjectId } from 'mongodb'
 
 @Entity()
 @ObjectType()
@@ -7,7 +8,7 @@ export class Taak {
   @ObjectIdColumn()
   @Field(() => ID)
   id: string
-  
+
   @Field()
   @Column()
   plaats: string
