@@ -5,6 +5,9 @@ import { Takenlijst } from '../entities/task.entity';
 @InputType()
 export class CreatePersoneelInput {
   @Field()
+  uid: string
+
+  @Field()
   voornaam: string
 
   @Field()
@@ -16,5 +19,4 @@ export class CreatePersoneelInput {
   @Field(() => [Takenlijst])
   takenlijst?: Takenlijst[];
 }
-
 

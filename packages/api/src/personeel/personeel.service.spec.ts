@@ -4,6 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Personeel } from './entities/personeel.entity';
 import { Repository } from 'typeorm';
 import { createPersoneelInputStub, personeelStub } from './stubs/personeel.stub';
+import { CreatePersoneelInput } from './dto/create-personeel.input';
 
 describe('PersoneelService', () => {
   let service: PersoneelService;
@@ -32,13 +33,13 @@ describe('PersoneelService', () => {
       it('should call the personeelRepo.save()', async () => {
         const personeel = new Personeel();
         const saveSpy = jest.spyOn(personeelRepositoryMock, 'save')
-        service.create(personeel)
+        await service.create(personeel)
         expect(saveSpy).toHaveBeenCalledTimes(1)
       })
 
       it('should call personeelRepo.save() with the correct params', async () => {
+        const personeel: CreatePersoneelInput = createPersoneelInputStub()
         const saveSpy = jest.spyOn(personeelRepositoryMock, 'save')
-        const personeel = createPersoneelInputStub()
 
         await service.create(personeel)
         expect(saveSpy).toHaveBeenCalledWith(personeel)
