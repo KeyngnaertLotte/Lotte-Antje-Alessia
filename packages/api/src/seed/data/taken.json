@@ -1,0 +1,186 @@
+[
+    {
+        "plaats": "Antje",
+        "type": "Podium - licht (Antje)",
+        "naam": "Taak 1",
+        "category": "Categorie 1",
+        "aantal": 5,
+        "deadline": "15:00"
+    },
+    {
+        "plaats": "Aléssia",
+        "type": "Podium - geluid (Aléssia)",
+        "naam": "Taak 2",
+        "category": "Categorie 2",
+        "aantal": 3,
+        "deadline": "16:30"
+    },
+    {
+        "plaats": "Lotte",
+        "type": "Podium - licht (Lotte)",
+        "naam": "Taak 3",
+        "category": "Categorie 3",
+        "aantal": 4,
+        "deadline": "14:45"
+    },
+    {
+        "plaats": "Bar",
+        "type": "Bar - eten",
+        "naam": "Taak 4",
+        "category": "Categorie 4",
+        "aantal": 6,
+        "deadline": "18:00"
+    },
+    {
+        "plaats": "Toiletten",
+        "type": "All round",
+        "naam": "Taak 5",
+        "category": "Categorie 5",
+        "aantal": 2,
+        "deadline": "13:15"
+    },
+    {
+        "plaats": "Backstage",
+        "type": "Kuisen",
+        "naam": "Taak 6",
+        "category": "Categorie 6",
+        "aantal": 4,
+        "deadline": "17:30"
+    },
+    {
+        "plaats": "Antje",
+        "type": "Podium - geluid (Antje)",
+        "naam": "Taak 7",
+        "category": "Categorie 7",
+        "aantal": 3,
+        "deadline": "16:00"
+    },
+    {
+        "plaats": "Aléssia",
+        "type": "Podium - licht (Aléssia)",
+        "naam": "Taak 8",
+        "category": "Categorie 8",
+        "aantal": 5,
+        "deadline": "15:45"
+    },
+    {
+        "plaats": "Lotte",
+        "type": "Podium - geluid (Lotte)",
+        "naam": "Taak 9",
+        "category": "Categorie 9",
+        "aantal": 4,
+        "deadline": "14:15"
+    },
+    {
+        "plaats": "Bar",
+        "type": "Bar - drank",
+        "naam": "Taak 10",
+        "category": "Categorie 10",
+        "aantal": 8,
+        "deadline": "18:30"
+    },
+    {
+        "plaats": "Toiletten",
+        "type": "Kuisen",
+        "naam": "Taak 11",
+        "category": "Categorie 11",
+        "aantal": 2,
+        "deadline": "13:30"
+    },
+    {
+        "plaats": "Backstage",
+        "type": "loge(artiesten)",
+        "naam": "Taak 12",
+        "category": "Categorie 12",
+        "aantal": 6,
+        "deadline": "17:00"
+    },
+    {
+        "plaats": "Antje",
+        "type": "Podium - licht (Antje)",
+        "naam": "Taak 13",
+        "category": "Categorie 13",
+        "aantal": 5,
+        "deadline": "15:15"
+    },
+    {
+        "plaats": "Aléssia",
+        "type": "Podium - geluid (Aléssia)",
+        "naam": "Taak 14",
+        "category": "Categorie 14",
+        "aantal": 3,
+        "deadline": "16:45"
+    },
+    {
+        "plaats": "Lotte",
+        "type": "Podium - licht (Lotte)",
+        "naam": "Taak 15",
+        "category": "Categorie 15",
+        "aantal": 4,
+        "deadline": "14:30"
+    },
+    {
+        "plaats": "Bar",
+        "type": "Bar - eten",
+        "naam": "Taak 16",
+        "category": "Categorie 16",
+        "aantal": 6,
+        "deadline": "18:15"
+    },
+    {
+        "plaats": "Toiletten",
+        "type": "All round",
+        "naam": "Taak 17",
+        "category": "Categorie 17",
+        "aantal": 2,
+        "deadline": "13:00"
+    },
+    {
+        "plaats": "Backstage",
+        "type": "Kuisen",
+        "naam": "Taak 18",
+        "category": "Categorie 18",
+        "aantal": 4,
+        "deadline": "17:15"
+    },
+    {
+        "plaats": "Antje",
+        "type": "Podium - geluid (Antje)",
+        "naam": "Taak 19",
+        "category": "Categorie 19",
+        "aantal": 3,
+        "deadline": "16:15"
+    },
+    {
+        "plaats": "Aléssia",
+        "type": "Podium - licht (Aléssia)",
+        "naam": "Taak 20",
+        "category": "Categorie 20",
+        "aantal": 5,
+        "deadline": "15:30"
+    },
+    {
+        "plaats": "Lotte",
+        "type": "Podium - geluid (Lotte)",
+        "naam": "Taak 21",
+        "category": "Categorie 21",
+        "aantal": 4,
+        "deadline": "14:00"
+    },
+    {
+        "plaats": "Bar",
+        "type": "Bar - drank",
+        "naam": "Taak 22",
+        "category": "Categorie 22",
+        "aantal": 8,
+        "deadline": "18:45"
+    },
+    {
+        "plaats": "Toiletten",
+        "type": "Kuisen",
+        "naam": "Taak 23",
+        "category": "Categorie 23",
+        "aantal": 2,
+        "deadline": "13:45"
+    }
+]
