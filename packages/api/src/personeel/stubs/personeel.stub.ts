@@ -6,7 +6,7 @@ export const createPersoneelInputStub = (): CreatePersoneelInput => {
   personeel.voornaam = ''
   personeel.achternaam = ''
   personeel.type = ''
-  personeel.takenlijst = []
+  // personeel.takenlijst = []
   return personeel
 }
 
@@ -17,6 +17,6 @@ export const personeelStub = (): Personeel => {
   personeel.voornaam = 'voornaam'
   personeel.achternaam = 'achternaam'
   personeel.type = 'type'
-  personeel.takenlijst = []
+  // personeel.takenlijst = []
   return personeel
 }

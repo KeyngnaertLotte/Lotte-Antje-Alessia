@@ -16,8 +16,11 @@ export class PersoneelService {
 
   create(createPersoneelInput: CreatePersoneelInput): Promise<Personeel> {
     const p = new Personeel()
+    p.uid = createPersoneelInput.uid
     p.voornaam = createPersoneelInput.voornaam
     p.achternaam = createPersoneelInput.achternaam
+    p.takenlijst = []
+    p.type = createPersoneelInput.type
 
     return this.personeelRepository.save(p)
   }

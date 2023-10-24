@@ -16,7 +16,5 @@ export class CreatePersoneelInput {
   @Field()
   type: string
 
-  @Field(() => [Takenlijst])
-  takenlijst?: Takenlijst[];
 }
 
