@@ -1,5 +1,5 @@
 <template>
-        <cardSm title="saldo" url="/bezoeker/saldo" :value="bezoekerInfo.bezoekerByUid.saldo" class="col-span-1 row-start-4 row-span-4 bg-[#885053]"/>
+        <cardSm title="saldo" url="/bezoeker/saldo" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :artiest="bezoekerInfo.bezoekerByUid.favoartiest" :value="bezoekerInfo.bezoekerByUid.saldo" class="col-span-1 row-start-4 row-span-4 bg-[#885053]"/>
         <cardSm title="bonnetjes" class="col-span-1 row-start-4 row-span-4 bg-custom-lightGreen "/>
         <FavoriteArtists v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :artiest="bezoekerInfo.bezoekerByUid.favoartiest"/>
   </template>
@@ -22,6 +22,8 @@
     provideApolloClient(apolloClient)
     const uid = customUser.value?.uid;
     const bezoekerInfo = ref<any | null>(null);
+
+
     export default {
         components: {
             AppHeader,
@@ -33,14 +35,14 @@
     
 
     const getBezoekerInfo = async () => {
-        console.log('uid:', uid);
+        // console.log('uid:', uid);
       try {
         const { onResult } = useQuery(GET_BEZOEKER_BY_UID, { uid });
         onResult((result) => {
           if (result.data) {
             console.log('Data:', result.data);
             bezoekerInfo.value = result.data;  // Update the ref with the fetched data
-            console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
+            // console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
           }
         });
       } catch (error) {

@@ -12,6 +12,12 @@ query bezoekerByUid($uid: String!){
     	time
       color
     }
+    transacties {
+      transactie
+    	aantal
+      tijd
+    }
   }
-}  
+}
+ 
 `

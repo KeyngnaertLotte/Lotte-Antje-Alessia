@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="bg-white shadow-md max-w-3xl p-4 rounded-2xl">
+  <div class="bg-white shadow-md max-w-3xl p-4 rounded-2xl col-span-2 row-start-8 row-span-17 bg-white rounded-xl m-4 grid grid-rows-17">
     <h1 class="font-bold text-xl">Takenlijst</h1>
     <div class="mt-3">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-2">

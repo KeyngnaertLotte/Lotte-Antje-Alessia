@@ -6,7 +6,6 @@ export const ALL_PERSONEEL = gql`
       id
       voornaam
       achternaam
-      telefoon
     }
   }
 `
@@ -17,7 +16,6 @@ const GET_PERSONEEL_BY_UID = gql`
       id
       voornaam
       achternaam
-      telefoon
     }
   }
 `
