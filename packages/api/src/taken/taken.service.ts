@@ -31,6 +31,10 @@ export class TakenService {
     return `This action returns a #${id} taken`
   }
 
+  findByType(type: string): Promise<Taak[]> {
+    return this.taakRepository.find({where: { type }})
+  }
+
   update(id: number, updateTakenInput: UpdateTakenInput) {
     return `This action updates a #${id} taken`
   }
