@@ -53,7 +53,7 @@ const router = createRouter({
 
     {
       path: '/personeel',
-      component: () => import('../components/wrapper/BezoekerWrap.vue'),
+      component: () => import('../components/wrapper/AccountWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'personeel' },
       children: [
         {
