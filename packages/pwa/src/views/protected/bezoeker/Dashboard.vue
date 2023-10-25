@@ -13,7 +13,7 @@
 
     import { provideApolloClient, useQuery } from '@vue/apollo-composable'
     import { GET_BEZOEKER_BY_UID } from '@/graphql/bezoeker.query'
-    import useGraphql from '../../../composables/useGraphql'
+    import useGraphql from '@/composables/useGraphql'
     import { ref } from 'vue';
 
 

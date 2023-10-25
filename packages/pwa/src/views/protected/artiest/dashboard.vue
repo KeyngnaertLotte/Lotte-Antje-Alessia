@@ -10,7 +10,7 @@
     import { ALL_Artiesten } from '@/graphql/artiest.query';
     import AppHeader from '@/components/AppHeader.vue'
     import AgendaArtist from '@/components/artiest/AgendaArtist.vue';
-    import cardSm from '@/components/generic/card-sm.vue';
+    import cardSm from '@/components/generic/CardSm.vue';
 
     export default {
         
