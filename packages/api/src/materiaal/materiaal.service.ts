@@ -4,6 +4,7 @@ import { UpdateMateriaalInput } from './dto/update-materiaal.input'
 import { Materiaal } from './entities/materiaal.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { Taak } from 'src/taken/entities/taken.entity'
 
 @Injectable()
 export class MateriaalService {
@@ -35,5 +36,30 @@ export class MateriaalService {
 
   remove(id: number) {
     return `This action removes a #${id} materiaal`
+  }
+
+  async UpdateAantalOptellen(materiaalId: string): Promise<void> {
+    const materiaal = await this.findOneById(materiaalId)
+    this.materiaalRepository.update(
+      { id: materiaalId },
+      { aantal: materiaal.aantal + 1 },
+    )
+  }
+
+  async UpdateAantalaftrekken(materiaalId: string): Promise<void> {
+    const materiaal = await this.findOneById(materiaalId)
+    this.materiaalRepository.update(
+      { id: materiaalId },
+      { aantal: materiaal.aantal - 1 },
+    )
+  }
+
+  findOneById(id: string): Promise<Materiaal> {
+    try {
+      // @ts-ignore
+      return this.materiaalRepository.findOne({ _id: new ObjectId(id) })
+    } catch (e) {
+      throw new Error('Taak niet gevonden')
+    }
   }
 }

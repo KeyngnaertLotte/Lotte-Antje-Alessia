@@ -29,6 +29,11 @@ export class TakenResolver {
     return this.takenService.findOneById(id)
   }
 
+  @Query(() => [Taak], { name: 'takenbytype' })
+  findByType(@Args('type', { type: () => String }) type: string) {
+    return this.takenService.findByType(type)
+  }
+
   // @Query(() => Taak, { name: 'taakbyid' })
   // async findOneById(@Args('id', { type: () => String }) id: string) {
   //   console.log('id (resolver)', id)
