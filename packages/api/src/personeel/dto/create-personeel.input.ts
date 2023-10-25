@@ -8,7 +8,4 @@ export class CreatePersoneelInput {
 
   @Field()
   achternaam: string
-  
-  @Field()
-  telefoon: number
 }

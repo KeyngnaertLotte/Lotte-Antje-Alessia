@@ -102,7 +102,7 @@ export default {
           console.log('logged in')
           restoreCustomUser().then(() => {
             console.log('custom user restored')
-            const role = customUser.value?.role.toLowerCase()
+            const role = customUser.value?.role.toLowerCase() 
             console.log('role: ', role)
             replace(`/${role}/dashboard`)
           })

@@ -23,7 +23,7 @@ export class PersoneelResolver {
   }
 
   // get all personeel
-  @UseGuards(FirebaseGuard)
+  // @UseGuards(FirebaseGuard)
   @Query(() => [Personeel], { name: 'personeel' })
   findAll(@FirebaseUser() currentUser: UserRecord) {
     console.log(currentUser)
@@ -36,20 +36,26 @@ export class PersoneelResolver {
     return this.personeelService.findOneById(id)
   }
 
-  // update personeel
-  @Mutation(() => Personeel)
-  updatePersoneel(
-    @Args('updatePersoneelInput') updatePersoneelInput: UpdatePersoneelInput,
-  ) {
-    return this.personeelService.update(
-      updatePersoneelInput.id,
-      updatePersoneelInput,
-    )
+  // get one by uid
+  @Query(() => Personeel, { name: 'personeelByUid' })
+  findOneByUid(@Args('uid', { type: () => String }) uid: string): Promise<Personeel> {
+    return this.personeelService.findOneByUid(uid)
   }
 
+  // update personeel
+  // @Mutation(() => Personeel)
+  // updatePersoneel(
+  //   @Args('updatePersoneelInput') updatePersoneelInput: UpdatePersoneelInput,
+  // ) {
+  //   return this.personeelService.update(
+  //     updatePersoneelInput.id,
+  //     updatePersoneelInput,
+  //   )
+  // }
+
   // delete personeel
-  @Mutation(() => Personeel)
-  removePersoneel(@Args('id', { type: () => Int }) id: number) {
-    return this.personeelService.remove(id)
-  }
+  // @Mutation(() => Personeel)
+  // removePersoneel(@Args('id', { type: () => Int }) id: number) {
+  //   return this.personeelService.remove(id)
+  // }
 }

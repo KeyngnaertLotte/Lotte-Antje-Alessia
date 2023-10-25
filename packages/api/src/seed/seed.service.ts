@@ -9,6 +9,9 @@ import { Personeel } from 'src/personeel/entities/personeel.entity'
 import * as artiesten from './data/artiesten.json'
 import * as bezoekers from './data/bezoekers.json'
 import * as personeel from './data/personeel.json'
+import * as taken from './data/taken.json'
+import { Taak } from 'src/taken/entities/taken.entity'
+import { TakenService } from 'src/taken/taken.service'
 
 @Injectable()
 export class SeedService {
@@ -16,6 +19,7 @@ export class SeedService {
     private artiestenService: ArtiestenService, 
     private bezoekersService: BezoekersService,
     private personeelService: PersoneelService,
+    private taakService: TakenService,
     ) {}
 
   async addArtiestenFromJson(): Promise<Artiest[]> {
@@ -61,7 +65,6 @@ export class SeedService {
       const p = new Personeel()
       p.achternaam = personeelLid.achternaam
       p.voornaam = personeelLid.voornaam
-      p.telefoon = personeelLid.telefoon
 
       hetPersoneel.push(p)
     }
@@ -70,6 +73,23 @@ export class SeedService {
 
   async deleteAllPersoneel(): Promise<void> {
     return this.personeelService.truncate()
+  }
+
+  async addTakenFromJson(): Promise<Taak[]> {
+    let deTaken: Taak[] = []
+    for (let taak of taken) {
+      const t = new Taak()
+      t.aantal = taak.aantal
+      t.category = taak.category
+      t.deadline = taak.deadline
+      t.naam = taak.naam
+      t.plaats = taak.plaats
+      t.type = taak.type
+
+
+      deTaken.push(t)
+    }
+    return this.taakService.saveAll(deTaken)
   }
 
 }

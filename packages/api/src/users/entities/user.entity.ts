@@ -11,6 +11,7 @@ export enum Role {
   BEZOEKER = 'BEZOEKER',
   ARTIEST = 'ARTIEST',
   PERSONEEL = 'PERSONEEL',
+  ADMIN = 'ADMIN',
 }
 
 @Entity()

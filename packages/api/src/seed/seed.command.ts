@@ -66,4 +66,13 @@ export class DatabaseSeedCommand {
     console.info('deleted personeel')
   }
 
+  @Command({
+    command: 'seed:database:taak',
+    describe: 'seed the database with taak',
+  })
+  async seedTaken() {
+    console.info('seeding taken')
+    const taken = await this.seedService.addTakenFromJson()
+    console.info(`Seeded ${taken.length} taken`)
+  }
 }

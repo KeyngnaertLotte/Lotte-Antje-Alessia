@@ -6,7 +6,6 @@ export const ADD_PERSONEEL = gql`
       id
       voornaam
       achternaam
-      telefoon
     }
   }
 `

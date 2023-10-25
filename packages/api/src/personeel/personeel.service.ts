@@ -18,7 +18,6 @@ export class PersoneelService {
     const p = new Personeel()
     p.voornaam = createPersoneelInput.voornaam
     p.achternaam = createPersoneelInput.achternaam
-    p.telefoon = createPersoneelInput.telefoon
 
     return this.personeelRepository.save(p)
   }
@@ -32,6 +31,10 @@ export class PersoneelService {
     console.log(obj)
     // @ts-ignore
     return this.personeelRepository.findOne({_id: new ObjectId(id)})
+  }
+
+  findOneByUid(uid: string): Promise<Personeel> {
+    return this.personeelRepository.findOneByOrFail({ uid })
   }
 
   update(id: number, updatePersoneelInput: UpdatePersoneelInput) {

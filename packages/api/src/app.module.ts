@@ -11,6 +11,8 @@ import { SeedModule } from './seed/seed.module'
 import { AuthenticationModule } from './authentication/authentication.module'
 import { ConfigModule } from '@nestjs/config'
 import { UsersModule } from './users/users.module';
+import { MateriaalModule } from './materiaal/materiaal.module';
+import { TakenModule } from './taken/taken.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { UsersModule } from './users/users.module';
     SeedModule,
     AuthenticationModule,
     UsersModule,
+    MateriaalModule,
+    TakenModule,
   ],
   controllers: [AppController],
   providers: [AppService],

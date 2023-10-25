@@ -1,22 +1,33 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Entity, Column, ObjectIdColumn } from 'typeorm'
 
-@Entity() // Database link - Typeorm
-@ObjectType({ description: 'personeel'})
+import { Takenlijst } from './task.entity'
+
+@Entity()
+@ObjectType()
 export class Personeel {
-  @ObjectIdColumn() // Database link - Typeorm
-  @Field(() => ID) // Graphql
+  @ObjectIdColumn()
+  @Field(() => ID)
   id: number
 
-  @Column() // Database link - Typeorm
-  @Field() //graphql
+  @Column()
+  @Field()
+  uid: string
+
+  @Column()
+  @Field()
   voornaam: string
 
-  @Column() // Database link - Typeorm
-  @Field() //graphql
+  @Column()
+  @Field()
   achternaam: string
 
-  @Column() // Database link - Typeorm
-  @Field() //graphql
-  telefoon: number
+  // type personeel
+  @Column()
+  @Field()
+  type: string
+
+  @Column()
+  @Field(() => [Takenlijst])
+  takenlijst?: Takenlijst[];
 }
