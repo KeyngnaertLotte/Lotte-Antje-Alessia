@@ -40,7 +40,7 @@
         const { onResult } = useQuery(GET_BEZOEKER_BY_UID, { uid });
         onResult((result) => {
           if (result.data) {
-            // console.log('Data:', result.data);
+            console.log('Data:', result.data);
             bezoekerInfo.value = result.data;  // Update the ref with the fetched data
             // console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
           }
