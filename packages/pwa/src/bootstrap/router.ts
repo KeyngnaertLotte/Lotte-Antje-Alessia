@@ -10,14 +10,10 @@ const router = createRouter({
       path: '/',
       component: () => import('../views/Home.vue'),
     },
-    // {
-    //   path: '/account',
-    //   component: () => import('../views/Account.vue'),
-    // },
     
     {
       path: '/bezoeker',
-      component: () => import('../components/wrapper/BezoekerWrap.vue'),
+      component: () => import('../components/wrapper/AccountWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'bezoeker' },
       children: [
         {
@@ -45,32 +41,29 @@ const router = createRouter({
 
     {
       path: '/artiest',
-      component: () => import('../views/protected/artiest/Dashboard.vue'),
+      component: () => import('../components/wrapper/AccountWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'artiest' },
-    },
-    {
-      path: '/artiest',
-      component: () => import('../components/wrapper/EventsWrapper.vue'),
-      meta: { shouldBeAuthenticated: true, allowedRole: 'artiest' },
-      children: [],
+      children: [
+        {
+          path: 'dashboard',
+          component: () => import('../views/protected/artiest/dashboard.vue'),
+        },
+      ],
     },
 
     {
       path: '/personeel',
-      component: () => import('../views/protected/personeel/Dashboard.vue'),
-      meta: { shouldBeAuthenticated: true, allowedRole: 'personeel' },
-    },
-    {
-      path: '/personeel',
-      component: () => import('../components/wrapper/BezoekerWrap.vue'),
+      component: () => import('../components/wrapper/AccountWrap.vue'),
       meta: { shouldBeAuthenticated: true, allowedRole: 'personeel' },
       children: [
         {
-          path: 'materiaal',
-          component: () => import('../views/protected/personeel/Materiaal.vue'),
+          path: 'dashboard',
+          component: () => import('../views/protected/personeel/Dashboard.vue'),
         },
       ],
     },
+
+    
     {
       path: '/auth',
       component: () => import('../components/wrapper/AuthWrap.vue'),
@@ -93,7 +86,8 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       component: () => import('../views/NotFound.vue'),
-    },
+    }
+
   ],
 })
 
@@ -102,8 +96,8 @@ router.beforeEach(async (to, from, next) => {
   const { customUser } = useCustomUser()
 
   const role = customUser.value?.role.toLowerCase()
-  console.log('inlog rol: ', role)
-  console.log(to.meta.allowedRole)
+  // console.log('inlog rol: ', role)
+  // console.log(to.meta.allowedRole)
 
   if (to.meta.shouldBeAuthenticated && !firebaseUser.value) {
     next({ path: '/auth/login' })
@@ -117,5 +111,5 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
 })
-
+ 
 export default router

@@ -2,6 +2,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Column, Entity, ObjectIdColumn } from 'typeorm';
 
 import { FavArtiest } from './favartiest.entity'
+import { Transactie } from './transacties.entity'
 
 @Entity()
 @ObjectType()
@@ -25,4 +26,8 @@ export class Bezoeker {
   @Column()
   @Field(() => [FavArtiest]) 
   favoartiest?: FavArtiest[];
+
+  @Column()
+  @Field(() => [Transactie])
+  transacties?: Transactie[]
 }

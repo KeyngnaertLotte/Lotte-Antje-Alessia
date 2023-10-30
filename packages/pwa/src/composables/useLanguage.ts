@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 export default () => {
   const { locale, t, setLocaleMessage } = useI18n()
 
-  console.log(t('hello'))
+  // console.log(t('hello'))
 
   const loadMessages = async (locale: string) => {
     if (locale in SUPPORTED_LOCALES) {

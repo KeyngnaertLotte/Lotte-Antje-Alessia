@@ -1,28 +1,8 @@
 <template>
-  <div
-    class="max-h-screen grid grid-cols-2 grid-rows-24 h-screen bg-secondary overflow-hidden"
-  >
-    <div class="col-span-2 row-span-3">
-      <AppHeader
-        v-if="personeelInfo && personeelInfo.personeelByUid"
-        :naam="personeelInfo.personeelByUid.voornaam"
-      />
-    </div>
-    <div
-      class="flex flex-row items-center justify-center col-span-2 row-start-7"
-    >
-      <CardSm title="materiaal" />
-      <CardSm title="scanner" />
-    </div>
-    <div
-      class="col-span-2 row-start-11 md:row-start-12 flex items-center justify-center mx-6 md:mx-24"
-    >
-      <TaskList
-        v-if="personeelInfo && personeelInfo.personeelByUid"
-        :takenlijst="personeelInfo.personeelByUid.takenlijst"
-      />
-    </div>
-  </div>
+      <CardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4"/>
+      <!-- <CardSm title="uurrooster" /> -->
+      <CardSm title="scanner"  class="col-span-1 row-start-4 row-span-4"/>
+      <task-list />
 </template>
 
 <script lang="ts">

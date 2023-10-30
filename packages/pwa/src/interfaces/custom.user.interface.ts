@@ -10,4 +10,5 @@ export interface CustomUser {
   role: Role
   createdAt?: string
   updatedAt?: string
+  naam: string
 }

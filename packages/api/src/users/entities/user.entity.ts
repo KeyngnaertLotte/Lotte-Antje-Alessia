@@ -11,6 +11,7 @@ export enum Role {
   BEZOEKER = 'BEZOEKER',
   ARTIEST = 'ARTIEST',
   PERSONEEL = 'PERSONEEL',
+  ADMIN = 'ADMIN',
 }
 
 @Entity()
@@ -23,6 +24,10 @@ export class User {
   @Column()
   @Field()
   uid: string
+
+  @Column()
+  @Field()
+  naam: string
 
   @Column()
   @Field()
