@@ -8,7 +8,7 @@ import { Takenlijst } from './task.entity'
 export class Personeel {
   @ObjectIdColumn()
   @Field(() => ID)
-  id: number
+  id: string
 
   @Column()
   @Field()

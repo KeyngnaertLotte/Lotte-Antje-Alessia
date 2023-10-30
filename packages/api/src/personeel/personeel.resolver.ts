@@ -3,7 +3,9 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql'
 import { PersoneelService } from './personeel.service'
 
 import { Personeel } from './entities/personeel.entity'
+import { Takenlijst } from './entities/task.entity'
 import { CreatePersoneelInput } from './dto/create-personeel.input'
+import { CreateTaakInput } from './dto/create-taak.input'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
 import { FirebaseUser } from 'src/authentication/decoraters/user.decorator'
 import { UserRecord } from 'firebase-admin/auth'
@@ -22,6 +24,16 @@ export class PersoneelResolver {
     return this.personeelService.create(createPersoneelInput)
   }
 
+  // create takenlijst
+  @Mutation(() => Personeel, { name: 'createTaakInput' })
+  createTaakInput(
+    @Args('createTaakInput')
+    createTaakInput: CreateTaakInput,
+    @Args('uid') uid: string,
+  ) {
+    return this.personeelService.AddTaakToPersoneel(uid, createTaakInput)
+  }
+
   // get all personeel
   // @UseGuards(FirebaseGuard)
   @Query(() => [Personeel], { name: 'personeel' })
@@ -38,7 +50,9 @@ export class PersoneelResolver {
 
   // get one by uid
   @Query(() => Personeel, { name: 'personeelByUid' })
-  findOneByUid(@Args('uid', { type: () => String }) uid: string): Promise<Personeel> {
+  findOneByUid(
+    @Args('uid', { type: () => String }) uid: string,
+  ): Promise<Personeel> {
     return this.personeelService.findOneByUid(uid)
   }
 
