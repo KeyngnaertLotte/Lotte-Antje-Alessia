@@ -5,6 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Personeel } from './entities/personeel.entity';
 import { ObjectId } from 'mongodb';
+import { Takenlijst } from './entities/task.entity';
+import { CreateTaakInput } from './dto/create-taak.input';
 
 @Injectable()
 export class PersoneelService {
@@ -23,6 +25,34 @@ export class PersoneelService {
     p.type = createPersoneelInput.type
 
     return this.personeelRepository.save(p)
+  }
+
+  // taak
+  async AddTaakToPersoneel(
+    uid: string,
+    createTaakInput: CreateTaakInput,
+  ){
+    const currentPersoneel = await this.findOneByUid(uid)
+    const updatePersoneel = new Personeel()
+
+    updatePersoneel.uid = currentPersoneel.uid
+    updatePersoneel.voornaam = currentPersoneel.voornaam
+    updatePersoneel.achternaam = currentPersoneel.achternaam
+    updatePersoneel.type = currentPersoneel.type
+
+    const newTaak = new Takenlijst()
+    newTaak.plaats = createTaakInput.plaats
+    newTaak.naam = createTaakInput.naam
+    newTaak.aantal = createTaakInput.aantal
+    newTaak.deadline = createTaakInput.deadline
+    newTaak.category = createTaakInput.categorie
+
+    updatePersoneel.takenlijst = [
+      ...currentPersoneel.takenlijst,
+      newTaak
+    ]
+
+    return this.personeelRepository.save(updatePersoneel)
   }
 
   findAll() {
