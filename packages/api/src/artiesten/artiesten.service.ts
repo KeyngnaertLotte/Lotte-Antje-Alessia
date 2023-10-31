@@ -67,12 +67,12 @@ export class ArtiestenService {
   ) {
     const currentArtiest = await this.findOneByUid(uid)
 
-    const updateArtiest = new Artiest()
+    // const updateArtiest = new Artiest()
 
-    updateArtiest.naam = currentArtiest.naam
-    updateArtiest.podium = currentArtiest.podium
-    updateArtiest.uid = currentArtiest.uid
-    updateArtiest.agenda = currentArtiest.agenda
+    // updateArtiest.naam = currentArtiest.naam
+    // updateArtiest.podium = currentArtiest.podium
+    // updateArtiest.uid = currentArtiest.uid
+    // updateArtiest.agenda = currentArtiest.agenda
 
     const newbenodigdheden = new Benodigdheden()
     newbenodigdheden.item = materiaal.item
@@ -80,7 +80,7 @@ export class ArtiestenService {
     newbenodigdheden.categorie = materiaal.categorie
     newbenodigdheden.podium = currentArtiest.podium
 
-    updateArtiest.benodigdheden = [
+    currentArtiest.benodigdheden = [
       ...currentArtiest.benodigdheden,
       newbenodigdheden,
     ]
@@ -90,7 +90,7 @@ export class ArtiestenService {
     //   ...updatedArtiestenInput.benodigdheden,
     // ]
 
-    return this.artiestRepository.save(updateArtiest)
+    return this.artiestRepository.save(currentArtiest)
   }
 
   findAll() {
