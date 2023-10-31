@@ -118,7 +118,7 @@ export default {
           //create user in our own database with the same uid
           //use the mutation we created in the graphql folder
           addUser({
-            createUserInput: {locale: 'nl', uid: newFireBaseUser.uid}
+            createUserInput: {locale: 'nl', uid: newFireBaseUser.uid, naam: newUser.name}
           }).then((graphqlresult) => {
             console.log('🎉 new user created in our database')
             console.log(graphqlresult)

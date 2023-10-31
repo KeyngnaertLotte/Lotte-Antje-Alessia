@@ -7,6 +7,7 @@ export const ADD_USER = gql`
       uid
       locale
       role
+      naam
     }
   }
 `

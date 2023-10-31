@@ -11,4 +11,7 @@ export class CreateUserInput {
   // uid
   @Field(() => String, { description: 'Optional uid of the current user' })
   uid: string
+
+  @Field(() => String, { description: 'Optional role of the current user' })
+  naam: string
 }
