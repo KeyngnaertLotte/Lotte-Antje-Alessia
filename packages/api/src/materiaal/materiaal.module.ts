@@ -7,5 +7,6 @@ import { Materiaal } from './entities/materiaal.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Materiaal])],
   providers: [MateriaalResolver, MateriaalService],
+  exports: [MateriaalService]
 })
 export class MateriaalModule {}

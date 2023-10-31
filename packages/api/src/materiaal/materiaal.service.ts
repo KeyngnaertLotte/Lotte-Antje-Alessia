@@ -4,7 +4,6 @@ import { UpdateMateriaalInput } from './dto/update-materiaal.input'
 import { Materiaal } from './entities/materiaal.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Taak } from 'src/taken/entities/taken.entity'
 
 @Injectable()
 export class MateriaalService {
@@ -46,12 +45,38 @@ export class MateriaalService {
     )
   }
 
-  async UpdateAantalaftrekken(materiaalId: string): Promise<void> {
+  async UpdateAantalaftrekken(
+    materiaalId: string,
+    aantal: number,
+  ): Promise<void> {
+    //@ts-ignore
     const materiaal = await this.findOneById(materiaalId)
     this.materiaalRepository.update(
       { id: materiaalId },
-      { aantal: materiaal.aantal - 1 },
+      { aantal: materiaal.aantal - aantal },
     )
+  }
+
+  async checkMateriaal(materiaalnaam: string, aantal: number) {
+    //@ts-ignore
+
+    const materiaal: Materiaal[] = await this.materiaalRepository.find({
+      where: { item: materiaalnaam },
+    })
+    console.log(materiaal)
+    if (materiaal.length === 0) {
+      throw new Error('Materiaal niet gevonden')
+    }
+    // check if there is enough materiaal
+    if (materiaal[0].aantal < aantal) {
+      throw new Error('Niet genoeg materiaal')
+    } else {
+      const resultAantal = materiaal[0].aantal - aantal
+      this.materiaalRepository.update(
+        { id: materiaal[0].id },
+        { aantal: resultAantal },
+      )
+    }
   }
 
   findOneById(id: string): Promise<Materiaal> {
@@ -59,7 +84,7 @@ export class MateriaalService {
       // @ts-ignore
       return this.materiaalRepository.findOne({ _id: new ObjectId(id) })
     } catch (e) {
-      throw new Error('Taak niet gevonden')
+      throw new Error('Materiaal niet gevonden')
     }
   }
 }

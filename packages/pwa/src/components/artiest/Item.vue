@@ -52,7 +52,7 @@ const addItem = () => {
 
     createItem({
       createBenodigdhedenInput: {
-        item: newItemName.value,
+        item: newItemName.value.toLocaleLowerCase(),
         aantal: +newItemAantal.value,
         categorie: newItemCategorie.value,
       },
@@ -104,6 +104,7 @@ const addItem = () => {
           <option>Drank</option>
           <option>Eten</option>
           <option>Geluid</option>
+          <option>Instrument</option>
           <option>Licht</option>
           <option>andere</option>
         </select>

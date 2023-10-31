@@ -8,12 +8,14 @@ import { ObjectId } from 'mongodb'
 import { Agenda } from './entities/agenda.entity'
 import { Benodigdheden } from './entities/benodigdheden.entity'
 import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
+import { MateriaalService } from 'src/materiaal/materiaal.service'
 
 @Injectable()
 export class ArtiestenService {
   constructor(
     @InjectRepository(Artiest)
     private readonly artiestRepository: Repository<Artiest>,
+    private readonly materiaalService: MateriaalService,
   ) {}
 
   async create(createArtiestenInput: CreateArtiestenInput): Promise<Artiest> {
@@ -67,12 +69,13 @@ export class ArtiestenService {
   ) {
     const currentArtiest = await this.findOneByUid(uid)
 
-    // const updateArtiest = new Artiest()
+    // check in materiaal
+    await this.materiaalService.checkMateriaal(materiaal.item, materiaal.aantal)
 
-    // updateArtiest.naam = currentArtiest.naam
-    // updateArtiest.podium = currentArtiest.podium
-    // updateArtiest.uid = currentArtiest.uid
-    // updateArtiest.agenda = currentArtiest.agenda
+    // await this.materiaalService.UpdateAantalaftrekken(
+    //   materiaal.item,
+    //   materiaal.aantal,
+    // )
 
     const newbenodigdheden = new Benodigdheden()
     newbenodigdheden.item = materiaal.item
@@ -84,12 +87,6 @@ export class ArtiestenService {
       ...currentArtiest.benodigdheden,
       newbenodigdheden,
     ]
-
-    // updateArtiest.benodigdheden = [
-    //   ...currentArtiest.benodigdheden,
-    //   ...updatedArtiestenInput.benodigdheden,
-    // ]
-
     return this.artiestRepository.save(currentArtiest)
   }
 
