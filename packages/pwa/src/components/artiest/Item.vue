@@ -106,7 +106,7 @@ const addItem = () => {
           <option>Geluid</option>
           <option>Instrument</option>
           <option>Licht</option>
-          <option>andere</option>
+          <option>Andere</option>
         </select>
         <input
           v-model="newItemAantal"
