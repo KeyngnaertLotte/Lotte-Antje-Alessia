@@ -18,10 +18,11 @@ export class MateriaalResolver {
     return this.materiaalService.findAll();
   }
 
-  @Query(() => Materiaal, { name: 'materiaal' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.materiaalService.findOne(id);
-  }
+  // // geeft problemen wanneer uit commentaar
+  // @Query(() => Materiaal, { name: 'materiaal' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.materiaalService.findOne(id);
+  // }
 
   @Mutation(() => Materiaal)
   updateMateriaal(@Args('updateMateriaalInput') updateMateriaalInput: UpdateMateriaalInput) {

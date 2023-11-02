@@ -1,11 +1,15 @@
 <template>
   <div class="mt-24">
-    <button @click="showdeco = !showdeco" class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between">
+    <div>{{  }}</div>
+    <!-- <button
+      @click="showGeluid = !showGeluid"
+      class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
+    >
       <p>decoration</p>
       <ChevronDown class="stroke-custom-brown" />
     </button>
     <transition name="slide-fade">
-      <div v-if="showdeco">
+      <div v-if="showGeluid">
         <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
           <p>balloons</p>
           <p>30 pieces</p>
@@ -17,12 +21,15 @@
       </div>
     </transition>
 
-    <button @click="showlight = !showlight" class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between">
+    <button
+      @click="showLicht = !showLicht"
+      class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
+    >
       <p>light</p>
       <ChevronDown class="stroke-custom-brown" />
     </button>
     <transition name="slide-fade">
-      <div v-if="showlight">
+      <div v-if="showLicht">
         <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
           <p>laser</p>
           <p>3 pieces</p>
@@ -32,18 +39,62 @@
           <p>5 pieces</p>
         </div>
       </div>
-    </transition>
-    
+    </transition> -->
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import { ref } from 'vue'
-import { ChevronDown } from 'lucide-vue-next';
+import { ChevronDown } from 'lucide-vue-next'
 
-const showdeco = ref(false)
-const showlight = ref(false)
-const showfood = ref(false)
+
+
+export default {
+  name: 'Materiaal',
+  components: {ChevronDown},
+  props: {},
+  setup() {
+    //voor elk onderdeel een show variabele
+    const showGeluid = ref(false)
+    const showLicht = ref(false)
+    const showInstrument = ref(false)
+    const showPodium = ref(false)
+    const showBackstage = ref(false)
+    const showStroom = ref(false)
+    const showToilet = ref(false)
+    const showEtenDrinken = ref(false)
+    const showEhbo = ref(false)
+    const showBeveiliging = ref(false)
+    const showAfval = ref(false)
+    const showDecor = ref(false)
+
+    const getMateriaalInfo = async () => {
+      try{
+
+      }
+      catch(error){
+        console.error('Error fetching materiaal info:', error)
+      }
+    }
+
+
+    return {
+      showGeluid,
+      showLicht,
+      showInstrument,
+      showPodium,
+      showBackstage,
+      showStroom,
+      showToilet,
+      showEtenDrinken,
+      showEhbo,
+      showBeveiliging,
+      showAfval,
+      showDecor
+    }
+  },
+}
+
 </script>
 
 <style scoped>
