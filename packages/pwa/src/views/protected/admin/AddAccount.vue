@@ -1,12 +1,15 @@
+import type { ADD_PERSONEEL } from '@/graphql/personeel.mutation'; import type {
+ADD_PERSONEEL } from '@/graphql/personeel.mutation'; import type { log } from
+'console';
 <template>
-  <form @submit.prevent="submitForm" class="w-full">
-    <h1 class="text-4xl font-bold tracking-wider">Register </h1>
+  <form @submit.prevent="submitForm" class="w-full mt-10">
+    <h1 class="text-4xl font-bold tracking-wider">Create Account</h1>
     <p class="text-neutral-500 mb-4">
       Create an account and keep track of your birds.
     </p>
 
     <div v-if="errorMessage">
-      <p class="text-red-600">{{ errorMessage}}</p>
+      <p class="text-red-600">{{ errorMessage }}</p>
     </div>
 
     <div class="mt-6">
@@ -22,7 +25,7 @@
         id="nickname"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
         v-model="newUser.name"
-        />
+      />
     </div>
 
     <div class="mt-6">
@@ -54,7 +57,23 @@
         id="password"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
         v-model="newUser.password"
-        />
+      />
+    </div>
+
+    <div class="mt-6">
+      <label
+        for="rol"
+        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+      >
+        Rol
+      </label>
+      <select
+        v-model="newUser.role"
+        class="w-full px-3 py-2 border border-gray-300 rounded mb-4"
+      >
+        <option>Personeel</option>
+        <option>Artiest</option>
+      </select>
     </div>
 
     <button
@@ -79,16 +98,16 @@ import { useRouter } from 'vue-router'
 import { useMutation } from '@vue/apollo-composable'
 
 import useFirebase from '@/composables/useFirebase'
-import { ADD_USER } from '@/graphql/user.mutation'
-import { ADD_BEZOEKER } from '@/graphql/bezoeker.mutation'
-
-
+import { ADD_USER_ADMIN } from '@/graphql/user.mutation'
+import { ADD_PERSONEEL } from '@/graphql/personeel.mutation'
+import { ADD_ARTIEST } from '@/graphql/artiest.mutation'
 
 export default {
   setup() {
-    const { register } = useFirebase()
-    const { mutate: addUser } = useMutation(ADD_USER)
-    const { mutate: addBezoeker } = useMutation(ADD_BEZOEKER)
+    const { registerAdmin } = useFirebase()
+    const { mutate: addUser } = useMutation(ADD_USER_ADMIN)
+    const { mutate: addPersoneel } = useMutation(ADD_PERSONEEL)
+    const { mutate: addArtiest } = useMutation(ADD_ARTIEST)
     const errorMessage: Ref<string> = ref('')
     const { push } = useRouter()
 
@@ -96,20 +115,22 @@ export default {
       name: '',
       email: '',
       password: '',
+      role: '',
     })
 
     const submitForm = () => {
       if (
         newUser.name === '' ||
         newUser.email === '' ||
-        newUser.password === ''
+        newUser.password === '' ||
+        newUser.role === ''
       ) {
         errorMessage.value = 'Please fill in all fields.'
         return
       }
 
       // User the register function from the useFirebase composable
-      register(newUser.name, newUser.email, newUser.password)
+      registerAdmin(newUser.name, newUser.email, newUser.password)
         .then((newFireBaseUser: any) => {
           console.log('🎉 new firebase user created in firebase')
           console.log(newFireBaseUser)
@@ -117,31 +138,62 @@ export default {
 
           //create user in our own database with the same uid
           //use the mutation we created in the graphql folder
+          console.log('new user role: ', newUser.role)
           addUser({
-            createUserInput: {locale: 'nl', uid: newFireBaseUser.uid, naam: newUser.name}
-          }).then((graphqlresult) => {
-            console.log('🎉 new user created in our database')
-            console.log(graphqlresult)
-            //redirect to the home page
-            addBezoeker({
-              createBezoekerInput: {uid: newFireBaseUser.uid, naam: newUser.name}
-            }).then((graphqlresult) => {
-              console.log('🎉 new bezoeker created in our database')
+            createUserInput: {
+              locale: 'nl',
+              uid: newFireBaseUser.uid,
+              naam: newUser.name,
+              role: newUser.role,
+            },
+          })
+            .then(graphqlresult => {
+              console.log('🎉 new user created in our database')
               console.log(graphqlresult)
-              //redirect to the home page
-              push({ path: '/bezoeker' })
-            }).catch((error) => {
+              if (newUser.role === 'Personeel') {
+                addPersoneel({
+                  createPersoneelInput: {
+                    uid: newFireBaseUser.uid,
+                    voornaam: newUser.name,
+                    achternaam: "",
+                    type: ""
+                  },
+                })
+                  .then(graphqlresult => {
+                    console.log('🎉 new personeel created in our database')
+                    console.log(graphqlresult)
+                    //redirect to the home page
+                  })
+                  .catch(error => {
+                    errorMessage.value = error.message
+                  })
+              }
+              if (newUser.role === 'Artiest') {
+                addArtiest({
+                    createArtiestenInput: {
+                    uid: newFireBaseUser.uid,
+                    naam: newUser.name,
+                  },
+                })
+                  .then(graphqlresult => {
+                    console.log('🎉 new artiest created in our database')
+                    console.log(graphqlresult)
+                    //redirect to the home page
+                  })
+                  .catch(error => {
+                    errorMessage.value = error.message
+                  })
+              }
+
+            })
+            .catch(error => {
               errorMessage.value = error.message
             })
-          }).catch((error) => {
-            errorMessage.value = error.message
-          })
         })
-        .catch((error) => {
+        .catch(error => {
           errorMessage.value = error.message
         })
-        .finally(() => {
-        })
+        .finally(() => {})
     }
 
     return {
@@ -152,7 +204,3 @@ export default {
   },
 }
 </script>
-
-
-
-

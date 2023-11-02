@@ -18,3 +18,22 @@ export const GET_PERSONEEL_BY_UID = gql`
     }
   }
 `
+
+export const GET_PERSONEEL = gql`
+  query {
+    personeel {
+      id
+      uid
+      voornaam
+      achternaam
+      type
+      takenlijst {
+        plaats
+        naam
+        category
+        aantal
+        deadline
+      }
+    }
+  }
+`

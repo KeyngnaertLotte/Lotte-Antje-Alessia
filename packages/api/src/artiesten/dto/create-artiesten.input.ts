@@ -9,8 +9,5 @@ export class CreateArtiestenInput {
   naam: string
 
   @Field()
-  podium: string
-
-  @Field()
   uid: string
 }
