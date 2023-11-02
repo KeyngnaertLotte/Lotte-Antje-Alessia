@@ -45,6 +45,18 @@ export class MateriaalService {
     )
   }
 
+  // async UpdateAantalOptellen(
+  //   materiaalId: string,
+  //   itemNaam: string,
+  // ): Promise<void> {
+  //   const materiaal = await this.findOneById(materiaalId)
+  //   const item = materiaal.items[itemNaam]
+  //   this.materiaalRepository.update(
+  //     { id: materiaalId },
+  //     { items: { ...materiaal.items, [itemNaam]: item + 1 } },
+  //   )
+  // }
+
   async UpdateAantalaftrekken(
     materiaalId: string,
     aantal: number,
@@ -56,6 +68,19 @@ export class MateriaalService {
       { aantal: materiaal.aantal - aantal },
     )
   }
+
+  // async UpdateAantalaftrekken(
+  //   materiaalId: string,
+  //   itemNaam: string,
+  //   aantal: number,
+  // ): Promise<void> {
+  //   const materiaal = await this.findOneById(materiaalId)
+  //   const item = materiaal.items[itemNaam]
+  //   this.materiaalRepository.update(
+  //     { id: materiaalId },
+  //     { items: { ...materiaal.items, [itemNaam]: item - aantal } },
+  //   )
+  // }
 
   async checkMateriaal(materiaalnaam: string, aantal: number) {
     //@ts-ignore
@@ -78,6 +103,46 @@ export class MateriaalService {
       )
     }
   }
+
+  // hier ben ik totaal niet zeker van
+  // async checkMateriaal(materiaalnaam: string, aantal: number) {
+  //   //@ts-ignore
+  //   const materiaalList: Materiaal[] = await this.materiaalRepository.find({
+  //     where: { items: [{ naam: materiaalnaam }] },
+  //   })
+
+  //   if (materiaalList.length === 0) {
+  //     throw new Error('Materiaal niet gevonden')
+  //   }
+
+  //   const materiaal = materiaalList[0]
+  //   const matchingItem = materiaal.items.find(
+  //     item => item.naam === materiaalnaam,
+  //   )
+
+  //   if (!matchingItem) {
+  //     throw new Error('Materiaal niet gevonden in items')
+  //   }
+
+  //   if (matchingItem.aantal < aantal) {
+  //     throw new Error('Niet genoeg materiaal')
+  //   } else {
+  //     const resultAantal = matchingItem.aantal - aantal
+  //     // Update the 'aantal' property for the specific item within the 'items' array
+  //     const updatedItems = materiaal.items.map(item => {
+  //       if (item.naam === materiaalnaam) {
+  //         return { ...item, aantal: resultAantal }
+  //       }
+  //       return item
+  //     })
+
+  //     // Update the document in the database
+  //     await this.materiaalRepository.update(
+  //       { id: materiaal.id },
+  //       { items: updatedItems },
+  //     )
+  //   }
+  // }
 
   findOneById(id: string): Promise<Materiaal> {
     try {

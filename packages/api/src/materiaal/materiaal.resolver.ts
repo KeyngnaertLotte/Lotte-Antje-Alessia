@@ -29,6 +29,11 @@ export class MateriaalResolver {
     return this.materiaalService.update(updateMateriaalInput.id, updateMateriaalInput);
   }
 
+  // @Mutation(() => Materiaal)
+  // updateMateriaal(@Args('updateMateriaalInput') updateMateriaalInput: UpdateMateriaalInput) {
+  //   return this.materiaalService.update(updateMateriaalInput.id, updateMateriaalInput.items, updateMateriaalInput);
+  // }
+
   @Mutation(() => Materiaal)
   removeMateriaal(@Args('id', { type: () => Int }) id: number) {
     return this.materiaalService.remove(id);
