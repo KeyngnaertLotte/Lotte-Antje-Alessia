@@ -1,10 +1,32 @@
 <template>
-  <div class="mt-24">
-    <button @click="toggle" class="bg-blue-400 text-white">
+  <div class="mt-24 flex flex-col">
+    <button @click="showdeco = !showdeco" class="bg-blue-400 text-white">
       decoration
     </button>
-    <transition name="slide" mode="out-in">
-      <div v-if="show" key="content" class="bg-white rounded-md">
+    <transition name="slide-fade">
+      <div v-if="showdeco">
+        <div class="m-4 p-2">
+          <p>balloons</p>
+          <p>30 pieces</p>
+        </div>
+      </div>
+    </transition>
+    <button @click="showlight = !showlight" class="bg-blue-400 text-white">
+      decoration
+    </button>
+    <transition name="slide-fade">
+      <div v-if="showlight">
+        <div class="m-4 p-2">
+          <p>balloons</p>
+          <p>30 pieces</p>
+        </div>
+      </div>
+    </transition>
+    <button @click="showfood = !showfood" class="bg-blue-400 text-white">
+      decoration
+    </button>
+    <transition name="slide-fade">
+      <div v-if="showfood">
         <div class="m-4 p-2">
           <p>balloons</p>
           <p>30 pieces</p>
@@ -14,25 +36,26 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      show: false,
-    };
-  },
-  methods: {
-    toggle() {
-      this.show = !this.show;
-    },
-  },
-};
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showdeco = ref(true)
+const showlight = ref(true)
+const showfood = ref(true)
 </script>
+
 <style scoped>
-.slide-enter-active, .slide-leave-active {
-  transition: transform 0.8s ease-in-out;
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
 }
-.slide-enter, .slide-leave-to{
-  transform: translateY(-100%);
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>
