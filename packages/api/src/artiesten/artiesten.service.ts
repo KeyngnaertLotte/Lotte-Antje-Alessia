@@ -21,33 +21,34 @@ export class ArtiestenService {
   async create(createArtiestenInput: CreateArtiestenInput): Promise<Artiest> {
     const a = new Artiest()
     a.naam = createArtiestenInput.naam
-    a.podium = createArtiestenInput.podium
-
-    const newBenodigdheden: Benodigdheden = {
-      item: 'Gitaar',
-      aantal: 1,
-      categorie: 'Instrumenten',
-      podium: createArtiestenInput.podium,
-    }
-
-    a.benodigdheden = [newBenodigdheden]
     a.uid = createArtiestenInput.uid
-    // a.agenda = []
-    // return 'This action adds a new artiesten'
+    // a.podium = createArtiestenInput.podium
 
-    const newAgendaItem: Agenda = {
-      taak: 'Opzetten',
-      podium: createArtiestenInput.podium,
-      tijd: '18:00 - 19:00',
-    }
+    // const newBenodigdheden: Benodigdheden = {
+    //   item: 'Gitaar',
+    //   aantal: 1,
+    //   categorie: 'Instrumenten',
+    //   podium: createArtiestenInput.podium,
+    // }
 
-    const newAgendaItem2: Agenda = {
-      taak: 'Soundcheck',
-      podium: createArtiestenInput.podium,
-      tijd: '19:00 - 19:30',
-    }
+    // a.benodigdheden = [newBenodigdheden]
+    // a.uid = createArtiestenInput.uid
+    // // a.agenda = []
+    // // return 'This action adds a new artiesten'
 
-    a.agenda = [newAgendaItem, newAgendaItem2]
+    // const newAgendaItem: Agenda = {
+    //   taak: 'Opzetten',
+    //   podium: createArtiestenInput.podium,
+    //   tijd: '18:00 - 19:00',
+    // }
+
+    // const newAgendaItem2: Agenda = {
+    //   taak: 'Soundcheck',
+    //   podium: createArtiestenInput.podium,
+    //   tijd: '19:00 - 19:30',
+    // }
+
+    // a.agenda = [newAgendaItem, newAgendaItem2]
 
     return this.artiestRepository.save(a)
   }

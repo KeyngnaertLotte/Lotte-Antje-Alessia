@@ -10,7 +10,7 @@ const router = createRouter({
       path: '/',
       component: () => import('../views/Home.vue'),
     },
-    
+
     {
       path: '/bezoeker',
       component: () => import('../components/wrapper/AccountWrap.vue'),
@@ -63,7 +63,22 @@ const router = createRouter({
       ],
     },
 
-    
+    {
+      path: '/admin',
+      component: () => import('../components/wrapper/AccountWrap.vue'),
+      meta: { shouldBeAuthenticated: true, allowedRole: 'admin' },
+      children: [
+        {
+          path: 'dashboard',
+          component: () => import('../views/protected/admin/Dashboard.vue'),
+        },
+        {
+          path: 'account-aanmaken',
+          component: () => import('../views/protected/admin/AddAccount.vue'),
+        }
+      ],
+    },
+
     {
       path: '/auth',
       component: () => import('../components/wrapper/AuthWrap.vue'),
@@ -86,8 +101,7 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       component: () => import('../views/NotFound.vue'),
-    }
-
+    },
   ],
 })
 
@@ -111,5 +125,5 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
 })
- 
+
 export default router

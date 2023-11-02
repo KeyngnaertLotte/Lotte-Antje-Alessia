@@ -1,6 +1,5 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
-import { Takenlijst } from '../entities/task.entity';
-
+import { InputType, Field, Int } from '@nestjs/graphql'
+import { Takenlijst } from '../entities/task.entity'
 
 @InputType()
 export class CreatePersoneelInput {
@@ -15,6 +14,4 @@ export class CreatePersoneelInput {
 
   @Field()
   type: string
-
 }
-

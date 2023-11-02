@@ -42,9 +42,10 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutDashboard , X, Clock3, MapPin, Coins, LogOut } from 'lucide-vue-next'
+import { LayoutDashboard , X, Clock3, MapPin, Coins, LogOut, PlusCircle } from 'lucide-vue-next'
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
+import { Plus } from 'lucide-vue-next';
 
 const props = defineProps(
   {
@@ -103,6 +104,21 @@ const roleMenuList = [
       },
     ],
   },
+  {
+    role: 'ADMIN',
+    menuList: [
+      {
+        name: 'Dashboard',
+        path: '/admin/dashboard',
+        icon: LayoutDashboard,
+      },
+      {
+        name: 'Account aanmaken',
+        path: '/admin/account-aanmaken',
+        icon: PlusCircle,
+      }
+    ],
+  }
 ]
 
 const menuList = roleMenuList.find((roleMenu) => roleMenu.role === props.roleShow)?.menuList
