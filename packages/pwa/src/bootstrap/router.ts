@@ -60,6 +60,10 @@ const router = createRouter({
           path: 'dashboard',
           component: () => import('../views/protected/personeel/Dashboard.vue'),
         },
+        {
+          path: 'materiaal',
+          component: () => import('../views/protected/personeel/Materiaal.vue'),
+        },
       ],
     },
 
