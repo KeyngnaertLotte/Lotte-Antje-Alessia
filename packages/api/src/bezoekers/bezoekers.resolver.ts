@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { BezoekersService } from './bezoekers.service';
 import { Bezoeker } from './entities/bezoeker.entity';
 import { CreateBezoekerInput } from './dto/create-bezoeker.input';
-import { UpdateBezoekerInput } from './dto/update-bezoeker.input';
+import { UpdateBezoekerInput, FavoArtiestInput } from './dto/update-bezoeker.input';
 import { FavArtiest } from './entities/favartiest.entity';
 
 @Resolver(() => Bezoeker)
@@ -34,6 +34,12 @@ export class BezoekersResolver {
   findFavoArtiestsByUid(@Args('uid', { type: () => String }) uid: string): Promise<FavArtiest[]> {
     return this.bezoekersService.findFavoArtiestsByUid(uid);
   }
+
+  @Mutation(() => Bezoeker)
+  addFavoArtiestToBezoeker(@Args('uid', { type: () => String }) uid: string, @Args('favoartiest', { type: () => String }) favoartiest: string) {
+    return this.bezoekersService.addFavoArtiest(uid, favoartiest);
+  }
+
   
 
   // @Mutation(() => Bezoeker)

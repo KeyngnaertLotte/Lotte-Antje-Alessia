@@ -10,6 +10,20 @@ export const ADD_BEZOEKER = gql`
     }
   }
   `
+
+  export const ADD_FAVOARTIEST = gql`
+  mutation AddFavoArtiest($uid: String!, $artiest: String!){
+    addFavoArtiestToBezoeker(uid: $uid, favoartiest: $artiest) {
+      id
+      uid
+      favoartiest {
+        artiest
+        time
+        color
+      }
+    }
+  }
+  `  
   
   
     

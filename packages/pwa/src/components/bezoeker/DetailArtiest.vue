@@ -2,8 +2,8 @@
     <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
         <div class="relative bg-white w-9/10 h-3/4 rounded-lg flex flex-col  items-center p-6">
             <!-- <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg"> <X class="z-5 h-12 w-12 fill-white"/></button> -->
-            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"> <p class="text-white font-bold font-body text-2xl">X</p></button>
-            <button v-if="isBezoeker" @click="toggleFavorite" class="font-body font-bold text-3xl flex flex-row justify-center items-center gap-2">{{ currentArtist.artistName }} <p class="h-12 w-12 flex justify-center items-center"><Heart :class="[heartColor]" /></p></button>
+            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"><X class="h-10 w-10 stroke-white"/> </button>
+            <button v-if="isBezoeker" @click="toggleFavorite" class="font-body font-bold text-3xl flex flex-row justify-center items-center gap-2">{{ currentArtist.artistName }} <p class="h-12 w-12 flex justify-center items-center"><Heart :class="heartColor" /></p></button>
             <h1 v-if="!isBezoeker" class="font-body font-bold text-3xl flex flex-row items-center gap-2">{{ currentArtist.artistName }}</h1>
             <p class="font-body text-xl">{{ currentArtist.time }}</p>
             <img :src=currentArtist.imgLink alt="aaaaaaaaaaaaaaa" class="my-6">
@@ -15,10 +15,13 @@
 </template>
 
 <script lang="ts" >
-    import { ref  } from 'vue';
-    import { Heart } from 'lucide-vue-next';
-    var favorite = false;
-    var heartColor = "w-10 h-10 fill-none"
+    import { computed, ref  } from 'vue';
+    import { Heart, X } from 'lucide-vue-next';
+    import { useMutation } from '@vue/apollo-composable'
+    import { ADD_FAVOARTIEST } from '@/graphql/bezoeker.mutation';
+    import useCustomUser from '@/composables/useCustomUser'
+    const { customUser } = useCustomUser();
+    const uid = customUser.value?.uid;
 
     const artistList = [
        {
@@ -114,7 +117,8 @@
         }
     },
     components: {
-        Heart
+        Heart,
+        X
     },
     methods: {
         closeModal() {
@@ -122,18 +126,13 @@
         }
   },
 
-  setup(props, { emit }) {
+  setup(props) {
+    const { mutate: addFavoArtiest } = useMutation(ADD_FAVOARTIEST)
     const favorite = ref(props.isFavorite);
-    // console.log(props.isFavorite);
 
     const currentArtist = ref();
     const isBezoeker = props.bezoeker;
-    // console.log(isBezoeker);
 
-    const heartColor = ref("w-10 h-10 fill-none");
-    
-    if (favorite.value) heartColor.value = "w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen";
-      else heartColor.value = "w-10 h-10 fill-none";
 
     artistList.forEach((element) => {
       if (element.artistName === props.artist) {
@@ -144,18 +143,35 @@
     const toggleFavorite = () => {
     //   console.log("before", favorite.value);
       favorite.value = !favorite.value;
-      if (favorite.value) heartColor.value = "w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen";
-      else heartColor.value = "w-10 h-10 fill-none";
+    //   console.log(props.artist)
+    //   console.log(uid)
+      if (favorite.value) {
+        addFavoArtiest({ uid: uid, artiest: props.artist.toUpperCase() })
+        .then((graphqlresult) => {
+            console.log('🎉 new favoartiest added to Bezoeker');
+            console.log(graphqlresult?.data); // Access the returned data
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+        }
     //   console.log("after", favorite.value);
     };
+
+    const heartColor = computed(() => ({
+        "w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen": favorite.value,
+        "w-10 h-10 fill-none": !favorite.value,
+    }))
 
     return {
       currentArtist,
       isBezoeker,
       toggleFavorite,
       favorite,
-      heartColor
+      heartColor,
     };
   }
 };
+
+
 </script>
