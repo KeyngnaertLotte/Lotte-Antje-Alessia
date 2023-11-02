@@ -1,25 +1,27 @@
 <template>
   <div class="mt-24">
-    <div v-for="m in materiaalInfo.materiaal">
-      <button
-        @click="showGeluid = !showGeluid"
-        class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
-      >
-        <p>{{ m.categorie }}</p>
-        <ChevronDown class="stroke-custom-brown" />
-      </button>
-      <transition name="slide-fade">
-        <div v-if="showGeluid">
-          <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
-            <p>{{ m.item }}</p>
-            <p>{{ m.aantal }}</p>
+    <div v-for="materiaal in materiaalInfo">
+      <div v-for="m in materiaal">
+        <button
+          @click="showGeluid = !showGeluid"
+          class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
+        >
+          <p>{{ m.categorie }}</p>
+          <ChevronDown class="stroke-custom-brown" />
+        </button>
+        <transition name="slide-fade">
+          <div v-if="showGeluid">
+            <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
+              <p>{{ m.item }}</p>
+              <p>{{ m.aantal }}</p>
+            </div>
+            <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
+              <p>{{ m.item }}</p>
+              <p>{{ m.aantal }}</p>
+            </div>
           </div>
-          <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
-            <p>{{ m.item }}</p>
-            <p>{{ m.aantal }}</p>
-          </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
 
     <!-- <button
