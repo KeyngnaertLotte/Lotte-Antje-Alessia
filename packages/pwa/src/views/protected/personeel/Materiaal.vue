@@ -1,27 +1,28 @@
 <template>
   <div class="mt-24">
-    <div>{{  }}</div>
-    <!-- <button
-      @click="showGeluid = !showGeluid"
-      class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
-    >
-      <p>decoration</p>
-      <ChevronDown class="stroke-custom-brown" />
-    </button>
-    <transition name="slide-fade">
-      <div v-if="showGeluid">
-        <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
-          <p>balloons</p>
-          <p>30 pieces</p>
+    <div v-for="m in materiaalInfo.materiaal">
+      <button
+        @click="showGeluid = !showGeluid"
+        class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
+      >
+        <p>{{ m.categorie }}</p>
+        <ChevronDown class="stroke-custom-brown" />
+      </button>
+      <transition name="slide-fade">
+        <div v-if="showGeluid">
+          <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
+            <p>{{ m.item }}</p>
+            <p>{{ m.aantal }}</p>
+          </div>
+          <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
+            <p>{{ m.item }}</p>
+            <p>{{ m.aantal }}</p>
+          </div>
         </div>
-        <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
-          <p>flowers</p>
-          <p>50 pieces</p>
-        </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
 
-    <button
+    <!-- <button
       @click="showLicht = !showLicht"
       class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
     >
@@ -45,9 +46,11 @@
 
 <script lang="ts">
 import { ref } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
 import { ChevronDown } from 'lucide-vue-next'
+import { GET_MATERIAAL } from '@/graphql/materiaal.query'
 
-
+const materiaalInfo = ref<any | null>(null)
 
 export default {
   name: 'Materiaal',
@@ -70,14 +73,21 @@ export default {
 
     const getMateriaalInfo = async () => {
       try{
-
+        const { onResult } = useQuery(GET_MATERIAAL)
+        onResult(result => {
+          if (result.data){
+            console.log('Data:', result.data)
+            materiaalInfo.value = result.data
+            console.log('materiaalInfo:', materiaalInfo.value)
+          }
+        })
       }
       catch(error){
         console.error('Error fetching materiaal info:', error)
       }
     }
 
-
+    getMateriaalInfo()
     return {
       showGeluid,
       showLicht,
@@ -90,7 +100,10 @@ export default {
       showEhbo,
       showBeveiliging,
       showAfval,
-      showDecor
+      showDecor,
+
+      getMateriaalInfo,
+      materiaalInfo,
     }
   },
 }
