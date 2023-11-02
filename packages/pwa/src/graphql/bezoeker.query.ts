@@ -21,3 +21,13 @@ query bezoekerByUid($uid: String!){
 }
  
 `
+
+export const GET_FAVOARTISTS_BY_ID = gql`
+query bezoekersFavorite($uid: String!){
+  bezoekersFavorite(uid: $uid) {
+    artiest
+    time
+    color
+  }
+}
+`

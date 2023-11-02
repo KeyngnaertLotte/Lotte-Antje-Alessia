@@ -3,6 +3,7 @@ import { BezoekersService } from './bezoekers.service';
 import { Bezoeker } from './entities/bezoeker.entity';
 import { CreateBezoekerInput } from './dto/create-bezoeker.input';
 import { UpdateBezoekerInput } from './dto/update-bezoeker.input';
+import { FavArtiest } from './entities/favartiest.entity';
 
 @Resolver(() => Bezoeker)
 export class BezoekersResolver {
@@ -28,6 +29,12 @@ export class BezoekersResolver {
   findOneByUid(@Args('uid', { type: () => String }) uid: string): Promise<Bezoeker> {
     return this.bezoekersService.findOneByUid(uid);
   }
+
+  @Query(() => [FavArtiest], { name: 'bezoekersFavorite' })
+  findFavoArtiestsByUid(@Args('uid', { type: () => String }) uid: string): Promise<FavArtiest[]> {
+    return this.bezoekersService.findFavoArtiestsByUid(uid);
+  }
+  
 
   // @Mutation(() => Bezoeker)
   // updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {

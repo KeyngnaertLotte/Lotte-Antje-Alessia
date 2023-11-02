@@ -48,41 +48,50 @@
                 <p class="font-body text-xl text-white leading-none">23:45 - 00:45</p>
             </button>
         </div>
-        <DetailArtiest v-if="isModalOpen" :artist="artist" :modalState="isModalOpen" @close-modal="handleCloseModal"/>
+        <DetailArtiest v-if="isModalOpen" :artist="artist" :modalState="isModalOpen" :isFavorite="isArtistInFavorites" :bezoeker="true" @close-modal="handleCloseModal"/>
     
 </template>
 
-<script lang="ts" >
-    import DetailArtiest from './DetailArtiest.vue'
-    import { ref, } from 'vue';
+<script lang="ts">
+import DetailArtiest from '@/components/bezoeker/DetailArtiest.vue';
+import { ref, computed, type PropType } from 'vue';
 
-    const isModalOpen = ref(false)
-    const artist = ref('Lotte')
+const isModalOpen = ref(false);
+const artist = ref('Lotte');
 
-    export default{
-        components: {
-            DetailArtiest
-        },
-        setup(){
-            return {
-                isModalOpen,
-                artist,
-                openModal,
-            }
-        },
-        methods: {
-            handleCloseModal() {
-            isModalOpen.value = false;
-        }
-  }
+export default {
+  props: {
+    favorites: {
+      type: Array as PropType<any[]>,
+      default: () => [],
+    },
+  },
+  components: {
+    DetailArtiest
+  },
+  setup(props) {
+    console.log("favorites", props);
+
+    function openModal(artistName: string) {
+      isModalOpen.value = true;
+      artist.value = artistName;
     }
 
-    function openModal(artistName: string){
-        isModalOpen.value = true
-        artist.value = artistName
+    const isArtistInFavorites = computed(() => {
+      return props.favorites.some(favorite => favorite.artiest === artist.value.toUpperCase());
+    });
+
+    function handleCloseModal() {
+      isModalOpen.value = false;
     }
 
-
-    
-    
+    return {
+      isModalOpen,
+      artist,
+      openModal,
+      isArtistInFavorites,
+      handleCloseModal,
+    };
+  },
+};
 </script>

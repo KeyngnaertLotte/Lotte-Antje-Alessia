@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Bezoeker } from './entities/bezoeker.entity';
 import { Repository } from 'typeorm';
 import { ObjectId } from 'mongodb'
+import { FavArtiest } from './entities/favartiest.entity';
 
 @Injectable()
 export class BezoekersService {
@@ -33,6 +34,12 @@ export class BezoekersService {
   findOneByUid(uid: string): Promise<Bezoeker> {
     return this.bezoekerRepository.findOneByOrFail({ uid })
   }
+
+  async findFavoArtiestsByUid(uid: string): Promise<FavArtiest[]> {
+    const bezoeker = await this.bezoekerRepository.findOneByOrFail({ uid })
+    return bezoeker?.favoartiest || []
+  }
+  
 
 
   // findAll() {
