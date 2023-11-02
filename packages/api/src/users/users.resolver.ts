@@ -14,13 +14,19 @@ import { RolesGuard } from './guards/roles.guard'
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(FirebaseGuard)
+  // @UseGuards(FirebaseGuard)
   @Mutation(() => User)
   createUser(
     @Args('createUserInput') createUserInput: CreateUserInput,
     @FirebaseUser() user: UserRecord,
   ) {
+    console.log('user', user)
     return this.usersService.create(user.uid, createUserInput)
+  }
+
+  @Mutation(() => User)
+  createUserAdmin(@Args('createUserInput') createUserInput: CreateUserInput) {
+    return this.usersService.createAdmin(createUserInput)
   }
 
   @AllowedRoles(Role.BEZOEKER)

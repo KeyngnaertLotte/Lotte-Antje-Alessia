@@ -27,7 +27,19 @@ const app = initializeApp({
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 })
 
+const app2 = initializeApp({
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+}, "Secondary")
+
 const auth = getAuth(app)
+const auth2 = getAuth(app2)
+
 setPersistence(auth, browserLocalPersistence) // Keep track of logged in user in the browser
 
 const firebaseUser = ref<User | null>(auth.currentUser)
@@ -56,6 +68,26 @@ const register = async (
         firebaseUser.value = userCredential.user
         updateProfile(firebaseUser.value, { displayName: name })
         resolve(userCredential.user)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
+const registerAdmin = async (
+  name: string,
+  email: string,
+  password: string,
+): Promise<User> => {
+  return new Promise((resolve, reject) => {
+    createUserWithEmailAndPassword(auth2, email, password)
+      .then(userCredential => {
+        console.log("create")
+        firebaseUser.value = userCredential.user
+        updateProfile(firebaseUser.value, { displayName: name })
+        resolve(userCredential.user)
+        signOut(auth2)
       })
       .catch(error => {
         reject(error)
@@ -112,5 +144,6 @@ export default () => {
     register,
     resetPassword,
     restoreUser,
+    registerAdmin,
   }
 }

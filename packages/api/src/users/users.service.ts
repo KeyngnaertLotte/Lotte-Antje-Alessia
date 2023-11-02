@@ -22,6 +22,18 @@ export class UsersService {
     return this.userRepository.save(user)
   }
 
+  createAdmin(createUserInput: CreateUserInput) {
+    // return new Error('This action adds a new user')
+
+    const tempRole: Role = createUserInput.role.toLocaleUpperCase() as Role
+    const user = new User()
+    user.uid = createUserInput.uid
+    user.locale = createUserInput.locale ?? 'nl'
+    user.role = tempRole ?? Role.BEZOEKER
+    user.naam = createUserInput.naam
+    return this.userRepository.save(user)
+  }
+
   findAll() {
     return this.userRepository.find()
   }
