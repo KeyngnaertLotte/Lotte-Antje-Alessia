@@ -18,7 +18,7 @@
     import { computed, ref  } from 'vue';
     import { Heart, X } from 'lucide-vue-next';
     import { useMutation } from '@vue/apollo-composable'
-    import { ADD_FAVOARTIEST } from '@/graphql/bezoeker.mutation';
+    import { ADD_FAVOARTIEST, REMOVE_FAVOARTIEST } from '@/graphql/bezoeker.mutation';
     import useCustomUser from '@/composables/useCustomUser'
     const { customUser } = useCustomUser();
     const uid = customUser.value?.uid;
@@ -128,6 +128,7 @@
 
   setup(props) {
     const { mutate: addFavoArtiest } = useMutation(ADD_FAVOARTIEST)
+    const { mutate: removeFavoArtiest } = useMutation(REMOVE_FAVOARTIEST)
     const favorite = ref(props.isFavorite);
 
     const currentArtist = ref();
@@ -154,6 +155,16 @@
         .catch((error) => {
             console.error(error)
         })
+        }
+        else {
+            removeFavoArtiest({ uid: uid, artiest: props.artist.toUpperCase() })
+            .then((graphqlresult) => {
+                console.log('🎉 favoartiest removed from Bezoeker');
+                console.log(graphqlresult?.data); // Access the returned data
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         }
     //   console.log("after", favorite.value);
     };

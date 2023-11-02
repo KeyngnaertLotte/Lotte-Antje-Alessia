@@ -40,6 +40,11 @@ export class BezoekersResolver {
     return this.bezoekersService.addFavoArtiest(uid, favoartiest);
   }
 
+  @Mutation(() => Bezoeker)
+  removeFavoArtiestFromBezoeker(@Args('uid', { type: () => String }) uid: string, @Args('favoartiest', { type: () => String }) favoartiest: string) {
+    return this.bezoekersService.removeFavoArtiest(uid, favoartiest);
+  }
+
   
 
   // @Mutation(() => Bezoeker)

@@ -100,6 +100,17 @@ export class BezoekersService {
 
     return this.bezoekerRepository.save(bezoeker)
   }
+
+
+  async removeFavoArtiest(uid: string, favoartiest: string) {
+    // Retrieve the Bezoeker by ID
+    const bezoeker = await this.bezoekerRepository.findOneByOrFail({ uid })
+  
+    // Remove the FavArtiest from the Bezoeker
+    bezoeker.favoartiest = bezoeker.favoartiest.filter(f => f.artiest !== favoartiest)
+
+    return this.bezoekerRepository.save(bezoeker)
+  }
   
 
 

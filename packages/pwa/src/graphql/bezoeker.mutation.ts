@@ -24,6 +24,20 @@ export const ADD_BEZOEKER = gql`
     }
   }
   `  
+
+  export const REMOVE_FAVOARTIEST = gql`
+  mutation removeFavoArtiestFromBezoeker ($uid: String!, $artiest: String!){
+    removeFavoArtiestFromBezoeker(uid: $uid, favoartiest: $artiest) {
+      id
+      uid
+      favoartiest {
+        artiest
+        time
+        color
+      }
+    }
+  }
+  `  
   
   
     
