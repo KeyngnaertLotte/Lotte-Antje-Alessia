@@ -3,13 +3,15 @@
     <div>
       <h1>List of Staff</h1>
       <ul>
-        <li v-for="(item, index) in personeelInfo">
-          {{ item.voornaam }} {{ item.achternaam }} - {{ item.type }}
-          <select v-model="item.type">
-            <option disabled value="">{{item.type}}</option>
-            <option value="Type 1">Type 1</option>
-            <option value="Type 2">Type 2</option>
-            <option value="Type 3">Type 3</option>
+        <li v-for="(item, index) in personeelInfo" :key="item.id">
+          {{ item.voornaam }} {{ item.achternaam }}
+          <select
+            v-model="item.type"
+            @change="onChange(item, index, $event.target.value)"
+          >
+            <option :value="option" v-for="option in types" :key="option">
+              {{ option }}
+            </option>
           </select>
         </li>
       </ul>
@@ -21,6 +23,8 @@
 import { useQuery } from '@vue/apollo-composable'
 import Container from '@/components/generic/Container.vue'
 import { GET_PERSONEEL } from '@/graphql/personeel.query'
+import { UPDATE_TYPE } from '@/graphql/personeel.mutation'
+import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
 interface Personeel {
@@ -42,12 +46,23 @@ interface Takenlijst {
 
 const personeelInfo = ref<any | null>(null)
 
+const types = [
+  'Podium - licht',
+  'Podium - geluid',
+  'Bar - eten',
+  'Bar - drank',
+  'Allround',
+  'Kuisen',
+  'Aanvulling',
+  'Loges',
+]
+
 export default {
   components: { Container },
 
   setup() {
     const getPersoneelInfo = async () => {
-    //   console.log('uid:', uid)
+      //   console.log('uid:', uid)
       try {
         const { onResult } = useQuery(GET_PERSONEEL)
         onResult(result => {
@@ -61,9 +76,28 @@ export default {
       }
     }
 
+    const onChange = (item: Personeel, index: number, newValue: string) => {
+      const { mutate: updateType } = useMutation(UPDATE_TYPE)
+      console.log(
+        `Type changed to ${item.type} for ${item.voornaam} ${item.achternaam} uid: ${item.uid}`,
+      )
+      console.log(`new value: ${newValue}`)
+      updateType({
+        updateTypeInput: newValue,
+        uid: item.uid,
+      })
+        .then(graphqlresult => {
+          console.log('🎉 type updated in our database')
+          console.log(graphqlresult)
+        })
+        .catch(error => {
+          console.log('Error updating type:', error)
+        })
+    }
+
     getPersoneelInfo()
 
-    return { personeelInfo }
+    return { personeelInfo, onChange, types }
   },
 }
 </script>
