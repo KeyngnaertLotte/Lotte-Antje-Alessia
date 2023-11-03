@@ -45,6 +45,11 @@ export class BezoekersResolver {
     return this.bezoekersService.removeFavoArtiest(uid, favoartiest);
   }
 
+  @Mutation(() => Bezoeker)
+  addSaldoToBezoeker(@Args('uid', { type: () => String }) uid: string, @Args('saldo', { type: () => Int }) aantal: number) {
+    return this.bezoekersService.addSaldo(uid, aantal);
+  }
+
   
 
   // @Mutation(() => Bezoeker)

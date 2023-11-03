@@ -6,9 +6,9 @@
                 <h1 class="font-body font-bold text-3xl">Voer een bedrag in</h1>
                 <div class="flex justify-center items-center gap-2 w-3/4">
                     <p class="font-pop  text-gray text-4xl">€</p>
-                    <input type="number" name="" id="" class="text-2xl border-b-2 border-gray-500 outline-none focus:border-blue-500 w-full">
+                    <input type="number" name="" id="amountInput" class="text-2xl border-b-2 border-gray-500 outline-none focus:border-blue-500 w-full">
                 </div>
-                <button class="h-12 flex flex-row items-center justify-center gap-2 font-pop text-xl font-bold text-white bg-custom-purple p-6 rounded"><Landmark class="h-8 w-8 border-white"/>OVERSCHRIJVEN</button>
+                <button @click="checkAndCloseModal" class="h-12 flex flex-row items-center justify-center gap-2 font-pop text-xl font-bold text-white bg-custom-purple p-6 rounded"><Landmark class="h-8 w-8 border-white"/>OVERSCHRIJVEN</button>
             </div>
         </div>
     </div>
@@ -31,6 +31,15 @@ export default {
     methods: {
         closeModal() {
             this.$emit('close-modal');
+        },
+        checkAndCloseModal() {
+            const amountInput = document.getElementById('amountInput') as HTMLInputElement;
+
+            if (amountInput.value === '') {
+                console.log('Input is empty');
+            } else {
+                this.closeModal();
+            }
         }
     },
     setup(props) {

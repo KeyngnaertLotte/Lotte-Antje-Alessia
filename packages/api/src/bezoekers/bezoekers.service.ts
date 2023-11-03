@@ -6,6 +6,7 @@ import { Bezoeker } from './entities/bezoeker.entity';
 import { Repository } from 'typeorm';
 import { ObjectId } from 'mongodb'
 import { FavArtiest } from './entities/favartiest.entity';
+import { Transactie } from './entities/transacties.entity';
 
 @Injectable()
 export class BezoekersService {
@@ -112,6 +113,25 @@ export class BezoekersService {
     return this.bezoekerRepository.save(bezoeker)
   }
   
+  async addSaldo(uid: string, saldo: number) {
+    // Retrieve the Bezoeker by ID
+    const bezoeker = await this.bezoekerRepository.findOneByOrFail({ uid })
+  
+    const newTransactie = new Transactie()
+    newTransactie.aantal = saldo
+    newTransactie.tijd = new Date()
+    newTransactie.transactie = "Saldo Verhoging"
+
+    bezoeker.transacties.push(newTransactie)
+
+    bezoeker.saldo = bezoeker.saldo + saldo
+
+    return this.bezoekerRepository.save(bezoeker)
+  }
+
+
+
+
 
 
   // findAll() {
