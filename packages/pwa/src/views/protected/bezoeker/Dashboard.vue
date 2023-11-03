@@ -2,7 +2,7 @@
   <cardSm title="saldo" url="/bezoeker/saldo" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :isPopup="false" :artiest="bezoekerInfo.bezoekerByUid.favoartiest" :value="bezoekerInfo.bezoekerByUid.saldo" class="col-span-1 row-start-4 row-span-4 bg-[#885053]"/>
   <cardSm title="bonnetjes" class="col-span-1 row-start-4 row-span-4 bg-custom-lightGreen" :isPopup="true" @sendDataToParent="handleDataFromChild"/>
   <FavoriteArtists v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :artiest="bezoekerInfo.bezoekerByUid.favoartiest"/>
-  <QrPopup  v-if="isModalOpen"/>
+  <QrPopup  v-if="isModalOpen" :id="uid" @close-modal="handleCloseModal"/>
 </template>
   
 <script lang="ts">
@@ -43,6 +43,10 @@
           isModalOpen.value = true;
         }
       }
+
+      const handleCloseModal = () => {
+        isModalOpen.value = false;
+      }
   
       const getBezoekerInfo = async () => {
           // console.log('uid:', uid);
@@ -62,7 +66,7 @@
 
       getBezoekerInfo();  
 
-      return { customUser, getBezoekerInfo, bezoekerInfo, handleDataFromChild, dataFromChild, isModalOpen }; 
+      return { customUser, getBezoekerInfo, bezoekerInfo, handleDataFromChild, dataFromChild, isModalOpen, uid, handleCloseModal }; 
     },
   };
 </script>
