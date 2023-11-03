@@ -104,6 +104,10 @@ export class MateriaalService {
     }
   }
 
+  async findByCategorie (categorie: string): Promise<Materiaal[]> {
+    return this.materiaalRepository.find({where: {categorie: categorie}})
+  }
+
   // hier ben ik totaal niet zeker van
   // async checkMateriaal(materiaalnaam: string, aantal: number) {
   //   //@ts-ignore

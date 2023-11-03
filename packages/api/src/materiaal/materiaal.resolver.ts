@@ -3,6 +3,7 @@ import { MateriaalService } from './materiaal.service';
 import { Materiaal } from './entities/materiaal.entity';
 import { CreateMateriaalInput } from './dto/create-materiaal.input';
 import { UpdateMateriaalInput } from './dto/update-materiaal.input';
+import { query } from 'express';
 
 @Resolver(() => Materiaal)
 export class MateriaalResolver {
@@ -24,6 +25,11 @@ export class MateriaalResolver {
   //   return this.materiaalService.findOne(id);
   // }
 
+  @Query(() => [Materiaal])
+  findByCategorie(@Args('categorie') categorie: string) {
+    return this.materiaalService.findByCategorie(categorie);
+  }
+
   @Mutation(() => Materiaal)
   updateMateriaal(@Args('updateMateriaalInput') updateMateriaalInput: UpdateMateriaalInput) {
     return this.materiaalService.update(updateMateriaalInput.id, updateMateriaalInput);
@@ -38,4 +44,6 @@ export class MateriaalResolver {
   removeMateriaal(@Args('id', { type: () => Int }) id: number) {
     return this.materiaalService.remove(id);
   }
+
+
 }
