@@ -1,7 +1,6 @@
 <template>
     <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
         <div class="relative bg-white w-9/10 h-3/4 rounded-lg flex flex-col  items-center p-6">
-            <!-- <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg"> <X class="z-5 h-12 w-12 fill-white"/></button> -->
             <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"><X class="h-10 w-10 stroke-white"/> </button>
             <button v-if="isBezoeker" @click="toggleFavorite" class="font-body font-bold text-3xl flex flex-row justify-center items-center gap-2">{{ currentArtist.artistName }} <p class="h-12 w-12 flex justify-center items-center"><Heart :class="heartColor" /></p></button>
             <h1 v-if="!isBezoeker" class="font-body font-bold text-3xl flex flex-row items-center gap-2">{{ currentArtist.artistName }}</h1>
