@@ -2,7 +2,7 @@
   <cardSm title="saldo" url="/bezoeker/saldo" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :isPopup="false" :artiest="bezoekerInfo.bezoekerByUid.favoartiest" :value="bezoekerInfo.bezoekerByUid.saldo" class="col-span-1 row-start-4 row-span-4 bg-[#885053]"/>
   <cardSm title="bonnetjes" class="col-span-1 row-start-4 row-span-4 bg-custom-lightGreen" :isPopup="true" @sendDataToParent="handleDataFromChild"/>
   <FavoriteArtists v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid" :artiest="bezoekerInfo.bezoekerByUid.favoartiest"/>
-  <QrPopup  v-if="isModalOpen" :id="uid" @close-modal="handleCloseModal"/>
+  <QrPopup  v-if="isModalOpen" :id="uid ?? ''" @close-modal="handleCloseModal"/>
 </template>
   
 <script lang="ts">
@@ -39,7 +39,7 @@
         dataFromChild.value = data;
         // console.log('dataFromChild:', dataFromChild.value);
         if (dataFromChild.value === 'open-popup') {
-          console.log('open popup');
+          // console.log('open popup');
           isModalOpen.value = true;
         }
       }

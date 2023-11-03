@@ -4,7 +4,7 @@
           <p class="font-body text-xl mx-2">Saldo</p>
           <p class="font-pop text-4xl self-center" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid"> € {{ bezoekerInfo.bezoekerByUid.saldo }}</p>
         </div>
-        <button class="bg-white px-4 py-2 text-custom-purple rounded-md font-pop font-bold mx-4 self-center">VOEG TOE</button>
+        <button @click="handleModal" class="bg-white px-4 py-2 text-custom-purple rounded-md font-pop font-bold mx-4 self-center">VOEG TOE</button>
       </div>
       <div class="mx-4 bg-white row-start-9 p-4 rounded-md col-span-2 row-span-15">
         <p class="font-body text-xl font-bold">TRANSACTIES</p>
@@ -15,6 +15,7 @@
           </div>
         </div>
       </div>
+      <SaldoPopup :id="uid ?? ''" v-if="isModalOpen" @close-modal="handleCloseModal"/>
   </template>
   
   <script lang="ts">
@@ -23,20 +24,24 @@ import { provideApolloClient, useQuery } from '@vue/apollo-composable'
 import { GET_BEZOEKER_BY_UID } from '@/graphql/bezoeker.query'
 import useGraphql from '../../../composables/useGraphql'
 import { onMounted, ref } from 'vue';
+import SaldoPopup from '@/components/bezoeker/SaldoPopup.vue';
 
 const { customUser } = useCustomUser();
 const { apolloClient } = useGraphql();
 provideApolloClient(apolloClient);
 const uid = customUser.value?.uid;
 const bezoekerInfo = ref<any | null>(null);
+const isModalOpen = ref(false);
 
 export default {
-  components: {},
+  components: {
+    SaldoPopup
+  },
   setup() {
     onMounted(() => {
       getBezoekerInfo();
     });
-    return { getBezoekerInfo, bezoekerInfo };
+    return { getBezoekerInfo, bezoekerInfo, isModalOpen, handleModal, handleCloseModal, uid };
   },
   computed: {
     reversedTransacties() {
@@ -46,6 +51,7 @@ export default {
       }
       return [];
     },
+    
     
   },
   methods: {
@@ -58,6 +64,13 @@ export default {
     },
   },
 };
+
+const handleModal = () => {
+      isModalOpen.value = true;
+    }
+    const handleCloseModal = () => {
+        isModalOpen.value = false;
+      }
 
 const getBezoekerInfo = async () => {
         // console.log('uid:', uid);
