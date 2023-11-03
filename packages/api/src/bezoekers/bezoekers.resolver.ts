@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Float } from '@nestjs/graphql';
 import { BezoekersService } from './bezoekers.service';
 import { Bezoeker } from './entities/bezoeker.entity';
 import { CreateBezoekerInput } from './dto/create-bezoeker.input';
@@ -43,6 +43,11 @@ export class BezoekersResolver {
   @Mutation(() => Bezoeker)
   removeFavoArtiestFromBezoeker(@Args('uid', { type: () => String }) uid: string, @Args('favoartiest', { type: () => String }) favoartiest: string) {
     return this.bezoekersService.removeFavoArtiest(uid, favoartiest);
+  }
+
+  @Mutation(() => Bezoeker)
+  addSaldoToBezoeker(@Args('uid', { type: () => String }) uid: string, @Args('saldo', { type: () => Float }) aantal: number) {
+    return this.bezoekersService.addSaldo(uid, aantal);
   }
 
   
