@@ -16,6 +16,8 @@
 
 <script lang="ts">
 import { X, Landmark } from 'lucide-vue-next';
+    import { useMutation } from '@vue/apollo-composable'
+    import { ADD_SALDO } from '@/graphql/bezoeker.mutation';
 
 export default {
     components: {
@@ -28,24 +30,44 @@ export default {
             required: true
         }
     },
-    methods: {
-        closeModal() {
-            this.$emit('close-modal');
-        },
-        checkAndCloseModal() {
-            const amountInput = document.getElementById('amountInput') as HTMLInputElement;
-
-            if (amountInput.value === '') {
-                console.log('Input is empty');
-            } else {
-                this.closeModal();
-            }
-        }
-    },
-    setup(props) {
-        console.log('props:', props.id);
+    setup(props, { emit }) {
         
+        const closeModal = () => {
+        emit('close-modal');
+        };
+
+        const checkAndCloseModal = () => {
+  const amountInput = document.getElementById('amountInput') as HTMLInputElement;
+  const { mutate: addSaldo } = useMutation(ADD_SALDO);
+
+  if (amountInput.value === '') {
+    console.log('Input is empty');
+  } else {
+    const saldoValue = parseFloat(amountInput.value); // Parse to a floating-point number
+    if (!isNaN(saldoValue)) {
+      // Ensure that it's a valid number
+      addSaldo({ uid: props.id, saldo: saldoValue })
+        .then((graphqlresult) => {
+          console.log('🎉 new favoartiest added to Bezoeker');
+          console.log(graphqlresult?.data); // Access the returned data
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      closeModal();
+    } else {
+      console.log('Invalid input: Not a number');
+    }
+  };
+};
+
+
+        console.log('props:', props.id);
+
+        return {
+            closeModal,
+            checkAndCloseModal
+        };
     }
 }
-
 </script>

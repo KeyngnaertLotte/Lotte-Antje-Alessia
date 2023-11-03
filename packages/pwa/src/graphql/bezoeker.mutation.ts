@@ -38,6 +38,17 @@ export const ADD_BEZOEKER = gql`
     }
   }
   `  
+
+  export const ADD_SALDO = gql`
+  mutation AddTransaction($uid: String!, $saldo: Float!){
+    addSaldoToBezoeker(uid: $uid, saldo: $saldo) {
+      id
+      uid
+      saldo
+      transacties{transactie, tijd, aantal}
+    }
+  }
+  `
   
   
     
