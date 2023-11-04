@@ -1,6 +1,6 @@
 <template>
-  <form @submit.prevent="handleLogin" class="w-full h-screen grid grid-rows-3 grid-cols-1 justify-center items-center " style="background-image: url(../../../../../src/images/bg-small.png); background-size: 100% auto;">
-    <div class="flex flex-col justify-center items-center row-start-1 row-span-1">
+  <form @submit.prevent="handleLogin" class="w-full h-screen grid grid-rows-13 grid-cols-1 justify-center items-center " style="background-image: url(../../../../../src/images/bg-small.png); background-size: 100% auto;">
+    <div class="flex flex-col justify-center items-center row-start-3 row-span-1">
       <div class="flex flex-col items-end row-span-4 justify-center  justify-self-center">
           <p class="font-header font-bold text-white text-6xl">Lotantsia</p>
           <p class="font-header font-bold text-white text-4xl">Festival</p>
@@ -11,59 +11,59 @@
       <p class="text-red-600">{{ error.message }}</p>
     </div> -->
 
-    <div class="row-start-2 row-span-2 bg-white w-full h-full rounded-t-3xl p-4 flex flex-col  items-center">
-      <h1 class="text-5xl font-body font-bold text-custom-darkGreen my-6">Login</h1>
+    <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-between ">
+      <h1 class="text-5xl font-body font-bold text-custom-orange my-6">Log in</h1>
       <div class="mt-6 w-full">
-      <div class="w-full">
-        <label
+      <div class="w-full flex justify-center">
+        <!-- <label
         for="email"
         class="text-md block font-pop font-bold tracking-wider text-custom-brown"
       >
         Email address
-      </label>
+      </label> -->
       <input
         type="email"
         name="email"
         id="email"
-        class="mt-1 block w-full rounded-md border-2 border-custom-brown p-2 focus:outline-none focus-visible:border-custom-darkGreen focus-visible:ring-2 focus-visible:ring-custom-darkGreen"
+        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         v-model="loginCredentials.email"
       />
     </div>
-    <div class="mt-6 w-full">
-      <label
+    <div class="w-full flex flex-col justify-center items-center m-t-4">
+      <!-- <label
         for="password"
         class="text-md block font-pop font-bold tracking-wider text-custom-brown"
       >
         Password
-      </label>
+      </label> -->
       <input
         type="password"
         name="password"
         id="password"
-        class="mt-1 block w-full rounded-md border-2 border-custom-brown p-2 focus:outline-none focus-visible:border-custom-darkGreen focus-visible:ring-2 focus-visible:ring-custom-darkGreen"
+        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         v-model="loginCredentials.password"
       />
       <RouterLink
         to="/auth/forgot-password"
-        class="mt-1 inline-block rounded text-sm text-custom-purple hover:underline focus:outline-none "
+        class="w-[90%] font-pop mt-1 inline-block rounded text-md text-custom-darkGreen hover:underline focus:outline-none "
       >
         Forgot password?
       </RouterLink>
     </div>
       </div>
 
-    <div class="w-full flex flex-col h-full justify-center">
+    <div class="w-full flex flex-col h-1/3 justify-center items-center">
       <button
-      class="mt-6 w-full rounded-md bg-custom-purple py-2 px-4 font-semibold text-white "
+      class="mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white "
     >
       Login
     </button>
     <div class="flex justify-center">
       <RouterLink
-        class="mt-3 inline-block rounded text-center text-sm text-custom-purple focus:outline-none focus-visible:ring-2 "
+        class="mt-1 font-pop inline-block rounded text-center text-md text-custom-darkGreen focus:outline-none focus-visible:ring-2 "
         to="/auth/register"
       >
-        Need to create an account?
+        Geen account? Maak hier één aan.
       </RouterLink>
     </div>
     </div>
