@@ -128,7 +128,7 @@ export class ArtiestenService {
 
     newTaak.type = type
 
-    console.log("newTaak: ",newTaak)
+    console.log('newTaak: ', newTaak)
 
     await this.takenService.create(newTaak)
 
@@ -154,6 +154,8 @@ export class ArtiestenService {
   findOneByUid(uid: string) {
     return this.artiestRepository.findOneByOrFail({ uid })
   }
+
+
 
   update(id: number, updateArtiestenInput: UpdateArtiestenInput) {
     return `This action updates a #${id} artiesten`

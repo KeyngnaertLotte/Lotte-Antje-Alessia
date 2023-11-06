@@ -45,6 +45,7 @@ export class ArtiestenResolver {
     return this.artiestenService.findOneByUid(id)
   }
 
+
   // @Mutation(() => Artiest)
   // updateArtiesten(
   //   @Args('updateArtiestenInput') updateArtiestenInput: UpdateArtiestenInput,
