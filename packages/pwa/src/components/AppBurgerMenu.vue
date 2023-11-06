@@ -92,6 +92,11 @@ const roleMenuList = [
         path: '/artiest/dashboard',
         icon: LayoutDashboard,
       },
+      {
+        name: 'Items',
+        path: '/artiest/items',
+        icon: Plus,
+      }
     ],
   },
   {

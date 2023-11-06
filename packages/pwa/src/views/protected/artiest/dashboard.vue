@@ -6,7 +6,11 @@
     @sendDataToParent="handleDataFromChild"
   />
   <!-- <cardSm title="vip lijst" class="col-span-1 row-start-4 row-span-4" /> -->
-  <ItemPopUp v-if="isModalOpen"  @close-modal="handleCloseModal" />
+  <ItemPopUp
+    v-if="isModalOpen"
+    :id="uid ?? ''"
+    @close-modal="handleCloseModal"
+  />
   <AgendaArtist />
 </template>
 
@@ -18,8 +22,13 @@ import AppHeader from '@/components/AppHeader.vue'
 import AgendaArtist from '@/components/artiest/AgendaArtist.vue'
 import cardSm from '@/components/generic/CardSm.vue'
 import ItemPopUp from '@/components/artiest/ItemPopUp.vue'
+import useCustomUser from '@/composables/useCustomUser'
 
 import { ref } from 'vue'
+
+const { customUser } = useCustomUser()
+
+const uid = customUser.value?.uid
 
 const isModalOpen = ref(false)
 
@@ -42,19 +51,11 @@ export default {
       isModalOpen.value = false
     }
 
-    const {
-      loading: ArtiestenLoading,
-      result: ArtiestenData,
-      error: ArtiestenError,
-    } = useQuery(ALL_Artiesten)
-    console.log(ArtiestenData)
     return {
-      ArtiestenData,
-      ArtiestenLoading,
-      ArtiestenError,
       handleCloseModal,
       handleDataFromChild,
       isModalOpen,
+      uid,
     }
   },
 }

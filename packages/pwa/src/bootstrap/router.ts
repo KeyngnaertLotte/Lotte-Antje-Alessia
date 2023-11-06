@@ -48,6 +48,10 @@ const router = createRouter({
           path: 'dashboard',
           component: () => import('../views/protected/artiest/dashboard.vue'),
         },
+        {
+          path: 'items',
+          component: () => import('../views/protected/artiest/Items.vue'),
+        }
       ],
     },
 
