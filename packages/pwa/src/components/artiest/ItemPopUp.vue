@@ -162,17 +162,16 @@ export default {
 
         <button
           @click="addItem"
-          class="mt-6 w-2/5 rounded-md bg-custom-orange py-2 font-body font-bold text-2xl text-white flex items-center justify-center gap-4"
+          class="mt-6 w-full rounded-md bg-custom-orange py-2 font-body font-bold text-2xl text-white flex items-center justify-center gap-4"
         >
           Add
         </button>
-      </div>
-        
-      <div class="flex justify-end mr-6">
         <p v-if="toegevoegdMessage" >
           {{ toegevoegdMessage }}
         </p>
       </div>
+        
+        
     </div>
   </div>
 </template>
