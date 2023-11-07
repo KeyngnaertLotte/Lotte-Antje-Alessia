@@ -45,5 +45,10 @@ export class MateriaalResolver {
     return this.materiaalService.remove(id);
   }
 
+  @Query(() => [Materiaal], { name: 'categorie' })
+  findAllCategories() {
+    return this.materiaalService.findAllCategories();
+  }
+
 
 }

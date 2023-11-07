@@ -1,23 +1,30 @@
 <template>
   <div class="mt-24">
-    <div v-for="materiaal in materiaalInfo">
-      <div v-for="m in materiaal">
+    <div v-if="MateriaalByCategorie">
+      <div
+        v-for="categorie in Object.keys(MateriaalByCategorie)"
+        :key="categorie"
+      >
         <button
-          @click="toggleShow(m.categorie)"
+          @click="toggleShow(categorie)"
           class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
         >
-          <p>{{ m.categorie }}</p>
+          <p>{{ categorie }}</p>
           <ChevronDown class="stroke-custom-brown" />
         </button>
         <transition name="slide-fade">
-          <div v-if="isShow(m.categorie)">
-            <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
-              <p>{{ m.item }}</p>
-              <p>{{ m.aantal }}</p>
-            </div>
-            <div class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full">
-              <p>{{ m.item }}</p>
-              <p>{{ m.aantal }}</p>
+          <div v-if="isShow(categorie)">
+            <div
+              v-for="item in MateriaalByCategorie[categorie]"
+              :key="categorie"
+            >
+              <div
+                v-if="item.categorie === categorie"
+                class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full"
+              >
+                <p>{{ item.item }}</p>
+                <p>{{ item.aantal }}</p>
+              </div>
             </div>
           </div>
         </transition>
@@ -27,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { ChevronDown } from 'lucide-vue-next'
 import { GET_MATERIAAL } from '@/graphql/materiaal.query'
@@ -37,11 +44,10 @@ type ShowState = { [key: string]: boolean }
 const materiaalInfo = ref<any | null>(null)
 
 export default {
-  name: 'Materiaal',
   components: { ChevronDown },
-  props: {},
   setup() {
     const showState = ref<ShowState>({})
+    const { onResult } = useQuery(GET_MATERIAAL)
 
     const toggleShow = (category: string) => {
       showState.value[category] = !showState.value[category]
@@ -51,32 +57,37 @@ export default {
       return showState.value[category] || false
     }
 
-    const getMateriaalInfo = async () => {
-      try {
-        const { onResult } = useQuery(GET_MATERIAAL)
-        onResult(result => {
-          if (result.data) {
-            console.log('Data:', result.data)
-            materiaalInfo.value = result.data
-            console.log('materiaalInfo:', materiaalInfo.value)
-          }
-        })
-      } catch (error) {
-        console.error('Error fetching materiaal info:', error)
+    onResult(result => {
+      if (result.data) {
+        materiaalInfo.value = result.data
       }
-    }
+    })
 
-    getMateriaalInfo()
+    const MateriaalByCategorie = computed(() => {
+      if (materiaalInfo.value) {
+        const categorizedItems: { [key: string]: any[] } = {}
+        materiaalInfo.value.materiaal.forEach((item: any) => {
+          const category = item.categorie
+          if (!categorizedItems[category]) {
+            categorizedItems[category] = []
+          }
+          categorizedItems[category].push(item)
+        })
+        console.log('categorizedItems: ', categorizedItems)
+        return categorizedItems
+      }
+      return null
+    })
+
     return {
       toggleShow,
       isShow,
-      getMateriaalInfo,
+      MateriaalByCategorie,
       materiaalInfo,
     }
   },
 }
 </script>
-
 
 <style scoped>
 .slide-fade-enter-active {

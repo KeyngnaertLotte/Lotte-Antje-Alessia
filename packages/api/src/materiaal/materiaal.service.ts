@@ -45,6 +45,14 @@ export class MateriaalService {
     )
   }
 
+  async findAllCategories() {
+    const materiaalData = await this.materiaalRepository.find();
+      const categories = materiaalData.map(item => item.categorie);
+      return categories;
+  }
+  
+  
+
   // async UpdateAantalOptellen(
   //   materiaalId: string,
   //   itemNaam: string,
