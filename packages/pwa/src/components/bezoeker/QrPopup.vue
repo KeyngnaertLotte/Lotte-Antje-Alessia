@@ -31,6 +31,7 @@ export default {
         }
     },
     setup(props) {
+        
         text.value = props.id
         return {
             qrcode,

@@ -47,6 +47,7 @@ export default {
     reversedTransacties() {
       if (this.bezoekerInfo && this.bezoekerInfo.bezoekerByUid) {
         // Use slice() to create a shallow copy of the array and then reverse it
+        console.log('transacties:', this.bezoekerInfo.bezoekerByUid.transacties.slice());
         return this.bezoekerInfo.bezoekerByUid.transacties.slice().reverse();
       }
       return [];

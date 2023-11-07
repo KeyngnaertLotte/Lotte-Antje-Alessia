@@ -1,6 +1,14 @@
 <template>
-  <form @submit.prevent="handleResetPassword" class="w-full">
-    <h1 class="text-4xl font-bold tracking-wider">Forgot password?</h1>
+  <form @submit.prevent="handleResetPassword" class="w-full h-screen grid grid-rows-13 grid-cols-1 justify-center items-center " style="background-image: url(../../../../../src/images/bg-small.png); background-size: 100% auto;">
+    <div class="flex flex-col justify-center items-center row-start-3 row-span-1">
+      <div class="flex flex-col items-end row-span-4 justify-center  justify-self-center">
+          <p class="font-header font-bold text-white text-6xl">Lotantsia</p>
+          <p class="font-header font-bold text-white text-4xl">Festival</p>
+        </div>
+    </div>
+
+    <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-between ">
+      <h1 class="text-4xl font-body font-bold text-custom-orange my-6">Wachtwoord vergeten</h1>
     <p class="text-neutral-500 mb-4">
       No worries, we'll email you a link to reset your password.
     </p>
@@ -38,6 +46,8 @@
         Remember? Go to login.
       </RouterLink>
     </div>
+    </div>
+    
   </form>
 </template>
 
