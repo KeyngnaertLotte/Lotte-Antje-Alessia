@@ -3,12 +3,12 @@
         <div class="h-1/2 w-7/8 bg-white rounded-md flex justify-center relative">
             <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"><X class="h-10 w-10 stroke-white"/> </button>
             <div class="flex flex-col justify-around items-center h-full ">
-                <h1 class="font-body font-bold text-3xl">Voer een bedrag in</h1>
+                <h1 class="text-3xl font-body font-bold text-custom-orange my-6">Voer een bedrag in</h1>
                 <div class="flex justify-center items-center gap-2 w-3/4">
-                    <p class="font-pop  text-gray text-4xl">€</p>
-                    <input type="number" name="" id="amountInput" class="text-2xl border-b-2 border-gray-500 outline-none focus:border-blue-500 w-full">
+                    <p class="font-pop  text-4xl text-custom-darkGreen">€</p>
+                    <input type="number" name="" id="amountInput" class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl">
                 </div>
-                <button @click="checkAndCloseModal" class="h-12 flex flex-row items-center justify-center gap-2 font-pop text-xl font-bold text-white bg-custom-purple p-6 rounded"><Landmark class="h-8 w-8 border-white"/>OVERSCHRIJVEN</button>
+                <button @click="checkAndCloseModal"  class="mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4"><Landmark class="h-8 w-8 border-white"/>OVERSCHRIJVEN</button>
             </div>
         </div>
     </div>
