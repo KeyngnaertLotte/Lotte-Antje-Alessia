@@ -41,7 +41,7 @@ const addTask = () => {
 
 <template>
   <div
-    class="bg-white shadow-md w-full p-4 rounded-2xl"
+    class="bg-white shadow-md  p-4 rounded-2xl col-span-2 row-span-16 mx-4"
     v-for="taak in takenlijst"
   >
     <div class="flex items-center justify-between">
