@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Column, Entity, ObjectIdColumn } from 'typeorm';
 
 @Entity()
@@ -8,6 +8,7 @@ export class Materiaal {
   @Field(()=> ID)
   id: string;
 
+  // deze weg want naam van items zit in itemlijst
   @Field()
   @Column()
   item: string;
@@ -16,8 +17,12 @@ export class Materiaal {
   @Column()
   categorie: string;
 
+  // deze weg want zit in itemlijst
   @Field()
   @Column()
   aantal: number;
   
+  // @Column()
+  // @Field(() => [Itemlijst])
+  // items?: Itemlijst[];
 }

@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutDashboard , X, Clock3, MapPin, Coins, LogOut } from 'lucide-vue-next'
+import { LayoutDashboard , X, Clock3, MapPin, Coins, LogOut, PackageOpen } from 'lucide-vue-next'
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
 
@@ -100,6 +100,11 @@ const roleMenuList = [
         name: 'Dashboard',
         path: '/personeel/dashboard',
         icon: LayoutDashboard,
+      },
+      {
+        name: 'Materiaal',
+        path: '/personeel/materiaal',
+        icon: PackageOpen,
       },
     ],
   },
