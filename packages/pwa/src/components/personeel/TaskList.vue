@@ -99,6 +99,7 @@ const addTask = () => {
           >
             Close
           </button> -->
+          </div>
         </div>
       </div>
     </div>
