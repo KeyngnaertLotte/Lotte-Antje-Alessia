@@ -1,9 +1,9 @@
 <template>
     <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
         <div class="relative bg-white w-9/10 h-3/4 rounded-lg flex flex-col  items-center p-6">
-            <!-- <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg"> <X class="z-5 h-12 w-12 fill-white"/></button> -->
-            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"> <p class="text-white font-bold font-body text-2xl">X</p></button>
-            <h1 class="font-body font-bold text-3xl">{{ currentArtist.artistName }}</h1>
+            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"><X class="h-10 w-10 stroke-white"/> </button>
+            <button v-if="isBezoeker" @click="toggleFavorite" class="font-body font-bold text-3xl flex flex-row justify-center items-center gap-2">{{ currentArtist.artistName }} <p class="h-12 w-12 flex justify-center items-center"><Heart :class="heartColor" /></p></button>
+            <h1 v-if="!isBezoeker" class="font-body font-bold text-3xl flex flex-row items-center gap-2">{{ currentArtist.artistName }}</h1>
             <p class="font-body text-xl">{{ currentArtist.time }}</p>
             <img :src=currentArtist.imgLink alt="aaaaaaaaaaaaaaa" class="my-6">
             <p class="font-pop text-lg text-justify">{{ currentArtist.info }}</p>
@@ -14,8 +14,13 @@
 </template>
 
 <script lang="ts" >
-    import { ref,getCurrentInstance  } from 'vue';
-    import { X } from 'lucide-vue-next';
+    import { computed, ref  } from 'vue';
+    import { Heart, X } from 'lucide-vue-next';
+    import { useMutation } from '@vue/apollo-composable'
+    import { ADD_FAVOARTIEST, REMOVE_FAVOARTIEST } from '@/graphql/bezoeker.mutation';
+    import useCustomUser from '@/composables/useCustomUser'
+    const { customUser } = useCustomUser();
+    const uid = customUser.value?.uid;
 
     const artistList = [
        {
@@ -101,7 +106,18 @@
         modalState: {
             type: Boolean,
             required: true
+        },
+        isFavorite: {
+            type: Boolean,
+        },
+        bezoeker:{
+            type: Boolean,
+            default: false
         }
+    },
+    components: {
+        Heart,
+        X
     },
     methods: {
         closeModal() {
@@ -109,25 +125,63 @@
         }
   },
 
-    setup(props){
-        const currentArtist = ref();
+  setup(props) {
+    const { mutate: addFavoArtiest } = useMutation(ADD_FAVOARTIEST)
+    const { mutate: removeFavoArtiest } = useMutation(REMOVE_FAVOARTIEST)
+    const favorite = ref(props.isFavorite);
 
-        artistList.forEach(element => {
-            if(element.artistName == props.artist){
-                currentArtist.value = element
-            }
-            
-        });
+    const currentArtist = ref();
+    const isBezoeker = props.bezoeker;
 
 
-        return {
-            currentArtist
+    artistList.forEach((element) => {
+      if (element.artistName === props.artist) {
+        currentArtist.value = element;
+      }
+    });
+
+    const toggleFavorite = () => {
+    //   console.log("before", favorite.value);
+      favorite.value = !favorite.value;
+    //   console.log(props.artist)
+    //   console.log(uid)
+      if (favorite.value) {
+        addFavoArtiest({ uid: uid, artiest: props.artist.toUpperCase() })
+        .then((graphqlresult) => {
+            console.log('🎉 new favoartiest added to Bezoeker');
+            console.log(graphqlresult?.data); // Access the returned data
+        })
+        .catch((error) => {
+            console.error(error)
+        })
         }
+        else {
+            removeFavoArtiest({ uid: uid, artiest: props.artist.toUpperCase() })
+            .then((graphqlresult) => {
+                console.log('🎉 favoartiest removed from Bezoeker');
+                console.log(graphqlresult?.data); // Access the returned data
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+        }
+    //   console.log("after", favorite.value);
+    };
 
-    }
+    const heartColor = computed(() => ({
+        "w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen": favorite.value,
+        "w-10 h-10 fill-none": !favorite.value,
+    }))
 
-    
-
+    return {
+      currentArtist,
+      isBezoeker,
+      toggleFavorite,
+      favorite,
+      heartColor,
+    };
+  }
 };
+
 
 </script>

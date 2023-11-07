@@ -1,14 +1,55 @@
 <template>
     <div class="col-span-2 row-start-5 row-span-full bg-primary">
-        <AppLineUpVue/>
+      <div class="h-[93%] overflow-auto">
+        <AppLineUpVue v-if="bezoekerInfoLoaded" :favorites="bezoekerInfo.bezoekersFavorite" />
+      </div>
     </div>
-  </template>
+</template>
+  
   
   <script lang="ts">
+    import useCustomUser from '@/composables/useCustomUser'
+    import { provideApolloClient, useQuery } from '@vue/apollo-composable'
+    import { GET_FAVOARTISTS_BY_ID } from '@/graphql/bezoeker.query'
+    import useGraphql from '../../../composables/useGraphql'
+    import { onMounted, ref } from 'vue';
     import AppLineUpVue from '@/components/AppLineUp.vue';
-    export default {
-        components: {
-            AppLineUpVue,
-        },
+
+    const { customUser } = useCustomUser();
+    const { apolloClient } = useGraphql();
+    provideApolloClient(apolloClient);
+    const uid = customUser.value?.uid;
+    const bezoekerInfo = ref<BezoekerInfo>({});
+    const bezoekerInfoLoaded = ref(false);
+
+    interface BezoekerInfo {
+        bezoekersFavorite?: any[]
+    }
+
+    const getBezoekerInfo = async () => {
+    try {
+        const { onResult } = useQuery(GET_FAVOARTISTS_BY_ID, { uid });
+        onResult((result) => {
+        if (result.data) {
+            console.log('Data:', result.data);
+            bezoekerInfo.value = result.data;
+            bezoekerInfoLoaded.value = true; // Data is now available
+        }
+        });
+    } catch (error) {
+        console.error('Error fetching bezoeker info:', error);
+    }
     };
-  </script>
+
+    export default {
+    components: {
+        AppLineUpVue,
+    },
+    setup() {
+        onMounted(() => {
+        getBezoekerInfo();
+        });
+        return { getBezoekerInfo, bezoekerInfo, bezoekerInfoLoaded };
+    },
+    };
+</script>

@@ -9,6 +9,8 @@ import { Agenda } from './entities/agenda.entity'
 import { Benodigdheden } from './entities/benodigdheden.entity'
 import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 import { MateriaalService } from 'src/materiaal/materiaal.service'
+import { TakenService } from 'src/taken/taken.service'
+import { CreateTakenInput } from 'src/taken/dto/create-taken.input'
 
 @Injectable()
 export class ArtiestenService {
@@ -16,38 +18,41 @@ export class ArtiestenService {
     @InjectRepository(Artiest)
     private readonly artiestRepository: Repository<Artiest>,
     private readonly materiaalService: MateriaalService,
+    private readonly takenService: TakenService,
+    private readonly createTakenInput: CreateTakenInput,
   ) {}
 
   async create(createArtiestenInput: CreateArtiestenInput): Promise<Artiest> {
     const a = new Artiest()
     a.naam = createArtiestenInput.naam
-    a.podium = createArtiestenInput.podium
-
-    const newBenodigdheden: Benodigdheden = {
-      item: 'Gitaar',
-      aantal: 1,
-      categorie: 'Instrumenten',
-      podium: createArtiestenInput.podium,
-    }
-
-    a.benodigdheden = [newBenodigdheden]
     a.uid = createArtiestenInput.uid
-    // a.agenda = []
-    // return 'This action adds a new artiesten'
+    // a.podium = createArtiestenInput.podium
 
-    const newAgendaItem: Agenda = {
-      taak: 'Opzetten',
-      podium: createArtiestenInput.podium,
-      tijd: '18:00 - 19:00',
-    }
+    // const newBenodigdheden: Benodigdheden = {
+    //   item: 'Gitaar',
+    //   aantal: 1,
+    //   categorie: 'Instrumenten',
+    //   podium: createArtiestenInput.podium,
+    // }
 
-    const newAgendaItem2: Agenda = {
-      taak: 'Soundcheck',
-      podium: createArtiestenInput.podium,
-      tijd: '19:00 - 19:30',
-    }
+    // a.benodigdheden = [newBenodigdheden]
+    // a.uid = createArtiestenInput.uid
+    // // a.agenda = []
+    // // return 'This action adds a new artiesten'
 
-    a.agenda = [newAgendaItem, newAgendaItem2]
+    // const newAgendaItem: Agenda = {
+    //   taak: 'Opzetten',
+    //   podium: createArtiestenInput.podium,
+    //   tijd: '18:00 - 19:00',
+    // }
+
+    // const newAgendaItem2: Agenda = {
+    //   taak: 'Soundcheck',
+    //   podium: createArtiestenInput.podium,
+    //   tijd: '19:00 - 19:30',
+    // }
+
+    // a.agenda = [newAgendaItem, newAgendaItem2]
 
     return this.artiestRepository.save(a)
   }
@@ -87,6 +92,48 @@ export class ArtiestenService {
       ...currentArtiest.benodigdheden,
       newbenodigdheden,
     ]
+
+    const newTaak = new CreateTakenInput()
+    newTaak.naam = materiaal.item
+    newTaak.aantal = materiaal.aantal
+    newTaak.category = materiaal.categorie
+    newTaak.plaats = currentArtiest.podium
+
+    console.log(materiaal.categorie)
+
+    const categorie = materiaal.categorie.toLocaleLowerCase()
+    console.log(categorie)
+
+    let type
+
+    if (categorie === 'drank' || categorie === 'eten') {
+      type = 'loges'
+    }
+    if (categorie === 'geluid' || categorie === 'instrument') {
+      console.log('instrument')
+      type = 'Podium - geluid'
+    }
+    if (categorie === 'licht') {
+      type = 'Podium - licht'
+    }
+    if (categorie === 'andere') {
+      console.log('andere')
+      type = 'Allround'
+    }
+    // } else {
+    //   newTaak.type = 'Allround'
+    // }
+
+    console.log(type)
+
+    newTaak.type = type
+
+    console.log('newTaak: ', newTaak)
+
+    await this.takenService.create(newTaak)
+
+    // newTaak.type =
+
     return this.artiestRepository.save(currentArtiest)
   }
 
@@ -107,6 +154,8 @@ export class ArtiestenService {
   findOneByUid(uid: string) {
     return this.artiestRepository.findOneByOrFail({ uid })
   }
+
+
 
   update(id: number, updateArtiestenInput: UpdateArtiestenInput) {
     return `This action updates a #${id} artiesten`

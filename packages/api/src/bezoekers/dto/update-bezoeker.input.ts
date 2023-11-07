@@ -6,3 +6,17 @@ export class UpdateBezoekerInput extends PartialType(CreateBezoekerInput) {
   @Field(() => String)
   id: number;
 }
+
+@InputType()
+export class FavoArtiestInput {
+  @Field({ nullable: true })
+  artiest?: string;
+
+  @Field({ nullable: true })
+  time?: string;
+
+  @Field({ nullable: true })
+  color?: string;
+}
+
+

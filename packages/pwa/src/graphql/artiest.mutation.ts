@@ -6,3 +6,12 @@ mutation createBenodigdhedenInput ($createBenodigdhedenInput:CreateBenodigdheden
     benodigdheden{item, podium, categorie, aantal }
     }
   }`
+
+export const ADD_ARTIEST = gql`
+mutation createArtiesten ($createArtiestenInput: CreateArtiestenInput!){
+  createArtiesten (createArtiestenInput: $createArtiestenInput){
+    id
+    naam
+    uid
+  }
+}`

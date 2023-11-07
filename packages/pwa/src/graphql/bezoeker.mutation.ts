@@ -10,6 +10,45 @@ export const ADD_BEZOEKER = gql`
     }
   }
   `
+
+  export const ADD_FAVOARTIEST = gql`
+  mutation AddFavoArtiest($uid: String!, $artiest: String!){
+    addFavoArtiestToBezoeker(uid: $uid, favoartiest: $artiest) {
+      id
+      uid
+      favoartiest {
+        artiest
+        time
+        color
+      }
+    }
+  }
+  `  
+
+  export const REMOVE_FAVOARTIEST = gql`
+  mutation removeFavoArtiestFromBezoeker ($uid: String!, $artiest: String!){
+    removeFavoArtiestFromBezoeker(uid: $uid, favoartiest: $artiest) {
+      id
+      uid
+      favoartiest {
+        artiest
+        time
+        color
+      }
+    }
+  }
+  `  
+
+  export const ADD_SALDO = gql`
+  mutation AddTransaction($uid: String!, $saldo: Float!){
+    addSaldoToBezoeker(uid: $uid, saldo: $saldo) {
+      id
+      uid
+      saldo
+      transacties{transactie, tijd, aantal}
+    }
+  }
+  `
   
   
     
