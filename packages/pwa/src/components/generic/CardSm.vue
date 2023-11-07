@@ -6,6 +6,7 @@ import { computed, defineProps, defineEmits  } from 'vue';
 import { useRouter } from 'vue-router'; 
 
 
+
 // icon aan de hand van de titel
 const icons: Record<string, any> = {
     'materiaal': PackageOpen,

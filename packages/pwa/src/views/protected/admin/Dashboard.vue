@@ -1,23 +1,57 @@
 <template>
-  <Container>
-    <div>
-      <h1>List of Staff</h1>
-      <ul>
-        <li v-for="(item, index) in personeelInfo" :key="item.id">
-          {{ item.voornaam }} {{ item.achternaam }}
-          <select
-            v-model="item.type"
-            @change="onChange(item, index, $event.target.value)"
-          >
-            <option :value="option" v-for="option in types" :key="option">
-              {{ option }}
-            </option>
-          </select>
-        </li>
-      </ul>
-    </div>
-  </Container>
+  <div class="w-full">
+    <Container class="p-4 mt-8">
+      <div class="bg-white rounded-lg shadow-md p-4">
+        <h1 class="text-2xl font-bold mb-4">List of Staff</h1>
+
+        <div class="flex items-start justify-between">
+          <div class="w-1/2 mt-1"> <!-- Added mt-1 for extra margin -->
+            <h2 class="text-lg font-semibold">Naam</h2>
+            <ul>
+              <li
+                v-for="(item, index) in personeelInfo"
+                :key="item.id"
+                class="flex items-center justify-between py-4.9 ">
+                <span class="flex items-center">
+                  <span class="mr-2">{{ item.voornaam }} {{ item.achternaam }}</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="w-1/2">
+            <h2 class="text-lg font-semibold">Type werknemer</h2>
+            <ul>
+              <li
+                v-for="(item, index) in personeelInfo"
+                :key="item.id"
+                class="flex items-center justify-between py-4"
+              >
+                <select
+                  v-model="item.type"
+                  @change="onChange(item, index, ($event.target as HTMLInputElement)?.value)"
+                  class="px-2 py-1 border rounded-lg"
+                >
+                  <option
+                    :value="option"
+                    v-for="option in types"
+                    :key="option"
+                    class="capitalize"
+                  >
+                    {{ option }}
+                  </option>
+                </select>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
 </template>
+
+
+
+
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
