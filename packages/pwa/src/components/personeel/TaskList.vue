@@ -102,5 +102,4 @@ const addTask = () => {
           </div>
         </div>
       </div>
-    </div>
 </template>
