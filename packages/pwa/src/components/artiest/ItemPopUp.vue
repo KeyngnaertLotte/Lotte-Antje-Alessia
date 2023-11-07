@@ -127,35 +127,30 @@ export default {
     class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div
-      class="h-2/5 w-7/8 pl-8 bg-white rounded-md flex flex-col justify-center relative"
+      class="h-1/2 w-7/8 bg-white rounded-md flex justify-center relative"
     >
       <button
         @click="closeModal"
-        class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-start items-start"
+        class="absolute top-[-1rem] right-[-0.5rem] flex flex-row  bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"
       >
         <X class="h-10 w-10 stroke-white" />
       </button>
-      <div class="mb-4">
-        <h1>Voeg een item toe dat je nodig hebt</h1>
-      </div>
-      <div class="px-3 py-2 border border-gray-300 rounded mb-4 mr-8">
+
+      <div class="p-6 flex flex-col  items-center justify-between">
+        <h1 class="text-2xl font-body font-bold text-custom-orange my-6 ">Voeg een item toe</h1>
         <input
           v-model="newItemName"
           type="text"
           placeholder="Item Name"
-          class="outline-none"
+          class="block font-pop w-full border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         />
-      </div>
-      <div class="px-3 py-2 border border-gray-300 rounded mb-4 mr-8">
         <input
           v-model="newItemAantal"
           type="number"
           placeholder="Aantal"
-          class="outline-none"
+          class="block font-pop w-full border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         />
-      </div>
-      <div class="px-3 py-2 pr-24 border border-gray-300 rounded mb-4 mr-8">
-        <select v-model="newItemCategorie" class="text-gray outline-none">
+        <select v-model="newItemCategorie" class="w-full border-b-2 border-custom-darkGreen font-pop p-1 text-xl focus:border-b-4 focus:border-custom-darkGreen  focus:outline-none">
           <option disabled value="" class="text-gray">Categorie</option>
           <option class="text-black">Drank</option>
           <option class="text-black">Eten</option>
@@ -164,16 +159,15 @@ export default {
           <option class="text-black">Licht</option>
           <option class="text-black">Andere</option>
         </select>
-      </div>
 
-      <div class="flex justify-end mr-6">
         <button
           @click="addItem"
-          class="bg-blue-500 text-white px-4 py-2 rounded hover-bg-blue-600 mr-2"
+          class="mt-6 w-2/5 rounded-md bg-custom-orange py-2 font-body font-bold text-2xl text-white flex items-center justify-center gap-4"
         >
           Add
         </button>
       </div>
+        
       <div class="flex justify-end mr-6">
         <p v-if="toegevoegdMessage" >
           {{ toegevoegdMessage }}
