@@ -4,3 +4,6 @@ tailwind.config.cjs
 packages/api/credentials.json
 credentials.json
 packages/pwa/src/utils/token.json
+**/dist/
+packages/api/.env.production.local
+packages/pwa/.env.production.local

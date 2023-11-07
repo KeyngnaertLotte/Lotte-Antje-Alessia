@@ -2,6 +2,7 @@ import type { ADD_PERSONEEL } from '@/graphql/personeel.mutation'; import type {
 ADD_PERSONEEL } from '@/graphql/personeel.mutation'; import type { log } from
 'console';
 <template>
+  <div class="ml-8 mt-4">
   <form @submit.prevent="submitForm" class="w-full mt-10">
     <h1 class="text-4xl font-bold tracking-wider">Create Account</h1>
     <p class="text-neutral-500 mb-4">
@@ -90,6 +91,7 @@ ADD_PERSONEEL } from '@/graphql/personeel.mutation'; import type { log } from
       </RouterLink>
     </div>
   </form>
+</div>
 </template>
 
 <script lang="ts">
