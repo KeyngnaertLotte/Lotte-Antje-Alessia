@@ -65,36 +65,34 @@ const addTask = () => {
     </div>
     <div
       v-if="showAddTaskPopup"
-      class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
     >
-      <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
-        <div class="flex justify-between mb-4 items-center">
-          <h2 class="text-xl font-semibold">Add Task</h2>
-          <button
+      <div class="h-1/2 w-7/8 bg-white rounded-md flex justify-center relative">
+        <button
             @click="closeAddTaskPopup"
-            class="bg-gray-300 text-gray-700 px-2 py-1 rounded hover-bg-gray-400"
-          >
-            <X/>
-          </button>
+            class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"><X class="h-10 w-10 stroke-white"/> </button>
+        <div class="flex flex-col justify-around items-center h-full ">
+          <h1 class="text-3xl font-body font-bold text-custom-orange my-6">Taak toevoegen</h1>
+         
+         <input
+           v-model="newTaskName"
+           type="text"
+           placeholder="Task Name"
+           class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+         />
+         <input
+           v-model="newTaskDeadline"
+           type="date"
+           class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+         />
+           <button
+             @click="addTask"
+             class="mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4 items-center justify-center"
+           >
+             Add
+           </button>
         </div>
-        <input
-          v-model="newTaskName"
-          type="text"
-          placeholder="Task Name"
-          class="w-full px-3 py-2 border border-gray-300 rounded mb-4"
-        />
-        <input
-          v-model="newTaskDeadline"
-          type="date"
-          class="w-full px-3 py-2 border border-gray-300 rounded mb-4"
-        />
-        <div class="flex justify-end">
-          <button
-            @click="addTask"
-            class="bg-blue-500 text-white px-4 py-2 rounded hover-bg-blue-600 mr-2"
-          >
-            Add
-          </button>
+         
           <!-- <button
             @click="closeAddTaskPopup"
             class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover-bg-gray-400"
@@ -104,5 +102,4 @@ const addTask = () => {
         </div>
       </div>
     </div>
-  </div>
 </template>
