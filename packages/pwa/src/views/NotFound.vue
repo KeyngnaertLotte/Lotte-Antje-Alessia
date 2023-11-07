@@ -7,10 +7,9 @@
 </template>
 
 <script lang="ts">
+    console.log('404');
+    export default {
+        name: 'NotFound',
+    }
 </script>
-
-
-<style>
-
-</style>
 

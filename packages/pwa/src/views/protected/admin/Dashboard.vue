@@ -7,7 +7,7 @@
           {{ item.voornaam }} {{ item.achternaam }}
           <select
             v-model="item.type"
-            @change="onChange(item, index, $event.target.value)"
+            @change="onChange(item, index, ($event.target as HTMLInputElement)?.value)"
           >
             <option :value="option" v-for="option in types" :key="option">
               {{ option }}

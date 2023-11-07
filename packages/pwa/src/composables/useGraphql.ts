@@ -12,7 +12,8 @@ import { onError } from '@apollo/client/link/error'
 const { firebaseUser } = useFirebase()
 
 const httpLink = createHttpLink({
-  uri: 'http://[::1]:8000/graphql',
+  // uri: 'http://[::1]:8000/graphql',
+  uri: import.meta.env.VITE_BACKEND_URL,
   credentials: 'same-origin',
 })
 
