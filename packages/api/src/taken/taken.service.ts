@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Taak } from './entities/taken.entity'
 import { FindOneOptions, Repository } from 'typeorm'
 import { ObjectId } from 'mongodb'
+import { Args, Mutation } from '@nestjs/graphql'
 
 @Injectable()
 export class TakenService {
@@ -24,7 +25,7 @@ export class TakenService {
   }
 
   findAll() {
-    return `This action returns all taken`
+    return this.taakRepository.find()
   }
 
   findOne(id: number) {
@@ -36,7 +37,6 @@ export class TakenService {
   }
 
   update(id: number, updateTakenInput: UpdateTakenInput) {
-    return `This action updates a #${id} taken`
   }
 
   async remove(id: string) {

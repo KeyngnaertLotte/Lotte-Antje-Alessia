@@ -1,16 +1,15 @@
 <template>
-      <CardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4"/>
-      <!-- <CardSm title="uurrooster" /> -->
-      <CardSm title="scanner"  class="col-span-1 row-start-4 row-span-4"/>
-      <task-list />
+      <cardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4"/>
+      <cardSm title="scanner"  class="col-span-1 row-start-4 row-span-4"/>
+      <taskList :takenlijst="personeelInfo"/>
 </template>
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
 import Container from '@/components/generic/Container.vue'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
-import CardSm from '@/components/generic/CardSm.vue'
-import TaskList from '@/components/personeel/TaskList.vue'
+import cardSm from '@/components/generic/CardSm.vue';
+import taskList from '@/components/personeel/TaskList.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import useCustomUser from '@/composables/useCustomUser'
 import useGraphql from '@/composables/useGraphql'
@@ -30,7 +29,7 @@ const uid = customUser.value?.uid
 const personeelInfo = ref<any | null>(null)
 
 export default {
-  components: { Container, CardSm, TaskList, AppHeader },
+  components: { Container, cardSm, taskList, AppHeader },
 
   setup() {
     // const {
