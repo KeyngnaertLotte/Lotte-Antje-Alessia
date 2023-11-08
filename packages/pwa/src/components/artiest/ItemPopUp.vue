@@ -166,7 +166,7 @@ export default {
         >
           Add
         </button>
-        <p v-if="toegevoegdMessage" >
+        <p v-if="toegevoegdMessage">
           {{ toegevoegdMessage }}
         </p>
       </div>

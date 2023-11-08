@@ -47,7 +47,7 @@
         to="/auth/forgot-password"
         class="w-[90%] font-pop mt-1 inline-block rounded text-md text-custom-darkGreen hover:underline focus:outline-none "
       >
-        Forgot password?
+        Passwoord vergeten
       </RouterLink>
     </div>
       </div>
