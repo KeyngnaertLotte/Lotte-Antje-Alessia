@@ -7,18 +7,20 @@
         </div>
     </div>
 
-    <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-between ">
-    <h1 class="text-5xl font-body font-bold text-custom-orange mt-6">Registreer </h1>
-    <p class="text-neutral-500 mb-4">
-      Maak hier een account aan.
-    </p>
+    <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-around ">
+      <div class="flex flex-col items-center justify-center">
+        <h1 class="text-5xl font-body font-bold text-custom-orange mt-6">Registreer </h1>
+        <p class="text-neutral-500 mb-4">
+          Maak hier een account aan.
+        </p>
+      </div>
 
     <!-- <div v-if="errorMessage">
       <p class="text-red-600">{{ errorMessage}}</p>
     </div> -->
   
     <div class="mt-6 w-full">
-      <div class="w-full flex justify-center">
+      <div class="w-full flex justify-center mb-8">
       <!-- <label
         for="nickname"
         class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
@@ -29,59 +31,61 @@
         type="text"
         name="nickname"
         id="nickname"
-        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
-        v-model="newUser.name"
+        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        v-model="newUser.name" placeholder="Gebruikersnaam"
         />
     </div>
 
-    <div class="mt-6">
-      <label
+    <div class="w-full flex justify-center mb-8">
+      <!-- <label
         for="email"
         class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
       >
         Email address
-      </label>
+      </label> -->
       <input
         type="email"
         name="email"
         id="email"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-        v-model="newUser.email"
+        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        v-model="newUser.email" placeholder="Email adres"
       />
     </div>
 
-    <div class="mt-6">
-      <label
+    <div class="w-full flex justify-center">
+      <!-- <label
         for="password"
         class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
       >
         Password
-      </label>
+      </label> -->
       <input
         type="password"
         name="password"
         id="password"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-        v-model="newUser.password"
+        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        v-model="newUser.password" placeholder="Wachtwoord"
         />
     </div>
     </div>
 
     
-
-    <button
-      class="mt-6 w-full rounded-md border-2 border-blue-500 bg-blue-500 py-2 px-4 font-semibold text-white hover:bg-blue-600 focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
+    <div class="w-full flex flex-col items-center justify-center">
+      <button
+    class="mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white "
     >
       Register
     </button>
     <div class="flex justify-center">
       <RouterLink
-        class="mt-3 inline-block rounded text-center text-sm text-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
+        class="mt-1 font-pop inline-block rounded text-center text-md text-custom-darkGreen focus:outline-none focus-visible:ring-2 "
         to="/auth/login"
       >
         Already have an account?
       </RouterLink>
     </div>
+    </div>
+   
   </div>
   </form>
 </template>
