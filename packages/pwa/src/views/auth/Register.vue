@@ -9,7 +9,7 @@
 
     <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-around ">
       <div class="flex flex-col items-center justify-center">
-        <h1 class="text-5xl font-body font-bold text-custom-orange mt-6">Registreer </h1>
+        <h1 class="text-5xl font-body font-bold text-custom-orange">Registreer </h1>
         <p class="text-neutral-500 mb-4">
           Maak hier een account aan.
         </p>
