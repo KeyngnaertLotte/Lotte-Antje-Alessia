@@ -77,7 +77,7 @@ const addTask = () => {
          <input
            v-model="newTaskName"
            type="text"
-           placeholder="Task Name"
+           placeholder="Taak naam"
            class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
          />
          <input
@@ -89,7 +89,7 @@ const addTask = () => {
              @click="addTask"
              class="mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4 items-center justify-center"
            >
-             Add
+             Voeg toe
            </button>
         </div>
          
