@@ -141,7 +141,7 @@ export default {
         <input
           v-model="newItemName"
           type="text"
-          placeholder="Item Name"
+          placeholder="Naam item"
           class="block font-pop w-full border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         />
         <input
@@ -150,8 +150,8 @@ export default {
           placeholder="Aantal"
           class="block font-pop w-full border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         />
-        <select v-model="newItemCategorie" class="w-full border-b-2 border-custom-darkGreen font-pop p-1 text-xl focus:border-b-4 focus:border-custom-darkGreen  focus:outline-none">
-          <option disabled value="" class="text-gray">Categorie</option>
+        <select v-model="newItemCategorie" class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none">
+          <option disabled value="" class="text-gray ">Categorie</option>
           <option class="text-black">Drank</option>
           <option class="text-black">Eten</option>
           <option class="text-black">Geluid</option>
@@ -164,7 +164,7 @@ export default {
           @click="addItem"
           class="mt-6 w-full rounded-md bg-custom-orange py-2 font-body font-bold text-2xl text-white flex items-center justify-center gap-4"
         >
-          Add
+          Voeg toe
         </button>
         <p v-if="toegevoegdMessage">
           {{ toegevoegdMessage }}
