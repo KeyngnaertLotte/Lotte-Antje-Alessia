@@ -11,8 +11,8 @@
       <p class="text-red-600">{{ error.message }}</p>
     </div> -->
 
-    <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-between ">
-      <h1 class="text-5xl font-body font-bold text-custom-orange my-6">Log in</h1>
+    <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-around ">
+      <h1 class="text-5xl font-body font-bold text-custom-orange">Log in</h1>
       <div class="mt-6 w-full">
       <div class="w-full flex justify-center">
         <!-- <label
@@ -26,7 +26,7 @@
         name="email"
         id="email"
         class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
-        v-model="loginCredentials.email"
+        v-model="loginCredentials.email" placeholder="Email adres"
       />
     </div>
     <div class="w-full flex flex-col justify-center items-center m-t-4">
@@ -41,13 +41,13 @@
         name="password"
         id="password"
         class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
-        v-model="loginCredentials.password"
+        v-model="loginCredentials.password" placeholder="Wachtwoord"
       />
       <RouterLink
         to="/auth/forgot-password"
         class="w-[90%] font-pop mt-1 inline-block rounded text-md text-custom-darkGreen hover:underline focus:outline-none "
       >
-        Forgot password?
+        Passwoord vergeten
       </RouterLink>
     </div>
       </div>
@@ -91,8 +91,8 @@ export default {
 
     // Logic
     const loginCredentials = ref({
-      email: 'artiest@gmail.com',
-      password: '123456',
+      email: '',
+      password: '',
     })
     const error = ref<AuthError | null>(null)
 
