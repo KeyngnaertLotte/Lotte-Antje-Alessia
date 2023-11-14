@@ -10,7 +10,7 @@ export class TakenResolver {
   constructor(private readonly takenService: TakenService) {}
 
   @Mutation(() => Taak)
-  createTaken(@Args('createTakenInput') createTakenInput: CreateTakenInput) {
+  createTaak(@Args('createTakenInput') createTakenInput: CreateTakenInput) {
     return this.takenService.create(createTakenInput)
   }
 

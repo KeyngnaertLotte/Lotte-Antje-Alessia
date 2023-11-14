@@ -29,12 +29,6 @@ export class PersoneelService {
   // taak
   async AddTaakToPersoneel(uid: string, createTaakInput: CreateTaakInput) {
     const currentPersoneel = await this.findOneByUid(uid)
-    const updatePersoneel = new Personeel()
-
-    updatePersoneel.uid = currentPersoneel.uid
-    updatePersoneel.voornaam = currentPersoneel.voornaam
-    updatePersoneel.achternaam = currentPersoneel.achternaam
-    updatePersoneel.type = currentPersoneel.type
 
     const newTaak = new Takenlijst()
     newTaak.plaats = createTaakInput.plaats
@@ -43,9 +37,12 @@ export class PersoneelService {
     newTaak.deadline = createTaakInput.deadline
     newTaak.category = createTaakInput.categorie
 
-    updatePersoneel.takenlijst = [...currentPersoneel.takenlijst, newTaak]
+    currentPersoneel.takenlijst = [
+      ...currentPersoneel.takenlijst,
+      newTaak,
+    ]
 
-    return this.personeelRepository.save(updatePersoneel)
+    return this.personeelRepository.save(currentPersoneel)
   }
 
   async UpdateType(uid: string, type: string) {
