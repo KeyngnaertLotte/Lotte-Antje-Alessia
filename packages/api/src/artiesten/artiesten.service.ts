@@ -53,6 +53,7 @@ export class ArtiestenService {
       newbenodigdheden.aantal = materiaal.aantal
       newbenodigdheden.categorie = materiaal.categorie
       newbenodigdheden.podium = currentArtiest.podium
+      newbenodigdheden.deadline = materiaal.deadline
 
       currentArtiest.benodigdheden = [
         ...currentArtiest.benodigdheden,
@@ -65,6 +66,7 @@ export class ArtiestenService {
     newTaak.aantal = materiaal.aantal
     newTaak.category = materiaal.categorie
     newTaak.plaats = currentArtiest.podium
+    newTaak.deadline = materiaal.deadline
 
     const categorie = materiaal.categorie.toLocaleLowerCase()
     let type
