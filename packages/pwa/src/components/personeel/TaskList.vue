@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import { PlusCircle, X } from 'lucide-vue-next'
+import { useMutation } from '@vue/apollo-composable'
+import { CREATE_TASK } from '@/graphql/taak.mutation'
 
 const props = defineProps({
   takenlijst: {
@@ -8,10 +10,18 @@ const props = defineProps({
   },
 })
 
+const {mutate: createTask} = useMutation(CREATE_TASK)
+
 const newTaskName = ref('')
+const newTaskPlaats = ref('')
+const newTaskAantal = ref<number>(1);
 const newTaskDeadline = ref('')
+const newTaskCategory = ref('')
+const newTaskType = ref('')
 
 const showAddTaskPopup = ref(false)
+
+const toegevoegdMessage = ref('')
 
 const openAddTaskPopup = () => {
   showAddTaskPopup.value = true
@@ -21,28 +31,69 @@ const closeAddTaskPopup = () => {
   showAddTaskPopup.value = false
 }
 
+// const addTask = () => {
+//   if (newTaskName.value && newTaskDeadline.value) {
+//     const newTask = {
+//       naam: newTaskName.value,
+//       deadline: newTaskDeadline.value,
+//       plaats: newTaskPlaats.value,
+//       type: newTaskType.value,
+//       categorie: newTaskCategory.value,
+//       aantal: newTaskAantal.value,
+//     }
+//     newTaskName.value = ''
+//     newTaskPlaats.value = ''
+//     newTaskType.value = ''
+//     newTaskCategory.value = ''
+//     newTaskAantal.value = 1
+//     newTaskDeadline.value = ''
+//     showAddTaskPopup.value = false
+
+//     const instance = getCurrentInstance()
+//     if (instance) {
+//       instance.emit('task-added', newTask)
+//     }
+//   }
+// }
+
 const addTask = () => {
-  if (newTaskName.value && newTaskDeadline.value) {
-    const newTask = {
-      naam: newTaskName.value,
-      deadline: newTaskDeadline.value,
-    }
-    newTaskName.value = ''
-    newTaskDeadline.value = ''
+  if (newTaskName.value && newTaskDeadline.value && newTaskPlaats.value && newTaskType.value && newTaskCategory.value && newTaskAantal.value) {
     showAddTaskPopup.value = false
+
+    createTask({
+      createTakenInput: {
+        naam: newTaskName.value,
+        deadline: newTaskDeadline.value,
+        plaats: newTaskPlaats.value,
+        type: newTaskType.value,
+        category: newTaskCategory.value,
+        aantal: newTaskAantal.value,
+      }
+    }).then(graphqlresult => {
+      console.log(graphqlresult)
+      toegevoegdMessage.value = 'Taak toegevoegd!'
+
+      newTaskName.value = ''
+      newTaskPlaats.value = ''
+      newTaskType.value = ''
+      newTaskCategory.value = ''
+      newTaskAantal.value = 1
+      newTaskDeadline.value = ''
+    })
 
     const instance = getCurrentInstance()
     if (instance) {
-      instance.emit('task-added', newTask)
+      instance.emit('task-added')
     }
   }
+}
+
+const validateAantalInput = () => {
+  newTaskAantal.value = Math.min(100, Math.max(1, newTaskAantal.value))
 }
 </script>
 
 <template>
-  <!-- <div
-    class="bg-white shadow-md p-4 rounded-2xl col-span-2 row-span-16 mx-4"
-  > -->
   <div class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4">
     <div class="flex items-center justify-between">
       <h1 class="font-bold text-xl">Takenlijst</h1>
@@ -85,9 +136,56 @@ const addTask = () => {
             placeholder="Taak naam"
             class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
           />
+          <select
+            v-model="newTaskPlaats"
+            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none"
+          >
+            <option disabled value="" class="text-gray">Plaats</option>
+            <option class="text-black">Lotte</option>
+            <option class="text-black">Antje</option>
+            <option class="text-black">Aléssia</option>
+            <option class="text-black">Bar</option>
+            <option class="text-black">Toiletten</option>
+            <option class="text-black">Backstage</option>
+            <option class="text-black">Andere</option>
+          </select>
+          <select
+            v-model="newTaskType"
+            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none"
+          >
+            <option disabled value="" class="text-gray">Type</option>
+            <option class="text-black">Podium - licht</option>
+            <option class="text-black">Podium - geluid</option>
+            <option class="text-black">Bar - eten</option>
+            <option class="text-black">bar - drank</option>
+            <option class="text-black">Allround</option>
+            <option class="text-black">Kuisen</option>
+            <option class="text-black">Aanvulling</option>
+            <option class="text-black">Loges</option>
+          </select>
+          <select
+            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none"
+            v-model="newTaskCategory"
+          >
+            <option disabled value="" class="text-gray">Categorie</option>
+            <option class="text-black">Drank</option>
+            <option class="text-black">Eten</option>
+            <option class="text-black">Geluid</option>
+            <option class="text-black">Instrument</option>
+            <option class="text-black">Licht</option>
+            <option class="text-black">Andere</option>
+          </select>
+          <input
+            v-model="newTaskAantal"
+            type="number"
+            max="100"
+            min="1"
+            @input="validateAantalInput"
+            class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+          />
           <input
             v-model="newTaskDeadline"
-            type="date"
+            type="time"
             class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
           />
           <button
