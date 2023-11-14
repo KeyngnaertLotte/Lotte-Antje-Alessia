@@ -37,11 +37,6 @@ export default {
     console.log(newItemDeadline.value)
     const addItem = () => {
       if (newItemName.value && newItemAantal.value && newItemCategorie.value) {
-        const newItem = {
-          naam: newItemName.value,
-          aantal: newItemAantal.value,
-          categorie: newItemCategorie.value,
-        }
         showAddItemPopup.value = false
 
         // console.log(newItemDeadline.value)
@@ -54,18 +49,23 @@ export default {
             deadline: newItemDeadline.value,
           },
           uid: uid,
-        }).then(graphqlresult => {
-          console.log('🎉 new item created in our database')
-          console.log(graphqlresult)
-          // Update the message after the item is added
-          toegevoegdMessage.value = 'Item toegevoegd!'
-
-          // You can also reset the input fields if needed
-          newItemName.value = ''
-          newItemAantal.value = ''
-          newItemCategorie.value = ''
-          newItemDeadline.value = ''
         })
+          .then(graphqlresult => {
+            console.log('🎉 new item created in our database')
+            console.log(graphqlresult)
+            // Update the message after the item is added
+            toegevoegdMessage.value = 'Item toegevoegd!'
+
+            // You can also reset the input fields if needed
+            newItemName.value = ''
+            newItemAantal.value = ''
+            newItemCategorie.value = ''
+            newItemDeadline.value = ''
+          })
+          .catch(error => {
+            console.error('Error creating item:', error)
+            toegevoegdMessage.value = error.message
+          })
       }
     }
 
@@ -111,11 +111,6 @@ export default {
           placeholder="Aantal"
           class="block font-pop w-full border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         />
-        <input
-          v-model="newItemDeadline"
-          type="time"
-          class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
-        />
 
         <select
           v-model="newItemCategorie"
@@ -130,13 +125,25 @@ export default {
           <option class="text-black">Andere</option>
         </select>
 
+        <input
+          v-model="newItemDeadline"
+          type="time"
+          class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        />
+
         <button
           @click="addItem"
           class="mt-6 w-full rounded-md bg-custom-orange py-2 font-body font-bold text-2xl text-white flex items-center justify-center gap-4"
         >
           Voeg toe
         </button>
-        <p v-if="toegevoegdMessage">
+        <p
+          v-if="toegevoegdMessage"
+          :class="[
+            { 'text-black': toegevoegdMessage === 'Item toegevoegd!' },
+            'text-red',
+          ]"
+        >
           {{ toegevoegdMessage }}
         </p>
       </div>
