@@ -42,7 +42,7 @@ const addTask = () => {
 <template>
   <div
     class="bg-white shadow-md  p-4 rounded-2xl col-span-2 row-span-16 mx-4"
-    v-for="taak in takenlijst"
+    
   >
     <div class="flex items-center justify-between">
       <h1 class="font-bold text-xl">Takenlijst</h1>
@@ -50,7 +50,7 @@ const addTask = () => {
         <PlusCircle class="stroke-custom-blue" />
       </button>
     </div>
-    <div class="mt-3">
+    <div class="mt-3" v-for="taak in takenlijst">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-2">
         <div class="flex items-center col-span-4">
           <input
