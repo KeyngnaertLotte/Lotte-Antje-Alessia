@@ -4,6 +4,7 @@ import { UpdateUserInput } from './dto/update-user.input'
 import { Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Role, User } from './entities/user.entity'
+import { CreateUserAdminInput } from './dto/create-user-admin.input'
 
 @Injectable()
 export class UsersService {
@@ -12,25 +13,26 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  create(uid: string, createUserInput: CreateUserInput) {
+  create(createUserInput: CreateUserInput) {
     // return new Error('This action adds a new user')
     const user = new User()
-    user.uid = uid
+    user.uid = createUserInput.uid
     user.locale = createUserInput.locale ?? 'nl'
     user.role = Role.BEZOEKER
     user.naam = createUserInput.naam
     return this.userRepository.save(user)
   }
 
-  createAdmin(createUserInput: CreateUserInput) {
+  createAdmin(createUserAdminInput: CreateUserAdminInput) {
     // return new Error('This action adds a new user')
 
-    const tempRole: Role = createUserInput.role.toLocaleUpperCase() as Role
+    const tempRole: Role = createUserAdminInput.role.toLocaleUpperCase() as Role
     const user = new User()
-    user.uid = createUserInput.uid
-    user.locale = createUserInput.locale ?? 'nl'
+    user.uid = createUserAdminInput.uid
+    user.locale = createUserAdminInput.locale ?? 'nl'
     user.role = tempRole ?? Role.BEZOEKER
-    user.naam = createUserInput.naam
+    // tempRole ?? 
+    user.naam = createUserAdminInput.naam
     return this.userRepository.save(user)
   }
 

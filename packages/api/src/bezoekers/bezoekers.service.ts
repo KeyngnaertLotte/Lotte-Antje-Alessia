@@ -21,6 +21,7 @@ export class BezoekersService {
     b.naam = createBezoekerInput.naam;
     b.saldo =  0;
     b.favoartiest = [];
+    b.transacties = [];
     
 
     return this.bezoekerRepository.save(b);
