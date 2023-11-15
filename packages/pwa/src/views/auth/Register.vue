@@ -146,7 +146,7 @@ export default {
               console.log('🎉 new bezoeker created in our database')
               console.log(graphqlresult)
               //redirect to the home page
-              push({ path: '/bezoeker' })
+              push({ path: '/bezoeker/dashboard' })
             }).catch((error) => {
               errorMessage.value = error.message
             })
