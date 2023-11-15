@@ -17,6 +17,7 @@ export class PersoneelResolver {
   constructor(private readonly personeelService: PersoneelService) {}
 
   // create personeel
+  @UseGuards(FirebaseGuard)
   @Mutation(() => Personeel)
   createPersoneel(
     @Args('createPersoneelInput') createPersoneelInput: CreatePersoneelInput,
@@ -25,6 +26,7 @@ export class PersoneelResolver {
   }
 
   // create takenlijst
+  @UseGuards(FirebaseGuard)
   @Mutation(() => Personeel, { name: 'createTaakInput' })
   createTaakInput(
     @Args('createTaakInput')
@@ -34,6 +36,7 @@ export class PersoneelResolver {
     return this.personeelService.AddTaakToPersoneel(uid, createTaakInput)
   }
 
+  @UseGuards(FirebaseGuard)
   @Mutation(() => Personeel, { name: 'updateType' })
   UpdateType(
     @Args('updateTypeInput')
@@ -45,6 +48,7 @@ export class PersoneelResolver {
 
   // get all personeel
   // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Query(() => [Personeel], { name: 'personeel' })
   findAll(@FirebaseUser() currentUser: UserRecord) {
     console.log(currentUser)
@@ -52,12 +56,14 @@ export class PersoneelResolver {
   }
 
   // get one personeelslid
+  @UseGuards(FirebaseGuard)
   @Query(() => Personeel, { name: 'personeelLid', nullable: true })
   findOneById(@Args('id') id: string): Promise<Personeel> {
     return this.personeelService.findOneById(id)
   }
 
   // get one by uid
+  @UseGuards(FirebaseGuard)
   @Query(() => Personeel, { name: 'personeelByUid' })
   findOneByUid(
     @Args('uid', { type: () => String }) uid: string,
