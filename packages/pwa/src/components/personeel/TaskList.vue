@@ -10,16 +10,17 @@ const props = defineProps({
   },
 })
 
-const {mutate: createTask} = useMutation(CREATE_TASK)
+const { mutate: createTask } = useMutation(CREATE_TASK)
 
 const newTaskName = ref('')
 const newTaskPlaats = ref('')
-const newTaskAantal = ref<number>(1);
+const newTaskAantal = ref<number>(1)
 const newTaskDeadline = ref('')
 const newTaskCategory = ref('')
 const newTaskType = ref('')
 
 const showAddTaskPopup = ref(false)
+const showMessageCreated = ref(false)
 
 const toegevoegdMessage = ref('')
 
@@ -31,33 +32,19 @@ const closeAddTaskPopup = () => {
   showAddTaskPopup.value = false
 }
 
-// const addTask = () => {
-//   if (newTaskName.value && newTaskDeadline.value) {
-//     const newTask = {
-//       naam: newTaskName.value,
-//       deadline: newTaskDeadline.value,
-//       plaats: newTaskPlaats.value,
-//       type: newTaskType.value,
-//       categorie: newTaskCategory.value,
-//       aantal: newTaskAantal.value,
-//     }
-//     newTaskName.value = ''
-//     newTaskPlaats.value = ''
-//     newTaskType.value = ''
-//     newTaskCategory.value = ''
-//     newTaskAantal.value = 1
-//     newTaskDeadline.value = ''
-//     showAddTaskPopup.value = false
-
-//     const instance = getCurrentInstance()
-//     if (instance) {
-//       instance.emit('task-added', newTask)
-//     }
-//   }
-// }
+const hideMessage = () => {
+  showMessageCreated.value = false
+}
 
 const addTask = () => {
-  if (newTaskName.value && newTaskDeadline.value && newTaskPlaats.value && newTaskType.value && newTaskCategory.value && newTaskAantal.value) {
+  if (
+    newTaskName.value &&
+    newTaskDeadline.value &&
+    newTaskPlaats.value &&
+    newTaskType.value &&
+    newTaskCategory.value &&
+    newTaskAantal.value
+  ) {
     showAddTaskPopup.value = false
 
     createTask({
@@ -68,7 +55,7 @@ const addTask = () => {
         type: newTaskType.value,
         category: newTaskCategory.value,
         aantal: newTaskAantal.value,
-      }
+      },
     }).then(graphqlresult => {
       console.log(graphqlresult)
       toegevoegdMessage.value = 'Taak toegevoegd!'
@@ -85,6 +72,9 @@ const addTask = () => {
     if (instance) {
       instance.emit('task-added')
     }
+
+    showMessageCreated.value = true
+    setTimeout(hideMessage, 5000)
   }
 }
 
@@ -195,6 +185,18 @@ const validateAantalInput = () => {
             Voeg toe
           </button>
         </div>
+      </div>
+    </div>
+    <div
+      class="fixed z-1 row-span-2 left-0 top-auto w-full h-fit flex justify-center items-center"
+    >
+      <div class="flex justify-center items-center">
+        <p
+          v-if="showMessageCreated == true"
+          class="bg-[#777DA7] text-white rounded-md p-3 opacity-85 shadow-sm"
+        >
+          Taak toegevoegd!
+        </p>
       </div>
     </div>
   </div>
