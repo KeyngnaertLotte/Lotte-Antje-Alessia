@@ -3,8 +3,9 @@
     class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4"
     v-if="takenInfo"
   >
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col items-start">
       <h1 class="font-bold text-xl">Alle open taken</h1>
+      <h2 class="font-bold text-sm text-gray-600">Claim hier je taak</h2>
     </div>
     <div class="mt-3" v-for="taken in takenInfo">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-1" v-for="taak in taken">
