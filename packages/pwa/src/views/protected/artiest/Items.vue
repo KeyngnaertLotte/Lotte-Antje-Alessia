@@ -1,177 +1,200 @@
-<!-- <script lang="ts">
-import { ref } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
-import Container from '@/components/generic/Container.vue'
-import { GET_Artiest_By_Uid } from '@/graphql/artiest.query'
-import useCustomUser from '@/composables/useCustomUser'
-
-const { customUser } = useCustomUser()
-const uid = customUser.value?.uid
-const Benodigdheden = ref<any | null>(null)
-
-// function sortItemsByCategory(items: any) {
-//   const categories = [
-//     'Drank',
-//     'Eten',
-//     'Geluid',
-//     'Instrument',
-//     'Licht',
-//     'Andere',
-//   ]
-//   const sortedItems: any[] = []
-
-//   // Initialize an empty object for each category
-//   const categoryMap: any = {}
-//   categories.forEach(category => {
-//     categoryMap[category] = { categorie: category, items: [] }
-//   })
-
-//   // Sort the items into their respective categories
-//   items.forEach((item: any) => {
-//     if (categories.includes(item.categorie)) {
-//       categoryMap[item.categorie].items.push({
-//         naam: item.naam,
-//         aantal: item.aantal,
-//       })
-//     }
-//   })
-
-//   // Convert the category objects into an array and return
-//   categories.forEach(category => {
-//     sortedItems.push(categoryMap[category])
-//   })
-
-//   return sortedItems
-// }
-
-export default {
-  components: {
-    Container,
-  },
-  setup() {
-    const getBezoekerInfo = async () => {
-      console.log('uid:', uid)
-      try {
-        const { onResult } = await useQuery(GET_Artiest_By_Uid, { uid })
-        onResult(result => {
-          if (result.data) {
-            console.log('Data:', result.data.artiestByUid.benodigdheden)
-            Benodigdheden.value = result.data.artiestByUid.benodigdheden
-            console.log('Items:', Benodigdheden.value)
-          }
-        })
-      } catch (error) {
-        console.error('Error fetching bezoeker info:', error)
-      }
-    }
-
-    getBezoekerInfo()
-
-    console.log('Items:', Benodigdheden)
-
-    return { customUser, Benodigdheden }
-  },
-}
-</script>
-
-<template></template> -->
-
 <template>
-  <div class="m-8">
-    <div v-if="BenodigdhedenByCategory">
-      <div v-for="category in Object.keys(BenodigdhedenByCategory)" :key="category" class="mb-6">
-        <div
-          @click="toggleCategory(category)"
-          class="cursor-pointer text-3xl font-bold flex items-center mb-2"
+  <div class="mt-24">
+    <div v-if="MateriaalByCategorie">
+      <div
+        v-for="categorie in Object.keys(MateriaalByCategorie)"
+        :key="categorie"
+      >
+        <button
+          @click="toggleShow(categorie)"
+          class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
         >
-          <div class="flex items-center">
-            <lucide-icon-chevron-down
-              class="w-6 h-6 transform"
-              :class="{ 'rotate-180': openCategories.includes(category) }"
-            />
-            <span class="ml-2">{{ category }}</span>
+          <p>{{ categorie }}</p>
+          <ChevronDown class="stroke-custom-brown" />
+        </button>
+
+        <transition name="slide-fade">
+          <div v-if="isShow(categorie)">
+            <div
+              v-for="item in MateriaalByCategorie[categorie]"
+              :key="categorie"
+            >
+              <div
+                v-if="item.categorie === categorie"
+                class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full"
+              >
+                <p>{{ item.item }}</p>
+                <button @click="minusButtonClicked(item)">
+                  <MinusIcon class="stroke-custom-brown" />
+                </button>
+                <p>{{ aantal[item.item] }}</p>
+                <button @click="plusButtonClicked(item)">
+                  <plus-icon class="stroke-custom-brown" />
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-        <ul v-if="openCategories.includes(category)" class="mt-4 ml-8">
-          <li
-            v-for="item in BenodigdhedenByCategory[category]"
-            :key="item.item"
-            class="flex justify-between items-center mt-2"
-          >
-            <span class="text-2xl">{{ item.item.toLowerCase() }}</span>
-            <span class="text-2xl">{{ item.aantal }}</span>
-          </li>
-        </ul>
+        </transition>
       </div>
     </div>
-    <div v-else>
-      <p class="text-2xl font-semibold mt-8">Loading...</p>
-    </div>
+    <button @click="submit" class="ml-6 mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white">submit</button>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, computed } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import Container from '@/components/generic/Container.vue'
-import { GET_Artiest_By_Uid } from '@/graphql/artiest.query'
+import { ChevronDown, MinusIcon, PlusIcon } from 'lucide-vue-next'
+import { GET_MATERIAAL } from '@/graphql/materiaal.query'
+import { useMutation } from '@vue/apollo-composable'
+import { CREATE_ITEM } from '@/graphql/artiest.mutation'
 import useCustomUser from '@/composables/useCustomUser'
-import { defineComponent } from 'vue'
-import * as LucideIcons from 'lucide-vue-next'
+
+type ShowState = { [key: string]: boolean }
 
 const { customUser } = useCustomUser()
 const uid = customUser.value?.uid
-const Benodigdheden = ref<any | null>(null)
+
+const { mutate: createItem } = useMutation(CREATE_ITEM)
+const materiaalInfo = ref<any | null>(null)
+// const aantal[item] = ref<number>(0)
+const aantal = ref<Record<string, number>>({})
+
+interface ItemType {
+  item: string
+  categorie: string
+  aantal: number
+}
 
 export default {
-  components: {
-    Container,
-    LucideIconChevronDown: LucideIcons.ChevronDown,
-  },
-  data() {
-    return {
-      openCategories: [] as string[], // Store open categories
-    }
-  },
-  props: {
-    BenodigdhedenByCategory: Object, // Assuming this is a prop you're passing
-  },
-  methods: {
-    toggleCategory(category: string) {
-      if (this.openCategories.includes(category)) {
-        // If the category is already open, close it
-        this.openCategories = this.openCategories.filter(c => c !== category)
-      } else {
-        // If the category is closed, open it
-        this.openCategories.push(category)
-      }
-    },
-  },
+  components: { ChevronDown, MinusIcon, PlusIcon },
   setup() {
-    const { onResult } = useQuery(GET_Artiest_By_Uid, { uid })
+    const showState = ref<ShowState>({})
+    const { onResult } = useQuery(GET_MATERIAAL)
+
+    const toggleShow = (category: string) => {
+      showState.value[category] = !showState.value[category]
+    }
+
+    const isShow = (category: string) => {
+      return showState.value[category] || false
+    }
+
+    const minusButtonClicked = (item: any) => {
+      console.log(item, aantal)
+      aantal.value[item.item] = aantal.value[item.item] - 1
+    }
+
+    const plusButtonClicked = (item: any) => {
+      console.log(item, aantal)
+      aantal.value[item.item] = aantal.value[item.item] + 1
+    }
+
+    const submit = () => {
+      console.log('submit')
+      console.log(aantal)
+      console.log(aantal.value)
+      // for (const item in aantal.value) {
+      //   console.log(item)
+      //   console.log(aantal.value[item])
+      //   createItem({
+      //     createBenodigdhedenInput: {
+      //       item: item,
+      //       aantal: aantal.value[item],
+      //       categorie: ,
+      //       deadline: newItemDeadline.value,
+      //     },
+      //     uid: uid,
+      //   })
+      //     .then(graphqlresult => {
+      //       console.log('🎉 new item created in our database')
+      //       console.log(graphqlresult)
+      //     })
+      //     .catch(error => {
+      //       console.error('Error creating item:', error)
+      //     })
+      // }
+
+      for (const item in aantal.value) {
+        console.log(item)
+        console.log(aantal.value[item])
+
+        const categoryItem = materiaalInfo.value.materiaal.find(
+          (materiaalItem: ItemType) => materiaalItem.item === item,
+        )
+
+        const category: string | undefined = categoryItem?.categorie
+
+        if (aantal.value[item] !== 0) {
+          createItem({
+            createBenodigdhedenInput: {
+              item: item,
+              aantal: aantal.value[item],
+              categorie: category,
+              deadline: '',
+            },
+            uid: uid,
+          })
+            .then(graphqlresult => {
+              console.log('🎉 new item created in our database')
+              console.log(graphqlresult)
+            })
+            .catch(error => {
+              console.error('Error creating item:', error)
+            })
+        }
+      }
+    }
 
     onResult(result => {
       if (result.data) {
-        Benodigdheden.value = result.data.artiestByUid.benodigdheden
+        materiaalInfo.value = result.data
       }
     })
 
-    const BenodigdhedenByCategory = computed(() => {
-      if (Benodigdheden.value) {
+    const MateriaalByCategorie = computed(() => {
+      if (materiaalInfo.value) {
         const categorizedItems: { [key: string]: any[] } = {}
-        Benodigdheden.value.forEach((item: any) => {
+        materiaalInfo.value.materiaal.forEach((item: any) => {
           const category = item.categorie
           if (!categorizedItems[category]) {
             categorizedItems[category] = []
           }
           categorizedItems[category].push(item)
+          aantal.value[item.item] = 0
         })
+        console.log('categorizedItems: ', categorizedItems)
         return categorizedItems
       }
       return null
     })
 
-    return { customUser, BenodigdhedenByCategory }
+    return {
+      toggleShow,
+      isShow,
+      MateriaalByCategorie,
+      materiaalInfo,
+      aantal,
+      minusButtonClicked,
+      plusButtonClicked,
+      submit,
+    }
   },
 }
 </script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+</style>

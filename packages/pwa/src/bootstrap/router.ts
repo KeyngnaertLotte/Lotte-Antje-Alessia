@@ -51,7 +51,7 @@ const router = createRouter({
         {
           path: 'items',
           component: () => import('../views/protected/artiest/Items.vue'),
-        }
+        },
       ],
     },
 
@@ -83,7 +83,11 @@ const router = createRouter({
         {
           path: 'account-aanmaken',
           component: () => import('../views/protected/admin/AddAccount.vue'),
-        }
+        },
+        {
+          path: 'lijst-accounts',
+          component: () => import('../views/protected/admin/listAccounts.vue'),
+        },
       ],
     },
 
@@ -120,8 +124,6 @@ router.beforeEach(async (to, from, next) => {
   const role = customUser.value?.role.toLowerCase()
   // console.log('inlog rol: ', role)
   // console.log(to.meta.allowedRole)
-
-  
 
   if (to.meta.shouldBeAuthenticated && !firebaseUser.value) {
     next({ path: '/auth/login' })
