@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateTakenInput } from './dto/create-taken.input'
 import { UpdateTakenInput } from './dto/update-taken.input'
+import { DeleteTakenInput } from './dto/delete-taken.input'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Taak } from './entities/taken.entity'
 import { FindOneOptions, Repository } from 'typeorm'
@@ -39,18 +40,13 @@ export class TakenService {
   update(id: number, updateTakenInput: UpdateTakenInput) {
   }
 
-  async remove(id: string) {
-    // check if taak exists
-    const taakObj = await this.findOneById(id)
-    if (!taakObj) throw new Error('Taak niet gevonden')
-    else {
-      console.log('taakObj', taakObj)
-
-      this.taakRepository.remove(taakObj)
-
-      return taakObj
-    }
-  }
+  // async delete(id: number, deleteTakenInput: DeleteTakenInput) {
+  //   const taak = await this.taakRepository.findOne(id)
+  //   if (!taak) {
+  //     throw new NotFoundException(`Taak met id ${id} niet gevonden`)
+  //   }
+  //   return this.taakRepository.remove(taak)
+  // }
 
   saveAll(taken: Taak[]) {
     return this.taakRepository.save(taken)
