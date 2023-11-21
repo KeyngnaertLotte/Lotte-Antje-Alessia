@@ -121,6 +121,8 @@ router.beforeEach(async (to, from, next) => {
   // console.log('inlog rol: ', role)
   // console.log(to.meta.allowedRole)
 
+  
+
   if (to.meta.shouldBeAuthenticated && !firebaseUser.value) {
     next({ path: '/auth/login' })
   }
