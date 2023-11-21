@@ -21,6 +21,8 @@ export class Materiaal {
   @Field()
   @Column()
   aantal: number;
+
+  
   
   // @Column()
   // @Field(() => [Itemlijst])

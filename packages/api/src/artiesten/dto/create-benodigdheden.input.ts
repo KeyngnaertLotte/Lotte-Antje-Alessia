@@ -10,4 +10,7 @@ export class CreateBenodigdhedenInput {
 
   @Field()
   aantal: number
+
+  @Field()
+  deadline: string
 }

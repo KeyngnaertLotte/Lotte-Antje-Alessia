@@ -5,8 +5,7 @@ export const ADD_BEZOEKER = gql`
     createBezoeker(createBezoekerInput: $createBezoekerInput) {
       id
       uid
-      saldo
-      favoartiest
+      naam
     }
   }
   `
