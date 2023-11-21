@@ -46,7 +46,7 @@ export class UsersResolver {
 
   @UseGuards(FirebaseGuard)
   @Query(() => User, { name: 'userByUid' })
-  findOneByUid(@Args('uid', { type: () => String }) uid: string) {
+  findOneByUid(@Args('string', { type: () => String }) uid: string) {
     return this.usersService.findOneByUid(uid)
   }
 
