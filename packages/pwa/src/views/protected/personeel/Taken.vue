@@ -1,7 +1,10 @@
 <template>
-  <div class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4" v-if="takenInfo">
+  <div
+    class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4"
+    v-if="takenInfo"
+  >
     <div class="flex items-center justify-between">
-      <h1 class="font-bold text-xl">Takenlijst van Podium - licht (Aléssia)</h1>
+      <h1 class="font-bold text-xl">Alle open taken</h1>
     </div>
     <div class="mt-3" v-for="taken in takenInfo">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-1" v-for="taak in taken">
@@ -22,15 +25,12 @@
 <script lang="ts">
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import { ChevronDown } from 'lucide-vue-next'
 import { GET_TAAK_BY_TYPE } from '@/graphql/taak.query'
-
 type ShowState = { [key: string]: boolean }
 
 const takenInfo = ref<any | null>(null)
 
 export default {
-  components: { ChevronDown },
   setup() {
     const showState = ref<ShowState>({})
     const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
