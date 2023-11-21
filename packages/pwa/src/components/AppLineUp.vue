@@ -48,7 +48,7 @@
                 <p class="font-body text-xl text-white leading-none">23:45 - 00:45</p>
             </button>
         </div>
-        <DetailArtiest v-if="isModalOpen" :artist="artist" :modalState="isModalOpen" :isFavorite="isArtistInFavorites" :bezoeker="true" @close-modal="handleCloseModal"/>
+        <DetailArtiest v-if="isModalOpen" :artist="artist" :modalState="isModalOpen" :isBezoeker="isBezoeker" @close-modal="handleCloseModal"/>
     
 </template>
 
@@ -58,6 +58,7 @@ import { ref, computed, type PropType } from 'vue';
 
 const isModalOpen = ref(false);
 const artist = ref('Lotte');
+const isBezoeker = ref(false);
 
 export default {
   props: {
@@ -73,6 +74,15 @@ export default {
     console.log("favorites", props);
 
     function openModal(artistName: string) {
+      const url = window.location.href;
+      console.log(url);
+      // see if url has bezoeker
+      const result = url.includes('bezoeker');
+      console.log(result);
+
+      if (result) {
+        isBezoeker.value = true;
+      }
       isModalOpen.value = true;
       artist.value = artistName;
     }
@@ -91,6 +101,7 @@ export default {
       openModal,
       isArtistInFavorites,
       handleCloseModal,
+      isBezoeker
     };
   },
 };
