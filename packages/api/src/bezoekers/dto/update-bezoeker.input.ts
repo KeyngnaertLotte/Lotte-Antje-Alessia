@@ -13,7 +13,10 @@ export class FavoArtiestInput {
   artiest?: string;
 
   @Field({ nullable: true })
-  time?: string;
+  startTime?: string;
+
+  @Field({ nullable: true })
+  endTime?: string;
 
   @Field({ nullable: true })
   color?: string;
