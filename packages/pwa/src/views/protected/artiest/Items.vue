@@ -1,10 +1,11 @@
 <template>
-  <div class="mt-8 col-span-2 row-span-20 ">
+  <div class="mt-8 col-span-2 row-span-20 flex flex-col items-center">
     <div v-if="MateriaalByCategorie" class="flex flex-col items-center w-full">
       <div
       
         v-for="categorie in Object.keys(MateriaalByCategorie)"
         :key="categorie"
+        class="w-full flex items-center justify-center"
       >
         <button
           @click="toggleShow(categorie)"
@@ -40,7 +41,7 @@
     </div>
     <button
       @click="submit"
-      class="ml-6 mt-6 w-full rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white"
+      class="w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white"
     >
       Submit
     </button>
