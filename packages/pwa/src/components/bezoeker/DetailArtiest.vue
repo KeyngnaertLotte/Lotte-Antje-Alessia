@@ -145,7 +145,24 @@
       }
     });
 
-    const toggleFavorite = () => {
+    
+
+    // Assuming the GraphQL query result is stored in the 'result' variable
+    const { error, result, loading, refetch, onResult } = useQuery(GET_FAVOARTISTS_BY_ID, { uid });
+
+    onResult((result) => {
+    if (result.data) {
+        for (const artiest of result.data.bezoekersFavorite) {
+            console.log(artiest.artiest)
+            const doesIt = artiest.artiest.includes(currentArtist.value.artistName.toUpperCase())
+            console.log(doesIt)
+          if (doesIt) heartColor.value = "w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen"
+          else heartColor.value = "w-10 h-10 fill-none"
+        }
+    }
+  });
+
+  const toggleFavorite = () => {
     //   console.log("before", favorite.value);
       favorite.value = !favorite.value;
     //   console.log(props.artist)
@@ -155,6 +172,7 @@
         .then((graphqlresult) => {
             console.log('🎉 new favoartiest added to Bezoeker');
             console.log(graphqlresult?.data); // Access the returned data
+            refetch()
         })
         .catch((error) => {
             console.error(error)
@@ -165,6 +183,7 @@
             .then((graphqlresult) => {
                 console.log('🎉 favoartiest removed from Bezoeker');
                 console.log(graphqlresult?.data); // Access the returned data
+                refetch()
             })
             .catch((error) => {
                 console.error(error)
@@ -172,19 +191,6 @@
         }
     //   console.log("after", favorite.value);
     };
-
-    // Assuming the GraphQL query result is stored in the 'result' variable
-    const { error, result, loading, refetch, onResult } = useQuery(GET_FAVOARTISTS_BY_ID, { uid });
-
-    onResult((result) => {
-    if (result.data) {
-        for (const artiest of result.data.bezoekersFavorite) {
-          if (artiest.artiest.includes(currentArtist.value.artistName.toUpperCase())) {
-            heartColor.value = "w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen"
-          }
-        }
-    }
-  });
 
 
     
