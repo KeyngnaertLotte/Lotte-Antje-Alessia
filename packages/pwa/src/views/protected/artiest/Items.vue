@@ -1,13 +1,14 @@
 <template>
-  <div class="mt-24">
-    <div v-if="MateriaalByCategorie">
+  <div class="mt-8 col-span-2 row-span-20 ">
+    <div v-if="MateriaalByCategorie" class="flex flex-col items-center w-full">
       <div
+      
         v-for="categorie in Object.keys(MateriaalByCategorie)"
         :key="categorie"
       >
         <button
           @click="toggleShow(categorie)"
-          class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
+          class="my-4 p-2 w-[90%] border-custom-brown border-1 flex justify-between"
         >
           <p>{{ categorie }}</p>
           <ChevronDown class="stroke-custom-brown" />
@@ -17,11 +18,11 @@
           <div v-if="isShow(categorie)">
             <div
               v-for="item in MateriaalByCategorie[categorie]"
-              :key="categorie"
+              :key="item.item"
             >
               <div
                 v-if="item.categorie === categorie"
-                class="m-2 mx-4 mt-0 p-2 flex justify-between min-w-full"
+                class="m-2 mx-4 mt-0 p-2 flex justify-between w-full"
               >
                 <p>{{ item.item }}</p>
                 <button @click="minusButtonClicked(item)">
@@ -37,7 +38,12 @@
         </transition>
       </div>
     </div>
-    <button @click="submit" class="ml-6 mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white">submit</button>
+    <button
+      @click="submit"
+      class="ml-6 mt-6 w-full rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white"
+    >
+      Submit
+    </button>
   </div>
 </template>
 
