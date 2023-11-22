@@ -41,7 +41,7 @@ export class BezoekersResolver {
     return this.bezoekersService.findOneByUid(uid)
   }
 
-  @UseGuards(FirebaseGuard)
+  // @UseGuards(FirebaseGuard)
   @Query(() => [FavArtiest], { name: 'bezoekersFavorite' })
   findFavoArtiestsByUid(
     @Args('uid', { type: () => String }) uid: string,

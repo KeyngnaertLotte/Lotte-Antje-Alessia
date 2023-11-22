@@ -23,6 +23,15 @@
   const uid = customUser.value?.uid;
   const bezoekerInfo = ref<any | null>(null);
   const isModalOpen = ref(false);
+  const { error, result: bezoekerResult, loading, refetch, onResult } =  useQuery(GET_BEZOEKER_BY_UID, { uid });
+
+  onResult((result) => {
+    if (result.data) {
+      console.log('Data:', result.data);
+      bezoekerInfo.value = result.data;  // Update the ref with the fetched data
+      // console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
+    }
+  });
 
   export default {
     components: {
@@ -46,27 +55,9 @@
 
       const handleCloseModal = () => {
         isModalOpen.value = false;
-      }
-  
-      const getBezoekerInfo = async () => {
-          // console.log('uid:', uid);
-        try {
-          const { onResult } = useQuery(GET_BEZOEKER_BY_UID, { uid });
-          onResult((result) => {
-            if (result.data) {
-              console.log('Data:', result.data);
-              bezoekerInfo.value = result.data;  // Update the ref with the fetched data
-              // console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
-            }
-          });
-        } catch (error) {
-          console.error('Error fetching bezoeker info:', error);
-        }
-      };
+      } 
 
-      getBezoekerInfo();  
-
-      return { customUser, getBezoekerInfo, bezoekerInfo, handleDataFromChild, dataFromChild, isModalOpen, uid, handleCloseModal }; 
+      return { customUser, bezoekerInfo, handleDataFromChild, dataFromChild, isModalOpen, uid, handleCloseModal }; 
     },
   };
 </script>

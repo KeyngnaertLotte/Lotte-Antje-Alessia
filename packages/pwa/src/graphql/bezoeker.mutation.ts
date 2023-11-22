@@ -17,7 +17,8 @@ export const ADD_BEZOEKER = gql`
       uid
       favoartiest {
         artiest
-        time
+        startTime
+        endTime
         color
       }
     }
@@ -31,7 +32,8 @@ export const ADD_BEZOEKER = gql`
       uid
       favoartiest {
         artiest
-        time
+        startTime
+        endTime
         color
       }
     }

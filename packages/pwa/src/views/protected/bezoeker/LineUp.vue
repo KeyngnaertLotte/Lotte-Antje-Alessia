@@ -21,35 +21,31 @@
     const uid = customUser.value?.uid;
     const bezoekerInfo = ref<BezoekerInfo>({});
     const bezoekerInfoLoaded = ref(false);
+    const { error, result, loading, refetch, onResult } = useQuery(GET_FAVOARTISTS_BY_ID, { uid });
+
+    onResult((result) => {
+        if (result.data) {
+        console.log('Data:', result.data);
+        bezoekerInfo.value = result.data;
+        bezoekerInfoLoaded.value = true; // Data is now available
+        }
+    });
+
+    onMounted(() => {
+        refetch()
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    });
 
     interface BezoekerInfo {
         bezoekersFavorite?: any[]
     }
-
-    const getBezoekerInfo = async () => {
-    try {
-        const { onResult } = useQuery(GET_FAVOARTISTS_BY_ID, { uid });
-        onResult((result) => {
-        if (result.data) {
-            console.log('Data:', result.data);
-            bezoekerInfo.value = result.data;
-            bezoekerInfoLoaded.value = true; // Data is now available
-        }
-        });
-    } catch (error) {
-        console.error('Error fetching bezoeker info:', error);
-    }
-    };
 
     export default {
     components: {
         AppLineUpVue,
     },
     setup() {
-        onMounted(() => {
-        getBezoekerInfo();
-        });
-        return { getBezoekerInfo, bezoekerInfo, bezoekerInfoLoaded };
+        return { bezoekerInfo, bezoekerInfoLoaded };
     },
     };
 </script>
