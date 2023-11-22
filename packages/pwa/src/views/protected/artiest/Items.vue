@@ -5,11 +5,11 @@
       
         v-for="categorie in Object.keys(MateriaalByCategorie)"
         :key="categorie"
-        class="w-full flex items-center justify-center"
+        class="w-[90%] flex-col items-center justify-center"
       >
         <button
           @click="toggleShow(categorie)"
-          class="my-4 p-2 w-[90%] border-custom-brown border-1 flex justify-between"
+          class="my-4 p-2 w-full border-custom-brown border-1 flex justify-between"
         >
           <p>{{ categorie }}</p>
           <ChevronDown class="stroke-custom-brown" />
@@ -23,7 +23,7 @@
             >
               <div
                 v-if="item.categorie === categorie"
-                class="m-2 mx-4 mt-0 p-2 flex justify-between w-full"
+                class="mx-4 mt-0 p-2 flex justify-between "
               >
                 <p>{{ item.item }}</p>
                 <button @click="minusButtonClicked(item)">
@@ -41,7 +41,7 @@
     </div>
     <button
       @click="submit"
-      class="w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white"
+      class="w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white mt-4"
     >
       Submit
     </button>
