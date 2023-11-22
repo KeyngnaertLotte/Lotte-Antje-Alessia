@@ -31,9 +31,26 @@ export class UsersService {
     user.uid = createUserAdminInput.uid
     user.locale = createUserAdminInput.locale ?? 'nl'
     user.role = tempRole ?? Role.BEZOEKER
-    // tempRole ?? 
+    // tempRole ??
     user.naam = createUserAdminInput.naam
     return this.userRepository.save(user)
+  }
+
+  // getUsersByRole(role: string): Promise<User[]> {
+  //   return this.userRepository.find({ where: { role: role } })
+  // }
+
+  async getUsersArtiestPersoneel(): Promise<User[]> {
+    // const list: User[] = []
+    const artiesten = this.userRepository.find({
+      where: { role: Role.ARTIEST },
+    })
+    const personeel = this.userRepository.find({
+      where: { role: Role.PERSONEEL },
+    })
+    const result = await Promise.all([artiesten, personeel])
+    
+    return result[0].concat(result[1])
   }
 
   findAll() {

@@ -27,7 +27,9 @@ export class UsersResolver {
 
   @UseGuards(FirebaseGuard)
   @Mutation(() => User)
-  createUserAdmin(@Args('createUserAdminInput') createUserAdminInput: CreateUserAdminInput) {
+  createUserAdmin(
+    @Args('createUserAdminInput') createUserAdminInput: CreateUserAdminInput,
+  ) {
     return this.usersService.createAdmin(createUserAdminInput)
   }
 
@@ -36,6 +38,15 @@ export class UsersResolver {
   @Query(() => [User], { name: 'users' })
   findAll() {
     return this.usersService.findAll()
+  }
+
+  @Query(() => [User])
+  findByRole() {
+    // convert role to Role
+
+    // const roleUpdated = role.toLocaleUpperCase() as Role
+
+    return this.usersService.getUsersArtiestPersoneel()
   }
 
   @UseGuards(FirebaseGuard)
@@ -49,6 +60,11 @@ export class UsersResolver {
   findOneByUid(@Args('string', { type: () => String }) uid: string) {
     return this.usersService.findOneByUid(uid)
   }
+
+  // @Query(() => [User], { name: 'usersByRole' })
+  // getByUserRole(@Args('role', { type: () => Role }) role: Role) {
+  //   return this.usersService.getUsersByRole(role)
+  // }
 
   @UseGuards(FirebaseGuard)
   @Mutation(() => User)

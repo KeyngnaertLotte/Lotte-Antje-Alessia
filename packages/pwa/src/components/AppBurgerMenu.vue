@@ -126,6 +126,10 @@ const roleMenuList = [
         name: 'Account aanmaken',
         path: '/admin/account-aanmaken',
         icon: PlusCircle,
+      },
+      {
+        name:'Lijst Accounts',
+        path: '/admin/lijst-accounts',
       }
     ],
   }
