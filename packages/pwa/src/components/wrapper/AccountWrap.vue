@@ -1,6 +1,6 @@
 <template>
       <div :class="['max-h-screen', 'grid', 'grid-cols-2', 'grid-rows-24', 'h-screen', `${bgColorClass}`]">
-          <div class="col-span-2 row-span-3 ">
+          <div class="col-span-2 row-span-3">
               <AppHeader v-if="userName" :naam="userName"/>
           </div>
         <RouterView/>

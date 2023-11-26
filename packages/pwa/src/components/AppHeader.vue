@@ -1,10 +1,13 @@
 <template>
     <AppBurgerMenu v-if="role" :isVisible="isVisible" @toggleVisibility="toggleVisibility" :roleShow="role"/>
-      <div class="absolute top-0 left-0 right-0 px-8 py-6 bg-[#D5573B]">
-          <div class=" text-3xl text-white flex justify-between content-center font-header">
-              <p>Hey <br> {{naam}}!</p>
+      <div class="absolute top-0 left-0 right-0 px-8 py-6 bg-[#D5573B] md:py-5">
+          <div class=" text-3xl text-white flex justify-between content-center font-header md:text-2xl">
+            <div class="flex flex-col md:flex-row">
+                <p>Hey</p>
+                <p class="md:pl-3">{{naam}}!</p>
+            </div>
               <button @click="toggleVisibility">
-                  <AlignJustify class="h-12 w-12 fill-white" />
+                  <AlignJustify class="h-12 w-12 fill-white md:h-8 md:w-8"/>
               </button>
           </div>
       </div>
