@@ -92,6 +92,7 @@ export class ArtiestenService {
     return this.artiestRepository.save(currentArtiest)
   }
 
+
   findAll() {
     return this.artiestRepository.find()
   }
