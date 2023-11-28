@@ -32,28 +32,30 @@ describe('AppController (e2e)', () => {
       .useValue(artiestenServiceMockData)
       .overrideProvider(FirebaseAuthStrategy)
       .useClass(FirebaseAuthStrategyMock)
-      // .overrideProvider(UsersService)
-      // .useValue({
-      //   findAll: () => [
-      //     {
-      //       id: '652c1c9cf2dc02e7bb903c5e',
-      //       uid: '0PIT8EUeuUZvbkxez4HVwKs5GVk1',
-      //       locale: 'nl',
-      //       role: 'USER',
-      //       createdAt: '2023-10-15T17:08:44.542Z',
-      //       updatedAt: '2023-10-15T17:08:44.542Z',
-      //     },
-      //     {
-      //       id: '652c1c9cf2dc02e7bb903c5e',
-      //       uid: 'H4lI64EpZnZTh47tgaTtV8WDubJ2',
-      //       locale: 'nl',
-      //       role: 'ADMIN',
-      //       createdAt: '2023-10-15T17:08:44.542Z',
-      //       updatedAt: '2023-10-15T17:08:44.542Z',
-      //     },
-      //   ],
-      //   findOneByUid: jest.fn(), // we will mock this in the test, so we can return a user with role USER or ADMIN
-      // })
+      .overrideProvider(UsersService)
+      .useValue({
+        findAll: () => [
+          {
+            id: '652c1c9cf2dc02e7bb903c5e',
+            naam: 'test',
+            uid: '0PIT8EUeuUZvbkxez4HVwKs5GVk1',
+            locale: 'nl',
+            role: 'ARTIEST',
+            createdAt: '2023-10-15T17:08:44.542Z',
+            updatedAt: '2023-10-15T17:08:44.542Z',
+          },
+          {
+            id: '652c1c9cf2dc02e7bb903c5e',
+            naam: 'test',
+            uid: 'H4lI64EpZnZTh47tgaTtV8WDubJ2',
+            locale: 'nl',
+            role: 'ADMIN',
+            createdAt: '2023-10-15T17:08:44.542Z',
+            updatedAt: '2023-10-15T17:08:44.542Z',
+          },
+        ],
+        findOneByUid: jest.fn(), // we will mock this in the test, so we can return a user with role USER or ADMIN
+      })
       .compile()
 
     app = moduleFixture.createNestApplication()
@@ -84,69 +86,71 @@ describe('AppController (e2e)', () => {
       })
     })
 
-    // describe('Users', () => {
-    //   it('give Unauthorized when invalid bearer token', () => {
-    //     return request(app.getHttpServer())
-    //       .post(GQL_ENDPOINT)
-    //       .send({
-    //         query: '{ users { id } }',
-    //       })
-    //       .set('Authorization', `Bearer ${dummyInvalidJwtToken}}`)
-    //       .expect(200)
-    //       .expect(res => {
-    //         expect(res.body.errors[0].message).toEqual('Unauthorized')
-    //       })
-    //   })
+    describe('Users', () => {
+      it('give Unauthorized when invalid bearer token', () => {
+        return request(app.getHttpServer())
+          .post(GQL_ENDPOINT)
+          .send({
+            query: '{ users { id } }',
+          })
+          .set('Authorization', `Bearer ${dummyInvalidJwtToken}}`)
+          .expect(200)
+          .expect(res => {
+            expect(res.body.errors[0].message).toEqual('Unauthorized')
+          })
+      })
 
-    //   it('should return all users with valid bearer token, but role USER', () => {
-    //     const usersService = app.get(UsersService)
-    //     jest
-    //       .spyOn(usersService, 'findOneByUid')
-    //       .mockImplementation((uid: string): Promise<User> => {
-    //         const user: User = {
-    //           id: '0PIT8EUeuUZvbkxez4HVwKs5GVk1',
-    //           role: Role.USER, // <--- USER
-    //           uid: uid,
-    //         }
-    //         return Promise.resolve(user)
-    //       })
-    //     return request(app.getHttpServer())
-    //       .post(GQL_ENDPOINT)
-    //       .send({
-    //         query: '{ users { id } }',
-    //       })
-    //       .set('Authorization', `Bearer ${dummyJwtToken}`)
-    //       .expect(200)
-    //       .expect(res => {
-    //         expect(res.body.errors[0].message).toEqual('Forbidden resource')
-    //       })
-    //   })
+      it('should return all users with valid bearer token, but role USER', () => {
+        const usersService = app.get(UsersService)
+        jest
+          .spyOn(usersService, 'findOneByUid')
+          .mockImplementation((uid: string): Promise<User> => {
+            const user: User = {
+              id: '0PIT8EUeuUZvbkxez4HVwKs5GVk1',
+              role: Role.ARTIEST, // <--- USER
+              uid: uid,
+              naam: 'test',
+            }
+            return Promise.resolve(user)
+          })
+        return request(app.getHttpServer())
+          .post(GQL_ENDPOINT)
+          .send({
+            query: '{ users { id } }',
+          })
+          .set('Authorization', `Bearer ${dummyJwtToken}`)
+          .expect(200)
+          .expect(res => {
+            expect(res.body.errors[0].message).toEqual('Forbidden resource')
+          })
+      })
 
-    //   it('should return all users with valid bearer token, but role ADMIN', () => {
-    //     const usersService = app.get(UsersService)
-    //     jest
-    //       .spyOn(usersService, 'findOneByUid')
-    //       .mockImplementation((uid: string): Promise<User> => {
-    //         const user: User = {
-    //           id: '0PIT8EUeuUZvbkxez4HVwKs5GVk1',
-    //           role: Role.ADMIN, // <--- ADMIN
-    //           uid: uid,
-    //         }
-    //         return Promise.resolve(user)
-    //       })
+      it('should return all users with valid bearer token, but role ADMIN', () => {
+        const usersService = app.get(UsersService)
+        jest
+          .spyOn(usersService, 'findOneByUid')
+          .mockImplementation((uid: string): Promise<User> => {
+            const user: User = {
+              id: '0PIT8EUeuUZvbkxez4HVwKs5GVk1',
+              role: Role.ADMIN, // <--- ADMIN
+              uid: uid,
+              naam: 'test',
+            }
+            return Promise.resolve(user)
+          })
 
-    //     return request(app.getHttpServer())
-    //       .post(GQL_ENDPOINT)
-    //       .send({
-    //         query: '{ users { id } }',
-    //       })
-    //       .set('Authorization', `Bearer ${dummyJwtToken}`)
-    //       .expect(200)
-    //       .expect(res => {
-    //         expect(res.body.data.users.length).toBe(2)
-    //       })
-    //   })
-    // })
+        return request(app.getHttpServer())
+          .post(GQL_ENDPOINT)
+          .send({
+            query: '{ users { id } }',
+          })
+          .set('Authorization', `Bearer ${dummyJwtToken}`)
+          .expect(200)
+          .expect(res => {
+            expect(res.body.data.users.length).toBe(2)
+          })
+      })
+    })
   })
 
   afterAll(async () => {
