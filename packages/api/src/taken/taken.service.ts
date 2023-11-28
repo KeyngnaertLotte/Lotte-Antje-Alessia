@@ -14,6 +14,8 @@ export class TakenService {
     @InjectRepository(Taak)
     private readonly taakRepository: Repository<Taak>,
   ) {}
+
+  // CREATE taak
   create(createTakenInput: CreateTakenInput) {
     const t = new Taak()
     t.plaats = createTakenInput.plaats
@@ -25,21 +27,32 @@ export class TakenService {
     return this.taakRepository.save(t)
   }
 
+  // GET alle taken
   findAll() {
     return this.taakRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} taken`
+  // GET taak by id
+  async findOneById(id: string){
+    try {
+      // @ts-ignore
+      return await this.taakRepository.findOne({ _id: new ObjectId(id) })
+    } catch (e) {
+      throw new Error('Taak niet gevonden')
+    }
   }
 
+  // GET taak by type, vb. "Podium - licht (Aléssia)"
   findByType(type: string): Promise<Taak[]> {
-    return this.taakRepository.find({where: { type }})
+    return this.taakRepository.find({ where: { type } })
   }
 
+  // PUT taak by id, werkt nog niet
   update(id: number, updateTakenInput: UpdateTakenInput) {
+
   }
 
+  // DELETE taak by id, werkt nog niet
   // async delete(id: number, deleteTakenInput: DeleteTakenInput) {
   //   const taak = await this.taakRepository.findOne(id)
   //   if (!taak) {
@@ -48,16 +61,8 @@ export class TakenService {
   //   return this.taakRepository.remove(taak)
   // }
 
+  // slaat alle taken op
   saveAll(taken: Taak[]) {
     return this.taakRepository.save(taken)
-  }
-
-  findOneById(id: string): Promise<Taak> {
-    try {
-      // @ts-ignore
-      return this.taakRepository.findOne({ _id: new ObjectId(id) })
-    } catch (e) {
-      throw new Error('Taak niet gevonden')
-    }
   }
 }

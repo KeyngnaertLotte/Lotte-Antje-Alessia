@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb'
 export class Taak {
   @ObjectIdColumn()
   @Field(() => ID)
-  id: number
+  id: string
 
   @Field()
   @Column()
@@ -16,6 +16,10 @@ export class Taak {
   @Field()
   @Column()
   type: string
+
+  @Field()
+  @Column()
+  status: boolean
 
   @Field()
   @Column()

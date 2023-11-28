@@ -27,11 +27,11 @@ export class PersoneelResolver {
   // create takenlijst
   @Mutation(() => Personeel, { name: 'createTaakInput' })
   createTaakInput(
-    @Args('createTaakInput')
-    createTaakInput: CreateTaakInput,
+    @Args('taakId')
+    taakId: string,
     @Args('uid') uid: string,
   ) {
-    return this.personeelService.AddTaakToPersoneel(uid, createTaakInput)
+    return this.personeelService.AddTaak(uid, taakId)
   }
 
   @Mutation(() => Personeel, { name: 'updateType' })

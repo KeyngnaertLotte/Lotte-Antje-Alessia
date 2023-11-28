@@ -6,6 +6,8 @@ import { Repository } from 'typeorm'
 import { Personeel } from './entities/personeel.entity'
 import { ObjectId } from 'mongodb'
 import { Takenlijst } from './entities/task.entity'
+import { Taak } from 'src/taken/entities/taken.entity'
+import { TakenService } from 'src/taken/taken.service'
 import { CreateTaakInput } from './dto/create-taak.input'
 
 @Injectable()
@@ -13,38 +15,56 @@ export class PersoneelService {
   constructor(
     @InjectRepository(Personeel)
     private readonly personeelRepository: Repository<Personeel>,
+    private readonly takenService: TakenService,
   ) {}
 
+  // CREATE personeel
   create(createPersoneelInput: CreatePersoneelInput): Promise<Personeel> {
     const p = new Personeel()
     p.uid = createPersoneelInput.uid
     p.voornaam = createPersoneelInput.voornaam
     p.achternaam = createPersoneelInput.achternaam
-    p.takenlijst = []
     p.type = createPersoneelInput.type
+    p.takenlijst = []
 
     return this.personeelRepository.save(p)
   }
 
-  // taak
-  async AddTaakToPersoneel(uid: string, createTaakInput: CreateTaakInput) {
-    const currentPersoneel = await this.findOneByUid(uid)
+  // PUT takenlijst personeel met taak
+  async AddTaak(uid: string, taakId: string) {
+    // const currentPersoneel = await this.findOneById(id)
+    const personeel = await this.personeelRepository.findOne({
+      where: {uid},
+    })
 
-    const newTaak = new Takenlijst()
-    newTaak.plaats = createTaakInput.plaats
-    newTaak.naam = createTaakInput.naam
-    newTaak.aantal = createTaakInput.aantal
-    newTaak.deadline = createTaakInput.deadline
-    newTaak.category = createTaakInput.categorie
+    if (!personeel) {
+      throw new Error('Personeel niet gevonden')
+    }
 
-    currentPersoneel.takenlijst = [
-      ...currentPersoneel.takenlijst,
-      newTaak,
+    // zoek taak op
+    const taak = await this.takenService.findOneById(taakId)
+    console.log("taak ", taak)
+
+    // push taak naar takenlijst
+    const newTaak = new CreateTaakInput()
+    newTaak.id = taak.id
+    newTaak.plaats = taak.plaats
+    newTaak.type = taak.type
+    newTaak.naam = taak.naam
+    newTaak.category = taak.category
+    newTaak.aantal = taak.aantal
+    newTaak.deadline = taak.deadline
+    newTaak.status = taak.status
+
+    personeel.takenlijst = [
+      ...personeel.takenlijst,
+      newTaak
     ]
 
-    return this.personeelRepository.save(currentPersoneel)
+    return this.personeelRepository.save(personeel)
   }
 
+  // PUT type personeel
   async UpdateType(uid: string, type: string) {
     const personeel: Personeel[] = await this.personeelRepository.find({
       where: { uid: uid },
@@ -64,6 +84,22 @@ export class PersoneelService {
 
     return findUpdated[0]
   }
+
+  // 
+  // voegt een bestaande taak bij een personeelslid
+  // async addTaak(personeelId: ObjectId, taak: Takenlijst){
+  //   const personeel = await this.personeelRepository.findOne({
+  //     // @ts-ignore
+  //     _id: new ObjectId(personeelId)
+  //   })
+
+  //   if(!personeel){
+  //     throw new Error('Personeel niet gevonden')
+  //   }
+
+  //   personeel.takenlijst.push(taak)
+  //   return this.personeelRepository.save(personeel)
+  // }
 
   findAll() {
     return this.personeelRepository.find()
