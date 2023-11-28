@@ -1,64 +1,12 @@
 <template>
-  <div class="ml-8 mt-4">
-    <form @submit.prevent="submitForm" class="w-full mt-10">
-      <h1 class="text-4xl font-bold tracking-wider">Create Account</h1>
-      <p class="text-neutral-500 mb-4">
-        Maak hier een account aan.
-      </p>
+    <form @submit.prevent="submitForm" class="col-span-2 row-span-22 m-10 bg-white rounded-lg p-6 flex flex-col justify-between">
+      <h1 class="text-2xl font-bold mb-4 font-body ">Maak een account</h1>
 
       <div v-if="errorMessage">
         <p class="text-red-600">{{ errorMessage }}</p>
       </div>
 
-      <div class="mt-6">
-        <label
-          for="nickname"
-          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
-        >
-          Name
-        </label>
-        <input
-          type="text"
-          name="nickname"
-          id="nickname"
-          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
-          v-model="newUser.name"
-        />
-      </div>
-
-      <div class="mt-6">
-        <label
-          for="email"
-          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
-        >
-          Email address
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-          v-model="newUser.email"
-        />
-      </div>
-
-      <div class="mt-6">
-        <label
-          for="password"
-          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
-        >
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-          v-model="newUser.password"
-        />
-      </div>
-
-      <div class="mt-6">
+      <div class="">
         <label
           for="rol"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
@@ -74,25 +22,100 @@
         </select>
       </div>
 
-      <button
-        class="mt-6 w-full rounded-md border-2 border-blue-500 bg-blue-500 py-2 px-4 font-semibold text-white hover:bg-blue-600 focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
-      >
-        Register
-      </button>
-      <div class="flex justify-center">
-        <RouterLink
-          class="mt-3 inline-block rounded text-center text-sm text-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
-          to="/auth/login"
+      <div v-if="shouldShowArtiestFields" class="">
+        <label
+          for="nickname"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Already have an account?
-        </RouterLink>
+          Artiestennaam
+        </label>
+        <input
+          type="text"
+          name="nickname"
+          id="nickname"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          v-model="newUser.name"
+        />
       </div>
+
+      <div v-if="shouldShowPersoneelFields" class="flex flex-row ">
+        <div class="flex flex-col justify-center items-start w-1/2 mr-4">
+          <label
+          for="voornaam"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Voornaam
+        </label>
+        <input
+          type="text"
+          name="voornaam"
+          id="voornaam"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          v-model="newUser.voornaam"
+        />
+        </div>
+        <div class="flex flex-col justify-center items-start w-1/2 ">
+          <label
+          for="achternaam"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Achternaam
+        </label>
+        <input
+          type="text"
+          name="achternaam"
+          id="achternaam"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          v-model="newUser.achternaam"
+        />
+        </div>
+       
+
+        
+      </div>
+
+      <div class="">
+        <label
+          for="email"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Email address
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
+          v-model="newUser.email"
+        />
+      </div>
+
+      <div class="">
+        <label
+          for="password"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Password
+        </label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
+          v-model="newUser.password"
+        />
+      </div>
+
+      <button
+        class="mt-6 w-1/3 rounded-md border-2 bg-custom-orange self-center py-2 px-4 font-semibold text-white hover:bg-custom-brown focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
+      >
+        Registreer
+      </button>
     </form>
-  </div>
 </template>
 
 <script lang="ts">
-import { ref, reactive, type Ref } from 'vue'
+import { ref, computed, reactive, type Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMutation } from '@vue/apollo-composable'
 
@@ -110,19 +133,28 @@ export default {
     const errorMessage: Ref<string> = ref('')
     const { push } = useRouter()
 
+    const shouldShowArtiestFields = computed(() => newUser.role === 'Artiest')
+    const shouldShowPersoneelFields = computed(
+      () => newUser.role === 'Personeel',
+    )
+
     const newUser = reactive({
       name: '',
+      voornaam: '',
+      achternaam: '',
       email: '',
       password: '',
-      role: '',
+      role: 'Personeel',
     })
 
     const submitForm = () => {
       if (
-        newUser.name === '' ||
+        newUser.role === '' ||
+        (newUser.role === 'artiest' && newUser.name === '') ||
+        (newUser.role === 'personeel' &&
+          (newUser.voornaam === '' || newUser.achternaam === '')) ||
         newUser.email === '' ||
-        newUser.password === '' ||
-        newUser.role === ''
+        newUser.password === ''
       ) {
         errorMessage.value = 'Please fill in all fields.'
         return
@@ -153,8 +185,8 @@ export default {
                 addPersoneel({
                   createPersoneelInput: {
                     uid: newFireBaseUser.uid,
-                    voornaam: newUser.name,
-                    achternaam: '',
+                    voornaam: newUser.voornaam,
+                    achternaam: newUser.achternaam,
                     type: '',
                   },
                 })
@@ -198,6 +230,8 @@ export default {
       errorMessage,
       newUser,
       submitForm,
+      shouldShowArtiestFields,
+      shouldShowPersoneelFields,
     }
   },
 }
