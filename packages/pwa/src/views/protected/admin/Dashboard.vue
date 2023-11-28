@@ -10,8 +10,12 @@
       <div class="flex items-center justify-between mb-4 px-2">
         <h2 class="text-lg font-bold w-1/4">Achternaam</h2>
         <h2 class="text-lg font-bold w-1/4">Voornaam</h2>
-        <select class="text-lg font-bold w-1/4 p-2 rounded-md">
-          <option value="none" selected>Type</option>
+        <select
+          class="text-lg font-bold w-1/4 p-2 rounded-md"
+          @change="filterByType(($event.target as HTMLInputElement)?.value)"
+        >
+          <option value="all" selected>Type</option>
+          <option value="none">Leeg</option>
           <option v-for="option in types" :key="option" :value="option">
             {{ option }}
           </option>
@@ -20,7 +24,7 @@
       </div>
       <div class="overflow-auto max-h-[80%]">
         <div
-          v-for="(item, index) in personeelInfo"
+          v-for="(item, index) in filterPersoneel"
           :key="item.id"
           class="flex items-center justify-between border-b-2 p-2 last:border-b-none"
         >
@@ -43,14 +47,16 @@
         </div>
       </div>
     </div>
-    <div
-      class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md"
-    >
-      <h1 class="text-2xl font-bold font-body ">Bericht</h1>
+    <div class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md">
+      <h1 class="text-2xl font-bold font-body">Bericht</h1>
       <form action="" class="flex flex-col justify-between">
         <div class="flex flex-row w-full my-4">
-          <label for="" class="mr-4 ">Voor: </label>
-          <select name="" id="" class="bg-gray-200 rounded font-pop text-xl focus:outline-none w-3/4 p-1"></select>
+          <label for="" class="mr-4">Voor: </label>
+          <select
+            name=""
+            id=""
+            class="bg-gray-200 rounded font-pop text-xl focus:outline-none w-3/4 p-1"
+          ></select>
         </div>
         <textarea
           placeholder="Typ hier je mededeling"
@@ -58,25 +64,37 @@
           id=""
           cols="50"
           rows="3"
-          class="w-full block font-pop border-2 rounded-md  p-1 focus:outline-none focus:border-4 focus:border-white bg-white"
+          class="w-full block font-pop border-2 rounded-md p-1 focus:outline-none focus:border-4 focus:border-white bg-white"
         ></textarea>
 
-        <button class="py-1 bg-custom-purple text-white my-6 rounded w-1/2 self-end">VERZEND</button>
+        <button
+          class="py-1 bg-custom-purple text-white my-6 rounded w-1/2 self-end"
+        >
+          VERZEND
+        </button>
       </form>
     </div>
-    <div class="row-span-3 col-span-2 bg-white rounded-lg shadow-md p-6  ">
+    <div class="row-span-3 col-span-2 bg-white rounded-lg shadow-md p-6">
       <h1 class="text-2xl font-bold font-body">Voeg taak toe</h1>
       <form action="" class="flex flex-col justify-around w-full h-full">
         <div class="flex flex-row w-full my-4">
-          <label for="" class="mr-4 ">Voor: </label>
-          <select name="" id="" class="bg-gray-200 rounded font-pop text-xl focus:outline-none w-3/4 p-1"></select>
+          <label for="" class="mr-4">Voor: </label>
+          <select
+            name=""
+            id=""
+            class="bg-gray-200 rounded font-pop text-xl focus:outline-none w-3/4 p-1"
+          ></select>
         </div>
         <div class="flex flex-row">
           <label for="" class="mr-4">Taak: </label>
-          <input type="text" class="border-b-2 border-b-black w-3/4">
+          <input type="text" class="border-b-2 border-b-black w-3/4" />
         </div>
 
-        <button class="py-1 bg-custom-orange text-white my-6 rounded w-1/2 self-end">VERZEND</button>
+        <button
+          class="py-1 bg-custom-orange text-white my-6 rounded w-1/2 self-end"
+        >
+          VERZEND
+        </button>
       </form>
     </div>
   </div>
@@ -90,6 +108,9 @@ import { UPDATE_TYPE } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 import { Trash2 } from 'lucide-vue-next'
+
+// const { error, result: bezoekerResult, loading, refetch, onResult } =  useQuery(GET_BEZOEKER_BY_UID, { uid });
+const { error, onResult, refetch } = useQuery(GET_PERSONEEL)
 
 interface Personeel {
   id: string
@@ -109,6 +130,7 @@ interface Takenlijst {
 }
 
 const personeelInfo = ref<any | null>(null)
+const filterPersoneel = ref<any | null>(null)
 
 const types = [
   'Podium - licht',
@@ -121,33 +143,26 @@ const types = [
   'Loges',
 ]
 
+onResult(result => {
+  if (result.data) {
+    const sortedPersoneel = [...result.data.personeel]
+
+    // Sort the array by achternaam
+    sortedPersoneel.sort((a: Personeel, b: Personeel) =>
+      a.achternaam.localeCompare(b.achternaam),
+    )
+
+    // Update personeelInfo with the sorted array
+    personeelInfo.value = sortedPersoneel
+    filterPersoneel.value = sortedPersoneel
+  }
+})
+
 export default {
   // components: { Container },
   components: { Trash2 },
 
   setup() {
-    const getPersoneelInfo = async () => {
-      //   console.log('uid:', uid)
-      try {
-        const { onResult } = useQuery(GET_PERSONEEL)
-        onResult(result => {
-          if (result.data) {
-            const sortedPersoneel = [...result.data.personeel]
-
-            // Sort the array by achternaam
-            sortedPersoneel.sort((a: Personeel, b: Personeel) =>
-              a.achternaam.localeCompare(b.achternaam),
-            )
-
-            // Update personeelInfo with the sorted array
-            personeelInfo.value = sortedPersoneel
-          }
-        })
-      } catch (error) {
-        console.error('Error fetching bezoeker info:', error)
-      }
-    }
-
     const onChange = (item: Personeel, index: number, newValue: string) => {
       const { mutate: updateType } = useMutation(UPDATE_TYPE)
       console.log(
@@ -167,9 +182,21 @@ export default {
         })
     }
 
-    getPersoneelInfo()
+    const filterByType = (value: string) => {
+      console.log('filter by type', value)
+      console.log(
+        'personeelInfo.value',
+        personeelInfo.value)
+      if (value === 'all') filterPersoneel.value = personeelInfo.value
+      else if (value === 'none') filterPersoneel.value = personeelInfo.value.filter(
+        (item: Personeel) => item.type === "",  
+      )
+      else filterPersoneel.value = personeelInfo.value.filter(
+        (item: Personeel) => item.type === value,
+      )
+    }
 
-    return { personeelInfo, onChange, types }
+    return { personeelInfo, onChange, types, filterByType, filterPersoneel }
   },
 }
 </script>
