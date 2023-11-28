@@ -89,6 +89,12 @@ type ShowState = { [key: string]: boolean }
 const { customUser } = useCustomUser()
 const uid = customUser.value?.uid
 
+const {
+  onResult: resultArtiest,
+  refetch,
+  result: artiest,
+} = useQuery(GET_Artiest_By_Uid, { uid })
+
 const { mutate: createItem } = useMutation(CREATE_ITEM)
 const materiaalInfo = ref<any | null>(null)
 // const aantal[item] = ref<number>(0)
@@ -101,11 +107,18 @@ interface ItemType {
   aantal: number
 }
 
+resultArtiest(result => {
+  if (result.data) {
+    console.log('Data:', result.data.artiestByUid.benodigdheden)
+    benodigdheden.value = result.data.artiestByUid.benodigdheden
+  }
+})
+
 export default {
   components: { ChevronDown, MinusIcon, PlusIcon },
   setup() {
     const showState = ref<ShowState>({})
-    const { onResult, refetch } = useQuery(GET_MATERIAAL)
+    const { onResult } = useQuery(GET_MATERIAAL)
 
     const toggleShow = (category: string) => {
       showState.value[category] = !showState.value[category]
@@ -153,7 +166,7 @@ export default {
             .then(graphqlresult => {
               console.log('🎉 new item created in our database')
               console.log(graphqlresult)
-
+              refetch()
               // reset aantal
               aantal.value[item] = 0
             })
@@ -187,22 +200,22 @@ export default {
       return null
     })
 
-    const getBenodigdheden = async () => {
-      console.log('uid:', uid)
-      try {
-        const { onResult } = useQuery(GET_Artiest_By_Uid, { uid })
-        onResult(result => {
-          if (result.data) {
-            console.log('Data:', result.data.artiestByUid.benodigdheden)
-            benodigdheden.value = result.data.artiestByUid.benodigdheden
-          }
-        })
-      } catch (error) {
-        console.error('Error fetching bezoeker info:', error)
-      }
-    }
+    // const getBenodigdheden = async () => {
+    //   console.log('uid:', uid)
+    //   try {
+    //     const { onResult } = useQuery(GET_Artiest_By_Uid, { uid })
+    //     onResult(result => {
+    //       if (result.data) {
+    //         console.log('Data:', result.data.artiestByUid.benodigdheden)
+    //         benodigdheden.value = result.data.artiestByUid.benodigdheden
+    //       }
+    //     })
+    //   } catch (error) {
+    //     console.error('Error fetching bezoeker info:', error)
+    //   }
+    // }
 
-    getBenodigdheden()
+    // getBenodigdheden()
 
     return {
       toggleShow,
