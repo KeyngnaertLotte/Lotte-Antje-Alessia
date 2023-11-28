@@ -61,6 +61,19 @@ export class TakenService {
   //   return this.taakRepository.remove(taak)
   // }
 
+  async remove(id: string) {
+    // check if taak exists
+    const taakObj = await this.findOneById(id)
+    if (!taakObj) throw new Error('Taak niet gevonden')
+    else {
+      console.log('taakObj', taakObj)
+
+      this.taakRepository.remove(taakObj)
+
+      return taakObj
+    }
+  }
+
   // slaat alle taken op
   saveAll(taken: Taak[]) {
     return this.taakRepository.save(taken)
