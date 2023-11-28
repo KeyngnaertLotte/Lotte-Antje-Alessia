@@ -19,7 +19,7 @@ export class Taak {
 
   @Field()
   @Column()
-  status: boolean
+  status: boolean = false
 
   @Field()
   @Column()

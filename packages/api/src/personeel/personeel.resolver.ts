@@ -43,6 +43,16 @@ export class PersoneelResolver {
     return this.personeelService.UpdateType(uid, updateTypeInput)
   }
 
+  // create takenlijst
+  @Mutation(() => Personeel, { name: 'deleteTaakInput' })
+  DeleteTaakInput(
+    @Args('taakId')
+    taakId: string,
+    @Args('uid') uid: string,
+  ) {
+    return this.personeelService.removeTaak(uid, taakId)
+  }
+
   // get all personeel
   // @UseGuards(FirebaseGuard)
   @Query(() => [Personeel], { name: 'personeel' })

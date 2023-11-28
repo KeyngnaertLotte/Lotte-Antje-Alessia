@@ -52,4 +52,10 @@ export class TakenResolver {
   // deleteTaken(@Args('id', { type: () => Int }) id: number) {
   //   return this.takenService.delete(id)
   // }
+
+  // DELETE taak in grote takenlijst
+  @Mutation(() => Taak)
+  removeTaak(@Args('id', { type: () => String }) id: string) {
+    return this.takenService.remove(id)
+  }
 }

@@ -34,7 +34,7 @@ export class PersoneelService {
   async AddTaak(uid: string, taakId: string) {
     // const currentPersoneel = await this.findOneById(id)
     const personeel = await this.personeelRepository.findOne({
-      where: {uid},
+      where: { uid },
     })
 
     if (!personeel) {
@@ -43,7 +43,7 @@ export class PersoneelService {
 
     // zoek taak op
     const taak = await this.takenService.findOneById(taakId)
-    console.log("taak ", taak)
+    console.log('taak ', taak)
 
     // push taak naar takenlijst
     const newTaak = new CreateTaakInput()
@@ -54,12 +54,9 @@ export class PersoneelService {
     newTaak.category = taak.category
     newTaak.aantal = taak.aantal
     newTaak.deadline = taak.deadline
-    newTaak.status = taak.status
+    newTaak.status = true
 
-    personeel.takenlijst = [
-      ...personeel.takenlijst,
-      newTaak
-    ]
+    personeel.takenlijst = [...personeel.takenlijst, newTaak]
 
     return this.personeelRepository.save(personeel)
   }
@@ -85,22 +82,6 @@ export class PersoneelService {
     return findUpdated[0]
   }
 
-  // 
-  // voegt een bestaande taak bij een personeelslid
-  // async addTaak(personeelId: ObjectId, taak: Takenlijst){
-  //   const personeel = await this.personeelRepository.findOne({
-  //     // @ts-ignore
-  //     _id: new ObjectId(personeelId)
-  //   })
-
-  //   if(!personeel){
-  //     throw new Error('Personeel niet gevonden')
-  //   }
-
-  //   personeel.takenlijst.push(taak)
-  //   return this.personeelRepository.save(personeel)
-  // }
-
   findAll() {
     return this.personeelRepository.find()
   }
@@ -120,8 +101,44 @@ export class PersoneelService {
     return `This action updates a #${id} personeel`
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} personeel`
+  // DELETE taak bij personeel en in grote takenlijst
+  async removeTaak(uid: string, taakId: string) {
+    // check if personeel exists
+    const personeelObj = this.findOneByUid(uid)
+    if (!personeelObj) throw new Error('Personeel niet gevonden')
+    else {
+      // check if taak exists
+      const taakObj = this.takenService.findOneById(taakId)
+      if (!taakObj) throw new Error('Taak niet gevonden')
+      else {
+        // delete taak uit takenlijst
+        const personeel = await this.personeelRepository.findOne({
+          where: { uid: uid },
+        })
+
+        const obj = new ObjectId(taakId)
+
+        // Find the index of the item with the given taakId in takenlijst
+        const index = personeel.takenlijst.findIndex(
+          taak => taak.id && String(taak.id) === String(obj),
+        )
+
+        if (index !== -1) {
+          // Remove the item from takenlijst
+          personeel.takenlijst.splice(index, 1)
+
+          console.log('LIJST NA VERWIJDEREN: ', personeel.takenlijst)
+
+          // Save the updated personeel object
+          await this.personeelRepository.save(personeel)
+        }
+
+        // delete taak uit grote takenlijst
+        this.takenService.remove(taakId)
+
+        return personeel
+      }
+    }
   }
 
   saveAll(personeel: Personeel[]) {
