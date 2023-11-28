@@ -1,32 +1,53 @@
 <template>
-    <!-- <Container/> -->
-    <div class="row-start-4 col-span-2 row-span-21 flex items-center justify-center">
-      <div class="bg-white w-10/12 mx-auto p-6 rounded-lg shadow-md">
-  <h1 class="text-3xl font-bold mb-4">Lijst van personeel</h1>
-  <div class="flex items-center justify-between mb-4">
-    <h2 class="text-lg font-bold w-2/5">Naam</h2>
-    <select class="text-lg font-bold w-2/5 p-2 rounded-md">
-      <option value="none" selected>Type</option>
-      <option v-for="option in types" :key="option" :value="option">{{ option }}</option>
-    </select>
-    <p class="w-1/5">Edit</p>
-  </div>
-    <div v-for="(item, index) in personeelInfo" :key="item.id" class="flex items-center justify-between border-b-2 p-2">
-      <p class="w-3/7">{{ item.voornaam }} {{ item.achternaam }}</p>
-      <div class="w-3/7 flex justify-center items-center">
-        <select class="w-1/2 border p-2 rounded-md" v-model="item.type" @change="onChange(item, index, ($event.target as HTMLInputElement)?.value)">
-          <option :value="option" v-for="option in types" :key="option">{{ option }}</option>
+  <!-- <Container/> -->
+  <div
+    class="row-start-4 col-span-2 row-span-21 grid grid-rows-5 grid-cols-5 gap-4 m-4"
+  >
+    <div class="bg-white w-full mx-auto p-6 rounded-lg shadow-md row-span-5 col-span-3 ">
+      <h1 class="text-2xl font-bold mb-4 font-body">Lijst van personeel</h1>
+      <div class="flex items-center justify-between mb-4 px-2">
+        <h2 class="text-lg font-bold w-1/4">Achternaam</h2>
+        <h2 class="text-lg font-bold w-1/4">Voornaam</h2>
+        <select class="text-lg font-bold w-1/4 p-2 rounded-md">
+          <option value="none" selected>Type</option>
+          <option v-for="option in types" :key="option" :value="option">
+            {{ option }}
+          </option>
         </select>
+        <p class="w-1/14 flex justify-end items-center text-lg font-bold"> </p>
       </div>
-      <p class="w-1/7">Edit</p>
+      <div class="overflow-auto max-h-[80%]">
+        <div
+        v-for="(item, index) in personeelInfo"
+        :key="item.id"
+        class="flex items-center justify-between border-b-2 p-2 last:border-b-none"
+      >
+        <p class="w-1/4"> {{ item.achternaam }}</p>
+        <p class="w-1/4">{{ item.voornaam }}</p>
+          <select
+            class="w-1/4 border p-2 rounded-md"
+            v-model="item.type"
+            @change="
+              onChange(item, index, ($event.target as HTMLInputElement)?.value)
+            "
+          >
+            <option :value="option" v-for="option in types" :key="option">
+              {{ option }}
+            </option>
+          </select>
+        <button class="w-1/14 flex justify-center items-center"><Trash2 class=" stroke-1.5"/></button>
+      </div>
+      </div>
+      
     </div>
-</div>
+    <div class="row-span-2 col-span-2 bg-[#D5573B] rounded-lg shadow-md">
+      <h1>Bericht</h1>
     </div>
+    <div class="row-span-3 col-span-2 bg-[#D5573B] rounded-lg shadow-md">
+      <h1>Taken toevoegen</h1>
+    </div>
+  </div>
 </template>
-
-
-
-
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
@@ -35,6 +56,7 @@ import { GET_PERSONEEL } from '@/graphql/personeel.query'
 import { UPDATE_TYPE } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
+import { Trash2 } from 'lucide-vue-next';
 
 interface Personeel {
   id: string
@@ -68,6 +90,7 @@ const types = [
 
 export default {
   // components: { Container },
+  components: { Trash2 },
 
   setup() {
     const getPersoneelInfo = async () => {
@@ -76,8 +99,15 @@ export default {
         const { onResult } = useQuery(GET_PERSONEEL)
         onResult(result => {
           if (result.data) {
-            console.log('Data:', result.data.personeel)
-            personeelInfo.value = result.data.personeel
+            const sortedPersoneel = [...result.data.personeel];
+
+          // Sort the array by achternaam
+          sortedPersoneel.sort((a: Personeel, b: Personeel) =>
+            a.achternaam.localeCompare(b.achternaam)
+          );
+
+          // Update personeelInfo with the sorted array
+          personeelInfo.value = sortedPersoneel;
           }
         })
       } catch (error) {
