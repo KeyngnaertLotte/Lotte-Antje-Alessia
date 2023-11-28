@@ -19,7 +19,6 @@ export class ArtiestenService {
     private readonly artiestRepository: Repository<Artiest>,
     private readonly materiaalService: MateriaalService,
     private readonly takenService: TakenService,
-    private readonly createTakenInput: CreateTakenInput,
   ) {}
 
   async create(createArtiestenInput: CreateArtiestenInput): Promise<Artiest> {
@@ -92,7 +91,6 @@ export class ArtiestenService {
     return this.artiestRepository.save(currentArtiest)
   }
 
-
   findAll() {
     return this.artiestRepository.find()
   }
@@ -108,7 +106,7 @@ export class ArtiestenService {
   }
 
   findOneByUid(uid: string) {
-    return this.artiestRepository.findOneByOrFail({ uid })
+    return this.artiestRepository.findOne({ where: { uid } })
   }
 
   update(id: number, updateArtiestenInput: UpdateArtiestenInput) {
