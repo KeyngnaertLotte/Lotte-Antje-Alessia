@@ -1,24 +1,28 @@
 <template>
-  <div class="mt-8">
-    <table class="min-w-full bg-white border border-gray-300">
-      <thead>
-        <tr>
-          <th class="py-2 px-4 font-semibold">Naam</th>
-          <th class="py-2 px-4 font-semibold">Rol</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(user, index) in data"
+  <div class="col-span-2 rounded-lg bg-white row-span-22 m-5 p-6">
+    <div class="flex flex-row items-center justify-between">
+      
+    <h1 class="text-2xl font-bold mb-4 font-body w-2/3">Alle accounts</h1>
+    <input type="text" name="" id="" placeholder="Zoek naar een naam" class="border-2 border-black p-1 rounded w-1/3">
+    </div>
+    <div class="flex flex-row w-full justify-start items-center mb-4 ">
+      <h2 class="text-lg font-bold w-1/2">Naam</h2>
+      <h2 class="text-lg font-bold w-1/2">Rol</h2>
+    </div>
+    <div class="overflow-auto max-h-[80%] w-full">
+      <div v-for="(user, index) in data"
           :key="index"
           :class="{ 'bg-gray-50': index % 2 === 0 }"
+          class="flex flex-row items-center justify-start border-b-2 p-2 last:border-b-none"
         >
-          <td class="py-2 px-4">{{ user.naam }}</td>
-          <td class="py-2 px-4">{{ user.role }}</td>
-        </tr>
-      </tbody>
-    </table>
+        <p class="w-1/2">{{ user.naam }}</p>
+        <p class="w-1/2">{{ user.role }}</p>
+        
+      </div>
+    </div>
+    
   </div>
+    
 </template>
 
 <script lang="ts">
