@@ -7,11 +7,11 @@
       class="bg-white w-full mx-auto p-6 rounded-lg shadow-md row-span-6 col-span-5"
     >
       <h1 class="text-2xl font-bold mb-4 font-body">Lijst van personeel</h1>
-      <div class="flex items-center justify-between mb-4 px-2">
+      <div class="flex items-center justify-between mb-4 px-2 bg-gray-200">
         <h2 class="text-lg font-bold w-1/4">Achternaam</h2>
         <h2 class="text-lg font-bold w-1/4">Voornaam</h2>
         <select
-          class="text-lg font-bold w-1/4 p-2 rounded-md"
+          class="text-lg font-bold w-1/4 p-2 rounded-md bg-gray-200"
           @change="filterByType(($event.target as HTMLInputElement)?.value)"
         >
           <option value="all" selected>Type</option>
@@ -46,6 +46,7 @@
           </button>
         </div>
       </div>
+      
     </div>
     <div class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md">
       <h1 class="text-2xl font-bold font-body">Bericht</h1>
