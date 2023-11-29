@@ -88,6 +88,10 @@ const router = createRouter({
           path: 'lijst-accounts',
           component: () => import('../views/protected/admin/listAccounts.vue'),
         },
+        {
+          path: 'lijst-taken',
+          component: () => import('../views/protected/admin/allTasks.vue'),
+        }
       ],
     },
 
