@@ -1,7 +1,7 @@
 <template>
       <cardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4"/>
       <cardSm title="scanner"  class="col-span-1 row-start-4 row-span-4"/>
-      <taskList :takenlijst="personeelInfo"/>
+      <taskList :takenlijst="takenlijst"/>
 </template>
 
 <script lang="ts">
@@ -27,6 +27,7 @@ const { apolloClient } = useGraphql()
 provideApolloClient(apolloClient)
 const uid = customUser.value?.uid
 const personeelInfo = ref<any | null>(null)
+const takenlijst = ref<any | null>(null)
 
 export default {
   components: { Container, cardSm, taskList, AppHeader },
@@ -50,6 +51,10 @@ export default {
               'personeelInfo:',
               personeelInfo.value.personeelByUid.achternaam,
             )
+
+            takenlijst.value = personeelInfo.value.personeelByUid.takenlijst
+            console.log('takenlijst:', takenlijst.value)
+
           }
         })
       } catch (error) {
@@ -57,11 +62,13 @@ export default {
       }
     }
 
+
     getPersoneelInfo() // Call the function to fetch the data
     return {
       customUser,
       getPersoneelInfo,
       personeelInfo,
+      takenlijst
       // PersoneelLoading,
       // PersoneelError,
       // PersoneelData,
