@@ -29,11 +29,11 @@ export class PersoneelResolver {
   @UseGuards(FirebaseGuard)
   @Mutation(() => Personeel, { name: 'createTaakInput' })
   createTaakInput(
-    @Args('createTaakInput')
-    createTaakInput: CreateTaakInput,
+    @Args('taakId')
+    taakId: string,
     @Args('uid') uid: string,
   ) {
-    return this.personeelService.AddTaakToPersoneel(uid, createTaakInput)
+    return this.personeelService.AddTaak(uid, taakId)
   }
 
   @UseGuards(FirebaseGuard)
@@ -44,6 +44,16 @@ export class PersoneelResolver {
     @Args('uid') uid: string,
   ) {
     return this.personeelService.UpdateType(uid, updateTypeInput)
+  }
+
+  // create takenlijst
+  @Mutation(() => Personeel, { name: 'deleteTaakInput' })
+  DeleteTaakInput(
+    @Args('taakId')
+    taakId: string,
+    @Args('uid') uid: string,
+  ) {
+    return this.personeelService.removeTaak(uid, taakId)
   }
 
   // get all personeel

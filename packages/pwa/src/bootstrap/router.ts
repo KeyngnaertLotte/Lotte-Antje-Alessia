@@ -68,6 +68,10 @@ const router = createRouter({
           path: 'materiaal',
           component: () => import('../views/protected/personeel/Materiaal.vue'),
         },
+        {
+          path: 'taken',
+          component: () => import('../views/protected/personeel/Taken.vue'),
+        },
       ],
     },
 

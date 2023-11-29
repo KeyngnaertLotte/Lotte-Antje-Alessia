@@ -6,6 +6,8 @@ import { Repository } from 'typeorm'
 import { Personeel } from './entities/personeel.entity'
 import { ObjectId } from 'mongodb'
 import { Takenlijst } from './entities/task.entity'
+import { Taak } from 'src/taken/entities/taken.entity'
+import { TakenService } from 'src/taken/taken.service'
 import { CreateTaakInput } from './dto/create-taak.input'
 
 @Injectable()
@@ -13,41 +15,53 @@ export class PersoneelService {
   constructor(
     @InjectRepository(Personeel)
     private readonly personeelRepository: Repository<Personeel>,
+    private readonly takenService: TakenService,
   ) {}
 
+  // CREATE personeel
   create(createPersoneelInput: CreatePersoneelInput): Promise<Personeel> {
     const p = new Personeel()
     p.uid = createPersoneelInput.uid
     p.voornaam = createPersoneelInput.voornaam
     p.achternaam = createPersoneelInput.achternaam
-    p.takenlijst = []
     p.type = createPersoneelInput.type
+    p.takenlijst = []
 
     return this.personeelRepository.save(p)
   }
 
-  // taak
-  async AddTaakToPersoneel(uid: string, createTaakInput: CreateTaakInput) {
-    const currentPersoneel = await this.findOneByUid(uid)
-    const updatePersoneel = new Personeel()
+  // PUT takenlijst personeel met taak
+  async AddTaak(uid: string, taakId: string) {
+    // const currentPersoneel = await this.findOneById(id)
+    const personeel = await this.personeelRepository.findOne({
+      where: { uid },
+    })
 
-    updatePersoneel.uid = currentPersoneel.uid
-    updatePersoneel.voornaam = currentPersoneel.voornaam
-    updatePersoneel.achternaam = currentPersoneel.achternaam
-    updatePersoneel.type = currentPersoneel.type
+    if (!personeel) {
+      throw new Error('Personeel niet gevonden')
+    }
 
-    const newTaak = new Takenlijst()
-    newTaak.plaats = createTaakInput.plaats
-    newTaak.naam = createTaakInput.naam
-    newTaak.aantal = createTaakInput.aantal
-    newTaak.deadline = createTaakInput.deadline
-    newTaak.category = createTaakInput.categorie
+    // zoek taak op
+    const taak = await this.takenService.findOneById(taakId)
+    console.log('taak ', taak)
 
-    updatePersoneel.takenlijst = [...currentPersoneel.takenlijst, newTaak]
+    // push taak naar takenlijst
+    const newTaak = new CreateTaakInput()
+    newTaak.id = taak.id
+    newTaak.plaats = taak.plaats
+    newTaak.type = taak.type
+    newTaak.naam = taak.naam
+    newTaak.category = taak.category
+    newTaak.aantal = taak.aantal
+    newTaak.deadline = taak.deadline
+    newTaak.status = true
 
-    return this.personeelRepository.save(updatePersoneel)
+    personeel.takenlijst = [...personeel.takenlijst, newTaak]
+
+    return this.personeelRepository.save(personeel)
   }
 
+  // PUT type personeel
   async UpdateType(uid: string, type: string) {
     const personeel: Personeel[] = await this.personeelRepository.find({
       where: { uid: uid },
@@ -87,8 +101,44 @@ export class PersoneelService {
     return `This action updates a #${id} personeel`
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} personeel`
+  // DELETE taak bij personeel en in grote takenlijst
+  async removeTaak(uid: string, taakId: string) {
+    // check if personeel exists
+    const personeelObj = this.findOneByUid(uid)
+    if (!personeelObj) throw new Error('Personeel niet gevonden')
+    else {
+      // check if taak exists
+      const taakObj = this.takenService.findOneById(taakId)
+      if (!taakObj) throw new Error('Taak niet gevonden')
+      else {
+        // delete taak uit takenlijst
+        const personeel = await this.personeelRepository.findOne({
+          where: { uid: uid },
+        })
+
+        const obj = new ObjectId(taakId)
+
+        // Find the index of the item with the given taakId in takenlijst
+        const index = personeel.takenlijst.findIndex(
+          taak => taak.id && String(taak.id) === String(obj),
+        )
+
+        if (index !== -1) {
+          // Remove the item from takenlijst
+          personeel.takenlijst.splice(index, 1)
+
+          console.log('LIJST NA VERWIJDEREN: ', personeel.takenlijst)
+
+          // Save the updated personeel object
+          await this.personeelRepository.save(personeel)
+        }
+
+        // delete taak uit grote takenlijst
+        this.takenService.remove(taakId)
+
+        return personeel
+      }
+    }
   }
 
   saveAll(personeel: Personeel[]) {
