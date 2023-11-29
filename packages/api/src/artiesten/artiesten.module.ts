@@ -9,7 +9,6 @@ import { TakenModule } from 'src/taken/taken.module'
 @Module({
   imports: [TypeOrmModule.forFeature([Artiest]), MateriaalModule, TakenModule],
   providers: [ArtiestenResolver, ArtiestenService],
-
   exports: [ArtiestenService],
 })
 export class ArtiestenModule {}

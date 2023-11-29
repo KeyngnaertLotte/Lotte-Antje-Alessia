@@ -19,54 +19,14 @@ export class ArtiestenService {
     private readonly artiestRepository: Repository<Artiest>,
     private readonly materiaalService: MateriaalService,
     private readonly takenService: TakenService,
-    private readonly createTakenInput: CreateTakenInput,
   ) {}
 
   async create(createArtiestenInput: CreateArtiestenInput): Promise<Artiest> {
     const a = new Artiest()
     a.naam = createArtiestenInput.naam
     a.uid = createArtiestenInput.uid
-    // a.podium = createArtiestenInput.podium
-
-    // const newBenodigdheden: Benodigdheden = {
-    //   item: 'Gitaar',
-    //   aantal: 1,
-    //   categorie: 'Instrumenten',
-    //   podium: createArtiestenInput.podium,
-    // }
-
-    // a.benodigdheden = [newBenodigdheden]
-    // a.uid = createArtiestenInput.uid
-    // // a.agenda = []
-    // // return 'This action adds a new artiesten'
-
-    // const newAgendaItem: Agenda = {
-    //   taak: 'Opzetten',
-    //   podium: createArtiestenInput.podium,
-    //   tijd: '18:00 - 19:00',
-    // }
-
-    // const newAgendaItem2: Agenda = {
-    //   taak: 'Soundcheck',
-    //   podium: createArtiestenInput.podium,
-    //   tijd: '19:00 - 19:30',
-    // }
-
-    // a.agenda = [newAgendaItem, newAgendaItem2]
-
     return this.artiestRepository.save(a)
   }
-
-  // async addAgendaItem(uid: string, agendaItem: Agenda) {
-  //   const artiest = await this.findOneByUid(uid)
-
-  //   if (!artiest) {
-  //     throw new Error('artiest not found')
-  //   }
-
-  //   artiest.agenda.push(agendaItem)
-  //   return this.artiestRepository.save(artiest)
-  // }
 
   async AddMateriaaltoArtiest(
     uid: string,
@@ -77,62 +37,56 @@ export class ArtiestenService {
     // check in materiaal
     await this.materiaalService.checkMateriaal(materiaal.item, materiaal.aantal)
 
-    // await this.materiaalService.UpdateAantalaftrekken(
-    //   materiaal.item,
-    //   materiaal.aantal,
-    // )
+    const benodigdheden = currentArtiest.benodigdheden
+    const itemExists = await benodigdheden.find(
+      b => b.item.toLocaleLowerCase() === materiaal.item.toLocaleLowerCase(),
+    )
 
-    const newbenodigdheden = new Benodigdheden()
-    newbenodigdheden.item = materiaal.item
-    newbenodigdheden.aantal = materiaal.aantal
-    newbenodigdheden.categorie = materiaal.categorie
-    newbenodigdheden.podium = currentArtiest.podium
+    if (itemExists) {
+      console.log('item exists', itemExists)
+      itemExists.aantal = itemExists.aantal + materiaal.aantal
+      // return this.artiestRepository.save(currentArtiest)
+    } else {
+      const newbenodigdheden = new Benodigdheden()
+      newbenodigdheden.item = materiaal.item
+      newbenodigdheden.aantal = materiaal.aantal
+      newbenodigdheden.categorie = materiaal.categorie
+      newbenodigdheden.podium = currentArtiest.podium
+      newbenodigdheden.deadline = materiaal.deadline
 
-    currentArtiest.benodigdheden = [
-      ...currentArtiest.benodigdheden,
-      newbenodigdheden,
-    ]
+      currentArtiest.benodigdheden = [
+        ...currentArtiest.benodigdheden,
+        newbenodigdheden,
+      ]
+    }
 
     const newTaak = new CreateTakenInput()
     newTaak.naam = materiaal.item
     newTaak.aantal = materiaal.aantal
     newTaak.category = materiaal.categorie
     newTaak.plaats = currentArtiest.podium
-
-    console.log(materiaal.categorie)
+    newTaak.deadline = materiaal.deadline
 
     const categorie = materiaal.categorie.toLocaleLowerCase()
-    console.log(categorie)
-
     let type
 
     if (categorie === 'drank' || categorie === 'eten') {
       type = 'loges'
     }
     if (categorie === 'geluid' || categorie === 'instrument') {
-      console.log('instrument')
       type = 'Podium - geluid'
     }
     if (categorie === 'licht') {
       type = 'Podium - licht'
     }
     if (categorie === 'andere') {
-      console.log('andere')
       type = 'Allround'
     }
-    // } else {
-    //   newTaak.type = 'Allround'
-    // }
-
-    console.log(type)
-
     newTaak.type = type
 
-    console.log('newTaak: ', newTaak)
+    console.log(newTaak)
 
     await this.takenService.create(newTaak)
-
-    // newTaak.type =
 
     return this.artiestRepository.save(currentArtiest)
   }
@@ -152,10 +106,8 @@ export class ArtiestenService {
   }
 
   findOneByUid(uid: string) {
-    return this.artiestRepository.findOneByOrFail({ uid })
+    return this.artiestRepository.findOne({ where: { uid } })
   }
-
-
 
   update(id: number, updateArtiestenInput: UpdateArtiestenInput) {
     return `This action updates a #${id} artiesten`

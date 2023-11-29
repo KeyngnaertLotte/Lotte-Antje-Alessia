@@ -51,7 +51,7 @@ const router = createRouter({
         {
           path: 'items',
           component: () => import('../views/protected/artiest/Items.vue'),
-        }
+        },
       ],
     },
 
@@ -87,7 +87,11 @@ const router = createRouter({
         {
           path: 'account-aanmaken',
           component: () => import('../views/protected/admin/AddAccount.vue'),
-        }
+        },
+        {
+          path: 'lijst-accounts',
+          component: () => import('../views/protected/admin/listAccounts.vue'),
+        },
       ],
     },
 

@@ -13,8 +13,8 @@ export const ADD_USER = gql`
 `
 
 export const ADD_USER_ADMIN = gql`
-  mutation createUSerAdmin($createUserInput: CreateUserInput!) {
-    createUserAdmin(createUserInput: $createUserInput) {
+  mutation createUserAdmin($createUserAdminInput: CreateUserAdminInput!) {
+    createUserAdmin(createUserAdminInput: $createUserAdminInput) {
       id
       uid
       locale

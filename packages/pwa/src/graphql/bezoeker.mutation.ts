@@ -5,8 +5,7 @@ export const ADD_BEZOEKER = gql`
     createBezoeker(createBezoekerInput: $createBezoekerInput) {
       id
       uid
-      saldo
-      favoartiest
+      naam
     }
   }
   `
@@ -18,7 +17,8 @@ export const ADD_BEZOEKER = gql`
       uid
       favoartiest {
         artiest
-        time
+        startTime
+        endTime
         color
       }
     }
@@ -32,7 +32,8 @@ export const ADD_BEZOEKER = gql`
       uid
       favoartiest {
         artiest
-        time
+        startTime
+        endTime
         color
       }
     }

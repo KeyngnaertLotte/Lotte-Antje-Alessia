@@ -7,7 +7,10 @@ export class FavArtiest {
   artiest: string;
 
   @Field()
-  time: string;
+  startTime: string;
+
+  @Field()
+  endTime: string;
 
   @Field()
   color: string;

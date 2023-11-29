@@ -1,101 +1,126 @@
-import type { ADD_PERSONEEL } from '@/graphql/personeel.mutation'; import type {
-ADD_PERSONEEL } from '@/graphql/personeel.mutation'; import type { log } from
-'console';
 <template>
   <div class="ml-8 mt-4">
-  <form @submit.prevent="submitForm" class="w-full mt-10">
-    <h1 class="text-4xl font-bold tracking-wider">Create Account</h1>
-    <p class="text-neutral-500 mb-4">
-      Create an account and keep track of your birds.
-    </p>
+    <form @submit.prevent="submitForm" class="w-full mt-10">
+      <h1 class="text-4xl font-bold tracking-wider">Create Account</h1>
+      <p class="text-neutral-500 mb-4">Maak hier een account aan.</p>
 
-    <div v-if="errorMessage">
-      <p class="text-red-600">{{ errorMessage }}</p>
-    </div>
+      <div v-if="errorMessage">
+        <p class="text-red-600">{{ errorMessage }}</p>
+      </div>
 
-    <div class="mt-6">
-      <label
-        for="nickname"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
-      >
-        Name
-      </label>
-      <input
-        type="text"
-        name="nickname"
-        id="nickname"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
-        v-model="newUser.name"
-      />
-    </div>
+      <div class="mt-6">
+        <label
+          for="rol"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Rol
+        </label>
+        <select
+          v-model="newUser.role"
+          class="w-full px-3 py-2 border border-gray-300 rounded mb-4"
+        >
+          <option>Personeel</option>
+          <option>Artiest</option>
+        </select>
+      </div>
 
-    <div class="mt-6">
-      <label
-        for="email"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
-      >
-        Email address
-      </label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-        v-model="newUser.email"
-      />
-    </div>
+      <div v-if="shouldShowArtiestFields" class="mt-6">
+        <label
+          for="nickname"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Artiestennaam
+        </label>
+        <input
+          type="text"
+          name="nickname"
+          id="nickname"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          v-model="newUser.name"
+        />
+      </div>
 
-    <div class="mt-6">
-      <label
-        for="password"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
-      >
-        Password
-      </label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
-        v-model="newUser.password"
-      />
-    </div>
+      <div v-if="shouldShowPersoneelFields" class="mt-6">
+        <label
+          for="voornaam"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Voornaam
+        </label>
+        <input
+          type="text"
+          name="voornaam"
+          id="voornaam"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          v-model="newUser.voornaam"
+        />
 
-    <div class="mt-6">
-      <label
-        for="rol"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
-      >
-        Rol
-      </label>
-      <select
-        v-model="newUser.role"
-        class="w-full px-3 py-2 border border-gray-300 rounded mb-4"
-      >
-        <option>Personeel</option>
-        <option>Artiest</option>
-      </select>
-    </div>
+        <label
+          for="achternaam"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Achternaam
+        </label>
+        <input
+          type="text"
+          name="achternaam"
+          id="achternaam"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          v-model="newUser.achternaam"
+        />
+      </div>
 
-    <button
-      class="mt-6 w-full rounded-md border-2 border-blue-500 bg-blue-500 py-2 px-4 font-semibold text-white hover:bg-blue-600 focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
-    >
-      Register
-    </button>
-    <div class="flex justify-center">
-      <RouterLink
-        class="mt-3 inline-block rounded text-center text-sm text-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
-        to="/auth/login"
+      <div class="mt-6">
+        <label
+          for="email"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Email address
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
+          v-model="newUser.email"
+        />
+      </div>
+
+      <div class="mt-6">
+        <label
+          for="password"
+          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        >
+          Password
+        </label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
+          v-model="newUser.password"
+        />
+      </div>
+
+      <button
+        class="mt-6 w-full rounded-md border-2 border-blue-500 bg-blue-500 py-2 px-4 font-semibold text-white hover:bg-blue-600 focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
       >
-        Already have an account?
-      </RouterLink>
-    </div>
-  </form>
-</div>
+        Register
+      </button>
+      <div class="flex justify-center">
+        <RouterLink
+          class="mt-3 inline-block rounded text-center text-sm text-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
+          to="/auth/login"
+        >
+          Already have an account?
+        </RouterLink>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
-import { ref, reactive, type Ref } from 'vue'
+import { ref, computed, reactive, type Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMutation } from '@vue/apollo-composable'
 
@@ -113,8 +138,15 @@ export default {
     const errorMessage: Ref<string> = ref('')
     const { push } = useRouter()
 
+    const shouldShowArtiestFields = computed(() => newUser.role === 'Artiest')
+    const shouldShowPersoneelFields = computed(
+      () => newUser.role === 'Personeel',
+    )
+
     const newUser = reactive({
       name: '',
+      voornaam: '',
+      achternaam: '',
       email: '',
       password: '',
       role: '',
@@ -122,10 +154,12 @@ export default {
 
     const submitForm = () => {
       if (
-        newUser.name === '' ||
+        newUser.role === '' ||
+        (newUser.role === 'artiest' && newUser.name === '') ||
+        (newUser.role === 'personeel' &&
+          (newUser.voornaam === '' || newUser.achternaam === '')) ||
         newUser.email === '' ||
-        newUser.password === '' ||
-        newUser.role === ''
+        newUser.password === ''
       ) {
         errorMessage.value = 'Please fill in all fields.'
         return
@@ -142,7 +176,7 @@ export default {
           //use the mutation we created in the graphql folder
           console.log('new user role: ', newUser.role)
           addUser({
-            createUserInput: {
+            createUserAdminInput: {
               locale: 'nl',
               uid: newFireBaseUser.uid,
               naam: newUser.name,
@@ -156,9 +190,9 @@ export default {
                 addPersoneel({
                   createPersoneelInput: {
                     uid: newFireBaseUser.uid,
-                    voornaam: newUser.name,
-                    achternaam: "",
-                    type: ""
+                    voornaam: newUser.voornaam,
+                    achternaam: newUser.achternaam,
+                    type: '',
                   },
                 })
                   .then(graphqlresult => {
@@ -172,7 +206,7 @@ export default {
               }
               if (newUser.role === 'Artiest') {
                 addArtiest({
-                    createArtiestenInput: {
+                  createArtiestenInput: {
                     uid: newFireBaseUser.uid,
                     naam: newUser.name,
                   },
@@ -186,7 +220,6 @@ export default {
                     errorMessage.value = error.message
                   })
               }
-
             })
             .catch(error => {
               errorMessage.value = error.message
@@ -202,6 +235,8 @@ export default {
       errorMessage,
       newUser,
       submitForm,
+      shouldShowArtiestFields,
+      shouldShowPersoneelFields,
     }
   },
 }

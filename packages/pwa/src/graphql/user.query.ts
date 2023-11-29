@@ -14,4 +14,12 @@ export const GET_USER_BY_UID = gql`
   }
 `
 
-
+export const GET_USERS_BY_ROLE = gql`
+  query {
+    findByRole {
+      uid
+      role
+      naam
+    }
+  }
+`
