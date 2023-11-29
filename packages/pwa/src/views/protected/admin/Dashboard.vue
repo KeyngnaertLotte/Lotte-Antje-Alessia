@@ -52,12 +52,10 @@
       <h1 class="text-2xl font-bold font-body">Bericht</h1>
       <form action="" class="flex flex-col justify-between">
         <div class="flex flex-row w-full my-4">
-          <label for="" class="mr-4">Voor: </label>
-          <select
-            name=""
-            id=""
-            class="bg-gray-200 rounded font-pop text-xl focus:outline-none w-3/4 p-1"
-          ></select>
+          <label for="" class="mr-4">Aan: </label>
+          <label for="">Alle</label>
+          <input type="checkbox">
+          
         </div>
         <textarea
           placeholder="Typ hier je mededeling"
@@ -81,10 +79,12 @@
         <div class="flex flex-row w-full my-4">
           <label for="" class="mr-4">Voor: </label>
           <select
-            name=""
-            id=""
-            class="bg-gray-200 rounded font-pop text-xl focus:outline-none w-3/4 p-1"
-          ></select>
+          class="bg-gray-200 rounded font-pop focus:outline-none w-3/4 p-1"
+        >
+          <option v-for="option in types" :key="option" :value="option">
+            {{ option }}
+          </option>
+        </select>
         </div>
         <div class="flex flex-row">
           <label for="" class="mr-4">Taak: </label>
@@ -94,7 +94,7 @@
         <button
           class="py-1 bg-custom-orange text-white my-6 rounded w-1/2 self-end"
         >
-          VERZEND
+          TOEVOEGEN
         </button>
       </form>
     </div>
