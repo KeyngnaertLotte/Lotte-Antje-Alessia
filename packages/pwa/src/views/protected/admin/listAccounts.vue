@@ -2,7 +2,7 @@
   <div class="col-span-2 rounded-lg bg-white row-span-22 m-5 p-6">
     <div class="flex flex-row items-center justify-between">
       
-    <h1 class="text-2xl font-bold mb-4 font-body w-2/3">Alle accounts</h1>
+    <h1 class="text-2xl font-bold mb-4 font-body w-2/3">Alle personeel en artiesten</h1>
     <input type="text" name="search" id="search" placeholder="Zoek naar een naam" class="border-2 border-black p-1 rounded w-1/3" v-model="searchTerm">
     </div>
     <div class="flex flex-row w-full justify-start items-center mb-4 ">

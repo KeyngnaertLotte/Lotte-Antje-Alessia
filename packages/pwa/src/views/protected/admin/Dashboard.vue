@@ -1,5 +1,4 @@
 <template>
-  <!-- <Container/> -->
   <div
     class="row-start-4 col-span-2 row-span-21 grid grid-rows-6 grid-cols-7 gap-4 m-4"
   >
@@ -103,7 +102,6 @@
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-// import Container from '@/components/generic/Container.vue'
 import { GET_PERSONEEL } from '@/graphql/personeel.query'
 import { UPDATE_TYPE } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
