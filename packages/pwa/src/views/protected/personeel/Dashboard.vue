@@ -1,5 +1,5 @@
 <template>
-      <cardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4"/>
+      <cardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4" url="materiaal"/>
       <cardSm title="scanner"  class="col-span-1 row-start-4 row-span-4"/>
       <taskList :takenlijst="takenlijst"/>
 </template>
