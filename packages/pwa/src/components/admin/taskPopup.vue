@@ -13,8 +13,8 @@
       <div class="w-full h-full p-6">
         <h1 class="text-2xl font-bold mb-4 font-body ">Pas taak aan</h1>
       <div class="flex flex-col w-full">
-        <label for="">Naam</label>
-        <input type="text" value="aaaaaaaaaaa" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
+        <label for="">Taak naam</label>
+        <input type="text" :value="currentData.naam" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
       </div>
       <div class="flex flex-col w-full">
         <p for="">Type</p>
@@ -39,11 +39,11 @@
       </div>
       <div class="flex flex-col w-full">
         <label for="">Aantal</label>
-        <input type="number" value="3" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
+        <input type="number" :value="currentData.aantal" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
       </div>
       <div class="flex flex-col w-full">
         <label for="">Deadline</label>
-        <input type="time" value="12:45" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
+        <input type="time" :value="currentData.deadline" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
       </div>
       <div class="flex flex-col w-full">
         <label for="">Benodigdheden</label>
@@ -66,7 +66,14 @@ import { X } from 'lucide-vue-next'
 
 const types = ['aaaaaaaaaaaa', 'bbbbbbbbbbbb', 'cccccccccccc', 'dddddddddddd', 'eeeeeeeeeeee', 'ffffffffffff']
 
+
 export default {
+    props: {
+        taskData: {
+            type: Object,
+            required: true
+        }
+    },
   components: {
     X,
   },
@@ -75,9 +82,13 @@ export default {
       emit('close-modal')
     }
 
+    const currentData = props.taskData
+
     return {
       closeModal,
         types,
+        currentData
+        
     }
   },
 }

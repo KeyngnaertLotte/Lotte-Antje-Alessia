@@ -22,13 +22,13 @@
           <p class="w-1/4">{{ item.deadline }}</p>
           <p class="w-1/4">{{ item.materiaal }}</p>
           <p class="w-1/4">{{ item.status }}</p>
-          <button @click="handleOpenModal" class="w-1/14 flex justify-center items-center">
+          <button @click="handleOpenModal(item)" class="w-1/14 flex justify-center items-center">
             <Pencil class="stroke-1.5" />
           </button>
         </div>
       </div>
     </div>
-      <TaskPopup v-if="isModalOpen" @close-modal="handleCloseModal"/>
+      <TaskPopup v-if="isModalOpen" :taskData="selectedItem" @close-modal="handleCloseModal"/>
   </template>
   
   <script lang="ts">
@@ -40,6 +40,7 @@
   
   const data = ref<any | null>(null)
   const isModalOpen = ref(false)
+  const selectedItem = ref<any | null>(null)
   
   const { onResult, refetch } = useQuery(GET_ALL_TAKEN)
   
@@ -51,8 +52,9 @@
       })
   
 
-    const handleOpenModal = () => {
+    const handleOpenModal = (item: any) => {
       isModalOpen.value = true
+      selectedItem.value = item
     }
 
     const handleCloseModal = () => {
@@ -65,7 +67,7 @@
       TaskPopup
     },
     setup() {
-      return { data, handleCloseModal, handleOpenModal, isModalOpen }
+      return { data, handleCloseModal, handleOpenModal, isModalOpen, selectedItem }
     },
   }
   </script>
