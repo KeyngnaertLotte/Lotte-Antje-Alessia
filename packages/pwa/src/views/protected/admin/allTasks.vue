@@ -22,13 +22,13 @@
           <p class="w-1/4">{{ item.deadline }}</p>
           <p class="w-1/4">{{ item.materiaal }}</p>
           <p class="w-1/4">{{ item.status }}</p>
-          <button class="w-1/14 flex justify-center items-center">
+          <button @click="handleOpenModal" class="w-1/14 flex justify-center items-center">
             <Pencil class="stroke-1.5" />
           </button>
         </div>
       </div>
     </div>
-      
+      <TaskPopup v-if="isModalOpen" @close-modal="handleCloseModal"/>
   </template>
   
   <script lang="ts">
@@ -36,9 +36,10 @@
   import { GET_ALL_TAKEN } from '@/graphql/taken.query'
   import { computed, ref } from 'vue'
   import { Pencil } from 'lucide-vue-next'
-  import { taskPopup } from '@/components/admin/taskPopup.vue'
+  import TaskPopup from '@/components/admin/taskPopup.vue'
   
   const data = ref<any | null>(null)
+  const isModalOpen = ref(false)
   
   const { onResult, refetch } = useQuery(GET_ALL_TAKEN)
   
@@ -49,13 +50,22 @@
         }
       })
   
+
+    const handleOpenModal = () => {
+      isModalOpen.value = true
+    }
+
+    const handleCloseModal = () => {
+      isModalOpen.value = false
+    }
   
   export default {
     components: {
       Pencil,
+      TaskPopup
     },
     setup() {
-      return { data, }
+      return { data, handleCloseModal, handleOpenModal, isModalOpen }
     },
   }
   </script>
