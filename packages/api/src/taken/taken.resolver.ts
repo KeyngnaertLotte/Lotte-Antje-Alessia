@@ -16,7 +16,7 @@ export class TakenResolver {
     return this.takenService.create(createTakenInput)
   }
 
-  @UseGuards(FirebaseGuard)
+  // @UseGuards(FirebaseGuard) 
   @Query(() => [Taak], { name: 'taken' })
   findAll() {
     return this.takenService.findAll()

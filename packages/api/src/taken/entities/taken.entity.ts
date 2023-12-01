@@ -32,4 +32,12 @@ export class Taak {
   @Field()
   @Column()
   deadline: string
+
+  @Field()
+  @Column()
+  materiaal: string
+
+  @Field()
+  @Column()
+  status: string
 }
