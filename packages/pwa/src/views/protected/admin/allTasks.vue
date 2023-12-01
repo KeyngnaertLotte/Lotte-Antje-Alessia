@@ -36,6 +36,7 @@
   import { GET_ALL_TAKEN } from '@/graphql/taken.query'
   import { computed, ref } from 'vue'
   import { Pencil } from 'lucide-vue-next'
+  import { taskPopup } from '@/components/admin/taskPopup.vue'
   
   const data = ref<any | null>(null)
   

@@ -3,3 +3,17 @@
         <p>aaaaaaaaaaaaaaaaaaa</p>
     </div>
 </template>
+
+<script lang="ts">
+    export default {
+        setup(props, {emit}) {
+            const closeModal = () => {
+                emit('close-modal')
+            }
+            
+            return {
+                closeModal,
+            }
+        }
+    }
+</script>
