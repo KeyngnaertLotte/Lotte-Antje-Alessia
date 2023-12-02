@@ -4,10 +4,11 @@ import { PersoneelResolver } from './personeel.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Personeel } from './entities/personeel.entity';
 import { TakenModule } from 'src/taken/taken.module';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   providers: [PersoneelResolver, PersoneelService],
-  imports: [TypeOrmModule.forFeature([Personeel]), TakenModule],
+  imports: [TypeOrmModule.forFeature([Personeel]), TakenModule, UsersModule],
   exports: [PersoneelService],
 })
 export class PersoneelModule {}

@@ -5,9 +5,10 @@ import { Artiest } from './entities/artiesten.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { MateriaalModule } from 'src/materiaal/materiaal.module'
 import { TakenModule } from 'src/taken/taken.module'
+import { UsersModule } from 'src/users/users.module'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Artiest]), MateriaalModule, TakenModule],
+  imports: [TypeOrmModule.forFeature([Artiest]), MateriaalModule, TakenModule, UsersModule],
   providers: [ArtiestenResolver, ArtiestenService],
   exports: [ArtiestenService],
 })

@@ -11,6 +11,7 @@ import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 import { MateriaalService } from 'src/materiaal/materiaal.service'
 import { TakenService } from 'src/taken/taken.service'
 import { CreateTakenInput } from 'src/taken/dto/create-taken.input'
+import { UsersService } from 'src/users/users.service'
 
 @Injectable()
 export class ArtiestenService {
@@ -19,6 +20,7 @@ export class ArtiestenService {
     private readonly artiestRepository: Repository<Artiest>,
     private readonly materiaalService: MateriaalService,
     private readonly takenService: TakenService,
+    private readonly usersService: UsersService,
   ) {}
 
   async create(createArtiestenInput: CreateArtiestenInput): Promise<Artiest> {
@@ -109,12 +111,28 @@ export class ArtiestenService {
     return this.artiestRepository.findOne({ where: { uid } })
   }
 
-  update(id: number, updateArtiestenInput: UpdateArtiestenInput) {
-    return `This action updates a #${id} artiesten`
+  async update(uid: string, updateArtiestenInput: UpdateArtiestenInput) {
+    // update artiest
+    const artiest = this.findOneByUid(uid)
+    await artiest.then(a => {
+      a.naam = updateArtiestenInput?.naam
+      a.podium = updateArtiestenInput?.podium
+      return this.artiestRepository.save(a)
+    })
+    
+    const naam = updateArtiestenInput?.naam
+    if (naam){
+      await this.usersService.updateNaam(uid, naam)
+    }
+
+    return `artiest met uid ${uid} geupdate`
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} artiesten`
+  async remove(uid: string) {
+    const artiest = await this.findOneByUid(uid)
+    await this.artiestRepository.remove(artiest)
+    await this.usersService.remove(uid)
+    return 'user en artiest verwijderd'
   }
 
   saveAll(artiesten: Artiest[]) {
