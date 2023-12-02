@@ -64,7 +64,16 @@
 <script lang="ts">
 import { X } from 'lucide-vue-next'
 
-const types = ['aaaaaaaaaaaa', 'bbbbbbbbbbbb', 'cccccccccccc', 'dddddddddddd', 'eeeeeeeeeeee', 'ffffffffffff']
+const types = ['Podium - licht',
+  'Podium - geluid',
+  'Bar - eten',
+  'Bar - drank',
+  'Allround',
+  'Kuisen',
+  'Aanvulling',
+  'Loges']
+
+
 
 
 export default {
