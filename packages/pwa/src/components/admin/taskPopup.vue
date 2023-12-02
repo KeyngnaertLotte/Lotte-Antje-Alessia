@@ -53,8 +53,8 @@
       </div>
       <div class="flex flex-row justify-between w-full mt-10">
         
-      <button class="py-1 bg-gray-200 text-custom-brown my-6 rounded w-1/5 self-end">DELETE</button>
-      <button class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end">UPDATE</button>
+      <button @click="deleteTask" class="py-1 bg-gray-200 text-custom-brown my-6 rounded w-1/5 self-end">DELETE</button>
+      <button @click="updateTask" class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end">UPDATE</button>
       </div>
       </div>
     </div>
@@ -81,13 +81,24 @@ export default {
     const closeModal = () => {
       emit('close-modal')
     }
+    const deleteTask = () => {
+        console.log('delete')
+        closeModal()
+    }
+
+    const updateTask = () => {
+        console.log('update')
+        closeModal()
+    }
 
     const currentData = props.taskData
 
     return {
       closeModal,
         types,
-        currentData
+        currentData,
+        deleteTask,
+        updateTask
         
     }
   },
