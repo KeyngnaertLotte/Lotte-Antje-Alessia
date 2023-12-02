@@ -81,13 +81,13 @@ export class PersoneelResolver {
     return this.personeelService.findOneByUid(uid)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   removePersoneel(@Args('string', { type: () => String }) uid: string) {
     return this.personeelService.remove(uid)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   updatePersoneel(
     @Args('updatePersoneelInput') updatePersoneelInput: UpdatePersoneelInput,

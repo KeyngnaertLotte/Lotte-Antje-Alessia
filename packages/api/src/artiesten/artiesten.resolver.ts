@@ -59,7 +59,7 @@ export class ArtiestenResolver {
     return this.artiestenService.remove(uid)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   updateArtiesten(
     @Args('updateArtiestenInput') updateArtiestenInput: UpdateArtiestenInput,
