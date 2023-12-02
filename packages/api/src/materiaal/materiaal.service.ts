@@ -4,12 +4,14 @@ import { UpdateMateriaalInput } from './dto/update-materiaal.input'
 import { Materiaal } from './entities/materiaal.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { TakenService } from 'src/taken/taken.service'
 
 @Injectable()
 export class MateriaalService {
   constructor(
     @InjectRepository(Materiaal)
     private readonly materiaalRepository: Repository<Materiaal>,
+    private readonly takenService: TakenService,
   ) {}
 
   create(createMateriaalInput: CreateMateriaalInput) {
@@ -25,18 +27,6 @@ export class MateriaalService {
     return this.materiaalRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} materiaal`
-  }
-
-  update(id: number, updateMateriaalInput: UpdateMateriaalInput) {
-    return `This action updates a #${id} materiaal`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} materiaal`
-  }
-
   async UpdateAantalOptellen(materiaalId: string): Promise<void> {
     const materiaal = await this.findOneById(materiaalId)
     this.materiaalRepository.update(
@@ -46,24 +36,10 @@ export class MateriaalService {
   }
 
   async findAllCategories() {
-    const materiaalData = await this.materiaalRepository.find();
-      const categories = materiaalData.map(item => item.categorie);
-      return categories;
+    const materiaalData = await this.materiaalRepository.find()
+    const categories = materiaalData.map(item => item.categorie)
+    return categories
   }
-  
-  
-
-  // async UpdateAantalOptellen(
-  //   materiaalId: string,
-  //   itemNaam: string,
-  // ): Promise<void> {
-  //   const materiaal = await this.findOneById(materiaalId)
-  //   const item = materiaal.items[itemNaam]
-  //   this.materiaalRepository.update(
-  //     { id: materiaalId },
-  //     { items: { ...materiaal.items, [itemNaam]: item + 1 } },
-  //   )
-  // }
 
   async UpdateAantalaftrekken(
     materiaalId: string,
@@ -77,22 +53,8 @@ export class MateriaalService {
     )
   }
 
-  // async UpdateAantalaftrekken(
-  //   materiaalId: string,
-  //   itemNaam: string,
-  //   aantal: number,
-  // ): Promise<void> {
-  //   const materiaal = await this.findOneById(materiaalId)
-  //   const item = materiaal.items[itemNaam]
-  //   this.materiaalRepository.update(
-  //     { id: materiaalId },
-  //     { items: { ...materiaal.items, [itemNaam]: item - aantal } },
-  //   )
-  // }
-
   async checkMateriaal(materiaalnaam: string, aantal: number) {
     //@ts-ignore
-
     const materiaal: Materiaal[] = await this.materiaalRepository.find({
       where: { item: materiaalnaam },
     })
@@ -102,6 +64,26 @@ export class MateriaalService {
     }
     // check if there is enough materiaal
     if (materiaal[0].aantal < aantal) {
+      let currentTime = new Date()
+
+      // Add 30 minutes
+      currentTime.setMinutes(currentTime.getMinutes() + 30)
+
+      // Get the hours and minutes
+      let hours = currentTime.getHours()
+      let minutes = currentTime.getMinutes()
+
+      // Format the hours and minutes as a string
+      let formattedTime = `${hours}:${minutes}`
+
+      await this.takenService.create({
+        naam: `aanvullen ${materiaal[0].item}`,
+        aantal: aantal * 10,
+        category: materiaal[0].categorie,
+        plaats: 'Magazijn',
+        type: 'Aanvulling',
+        deadline: formattedTime,
+      })
       throw new Error('Niet genoeg materiaal')
     } else {
       const resultAantal = materiaal[0].aantal - aantal
@@ -112,49 +94,9 @@ export class MateriaalService {
     }
   }
 
-  async findByCategorie (categorie: string): Promise<Materiaal[]> {
-    return this.materiaalRepository.find({where: {categorie: categorie}})
+  async findByCategorie(categorie: string): Promise<Materiaal[]> {
+    return this.materiaalRepository.find({ where: { categorie: categorie } })
   }
-
-  // hier ben ik totaal niet zeker van
-  // async checkMateriaal(materiaalnaam: string, aantal: number) {
-  //   //@ts-ignore
-  //   const materiaalList: Materiaal[] = await this.materiaalRepository.find({
-  //     where: { items: [{ naam: materiaalnaam }] },
-  //   })
-
-  //   if (materiaalList.length === 0) {
-  //     throw new Error('Materiaal niet gevonden')
-  //   }
-
-  //   const materiaal = materiaalList[0]
-  //   const matchingItem = materiaal.items.find(
-  //     item => item.naam === materiaalnaam,
-  //   )
-
-  //   if (!matchingItem) {
-  //     throw new Error('Materiaal niet gevonden in items')
-  //   }
-
-  //   if (matchingItem.aantal < aantal) {
-  //     throw new Error('Niet genoeg materiaal')
-  //   } else {
-  //     const resultAantal = matchingItem.aantal - aantal
-  //     // Update the 'aantal' property for the specific item within the 'items' array
-  //     const updatedItems = materiaal.items.map(item => {
-  //       if (item.naam === materiaalnaam) {
-  //         return { ...item, aantal: resultAantal }
-  //       }
-  //       return item
-  //     })
-
-  //     // Update the document in the database
-  //     await this.materiaalRepository.update(
-  //       { id: materiaal.id },
-  //       { items: updatedItems },
-  //     )
-  //   }
-  // }
 
   findOneById(id: string): Promise<Materiaal> {
     try {
