@@ -3,6 +3,24 @@ import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateTakenInput extends PartialType(CreateTakenInput) {
-  @Field(() => Int)
-  id: number;
+  @Field(() => String, { nullable: true })
+  naam?: string;
+
+  @Field(() => String, { nullable: true })
+  type?: string;
+
+  @Field(() => String, { nullable: true })
+  category?: string;
+
+  @Field(() => String, { nullable: true })
+  plaats?: string;
+
+  @Field(() => Int, { nullable: true })
+  aantal?: number;
+
+  @Field(() => String, { nullable: true })
+  deadline?: string;
+
+  @Field(() => String, { nullable: true })
+  materiaal?: string;
 }

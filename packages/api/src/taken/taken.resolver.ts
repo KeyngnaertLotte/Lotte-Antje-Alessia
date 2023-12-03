@@ -49,9 +49,12 @@ export class TakenResolver {
 
   // PUT taak
   @UseGuards(FirebaseGuard)
-  @Mutation(() => Taak)
-  updateTaken(@Args('updateTakenInput') updateTakenInput: UpdateTakenInput) {
-    return this.takenService.update(updateTakenInput.id, updateTakenInput)
+  @Mutation(() => String)
+  updateArtiesten(
+    @Args('updateTakenInput') updateTakenInput: UpdateTakenInput,
+    @Args('id') id: string,
+  ) {
+    return this.takenService.update(id, updateTakenInput)
   }
 
  

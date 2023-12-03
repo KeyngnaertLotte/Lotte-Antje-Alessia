@@ -45,17 +45,19 @@ export class TakenService {
     return this.taakRepository.find({ where: { type } })
   }
 
-  // PUT taak by id, werkt nog niet
-  update(id: number, updateTakenInput: UpdateTakenInput) {}
-
-  // DELETE taak by id, werkt nog niet
-  // async delete(id: number, deleteTakenInput: DeleteTakenInput) {
-  //   const taak = await this.taakRepository.findOne(id)
-  //   if (!taak) {
-  //     throw new NotFoundException(`Taak met id ${id} niet gevonden`)
-  //   }
-  //   return this.taakRepository.remove(taak)
-  // }
+  // started!! afwerken
+  async update(id: string, updateTakenInput: UpdateTakenInput) {
+    const taak = await this.findOneById(id)
+    if (!taak) throw new Error('Taak niet gevonden')
+    else {
+      console.log('taak', taak)
+      console.log('updateTakenInput', updateTakenInput)
+      const updatedTaak = Object.assign(taak, updateTakenInput)
+      console.log('updatedTaak', updatedTaak)
+      await this.taakRepository.save(updatedTaak)
+      return `taak ${id} geupdate`
+    }
+  }
 
   async remove(id: string) {
     // check if taak exists
