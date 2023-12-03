@@ -19,4 +19,7 @@ export class CreateTakenInput {
 
   @Field()
   deadline: string
+
+  @Field()
+  materiaal: string
 }

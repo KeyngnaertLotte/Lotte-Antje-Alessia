@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { CreateMateriaalInput } from './dto/create-materiaal.input'
-import { UpdateMateriaalInput } from './dto/update-materiaal.input'
 import { Materiaal } from './entities/materiaal.entity'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { ObjectId, Repository } from 'typeorm'
 import { TakenService } from 'src/taken/taken.service'
 
 @Injectable()
@@ -27,30 +26,10 @@ export class MateriaalService {
     return this.materiaalRepository.find()
   }
 
-  async UpdateAantalOptellen(materiaalId: string): Promise<void> {
-    const materiaal = await this.findOneById(materiaalId)
-    this.materiaalRepository.update(
-      { id: materiaalId },
-      { aantal: materiaal.aantal + 1 },
-    )
-  }
-
   async findAllCategories() {
     const materiaalData = await this.materiaalRepository.find()
     const categories = materiaalData.map(item => item.categorie)
     return categories
-  }
-
-  async UpdateAantalaftrekken(
-    materiaalId: string,
-    aantal: number,
-  ): Promise<void> {
-    //@ts-ignore
-    const materiaal = await this.findOneById(materiaalId)
-    this.materiaalRepository.update(
-      { id: materiaalId },
-      { aantal: materiaal.aantal - aantal },
-    )
   }
 
   async checkMateriaal(materiaalnaam: string, aantal: number) {
@@ -83,6 +62,7 @@ export class MateriaalService {
         plaats: 'Magazijn',
         type: 'Aanvulling',
         deadline: formattedTime,
+        materiaal: materiaal[0].item,
       })
       throw new Error('Niet genoeg materiaal')
     } else {
@@ -98,12 +78,29 @@ export class MateriaalService {
     return this.materiaalRepository.find({ where: { categorie: categorie } })
   }
 
-  findOneById(id: string): Promise<Materiaal> {
-    try {
-      // @ts-ignore
-      return this.materiaalRepository.findOne({ _id: new ObjectId(id) })
-    } catch (e) {
-      throw new Error('Materiaal niet gevonden')
+  async remove(id: string) {
+    // check if taak exists
+    const taakObj = await this.takenService.findOneById(id)
+    const materiaal: Materiaal[] = await this.materiaalRepository.find({
+      where: { item: taakObj.materiaal },
+    })
+    if (!taakObj) throw new Error('Taak niet gevonden')
+    else {
+      console.log('taakObj', taakObj)
+
+      if (taakObj.type === 'Aanvulling') {
+        console.log(taakObj.materiaal, taakObj.aantal)
+        const id = materiaal[0].id.toString()
+        console.log(id)
+        this.materiaalRepository.update(
+          { id: materiaal[0].id },
+          { aantal: materiaal[0].aantal + taakObj.aantal },
+        )
+      }
+
+      await this.takenService.remove(id)
+      return `taak verwijderd`
     }
   }
+
 }
