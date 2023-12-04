@@ -49,18 +49,18 @@
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import { GET_USERS_BY_ROLE } from '@/graphql/user.query'
+import { ALL_Artiesten } from '@/graphql/artiest.query'
 import { computed, ref } from 'vue'
 
 const data = ref<any | null>(null)
 const searchTerm = ref('')
 
-const { onResult, refetch } = useQuery(GET_USERS_BY_ROLE)
+const { onResult, refetch } = useQuery(ALL_Artiesten)
 
 onResult(result => {
       if (result.data) {
-        console.log('Data:', result.data.findByRole)
-        data.value = result.data.findByRole
+        console.log('Data:', result.data.artiesten)
+        data.value = result.data.artiesten
       }
     })
 
