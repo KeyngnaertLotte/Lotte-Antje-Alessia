@@ -6,6 +6,7 @@ import { UpdateTakenInput } from './dto/update-taken.input'
 import { UseGuards } from '@nestjs/common'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
 import { DeleteTakenInput } from './dto/delete-taken.input'
+import { string } from 'yargs'
 
 @Resolver(() => Taak)
 export class TakenResolver {
@@ -47,15 +48,14 @@ export class TakenResolver {
   // }
 
   // PUT taak
-  @UseGuards(FirebaseGuard)
-  @Mutation(() => Taak)
-  updateTaken(@Args('updateTakenInput') updateTakenInput: UpdateTakenInput) {
-    return this.takenService.update(updateTakenInput.id, updateTakenInput)
+  // @UseGuards(FirebaseGuard)
+  @Mutation(() => String)
+  updateTaken(
+    @Args('updateTakenInput') updateTakenInput: UpdateTakenInput,
+    @Args('id') id: string,
+  ) {
+    return this.takenService.update(id, updateTakenInput)
   }
 
-  @UseGuards(FirebaseGuard)
-  @Mutation(() => Taak)
-  removeTaak(@Args('id', { type: () => String }) id: string) {
-    return this.takenService.remove(id)
-  }
+ 
 }

@@ -7,6 +7,7 @@ import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard
 import { FirebaseUser } from 'src/authentication/decoraters/user.decorator'
 import { UserRecord } from 'firebase-admin/auth'
 import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
+import { UpdateArtiestenInput } from './dto/update-artiesten.input'
 
 @Resolver(() => Artiest)
 export class ArtiestenResolver {
@@ -53,8 +54,17 @@ export class ArtiestenResolver {
   }
 
   @UseGuards(FirebaseGuard)
-  @Mutation(() => Artiest)
-  removeArtiesten(@Args('id', { type: () => Int }) id: number) {
-    return this.artiestenService.remove(id)
+  @Mutation(() => String)
+  removeArtiesten(@Args('string', { type: () => String }) uid: string) {
+    return this.artiestenService.remove(uid)
+  }
+
+  @UseGuards(FirebaseGuard)
+  @Mutation(() => String)
+  updateArtiesten(
+    @Args('updateArtiestenInput') updateArtiestenInput: UpdateArtiestenInput,
+    @Args('uid') uid: string,
+  ) {
+    return this.artiestenService.update(uid, updateArtiestenInput)
   }
 }

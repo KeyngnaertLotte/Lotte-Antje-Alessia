@@ -49,7 +49,7 @@ export class UsersService {
       where: { role: Role.PERSONEEL },
     })
     const result = await Promise.all([artiesten, personeel])
-    
+
     return result[0].concat(result[1])
   }
 
@@ -69,7 +69,15 @@ export class UsersService {
     return new Error(`This action updates a #${id} user`)
   }
 
-  remove(id: string) {
-    return new Error(`This action removes a #${id} user`)
+  async remove(uid: string) {
+    const user = await this.findOneByUid(uid)
+    await this.userRepository.remove(user)
+    return `user removed`
+  }
+
+  async updateNaam(uid: string, naam: string) {
+    const user = await this.findOneByUid(uid)
+    user.naam = naam
+    return this.userRepository.save(user)
   }
 }

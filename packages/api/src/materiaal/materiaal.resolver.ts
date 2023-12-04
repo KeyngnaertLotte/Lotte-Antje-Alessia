@@ -10,7 +10,6 @@ import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard
 export class MateriaalResolver {
   constructor(private readonly materiaalService: MateriaalService) {}
 
-  
   @UseGuards(FirebaseGuard)
   @Mutation(() => Materiaal)
   createMateriaal(
@@ -37,31 +36,20 @@ export class MateriaalResolver {
     return this.materiaalService.findByCategorie(categorie)
   }
 
-  @UseGuards(FirebaseGuard)
-  @Mutation(() => Materiaal)
-  updateMateriaal(
-    @Args('updateMateriaalInput') updateMateriaalInput: UpdateMateriaalInput,
-  ) {
-    return this.materiaalService.update(
-      updateMateriaalInput.id,
-      updateMateriaalInput,
-    )
-  }
-
   // @Mutation(() => Materiaal)
   // updateMateriaal(@Args('updateMateriaalInput') updateMateriaalInput: UpdateMateriaalInput) {
   //   return this.materiaalService.update(updateMateriaalInput.id, updateMateriaalInput.items, updateMateriaalInput);
   // }
 
   @UseGuards(FirebaseGuard)
-  @Mutation(() => Materiaal)
-  removeMateriaal(@Args('id', { type: () => Int }) id: number) {
-    return this.materiaalService.remove(id)
-  }
-
-  @UseGuards(FirebaseGuard)
   @Query(() => [Materiaal], { name: 'categorie' })
   findAllCategories() {
     return this.materiaalService.findAllCategories()
+  }
+
+  // @UseGuards(FirebaseGuard)
+  @Mutation(() => String)
+  removeTaak(@Args('id', { type: () => String }) id: string) {
+    return this.materiaalService.remove(id)
   }
 }

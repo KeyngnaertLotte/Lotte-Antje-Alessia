@@ -1,18 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { CreateTakenInput } from './dto/create-taken.input'
 import { UpdateTakenInput } from './dto/update-taken.input'
-import { DeleteTakenInput } from './dto/delete-taken.input'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Taak } from './entities/taken.entity'
-import { FindOneOptions, Repository } from 'typeorm'
+import { Repository } from 'typeorm'
 import { ObjectId } from 'mongodb'
-import { Args, Mutation } from '@nestjs/graphql'
 
 @Injectable()
 export class TakenService {
   constructor(
     @InjectRepository(Taak)
-    private readonly taakRepository: Repository<Taak>,
+    readonly taakRepository: Repository<Taak>,
   ) {}
 
   // CREATE taak
@@ -33,7 +31,7 @@ export class TakenService {
   }
 
   // GET taak by id
-  async findOneById(id: string){
+  async findOneById(id: string) {
     try {
       // @ts-ignore
       return await this.taakRepository.findOne({ _id: new ObjectId(id) })
@@ -47,19 +45,19 @@ export class TakenService {
     return this.taakRepository.find({ where: { type } })
   }
 
-  // PUT taak by id, werkt nog niet
-  update(id: number, updateTakenInput: UpdateTakenInput) {
-
+  // started!! afwerken
+  async update(id: string, updateTakenInput: UpdateTakenInput) {
+    const taak = await this.findOneById(id)
+    if (!taak) throw new Error('Taak niet gevonden')
+    else {
+      console.log('taak', taak)
+      console.log('updateTakenInput', updateTakenInput)
+      const updatedTaak = Object.assign(taak, updateTakenInput)
+      console.log('updatedTaak', updatedTaak)
+      await this.taakRepository.save(updatedTaak)
+      return `taak ${id} geupdate`
+    }
   }
-
-  // DELETE taak by id, werkt nog niet
-  // async delete(id: number, deleteTakenInput: DeleteTakenInput) {
-  //   const taak = await this.taakRepository.findOne(id)
-  //   if (!taak) {
-  //     throw new NotFoundException(`Taak met id ${id} niet gevonden`)
-  //   }
-  //   return this.taakRepository.remove(taak)
-  // }
 
   async remove(id: string) {
     // check if taak exists
@@ -68,9 +66,8 @@ export class TakenService {
     else {
       console.log('taakObj', taakObj)
 
-      this.taakRepository.remove(taakObj)
-
-      return taakObj
+      await this.taakRepository.remove(taakObj)
+      return `taak verwijderd`
     }
   }
 

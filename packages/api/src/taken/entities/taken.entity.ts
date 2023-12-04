@@ -40,8 +40,4 @@ export class Taak {
   @Field()
   @Column()
   materiaal: string
-
-  @Field()
-  @Column()
-  status: string
 }
