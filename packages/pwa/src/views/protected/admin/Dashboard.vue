@@ -40,8 +40,8 @@
               {{ option }}
             </option>
           </select>
-          <button class="w-1/14 flex justify-center items-center">
-            <Trash2 class="stroke-1.5" />
+          <button @click="deletePersoneel(item.uid)" class="w-1/14 flex justify-center items-center">
+            <Trash2  class="stroke-1.5" />
           </button>
         </div>
       </div>
@@ -103,10 +103,11 @@
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
 import { GET_PERSONEEL } from '@/graphql/personeel.query'
-import { UPDATE_TYPE } from '@/graphql/personeel.mutation'
+import { UPDATE_TYPE, DELETE_PERSONEEL } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 import { Trash2 } from 'lucide-vue-next'
+import { getAuth } from 'firebase/auth'
 
 // const { error, result: bezoekerResult, loading, refetch, onResult } =  useQuery(GET_BEZOEKER_BY_UID, { uid });
 const { error, onResult, refetch } = useQuery(GET_PERSONEEL)
@@ -195,7 +196,19 @@ export default {
       )
     }
 
-    return { personeelInfo, onChange, types, filterByType, filterPersoneel }
+    const { mutate: removePersoneel } = useMutation(DELETE_PERSONEEL)
+
+    const deletePersoneel = async (uid:string) => {
+      console.log('delete')
+      // const uid = filterPersoneel.value.uid
+      console.log(uid)
+      await removePersoneel({ uid: uid })
+      // delete firebase
+      
+
+    }
+
+    return { personeelInfo, onChange, types, filterByType, filterPersoneel, deletePersoneel }
   },
 }
 </script>

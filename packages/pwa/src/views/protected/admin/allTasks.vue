@@ -33,16 +33,16 @@
   
   <script lang="ts">
   import { useQuery } from '@vue/apollo-composable'
-  import { GET_ALL_TAKEN } from '@/graphql/taken.query'
+  import { GET_TAKEN } from '@/graphql/taak.query'
   import { computed, ref } from 'vue'
   import { Pencil } from 'lucide-vue-next'
   import TaskPopup from '@/components/admin/taskPopup.vue'
-  
+ 
   const data = ref<any | null>(null)
   const isModalOpen = ref(false)
   const selectedItem = ref<any | null>(null)
   
-  const { onResult, refetch } = useQuery(GET_ALL_TAKEN)
+  const { onResult, refetch } = useQuery(GET_TAKEN)
   
   onResult(result => {
         if (result.data) {

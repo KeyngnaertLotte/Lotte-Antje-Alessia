@@ -134,6 +134,7 @@ const logout = async (): Promise<void> => {
   })
 }
 
+
 // '() => ' is een functie
 export default () => {
   // State for each composable
