@@ -1,25 +1,3 @@
-<!-- ARTSIESTEN FINDALL -->
-
-<!-- query artiesten query artiesten {
-  artiesten{
-    id,
-    uid,
-    naam, 
-    podium, 
-    agenda{
-      taak, 
-      podium, 
-      tijd
-    }, 
-    benodigdheden {
-      item,
-      aantal,
-      categorie,
-      podium
-    }
-}} -->
-
-
 <template>
   <div class="col-span-2 rounded-lg bg-white row-span-22 m-5 p-6">
     <div class="flex flex-row items-center justify-between">
