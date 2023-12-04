@@ -48,9 +48,9 @@ export class TakenResolver {
   // }
 
   // PUT taak
-  @UseGuards(FirebaseGuard)
+  // @UseGuards(FirebaseGuard)
   @Mutation(() => String)
-  updateArtiesten(
+  updateTaken(
     @Args('updateTakenInput') updateTakenInput: UpdateTakenInput,
     @Args('id') id: string,
   ) {

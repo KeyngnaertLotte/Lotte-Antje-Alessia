@@ -23,4 +23,7 @@ export class UpdateTakenInput extends PartialType(CreateTakenInput) {
 
   @Field(() => String, { nullable: true })
   materiaal?: string;
+
+  @Field(()=> Boolean, {nullable: true})
+  status?: boolean;
 }
