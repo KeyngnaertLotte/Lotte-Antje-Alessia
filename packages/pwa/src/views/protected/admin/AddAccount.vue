@@ -1,14 +1,12 @@
 <template>
-  <div class="ml-8 mt-4">
-    <form @submit.prevent="submitForm" class="w-full mt-10">
-      <h1 class="text-4xl font-bold tracking-wider">Create Account</h1>
-      <p class="text-neutral-500 mb-4">Maak hier een account aan.</p>
+    <form @submit.prevent="submitForm" class="col-span-2 row-span-22 m-10 bg-white rounded-lg p-6 flex flex-col justify-between">
+      <h1 class="text-2xl font-bold mb-4 font-body ">Maak een account</h1>
 
       <div v-if="errorMessage">
         <p class="text-red-600">{{ errorMessage }}</p>
       </div>
 
-      <div class="mt-6">
+      <div class="">
         <label
           for="rol"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
@@ -24,7 +22,7 @@
         </select>
       </div>
 
-      <div v-if="shouldShowArtiestFields" class="mt-6">
+      <div v-if="shouldShowArtiestFields" class="">
         <label
           for="nickname"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
@@ -40,8 +38,9 @@
         />
       </div>
 
-      <div v-if="shouldShowPersoneelFields" class="mt-6">
-        <label
+      <div v-if="shouldShowPersoneelFields" class="flex flex-row ">
+        <div class="flex flex-col justify-center items-start w-1/2 mr-4">
+          <label
           for="voornaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
@@ -54,8 +53,9 @@
           class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
           v-model="newUser.voornaam"
         />
-
-        <label
+        </div>
+        <div class="flex flex-col justify-center items-start w-1/2 ">
+          <label
           for="achternaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
@@ -68,9 +68,13 @@
           class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
           v-model="newUser.achternaam"
         />
+        </div>
+       
+
+        
       </div>
 
-      <div class="mt-6">
+      <div class="">
         <label
           for="email"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
@@ -86,7 +90,7 @@
         />
       </div>
 
-      <div class="mt-6">
+      <div class="">
         <label
           for="password"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
@@ -103,20 +107,11 @@
       </div>
 
       <button
-        class="mt-6 w-full rounded-md border-2 border-blue-500 bg-blue-500 py-2 px-4 font-semibold text-white hover:bg-blue-600 focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
+        class="mt-6 w-1/3 rounded-md border-2 bg-custom-orange self-center py-2 px-4 font-semibold text-white hover:bg-custom-brown focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
       >
-        Register
+        Registreer
       </button>
-      <div class="flex justify-center">
-        <RouterLink
-          class="mt-3 inline-block rounded text-center text-sm text-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
-          to="/auth/login"
-        >
-          Already have an account?
-        </RouterLink>
-      </div>
     </form>
-  </div>
 </template>
 
 <script lang="ts">
@@ -149,7 +144,7 @@ export default {
       achternaam: '',
       email: '',
       password: '',
-      role: '',
+      role: 'Personeel',
     })
 
     const submitForm = () => {
