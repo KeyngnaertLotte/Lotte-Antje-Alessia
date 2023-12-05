@@ -1,6 +1,6 @@
 <template>
       <cardSm title="materiaal"  class="col-span-1 row-start-4 row-span-4" url="materiaal"/>
-      <test title="scanner" />
+      <qrscanner title="scanner" class="col-span-1 row-start-4 row-span-4"/>
       <taskList :takenlijst="takenlijst"/>
 </template>
 
@@ -9,7 +9,7 @@ import { useQuery } from '@vue/apollo-composable'
 import Container from '@/components/generic/Container.vue'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
 import cardSm from '@/components/generic/CardSm.vue';
-import test from '@/components/generic/Test.vue';
+import qrscanner from '@/components/generic/QrScanner.vue';
 import taskList from '@/components/personeel/TaskList.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import useCustomUser from '@/composables/useCustomUser'
@@ -31,7 +31,7 @@ const personeelInfo = ref<any | null>(null)
 const takenlijst = ref<any | null>(null)
 
 export default {
-  components: { Container, cardSm, taskList, AppHeader, test },
+  components: { Container, cardSm, taskList, AppHeader, qrscanner },
 
   setup() {
     // const {

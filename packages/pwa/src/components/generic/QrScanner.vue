@@ -108,6 +108,12 @@ const handleClickQR = () => {
   console.log('click - QR')
   // Toggle the visibility of the qrcode-stream
   isScannerActive.value = !isScannerActive.value
+
+  // Clear the input value when the scanner is closed
+  if (!isScannerActive.value) {
+    inputValue.value = '';
+  }
+
   const qrcodeStream = document.getElementById('qrcode-stream')
 
   if (qrcodeStream) {
@@ -124,9 +130,9 @@ const isQrCodeStreamVisible = computed(() => {
 </script>
 
 <template>
-  <div class="col-span-1 row-start-4 row-span-4">
+  <div class="rounded-md m-5 flex flex-col items-center justify-center shadow-md bg-custom-blue">
     <button
-      class="rounded-md m-5 flex flex-col items-center justify-center shadow-md text-white bg-custom-blue"
+      class="rounded-md m-5 flex flex-col items-center justify-center text-white"
       @click="handleClickQR"
     >
       <div>
