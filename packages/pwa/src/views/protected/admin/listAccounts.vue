@@ -4,15 +4,14 @@
       <h1 class="text-2xl font-bold mb-4 font-body">Agenda alle artiesten</h1>
       <div class="grid grid-rows-1 grid-cols-10 w-full">
         <h2 class="col-span-1"></h2>
-        <h2 class="col-span-3 text-center text-lg font-bold">Lotte</h2>
         <h2 class="col-span-3 text-center text-lg font-bold">Antje</h2>
+        <h2 class="col-span-3 text-center text-lg font-bold">Lotte</h2>
         <h2 class="col-span-3 text-center text-lg font-bold">Aléssia</h2>
       </div>
       <div class="overflow-auto max-h-[80%]">
         <div class="grid grid-rows-35 grid-cols-10">
           <agendaTimes />
           <artistAgenda v-for="artist in data" :key="artist.id" :artist="artist" />
-          
       </div>
         </div>
       </div>
