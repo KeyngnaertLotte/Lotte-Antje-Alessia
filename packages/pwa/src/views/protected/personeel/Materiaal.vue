@@ -1,5 +1,6 @@
 <template>
-  <div class="mt-24">
+  <!-- <div class="mt-24"> -->
+  <div class="col-span-2 row-start-4 h-fit">
     <div v-if="MateriaalByCategorie">
       <div
         v-for="categorie in Object.keys(MateriaalByCategorie)"
