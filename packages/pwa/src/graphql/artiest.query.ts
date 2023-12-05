@@ -1,13 +1,20 @@
 import gql from 'graphql-tag'
 
 export const ALL_Artiesten = gql`
-  query {
-    artiesten {
+query Artiesten {
+  artiesten {
       id
+      uid
       naam
       podium
-    }
+      agenda {
+          taak
+          podium
+          tijd
+      }
   }
+}
+
 `
 
 export const GET_Artiest_By_Uid = gql`

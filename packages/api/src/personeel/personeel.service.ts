@@ -9,6 +9,7 @@ import { Takenlijst } from './entities/task.entity'
 import { Taak } from 'src/taken/entities/taken.entity'
 import { TakenService } from 'src/taken/taken.service'
 import { CreateTaakInput } from './dto/create-taak.input'
+import { UsersService } from 'src/users/users.service'
 
 @Injectable()
 export class PersoneelService {
@@ -16,6 +17,7 @@ export class PersoneelService {
     @InjectRepository(Personeel)
     private readonly personeelRepository: Repository<Personeel>,
     private readonly takenService: TakenService,
+    private readonly usersService: UsersService,
   ) {}
 
   // CREATE personeel
@@ -97,10 +99,6 @@ export class PersoneelService {
     return this.personeelRepository.findOneByOrFail({ uid })
   }
 
-  update(id: number, updatePersoneelInput: UpdatePersoneelInput) {
-    return `This action updates a #${id} personeel`
-  }
-
   // DELETE taak bij personeel en in grote takenlijst
   async removeTaak(uid: string, taakId: string) {
     // check if personeel exists
@@ -139,6 +137,61 @@ export class PersoneelService {
         return personeel
       }
     }
+  }
+
+  async update(uid: string, updatePersoneel: UpdatePersoneelInput) {
+    // update artiest
+    const personeel = this.findOneByUid(uid)
+    await personeel.then(p => {
+      p.voornaam = updatePersoneel?.voornaam
+      p.achternaam = updatePersoneel?.achternaam
+      return this.personeelRepository.save(p)
+    })
+
+    const user = await this.usersService.findOneByUid(uid)
+
+    const usernaam = user.naam
+
+    if (usernaam.includes(' ')) {
+      const uservoor = usernaam.split(' ')[0]
+      let userachter = usernaam.split(' ').slice(1).join(' ')
+      // userachter = userachter.join(' ')
+
+      console.log(uservoor)
+      console.log(userachter)
+
+      if (updatePersoneel?.voornaam) {
+        const naam = updatePersoneel?.voornaam + ' ' + userachter
+        await this.usersService.updateNaam(uid, naam)
+      }
+      if (updatePersoneel?.achternaam) {
+        const naam = uservoor + ' ' + updatePersoneel?.achternaam
+        await this.usersService.updateNaam(uid, naam)
+      }
+    } else {
+      if (updatePersoneel?.voornaam) {
+        const naam = updatePersoneel?.voornaam
+        await this.usersService.updateNaam(uid, naam)
+      }
+      if (updatePersoneel?.achternaam) {
+        const naam = updatePersoneel?.achternaam
+        await this.usersService.updateNaam(uid, naam)
+      }
+      if (updatePersoneel?.voornaam && updatePersoneel?.achternaam) {
+        const naam =
+          updatePersoneel?.voornaam + ' ' + updatePersoneel?.achternaam
+        await this.usersService.updateNaam(uid, naam)
+      }
+    }
+
+    return `personeel met uid ${uid} geupdate`
+  }
+
+  async remove(uid: string) {
+    const personeel = await this.findOneByUid(uid)
+    await this.personeelRepository.remove(personeel)
+    await this.usersService.remove(uid)
+    return 'user en artiest verwijderd'
   }
 
   saveAll(personeel: Personeel[]) {

@@ -72,9 +72,9 @@ export class UsersResolver {
     return this.usersService.update(updateUserInput.id, updateUserInput)
   }
 
-  @UseGuards(FirebaseGuard)
-  @Mutation(() => User)
-  removeUser(@Args('string', { type: () => String }) id: string) {
-    return this.usersService.remove(id)
-  }
+  // @UseGuards(FirebaseGuard)
+  // @Mutation(() => String)
+  // removeUser(@Args('string', { type: () => String }) uid: string) {
+  //   return this.usersService.remove(uid)
+  // }
 }
