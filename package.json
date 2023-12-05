@@ -28,5 +28,8 @@
     "proseWrap": "preserve",
     "htmlWhitespaceSensitivity": "css",
     "useTabs": false
+  },
+  "dependencies": {
+    "vue-qrcode-reader": "^5.4.1"
   }
 }
