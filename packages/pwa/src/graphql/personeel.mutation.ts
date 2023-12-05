@@ -26,6 +26,6 @@ export const DELETE_PERSONEEL = gql`
 
 export const UPDATE_PERSONEEL = gql`
 mutation UpdatePersoneel ($updatePersoneelInput: 
-  UpdatePersoneelInput!, $uid: String!)) {
+  UpdatePersoneelInput!, $uid: String!) {
   updatePersoneel(updatePersoneelInput: $updatePersoneelInput, uid: $uid)
 }`

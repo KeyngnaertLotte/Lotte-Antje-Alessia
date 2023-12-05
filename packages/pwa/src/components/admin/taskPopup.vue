@@ -16,7 +16,7 @@
           <label for="">Taak naam</label>
           <input
             type="text"
-            :value="currentData.naam"
+            v-model="naam"
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
           />
         </div>
@@ -34,6 +34,7 @@
                 :id="option"
                 :value="option"
                 class="mr-2"
+                v-model="type"
               />
               <label :for="option">{{ option }}</label>
             </div>
@@ -45,25 +46,16 @@
             name=""
             id=""
             class="bg-gray-200 rounded font-pop focus:outline-none p-2"
+            v-model="plaats"
           >
-            <option>aaaaaaaa</option>
-          </select>
-        </div>
-        <div class="flex flex-col w-full">
-          <label for="">Categorie</label>
-          <select
-            name=""
-            id=""
-            class="bg-gray-200 rounded font-pop focus:outline-none p-2"
-          >
-            <option>aaaaaaaaaa</option>
+            <option v-for="plaats in plaatsen">{{ plaats }}</option>
           </select>
         </div>
         <div class="flex flex-col w-full">
           <label for="">Aantal</label>
           <input
             type="number"
-            :value="currentData.aantal"
+            v-model="aantal"
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
           />
         </div>
@@ -71,19 +63,35 @@
           <label for="">Deadline</label>
           <input
             type="time"
-            :value="currentData.deadline"
+            v-model="deadline"
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
           />
         </div>
         <div class="flex flex-col w-full">
-          <label for="">Benodigdheden</label>
+          <label for="">Categorie</label>
           <select
             name=""
             id=""
             class="bg-gray-200 rounded font-pop focus:outline-none p-2"
+            v-model="categorie"
+            @change="updatedData"
           >
-            <option>aaaaaaaaaaaa</option>
+            <option v-for="categorie in categorieen">{{ categorie }}</option>
           </select>
+        </div>
+        <div class="flex flex-col w-full">
+          <label for="">Materiaal</label>
+          <select
+            name=""
+            id=""
+            class="bg-gray-200 rounded font-pop focus:outline-none p-2"
+            v-model="materiaal"
+          >
+            <option v-for="i in listMateriaal">
+              {{ i }}
+            </option>
+          </select>
+          <!-- <p>{{ listMateriaal }}</p> -->
         </div>
         <div class="flex flex-row justify-between w-full mt-10">
           <button
@@ -106,8 +114,18 @@
 
 <script lang="ts">
 import { X } from 'lucide-vue-next'
-import { useMutation } from '@vue/apollo-composable'
+import { useMutation, useQuery } from '@vue/apollo-composable'
 import { UPDATE_TAAK, REMOVE_TAAK } from '@/graphql/taak.mutation'
+import { ref } from 'vue'
+import { GET_MATERIAAL_BY_CATEGORIE } from '@/graphql/materiaal.query'
+
+const naam = ref('')
+const type = ref('')
+const plaats = ref('')
+const categorie = ref('')
+const aantal = ref(0)
+const deadline = ref('')
+const materiaal = ref('')
 
 const types = [
   'Podium - licht',
@@ -119,6 +137,26 @@ const types = [
   'Aanvulling',
   'Loges',
 ]
+
+const plaatsen = ['Antje', 'Lotte', 'Allesia', 'Bar', 'Toiletten']
+
+const categorieen = [
+  'geluid',
+  'verlichting',
+  'instrumenten',
+  'podium',
+  'elektriciteit',
+  'toiletten',
+  'eten',
+  'drinken',
+  'ehbo',
+  'beveiliging',
+  'afval',
+  'decoratie',
+]
+
+//ref list with strings
+let listMateriaal = ref<string[]>([])
 
 export default {
   props: {
@@ -149,31 +187,78 @@ export default {
     const updateTask = async () => {
       console.log('update')
       const updateTaakInput = {
-        naam: currentData.naam,
-        type: currentData.type,
-        plaats: currentData.plaats,
-        category: currentData.category,
-        aantal: currentData.aantal,
-        deadline: currentData.deadline,
-        materiaal: currentData.materiaal,
-        status: currentData.status,
+        naam: naam.value,
+        type: type.value,
+        plaats: plaats.value,
+        category: categorie.value,
+        aantal: aantal.value,
+        deadline: deadline.value,
+        materiaal: materiaal.value,
       }
 
-      console.log()
+      console.log(await updateTaakInput)
 
       const id = props.taskData.id
+
+      await updateTaak({ id: id, updateTakenInput: updateTaakInput })
 
       closeModal()
     }
 
-    const currentData = props.taskData
+    const { onResult, refetch } = useQuery(GET_MATERIAAL_BY_CATEGORIE, {
+      categorie: categorie,
+    })
+
+    onResult(result => {
+      if (result.data) {
+        listMateriaal.value = []
+        console.log('Data:', result.data.findByCategorie)
+        console.log(result.data.findByCategorie.length)
+        for (let i = 0; i < result.data.findByCategorie.length; i++) {
+          console.log(result.data.findByCategorie[i].item)
+          listMateriaal.value.push(result.data.findByCategorie[i].item)
+        }
+        console.log("listmaterial",listMateriaal.value)
+      }
+    })
+
+
+
+    const updatedData = () => {
+      refetch()
+    }
+
+  
+
+
+
+    naam.value = props.taskData.naam
+    type.value = props.taskData.type
+    plaats.value = props.taskData.plaats
+    categorie.value = props.taskData.category
+    aantal.value = props.taskData.aantal
+    deadline.value = props.taskData.deadline
+    materiaal.value = props.taskData.materiaal
+
+    // const currentData = props.taskData
 
     return {
       closeModal,
       types,
-      currentData,
+      plaatsen,
+      categorieen,
+      // currentData,
       deleteTask,
       updateTask,
+      naam,
+      type,
+      plaats,
+      categorie,
+      aantal,
+      deadline,
+      materiaal,
+      listMateriaal,
+      updatedData,
     }
   },
 }

@@ -13,5 +13,125 @@
     {
         "naam": "taart",
         "podium": "taartpodium"
+    },
+    {
+        "item": "Microfoons",
+        "aantal": 30,
+        "categorie": "Geluid"
+    },
+    {
+        "item": "Lichtbalken",
+        "aantal": 40,
+        "categorie": "Verlichting"
+    },
+    {
+        "item": "Drumstel",
+        "aantal": 5,
+        "categorie": "Instrumenten"
+    },
+    {
+        "item": "Podiumtrappen",
+        "aantal": 10,
+        "categorie": "Podium"
+    },
+    {
+        "item": "Verlengsnoeren",
+        "aantal": 25,
+        "categorie": "Elektriciteit"
+    },
+    {
+        "item": "Handzeep",
+        "aantal": 50,
+        "categorie": "Toiletten"
+    },
+    {
+        "item": "Vegetarische wraps",
+        "aantal": 150,
+        "categorie": "Eten"
+    },
+    {
+        "item": "Waterflessen",
+        "aantal": 120,
+        "categorie": "Drinken"
+    },
+    {
+        "item": "Pleisters",
+        "aantal": 8,
+        "categorie": "EHBO"
+    },
+    {
+        "item": "Securitycamera's",
+        "aantal": 12,
+        "categorie": "Beveiliging"
+    },
+    {
+        "item": "Recyclebakken",
+        "aantal": 30,
+        "categorie": "Afval"
+    },
+    {
+        "item": "Ballonboog",
+        "aantal": 800,
+        "categorie": "Decoratie"
+    },
+    {
+        "item": "Geluidsboxen",
+        "aantal": 25,
+        "categorie": "Geluid"
+    },
+    {
+        "item": "Rookmachines",
+        "aantal": 15,
+        "categorie": "Verlichting"
+    },
+    {
+        "item": "Keyboards",
+        "aantal": 8,
+        "categorie": "Instrumenten"
+    },
+    {
+        "item": "Podiumdoeken",
+        "aantal": 20,
+        "categorie": "Podium"
+    },
+    {
+        "item": "Stroomgeneratoren",
+        "aantal": 10,
+        "categorie": "Elektriciteit"
+    },
+    {
+        "item": "Toiletreiniger",
+        "aantal": 40,
+        "categorie": "Toiletten"
+    },
+    {
+        "item": "Sushi",
+        "aantal": 100,
+        "categorie": "Eten"
+    },
+    {
+        "item": "Bierflessen",
+        "aantal": 180,
+        "categorie": "Drinken"
+    },
+    {
+        "item": "Verbandtrommels",
+        "aantal": 7,
+        "categorie": "EHBO"
+    },
+    {
+        "item": "Beveiligingshekken",
+        "aantal": 20,
+        "categorie": "Beveiliging"
+    },
+    {
+        "item": "Plastic vuilniszakken",
+        "aantal": 60,
+        "categorie": "Afval"
+    },
+    {
+        "item": "Feestverlichting",
+        "aantal": 500,
+        "categorie": "Decoratie"
     }
 ]

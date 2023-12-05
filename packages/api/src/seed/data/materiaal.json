@@ -1,0 +1,62 @@
+[
+    {
+        "item": "PA-systeem",
+        "aantal": 20,
+        "categorie": "Geluid"
+    },
+    {
+        "item": "LED-spotlights",
+        "aantal": 50,
+        "categorie": "Verlichting"
+    },
+    {
+        "item": "Gitaar",
+        "aantal": 10,
+        "categorie": "Instrumenten"
+    },
+    {
+        "item": "Podiumelementen",
+        "aantal": 15,
+        "categorie": "Podium"
+    },
+    {
+        "item": "Stroomkabels",
+        "aantal": 30,
+        "categorie": "Elektriciteit"
+    },
+    {
+        "item": "Toiletpapier",
+        "aantal": 100,
+        "categorie": "Toiletten"
+    },
+    {
+        "item": "Pizza",
+        "aantal": 200,
+        "categorie": "Eten"
+    },
+    {
+        "item": "Frisdrank",
+        "aantal": 150,
+        "categorie": "Drinken"
+    },
+    {
+        "item": "Verbanddozen",
+        "aantal": 5,
+        "categorie": "EHBO"
+    },
+    {
+        "item": "Beveiligingspersoneel",
+        "aantal": 15,
+        "categorie": "Beveiliging"
+    },
+    {
+        "item": "Afvalzakken",
+        "aantal": 50,
+        "categorie": "Afval"
+    },
+    {
+        "item": "Feestballonnen",
+        "aantal": 1000,
+        "categorie": "Decoratie"
+    }
+]

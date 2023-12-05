@@ -58,6 +58,7 @@
     }
 
     const handleCloseModal = () => {
+      refetch()
       isModalOpen.value = false
     }
   
