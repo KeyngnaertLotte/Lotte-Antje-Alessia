@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import Container from '@/components/generic/Container.vue'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
 import cardSm from '@/components/generic/CardSm.vue';
 import qrscanner from '@/components/generic/QrScanner.vue';
@@ -31,7 +30,7 @@ const personeelInfo = ref<any | null>(null)
 const takenlijst = ref<any | null>(null)
 
 export default {
-  components: { Container, cardSm, taskList, AppHeader, qrscanner },
+  components: { cardSm, taskList, AppHeader, qrscanner },
 
   setup() {
     // const {
