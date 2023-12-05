@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutDashboard , X, Clock3, Coins, LogOut, UserPlus, PackageOpen, Mic2, ListTodo  } from 'lucide-vue-next'
+import { LayoutDashboard , X, Clock3, Coins, LogOut, UserPlus, PackageOpen, Mic2, ListTodo, ClipboardCheck  } from 'lucide-vue-next'
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
 import { Plus } from 'lucide-vue-next';
