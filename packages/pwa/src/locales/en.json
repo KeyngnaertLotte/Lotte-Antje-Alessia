@@ -1,1 +1,17 @@
-{"en":{"Key":"en","navigation.home":"Home","navigation.user":"User","footer.disclaimer":"Disclaimer","account.welcome":"Hi, {user}","account.stats":"Stats","account.realtime":"Realtime","account.settings":"Settings","account.log.out":"Log out"}}
+{
+  "en": {
+    "Key": "en",
+    "navigation.home": "Home",
+    "navigation.user": "User",
+    "account.welcome": "Hi, {user}",
+    "account.log.out": "Log out",
+    "navigation.materiaal": "Material",
+    "navigation.alletaken": "All tasks",
+    "navigation.logout": "Log out",
+    "taken.alletaken": "All open tasks",
+    "taken.claim": "Claim here your task",
+    "dashboard.card.material": "Material",
+    "dashboard.card.scanner": "Scanner",
+    "dashboard.takenlijst": "Tasklist"
+  }
+}

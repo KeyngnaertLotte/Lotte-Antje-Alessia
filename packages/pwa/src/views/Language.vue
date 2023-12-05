@@ -1,7 +1,10 @@
 <template>
-  <Container>
+  <div>
     <h1 class="text-4xl font-bold tracking-wide mb-6">
       {{ $t('account.welcome', { user: firebaseUser?.displayName }) }}
+    </h1>
+    <h1 class="text-4xl font-bold tracking-wide mb-6">
+      {{ $t('taken.claim', { user: firebaseUser?.displayName }) }}
     </h1>
 
     <form @submit.prevent="">
@@ -18,17 +21,17 @@
         </option>
       </select>
     </form>
-  </Container>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-import Container from '@/components/generic/Container.vue'
 import useFirebase from '@/composables/useFirebase'
-import { SUPPORTED_LOCALES } from '@/bootstrap/i18n'
+
 import useLanguage from '@/composables/useLanguage'
 import { useI18n } from 'vue-i18n'
+import { SUPPORTED_LOCALES } from '@/bootstrap/i18n'
 
 const { firebaseUser, logout } = useFirebase()
 const { replace } = useRouter()

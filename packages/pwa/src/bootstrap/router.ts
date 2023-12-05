@@ -10,6 +10,11 @@ const router = createRouter({
       path: '/',
       component: () => import('../views/Home.vue'),
     },
+    // delete lang
+    {
+      path: '/lang',
+      component: () => import('../views/Language.vue'),
+    },
 
     {
       path: '/bezoeker',
