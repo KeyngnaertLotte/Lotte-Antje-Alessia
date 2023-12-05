@@ -1,17 +1,22 @@
 <template>
-  <button v-for="event in artist.agenda" :key="event.tijd" :class="calculateEventClass(event)" class="col-span-3 w-[90%] h-[90%] flex flex-col rounded-lg  justify-self-center" @click="editEvent(event)">
+  <button v-for="event in artist.agenda" :key="event.tijd" :class="calculateEventClass(event)" class="col-span-3 w-[90%] h-[90%] flex flex-col rounded-lg  justify-self-center" @click="handleOpenModal(event)">
     <div class="flex flex-row justify-between w-full p-2">
     <h3 class="text-md font-bold ">{{ artist.naam }}</h3>
     <p>{{ event.tijd }}</p>
     </div>
-    <p class="w-full p-2 text-center">{{ event.taak }}</p>
+    <p class="w-full p-2  pb-4 text-center">{{ event.taak }}</p>
   </button>
 </template>
 
 <script lang="ts">
 import { Pencil } from 'lucide-vue-next';
 import agendaTimes from '@/components/admin/agendaTimes.vue';
-import agendaLines from '@/components/admin/agendaLines.vue';
+import EventPopup from '@/components/admin/eventPopup.vue';
+import { computed, ref } from 'vue';
+
+const isModalOpen = ref(false)
+const selectedItem = ref<any | null>(null)
+
 
 export default {
   props: {
@@ -23,11 +28,19 @@ export default {
   components: {
     Pencil,
     agendaTimes,
-    agendaLines,
+    EventPopup
   },
-  setup(props) {
+  setup(props, { emit }) {
     const artist = props.artist;
-    return { artist, editEvent };
+
+    const handleOpenModal = (event: any) => {
+      // Emit the open-modal event with the event data
+      emit('open-modal', event);
+    };
+
+
+
+    return { artist, editEvent, handleOpenModal, isModalOpen, selectedItem };
   },
   methods: {
     calculateEventClass(event: any) {
