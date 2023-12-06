@@ -109,6 +109,27 @@ export class MateriaalService {
           }
 
           if (aantalUpdate > materiaal[0].aantal) {
+            let currentTime = new Date()
+
+            // Add 30 minutes
+            currentTime.setMinutes(currentTime.getMinutes() + 30)
+
+            // Get the hours and minutes
+            let hours = currentTime.getHours()
+            let minutes = currentTime.getMinutes()
+
+            // Format the hours and minutes as a string
+            let formattedTime = `${hours}:${minutes}`
+
+            await this.takenService.create({
+              naam: `aanvullen ${materiaal[0].item}`,
+              aantal: aantal * 10,
+              category: materiaal[0].categorie,
+              plaats: 'Magazijn',
+              type: 'Aanvulling',
+              deadline: formattedTime,
+              materiaal: materiaal[0].item,
+            })
             throw new Error('Niet genoeg materiaal')
           } else {
             const resultAantal = materiaal[0].aantal - aantalUpdate
@@ -125,8 +146,7 @@ export class MateriaalService {
           })
           if (materiaal.length === 0) {
             throw new Error('Materiaal niet gevonden')
-          }
-          else {
+          } else {
             const resultAantal = materiaal[0].aantal + aantalUpdate
             console.log('resultAantal', resultAantal)
             this.materiaalRepository.update(

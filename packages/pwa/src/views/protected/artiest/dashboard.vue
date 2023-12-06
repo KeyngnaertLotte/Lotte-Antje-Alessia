@@ -1,22 +1,22 @@
 <template>
   <cardSm
     title="item"
-    :isPopup="true"
+    :isPopup="false"
     class="col-span-1 row-start-4 row-span-4"
-    @sendDataToParent="handleDataFromChild"
+    
+    :url="'/artiest/items'"
   />
   <!-- <cardSm title="vip lijst" class="col-span-1 row-start-4 row-span-4" /> -->
-  <ItemPopUp
+  <!-- <ItemPopUp
     v-if="isModalOpen"
     :id="uid ?? ''"
     @close-modal="handleCloseModal"
-  />
+  /> -->
   <AgendaArtist />
 </template>
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import Container from '@/components/generic/Container.vue'
 import { ALL_Artiesten } from '@/graphql/artiest.query'
 import AppHeader from '@/components/AppHeader.vue'
 import AgendaArtist from '@/components/artiest/AgendaArtist.vue'
@@ -33,7 +33,7 @@ const uid = customUser.value?.uid
 const isModalOpen = ref(false)
 
 export default {
-  components: { Container, AppHeader, AgendaArtist, cardSm, ItemPopUp },
+  components: { AppHeader, AgendaArtist, cardSm, ItemPopUp },
 
   setup() {
     const dataFromChild = ref<string>('')
