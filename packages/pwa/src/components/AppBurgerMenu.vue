@@ -35,7 +35,7 @@
         class="flex flex-row items-center text-3xl text-white gap-4 font-body  md:text-2xl"
       >
         <LogOut class="stroke-white h-8 w-8 transform -scale-x-100" />
-        UITLOGGEN
+        {{ $t('account.log.out', { user: firebaseUser?.displayName }) }}
       </button>
     </div>
   </div>
@@ -46,6 +46,8 @@ import { LayoutDashboard , X, Clock3, Coins, LogOut, UserPlus, PackageOpen, Mic2
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
 import { Plus } from 'lucide-vue-next';
+
+const { firebaseUser } = useFirebase()
 
 const props = defineProps(
   {
