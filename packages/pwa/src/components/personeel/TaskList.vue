@@ -3,6 +3,11 @@ import { ref, getCurrentInstance } from 'vue'
 import { PlusCircle, X } from 'lucide-vue-next'
 import { useMutation } from '@vue/apollo-composable'
 import { CREATE_TASK } from '@/graphql/taak.mutation'
+import useFirebase from '@/composables/useFirebase'
+
+import useLanguage from '@/composables/useLanguage'
+import { useI18n } from 'vue-i18n'
+import { SUPPORTED_LOCALES } from '@/bootstrap/i18n'
 
 const props = defineProps({
   takenlijst: {
@@ -81,12 +86,15 @@ const addTask = () => {
 const validateAantalInput = () => {
   newTaskAantal.value = Math.min(100, Math.max(1, newTaskAantal.value))
 }
+
+const { firebaseUser, logout } = useFirebase()
 </script>
 
 <template>
   <div class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4">
     <div class="flex items-center justify-between">
-      <h1 class="font-bold text-xl">Takenlijst</h1>
+      <!-- <h1 class="font-bold text-xl">Takenlijst</h1> -->
+      <h1 class="font-bold text-xl">{{ $t('dashboard.takenlijst', { user: firebaseUser?.displayName }) }}</h1>
       <button @click="openAddTaskPopup">
         <PlusCircle class="stroke-custom-blue" />
       </button>
