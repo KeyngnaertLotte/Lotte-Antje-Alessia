@@ -28,6 +28,7 @@ export default {
         ) ?? locale.value,
       )
     }
+    return {}
   },
 }
 </script>
