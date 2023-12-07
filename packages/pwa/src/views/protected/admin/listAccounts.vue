@@ -1,59 +1,41 @@
-<!-- ARTSIESTEN FINDALL -->
 
-<!-- query artiesten query artiesten {
-  artiesten{
-    id,
-    uid,
-    naam, 
-    podium, 
-    agenda{
-      taak, 
-      podium, 
-      tijd
-    }, 
-    benodigdheden {
-      item,
-      aantal,
-      categorie,
-      podium
-    }
-}} -->
-
-
+import EventPopup from '@/components/admin/eventPopup.vue';
 <template>
-  <div class="col-span-2 rounded-lg bg-white row-span-22 m-5 p-6">
-    <div class="flex flex-row items-center justify-between">
-      
-    <h1 class="text-2xl font-bold mb-4 font-body w-2/3">Alle personeel en artiesten</h1>
-    <input type="text" name="search" id="search" placeholder="Zoek naar een naam" class="border-2 border-black p-1 rounded w-1/3" v-model="searchTerm">
-    </div>
-    <div class="flex flex-row w-full justify-start items-center mb-4 ">
-      <h2 class="text-lg font-bold w-1/2">Naam</h2>
-      <h2 class="text-lg font-bold w-1/2">Rol</h2>
-    </div>
-    <div class="overflow-auto max-h-[80%] w-full">
-      <div v-for="(user, index) in filteredUsers"
-          :key="index"
-          :class="{ 'bg-gray-50': index % 2 === 0 }"
-          class="flex flex-row items-center justify-start border-b-2 p-2 last:border-b-none"
-        >
-        <p class="w-1/2">{{ user.naam }}</p>
-        <p class="w-1/2">{{ user.role }}</p>
-        
+  <div class="col-span-2 row-span-22 flex flex-row items-center justify-center" id="teleport-target">
+    <div class="bg-white w-full h-[95%] rounded-lg m-4 p-6">
+      <h1 class="text-2xl font-bold mb-4 font-body">Agenda alle artiesten</h1>
+      <div class="grid grid-rows-1 grid-cols-10 w-full">
+        <h2 class="col-span-1"></h2>
+        <h2 class="col-span-3 text-center text-lg font-bold">Antje</h2>
+        <h2 class="col-span-3 text-center text-lg font-bold">Lotte</h2>
+        <h2 class="col-span-3 text-center text-lg font-bold">Aléssia</h2>
+      </div>
+      <div class="overflow-auto max-h-[80%]">
+        <div class="grid grid-rows-35 grid-cols-10">
+          <agendaTimes />
+          <artistAgenda v-for="artist in data" :key="artist.id" :artist="artist" @open-modal="handleOpenModal"/>
+      </div>
+        </div>
       </div>
     </div>
-    
-  </div>
+    <EventPopup v-if="isModalOpen" :eventData="selectedItem" @close-modal="handleCloseModal" />
     
 </template>
+
 
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
 import { ALL_Artiesten } from '@/graphql/artiest.query'
+import { Pencil  } from 'lucide-vue-next'
+import agendaTimes from '@/components/admin/agendaTimes.vue'
+import artistAgenda from '@/components/admin/artistAgenda.vue'
 import { computed, ref } from 'vue'
+import EventPopup from '@/components/admin/eventPopup.vue'
 
 const data = ref<any | null>(null)
-const searchTerm = ref('')
+const isModalOpen = ref(false)
+const selectedItem = ref<any | null>(null)
+
 
 const { onResult, refetch } = useQuery(ALL_Artiesten)
 
@@ -64,18 +46,26 @@ onResult(result => {
       }
     })
 
-const filteredUsers = computed(() => {
-  if (data.value) {
-    return data.value.filter((user: any) => {
-      return user.naam.toLowerCase().includes(searchTerm.value.toLowerCase())
-    })
-  }
-})
-
+    const handleOpenModal = (item: any) => {
+      isModalOpen.value = true;
+      selectedItem.value = item;
+    };
+    const handleCloseModal = () => {
+      refetch()
+      isModalOpen.value = false;
+      selectedItem.value = null;
+    };
 
 export default {
+  components: {
+    Pencil,
+    agendaTimes,
+    artistAgenda,
+    EventPopup
+},
   setup() {
-    return { data, searchTerm, filteredUsers }
+    return { data, handleOpenModal, isModalOpen, selectedItem, handleCloseModal }
   },
-}
+};
+
 </script>

@@ -28,5 +28,7 @@ export default defineConfig({
       body: ['gravesend-sans', 'sans-serif'],
       pop: ['poppins', 'sans-serif'],
     },
-  }
+  },
+  safelist: [...Array.from({ length: 10 }, (_, i) => `col-start-${i + 1}`), ...Array.from({ length: 70 }, (_, i) => `row-start-${i + 1}`), ...Array.from({ length: 35 }, (_, i) => `row-span-${i + 1}`)],
+
 })
