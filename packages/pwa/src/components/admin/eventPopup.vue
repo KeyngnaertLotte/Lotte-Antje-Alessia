@@ -47,7 +47,7 @@
         <div class="flex flex-row justify-end mt-6">
           <button
             @click="updateTask"
-            class="py-2 px-4 bg-custom-orange text-white rounded"
+            class="py-2 px-16 bg-custom-orange text-white rounded"
           >
             UPDATE
           </button>
