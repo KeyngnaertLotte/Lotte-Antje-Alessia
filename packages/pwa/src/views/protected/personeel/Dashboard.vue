@@ -8,7 +8,7 @@
 import { useQuery } from '@vue/apollo-composable'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
 import cardSm from '@/components/generic/CardSm.vue';
-import qrscanner from '@/components/generic/QrScanner.vue';
+import qrscanner from '@/components/personeel/QrScanner.vue';
 import taskList from '@/components/personeel/TaskList.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import useCustomUser from '@/composables/useCustomUser'

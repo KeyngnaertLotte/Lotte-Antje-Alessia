@@ -2,7 +2,7 @@
 import { computed, defineProps, defineEmits, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { QrCode, X } from 'lucide-vue-next'
-import { QrcodeStream } from 'vue-qrcode-reader'
+// import { QrcodeStream } from 'vue-qrcode-reader'
 
 const props = defineProps({
   title: {
@@ -143,37 +143,5 @@ const isQrCodeStreamVisible = computed(() => {
       </div>
     </button>
 
-    <div
-      v-if="isScannerActive === true"
-      class="fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
-    >
-      <div class="h-1/2 w-7/8 bg-white rounded-md flex justify-center relative">
-        <button
-          @click="handleClickQR"
-          class="absolute top-[-1rem] right-[-0.5rem] flex flex-row bg-[#D5573B] rounded-lg h-12 w-12 justify-center items-center"
-        >
-          <X class="h-10 w-10 stroke-white" />
-        </button>
-        <div class="flex flex-col justify-start items-center h-full w-full">
-          <h1 class="text-3xl font-body font-bold text-custom-orange my-6">
-            Scan een QR-code
-          </h1>
-          <p class="flex self-start pl-4">Geef het bedrag in</p>
-          <input
-            v-model="inputValue"
-            type="number"
-            max="100"
-            min="0"
-            class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
-          />
-          <qrcode-stream
-            v-show="isQrCodeStreamVisible"
-            :track="selected.value"
-            @error="logErrors"
-            class="p-4"
-          />
-        </div>
-      </div>
-    </div>
   </div>
 </template>
