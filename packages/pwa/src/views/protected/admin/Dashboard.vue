@@ -158,7 +158,6 @@ onResult(result => {
 })
 
 export default {
-  // components: { Container },
   components: { Trash2 },
 
   setup() {
