@@ -51,6 +51,7 @@ onResult(result => {
       selectedItem.value = item;
     };
     const handleCloseModal = () => {
+      refetch()
       isModalOpen.value = false;
       selectedItem.value = null;
     };
