@@ -3,10 +3,14 @@ import { ref } from 'vue'
 import { Euro, X } from 'lucide-vue-next'
 import { QrcodeStream } from 'vue-qrcode-reader'
 
+import { useMutation } from '@vue/apollo-composable'
+import { REMOVE_SALDO } from '@/graphql/bezoeker.mutation'
+const { mutate: removeSaldo } = useMutation(REMOVE_SALDO)
 
 const showCamera = ref(false)
 const price = ref(0)
 let enteredValue = 0
+const selectedPlace = ref(""); 
 
 export default {
   components: {
@@ -27,9 +31,17 @@ const closeModal = () => {
 }
 
 
-const onDetect = (result: string) => {
-  console.log('Result:', result)
+const onDetect = (result: any) => {
+  console.log('Result:', result[0].rawValue)
   console.log('Entered Value:', enteredValue)
+  removeSaldo({ uid: result[0].rawValue, saldo: enteredValue, transactie: selectedPlace.value })
+    .then(graphqlresult => {
+      console.log('🎉 new transactie added to Bezoeker')
+      console.log(graphqlresult?.data) // Access the returned data
+    })
+    .catch(error => {
+      console.error(error)
+    })
   closeModal()
 }
     return {
@@ -38,6 +50,7 @@ const onDetect = (result: string) => {
       price,
       closeModal,
       onDetect,
+      selectedPlace
     }
   },
 }
@@ -48,11 +61,17 @@ const scanButtonClick = () => {
   // Access the input value using the ref
   enteredValue = price.value
   // console.log('Entered Value:', enteredValue)
+  console.log('Selected Place:', selectedPlace.value)
 
   if (enteredValue === 0 || enteredValue.toString() === '' ) {
     alert('Please enter a valid price before scanning.')
     return
-  } else {
+  }
+  else if (selectedPlace.value === '') {
+    alert('Please select a place before scanning.')
+    return
+  }
+   else {
     showCamera.value = true
     // console.log('Entered Value:', enteredValue)
   }
@@ -69,24 +88,37 @@ const scanButtonClick = () => {
     >
       <button
         @click="closeModal"
-        class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"
+        class="absolute z-10 top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"
       >
         <X class="h-10 w-10 stroke-white" />
       </button>
       <div
         v-if="!showCamera"
-        class="h-1/2 flex flex-col items-center justify-around"
+        class="h-full flex flex-col items-center justify-around"
       >
-        <h1 class="text-2xl font-body font-bold text-custom-orange my-6">
+        <h1 class="text-2xl font-body font-bold text-custom-orange my-4">
           Geef een bedrag in:
         </h1>
-        <div class="flex flex-row w-full items-center justify-center">
+        <div class="flex flex-row w-full items-center justify-center mb-4">
           <Euro class="h-8 w-8" />
           <input
             type="number"
             v-model.number="price"
             class="block font-pop w-2/5 border-b-2 text-xl border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
           />
+        </div>
+
+        
+        <div class="w-3/4">
+          <select v-model="selectedPlace" class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none">
+            <option value="" disabled>Selecteer plaats</option>
+            <option value="Bar 1">Bar 1</option>
+            <option value="Bar 2">Bar 2</option>
+            <option value="Bar 3">Bar 3</option>
+            <option value="Eetstand 1">Eetstand 1</option>
+            <option value="Eetstand 2">Eetstand 2</option>
+            <option value="Eetstand 3">Eetstand 3</option>
+          </select>
         </div>
 
         <button

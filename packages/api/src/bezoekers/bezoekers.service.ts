@@ -140,7 +140,21 @@ export class BezoekersService {
     return this.bezoekerRepository.save(bezoeker)
   }
 
+  async removeSaldo(uid: string, saldo: number, transactie: string) {
+    // Retrieve the Bezoeker by ID
+    const bezoeker = await this.bezoekerRepository.findOneByOrFail({ uid })
+  
+    const newTransactie = new Transactie()
+    newTransactie.aantal = saldo
+    newTransactie.tijd = new Date()
+    newTransactie.transactie = transactie
 
+    bezoeker.transacties.push(newTransactie)
+
+    bezoeker.saldo = bezoeker.saldo - saldo
+
+    return this.bezoekerRepository.save(bezoeker)
+  }
 
 
 

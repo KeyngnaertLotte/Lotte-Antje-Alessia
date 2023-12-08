@@ -68,7 +68,7 @@ export default {
           // Ensure that it's a valid number
           addSaldo({ uid: props.id, saldo: saldoValue })
             .then(graphqlresult => {
-              console.log('🎉 new favoartiest added to Bezoeker')
+              console.log('🎉 new transactie added to Bezoeker')
               console.log(graphqlresult?.data) // Access the returned data
             })
             .catch(error => {

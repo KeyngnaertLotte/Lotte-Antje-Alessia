@@ -50,6 +50,20 @@ export const ADD_BEZOEKER = gql`
     }
   }
   `
+
+  export const REMOVE_SALDO = gql`
+  mutation RemoveSaldoFromBezoeker ($uid: String!, $saldo: Float!, $transactie: String!){
+    removeSaldoFromBezoeker(uid: $uid, saldo: $saldo, transactie: $transactie) {
+        id
+        uid
+        naam
+        saldo
+        transacties{transactie, tijd, aantal}
+    }
+  }
+`
+  
+
   
   
     
