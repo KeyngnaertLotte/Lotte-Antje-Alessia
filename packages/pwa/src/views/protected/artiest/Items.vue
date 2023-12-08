@@ -5,7 +5,7 @@
       v-if="benodigdheden"
       class="flex flex-col items-center w-full mb-4 mt-2"
     >
-      <div class="w-[90%] flex-col items-center justify-center">
+      <div class="w-9/10 flex-col items-center justify-center">
         <button
           @click="toggleShow('benodigdheden')"
           class="my-4 p-2 w-full rounded border-1 flex justify-between bg-slate-300"
@@ -31,7 +31,7 @@
       <div
         v-for="categorie in Object.keys(MateriaalByCategorie)"
         :key="categorie"
-        class="w-[90%] flex-col items-center justify-center"
+        class="w-9/10 flex-col items-center justify-center"
       >
         <button
           @click="toggleShow(categorie)"
@@ -67,7 +67,7 @@
     </div>
     <button
       @click="submit"
-      class="w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white mt-4"
+      class="w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white mt-4"
     >
       Submit
     </button>

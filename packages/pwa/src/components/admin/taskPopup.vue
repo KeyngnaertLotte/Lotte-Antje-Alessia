@@ -2,7 +2,7 @@
   <div
     class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
-    <div class="bg-white w-[90%] h-[90%] rounded-lg relative">
+    <div class="bg-white w-9/10 h-9/10 rounded-lg relative">
       <button
         @click="closeModal"
         class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"

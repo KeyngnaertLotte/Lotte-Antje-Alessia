@@ -19,12 +19,12 @@
             type="number"
             name=""
             id="amountInput"
-            class="block font-pop w-[90%] border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+            class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
           />
         </div>
         <button
           @click="checkAndCloseModal"
-          class="mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4"
+          class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4"
         >
           <Landmark class="h-8 w-8 border-white" />OVERSCHRIJVEN
         </button>

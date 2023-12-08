@@ -1,5 +1,5 @@
 <template>
-  <button v-for="event in artist.agenda" :key="event.tijd" :class="calculateEventClass(event)" class="col-span-3 w-[90%] h-[90%] flex flex-col rounded-lg  justify-self-center" @click="handleOpenModal(event)">
+  <button v-for="event in artist.agenda" :key="event.tijd" :class="calculateEventClass(event)" class="col-span-3 w-9/10 h-9/10 flex flex-col rounded-lg  justify-self-center" @click="handleOpenModal(event)">
     <div class="flex flex-row justify-between w-full p-2">
     <h3 class="text-md font-bold ">{{ artist.naam }}</h3>
     <p>{{ event.tijd }}</p>
