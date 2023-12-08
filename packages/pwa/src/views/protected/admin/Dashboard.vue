@@ -40,8 +40,8 @@
               {{ option }}
             </option>
           </select>
-          <button class="w-1/14 flex justify-center items-center">
-            <Trash2 class="stroke-1.5" />
+          <button class="w-1/14 flex justify-center items-center" @click="handleOpenModal(item)">
+            <Pencil class="stroke-1.5" />
           </button>
         </div>
       </div>
@@ -98,6 +98,7 @@
       </form>
     </div>
   </div>
+  <personeelPopup v-if="isModalOpen" :personeelData="selectedItem" @close-modal="handleCloseModal"/>
 </template>
 
 <script lang="ts">
@@ -106,7 +107,11 @@ import { GET_PERSONEEL } from '@/graphql/personeel.query'
 import { UPDATE_TYPE } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
-import { Trash2 } from 'lucide-vue-next'
+import { Pencil } from 'lucide-vue-next'
+import personeelPopup from '@/components/admin/personeelPopup.vue'
+
+const isModalOpen = ref(false)
+const selectedItem = ref<any | null>(null)
 
 // const { error, result: bezoekerResult, loading, refetch, onResult } =  useQuery(GET_BEZOEKER_BY_UID, { uid });
 const { error, onResult, refetch } = useQuery(GET_PERSONEEL)
@@ -142,6 +147,15 @@ const types = [
   'Loges',
 ]
 
+const handleOpenModal = (item: any) => {
+      isModalOpen.value = true
+      selectedItem.value = item
+    }
+
+    const handleCloseModal = () => {
+      isModalOpen.value = false
+    }
+
 onResult(result => {
   if (result.data) {
     const sortedPersoneel = [...result.data.personeel]
@@ -158,7 +172,7 @@ onResult(result => {
 })
 
 export default {
-  components: { Trash2 },
+  components: { Pencil, personeelPopup },
 
   setup() {
     const onChange = (item: Personeel, index: number, newValue: string) => {
@@ -194,7 +208,7 @@ export default {
       )
     }
 
-    return { personeelInfo, onChange, types, filterByType, filterPersoneel }
+    return { personeelInfo, onChange, types, filterByType, filterPersoneel, handleCloseModal, handleOpenModal, isModalOpen, selectedItem }
   },
 }
 </script>

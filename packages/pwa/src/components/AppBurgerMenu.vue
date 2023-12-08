@@ -133,7 +133,7 @@ const roleMenuList = [
         icon: UserPlus,
       },
       {
-        name:'Lijst artiesten',
+        name:'Agenda artiesten',
         path: '/admin/lijst-accounts',
         icon: Mic2,
       },
