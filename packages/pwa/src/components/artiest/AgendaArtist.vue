@@ -34,7 +34,6 @@
 <script lang="ts">
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import Container from '@/components/generic/Container.vue'
 import { GET_Artiest_By_Uid } from '@/graphql/artiest.query'
 import useCustomUser from '@/composables/useCustomUser'
 
@@ -44,7 +43,6 @@ const AgendaItems = ref<any | null>(null)
 
 export default {
   components: {
-    Container,
   },
   setup() {
     const getBezoekerInfo = async () => {

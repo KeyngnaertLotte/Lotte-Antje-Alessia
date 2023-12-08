@@ -21,13 +21,16 @@
     "lucide-vue-next": "^0.279.0",
     "proxy-agent": "^6.3.1",
     "qrcode": "^1.5.3",
+    "qrcode-vue3": "^1.6.8",
     "vue": "^3.3.4",
     "vue-i18n": "^9.5.0",
+    "vue-qrcode-reader": "^5.4.1",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
     "@types/node": "^18.17.15",
+    "@types/webrtc": "^0.0.41",
     "@unocss/preset-web-fonts": "^0.56.5",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vue/tsconfig": "^0.4.0",

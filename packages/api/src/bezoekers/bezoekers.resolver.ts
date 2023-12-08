@@ -76,6 +76,16 @@ export class BezoekersResolver {
     return this.bezoekersService.addSaldo(uid, aantal)
   }
 
+  // @UseGuards(FirebaseGuard)
+  @Mutation(() => Bezoeker)
+  removeSaldoFromBezoeker(
+    @Args('uid', { type: () => String }) uid: string,
+    @Args('saldo', { type: () => Float }) aantal: number,
+    @Args('transactie', { type: () => String }) transactie: string,
+  ) {
+    return this.bezoekersService.removeSaldo(uid, aantal, transactie)
+  }
+
   // @Mutation(() => Bezoeker)
   // updateBezoeker(@Args('updateBezoekerInput') updateBezoekerInput: UpdateBezoekerInput) {
   //   return this.bezoekersService.update(updateBezoekerInput.id, updateBezoekerInput);

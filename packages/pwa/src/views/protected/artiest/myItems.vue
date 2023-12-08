@@ -37,7 +37,6 @@
   <script lang="ts">
   import { ref, computed } from 'vue'
   import { useQuery } from '@vue/apollo-composable'
-  import Container from '@/components/generic/Container.vue'
   import { GET_Artiest_By_Uid } from '@/graphql/artiest.query'
   import useCustomUser from '@/composables/useCustomUser'
   import { defineComponent } from 'vue'
@@ -49,7 +48,6 @@
   
   export default {
     components: {
-      Container,
       LucideIconChevronDown: LucideIcons.ChevronDown,
     },
     data() {

@@ -2,7 +2,7 @@
 import { Crown } from 'lucide-vue-next';
 import { PlusCircle } from 'lucide-vue-next';
 import { QrCode, PackageOpen } from 'lucide-vue-next';
-import { computed, defineProps, defineEmits  } from 'vue';
+import { computed  } from 'vue';
 import { useRouter } from 'vue-router'; 
 
 

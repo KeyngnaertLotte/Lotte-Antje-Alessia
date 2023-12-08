@@ -1,5 +1,4 @@
 <template>
-  <Container>
     <h1 class="text-4xl font-bold tracking-wide mb-6">
       {{ $t('account.welcome', { user: firebaseUser?.displayName }) }}
     </h1>
@@ -18,13 +17,10 @@
         </option>
       </select>
     </form>
-  </Container>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-
-import Container from '@/components/generic/Container.vue'
 import useFirebase from '@/composables/useFirebase'
 import { SUPPORTED_LOCALES } from '@/bootstrap/i18n'
 import useLanguage from '@/composables/useLanguage'
