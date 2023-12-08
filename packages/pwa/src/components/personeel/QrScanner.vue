@@ -7,6 +7,7 @@ import { useMutation } from '@vue/apollo-composable'
 import { REMOVE_SALDO } from '@/graphql/bezoeker.mutation'
 const { mutate: removeSaldo } = useMutation(REMOVE_SALDO)
 
+
 const showCamera = ref(false)
 const price = ref(0)
 let enteredValue = 0
