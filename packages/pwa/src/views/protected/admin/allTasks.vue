@@ -1,6 +1,9 @@
 <template>
     <div class="col-span-2 rounded-lg bg-white row-span-22 m-5 p-6">
-      <h1 class="text-2xl font-bold mb-4 font-body">Alle taken</h1>
+      <div class="w-full flex flex-row justify-between mb-4">
+        <h1 class="text-2xl font-bold font-body">Alle taken</h1>
+        <button class="flex items-start justify-start bg-custom-orange rounded-lg" @click="handleOpenAddTask"><Plus class="w-10 h-10 stroke-white"/></button>
+      </div>
       <div class="flex items-center justify-between mb-4 px-2 bg-gray-200">
         <h2 class="text-lg font-bold w-1/4">Naam</h2>
         <h2 class="text-lg font-bold w-1/3">Type</h2>
@@ -12,7 +15,7 @@
         <h2 class="text-lg font-bold w-1/4">Status</h2>
         <h2 class="text-lg font-bold w-1/14"></h2>
       </div>
-      <div class="overflow-auto max-h-[80%]">
+      <div class="overflow-auto max-h-4/5">
         <div v-for="(item, index) in data" :key="item.id" class="flex items-center justify-between border-b-2 p-2 last:border-b-none">
           <p class="w-1/4">{{ item.naam }}</p>
           <p class="w-1/3">{{ item.type }}</p>
@@ -22,24 +25,27 @@
           <p class="w-1/4">{{ item.deadline }}</p>
           <p class="w-1/4">{{ item.materiaal }}</p>
           <p class="w-1/4">{{ item.status }}</p>
-          <button @click="handleOpenModal(item)" class="w-1/14 flex justify-center items-center">
+          <button @click="handleOpenEditTask(item)" class="w-1/14 flex justify-center items-center">
             <Pencil class="stroke-1.5" />
           </button>
         </div>
       </div>
     </div>
-      <TaskPopup v-if="isModalOpen" :taskData="selectedItem" @close-modal="handleCloseModal"/>
+      <TaskPopup v-if="isEditTaskOpen" :taskData="selectedItem" @close-modal="handleCloseModal"/>
+      <addTaskPopup v-if="isAddTaskOpen"  @close-modal="handleCloseModal"/>
   </template>
   
   <script lang="ts">
   import { useQuery } from '@vue/apollo-composable'
   import { GET_ALL_TAKEN } from '@/graphql/taken.query'
   import { computed, ref } from 'vue'
-  import { Pencil } from 'lucide-vue-next'
+  import { Pencil, Plus  } from 'lucide-vue-next'
   import TaskPopup from '@/components/admin/taskPopup.vue'
+  import addTaskPopup from '@/components/admin/addTaskPopup.vue'
   
   const data = ref<any | null>(null)
-  const isModalOpen = ref(false)
+  const isEditTaskOpen = ref(false)
+  const isAddTaskOpen = ref(false)
   const selectedItem = ref<any | null>(null)
   
   const { onResult, refetch } = useQuery(GET_ALL_TAKEN)
@@ -52,22 +58,29 @@
       })
   
 
-    const handleOpenModal = (item: any) => {
-      isModalOpen.value = true
+    const handleOpenEditTask = (item: any) => {
+      isEditTaskOpen.value = true
       selectedItem.value = item
     }
 
+    const handleOpenAddTask = () => {
+      isAddTaskOpen.value = true
+    }
+
     const handleCloseModal = () => {
-      isModalOpen.value = false
+      isEditTaskOpen.value = false
+      isAddTaskOpen.value = false
     }
   
   export default {
     components: {
       Pencil,
-      TaskPopup
+      TaskPopup,
+      addTaskPopup,
+      Plus,
     },
     setup() {
-      return { data, handleCloseModal, handleOpenModal, isModalOpen, selectedItem }
+      return { data, handleCloseModal, handleOpenEditTask, isEditTaskOpen, selectedItem, isAddTaskOpen, handleOpenAddTask }
     },
   }
   </script>
