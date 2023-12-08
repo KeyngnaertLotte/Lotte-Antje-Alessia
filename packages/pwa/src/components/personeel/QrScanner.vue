@@ -1,42 +1,60 @@
 <script lang="ts">
 import { ref } from 'vue'
 import { Euro, X } from 'lucide-vue-next'
+import { QrcodeStream } from 'vue-qrcode-reader'
 
 
 const showCamera = ref(false)
 const price = ref(0)
+let enteredValue = 0
 
 export default {
   components: {
     X,
     Euro,
+    QrcodeStream,
   },
-  methods: {
-    closeModal() {
-      showCamera.value = false
-      this.$emit('close-modal')
-    },
+  onMounted() {
+    console.log('mounted')
+    
   },
-  setup() {
+  setup(props, { emit }) {
+
+    
+const closeModal = () => {
+  showCamera.value = false
+  emit('close-modal')
+}
+
+
+const onDetect = (result: string) => {
+  console.log('Result:', result)
+  console.log('Entered Value:', enteredValue)
+  closeModal()
+}
     return {
       showCamera,
       scanButtonClick,
       price,
+      closeModal,
+      onDetect,
     }
   },
 }
 
+
+
 const scanButtonClick = () => {
   // Access the input value using the ref
-  const enteredValue = price.value
-  console.log('Entered Value:', enteredValue)
+  enteredValue = price.value
+  // console.log('Entered Value:', enteredValue)
 
   if (enteredValue === 0 || enteredValue.toString() === '' ) {
     alert('Please enter a valid price before scanning.')
     return
   } else {
     showCamera.value = true
-    console.log('Entered Value:', enteredValue)
+    // console.log('Entered Value:', enteredValue)
   }
 }
 </script>
@@ -78,7 +96,12 @@ const scanButtonClick = () => {
           Scan
         </button>
       </div>
-      <div v-if="showCamera">
+      <div v-if="showCamera" class="h-full w-full">
+        <QrcodeStream
+          @detect="onDetect"
+
+          class="h-full w-full"
+        />
       </div>
     </div>
   </div>
