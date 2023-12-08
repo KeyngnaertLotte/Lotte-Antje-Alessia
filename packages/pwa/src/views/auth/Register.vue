@@ -31,7 +31,7 @@
         type="text"
         name="nickname"
         id="nickname"
-        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         v-model="newUser.name" placeholder="Gebruikersnaam"
         />
     </div>
@@ -47,7 +47,7 @@
         type="email"
         name="email"
         id="email"
-        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         v-model="newUser.email" placeholder="Email adres"
       />
     </div>
@@ -63,7 +63,7 @@
         type="password"
         name="password"
         id="password"
-        class="block font-pop w-[90%] border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
         v-model="newUser.password" placeholder="Wachtwoord"
         />
     </div>
@@ -72,7 +72,7 @@
     
     <div class="w-full flex flex-col items-center justify-center">
       <button
-    class="mt-6 w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white "
+    class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white "
     >
       Register
     </button>

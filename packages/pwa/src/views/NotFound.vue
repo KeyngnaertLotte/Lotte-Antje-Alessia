@@ -6,7 +6,7 @@
                 <h2 class="font-body font-bold">Oeps deze pagina bestaat niet</h2>
             </div>
             <!-- <iframe src="https://giphy.com/embed/60QZQ4JNETQHshpPwU" width="90%" height="480" frameBorder="0" class="giphy-embed" ></iframe> -->
-            <router-link to="/" class="lex justify-center items-center w-[90%] rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4 mt-6">Keer terug</router-link>
+            <router-link to="/" class="lex justify-center items-center w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4 mt-6">Keer terug</router-link>
         </div>
     </div>
 </template>

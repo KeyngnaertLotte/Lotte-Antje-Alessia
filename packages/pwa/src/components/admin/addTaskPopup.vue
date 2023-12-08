@@ -11,50 +11,48 @@
       </button>
       
       <div class="w-full h-full p-6">
-        <h1 class="text-2xl font-bold mb-4 font-body ">Pas taak aan</h1>
+        <h1 class="text-2xl font-bold mb-4 font-body ">Maak nieuwe taak aan</h1>
       <div class="flex flex-col w-full">
-        <label for="">Taak naam</label>
-        <input type="text" :value="currentData.naam" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
+        <label for="taskName">Taak naam</label>
+        <input v-model="formData.taskName" type="text" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
       </div>
       <div class="flex flex-col w-full">
         <p for="">Type</p>
         <div  class="flex flex-row justify-between items-center ">
         <div v-for="option in types" :key="option" class="flex flex-row items-center justify-center ">
-            <input type="radio" name="type" :id="option" :value="option" class="mr-2">
+            <input v-model="formData.selectedType" type="radio" name="type" :id="option" :value="option" class="mr-2">
             <label :for="option">{{ option }}</label>
         </div>
     </div>
     </div>
       <div class="flex flex-col w-full">
         <label for="">Plaats</label>
-        <select name="" id="" class="bg-gray-200 rounded font-pop focus:outline-none p-2">
+        <select v-model="formData.selectedPlace" name="" id="" class="bg-gray-200 rounded font-pop focus:outline-none p-2">
             <option>aaaaaaaa</option>
         </select>
       </div>
       <div class="flex flex-col w-full">
         <label for="">Categorie</label>
-        <select name="" id="" class="bg-gray-200 rounded font-pop focus:outline-none p-2">
+        <select v-model="formData.selectedCategory" name="" id="" class="bg-gray-200 rounded font-pop focus:outline-none p-2">
             <option>aaaaaaaaaa</option>
         </select>
       </div>
       <div class="flex flex-col w-full">
         <label for="">Aantal</label>
-        <input type="number" :value="currentData.aantal" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
+        <input type="number" v-model="formData.amount"  class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
       </div>
       <div class="flex flex-col w-full">
         <label for="">Deadline</label>
-        <input type="time" :value="currentData.deadline" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
+        <input type="time" v-model="formData.deadline" class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full">
       </div>
       <div class="flex flex-col w-full">
         <label for="">Benodigdheden</label>
-        <select name="" id="" class="bg-gray-200 rounded font-pop focus:outline-none p-2">
+        <select name="" id="" v-model="formData.material" class="bg-gray-200 rounded font-pop focus:outline-none p-2">
             <option>aaaaaaaaaaaa</option>
         </select>
       </div>
-      <div class="flex flex-row justify-between w-full mt-10">
-        
-      <button @click="deleteTask" class="py-1 bg-gray-200 text-custom-brown my-6 rounded w-1/5 self-end">DELETE</button>
-      <button @click="updateTask" class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end">UPDATE</button>
+      <div class="flex flex-row justify-center w-full mt-10">
+      <button @click="createTask" class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end">MAAK TAAK AAN</button>
       </div>
       </div>
     </div>
@@ -63,6 +61,7 @@
 
 <script lang="ts">
 import { X } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 const types = ['Podium - licht',
   'Podium - geluid',
@@ -73,16 +72,18 @@ const types = ['Podium - licht',
   'Aanvulling',
   'Loges']
 
-
+  const formData = ref({
+      taskName: '',
+      selectedType: '',
+      selectedPlace: '',
+      selectedCategory: '',
+      amount: '',
+      deadline: '',
+      material: '',
+    });
 
 
 export default {
-    props: {
-        taskData: {
-            type: Object,
-            required: true
-        }
-    },
   components: {
     X,
   },
@@ -90,24 +91,19 @@ export default {
     const closeModal = () => {
       emit('close-modal')
     }
-    const deleteTask = () => {
-        console.log('delete')
-        closeModal()
-    }
 
-    const updateTask = () => {
+    const createTask = () => {
         console.log('update')
+        console.log(formData.value)
         closeModal()
     }
 
-    const currentData = props.taskData
 
     return {
       closeModal,
         types,
-        currentData,
-        deleteTask,
-        updateTask
+        createTask,
+        formData
         
     }
   },
