@@ -16,6 +16,9 @@
   import useGraphql from '@/composables/useGraphql'
   import { ref } from 'vue';
   import QrPopup from '@/components/bezoeker/QrPopup.vue';
+  import useRealtime from '@/composables/useRealtime'
+
+  const { on } = useRealtime()
 
   const { customUser } = useCustomUser()
   const { apolloClient } = useGraphql()
@@ -24,6 +27,12 @@
   const bezoekerInfo = ref<any | null>(null);
   const isModalOpen = ref(false);
   const { error, result: bezoekerResult, loading, refetch, onResult } =  useQuery(GET_BEZOEKER_BY_UID, { uid });
+
+  on('bezoekerChangeSaldo:' + uid, (data: any) => {
+          console.log('data:', data)
+          refetch()
+          isModalOpen.value = false;
+        })
 
   onResult((result) => {
     if (result.data) {

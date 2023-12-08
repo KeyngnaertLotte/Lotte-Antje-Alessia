@@ -9,10 +9,15 @@ import {
 import { FavArtiest } from './entities/favartiest.entity'
 import { UseGuards } from '@nestjs/common'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
+import { BezoekersGateway } from './bezoekers.gateway'
+
 
 @Resolver(() => Bezoeker)
 export class BezoekersResolver {
-  constructor(private readonly bezoekersService: BezoekersService) {}
+  constructor(
+    private readonly bezoekersService: BezoekersService, 
+    private readonly gateway: BezoekersGateway
+    ) {}
 
   @UseGuards(FirebaseGuard)
   @Mutation(() => Bezoeker, { description: 'Create a bezoeker using DTO' })
@@ -83,6 +88,7 @@ export class BezoekersResolver {
     @Args('saldo', { type: () => Float }) aantal: number,
     @Args('transactie', { type: () => String }) transactie: string,
   ) {
+    this.gateway.changeSaldoBezoeker(transactie, aantal, uid)
     return this.bezoekersService.removeSaldo(uid, aantal, transactie)
   }
 
@@ -96,9 +102,3 @@ export class BezoekersResolver {
   //   return this.bezoekersService.remove(id);
   // }
 }
-
-// web shop met spacial music?
-
-// via tekening ai beweging maken
-
-// hoe bouw je een realtime animatie generator aan de hand van animejs en chatgpt
