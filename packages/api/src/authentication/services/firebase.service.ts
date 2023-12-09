@@ -14,4 +14,6 @@ export class FirebaseService {
   }
 
   getAuth = (): Auth => getAuth()
+
+  
 }

@@ -1,137 +1,222 @@
 [
     {
-        "naam": "Koekjes",
-        "podium": "Koekjespodium",
+        "naam": "Tom Mish",
+        "podium": "Antje",
+        "uid": "gAYSl3edmHMs8zFvrMcE06FRoBL2",
         "agenda": [
             {
-                "tijd": "10:00",
-                "podium": "Koekjespodium",
-                "opdracht": "opzetten"
+                "taak": "Opzetten",
+                "podium": "Antje",
+                "tijd": "08:00 - 08:15"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Antje",
+                "tijd": "08:30- 09:00"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Antje",
+                "tijd": "20:15 - 21:30"
             }
         ]
     },
     {
-        "naam": "taart",
-        "podium": "taartpodium"
+        "naam": "Brihang",
+        "podium": "Antje",
+        "uid": "TTOrmIusnVTQ4WQUfnEp3OOT1ly2",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Antje",
+                "tijd": "15:00 - 15:15"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Antje",
+                "tijd": "15:30 - 16:00"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Antje",
+                "tijd": "22:00 - 23:15"
+            }
+        ]
     },
     {
-        "item": "Microfoons",
-        "aantal": 30,
-        "categorie": "Geluid"
+        "naam": "BeRightBack",
+        "podium": "Antje",
+        "uid": "14EVJZi5V5PEB0NDsOvPkIz2CWj1",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Antje",
+                "tijd": "10:00 - 10:15"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Antje",
+                "tijd": "10:30 - 11:00"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Antje",
+                "tijd": "23:45 - 01:00"
+            }
+        ]
     },
     {
-        "item": "Lichtbalken",
-        "aantal": 40,
-        "categorie": "Verlichting"
+        "naam": "Bohnes",
+        "podium": "Lotte",
+        "uid": "KIWpoBSEcwNULbw7L8pIE8usjUJ2",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Lotte",
+                "tijd": "09:00 - 09:15"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Lotte",
+                "tijd": "09:30 - 10:00"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Lotte",
+                "tijd": "20:00 - 21:30"
+            }
+        ]
     },
     {
-        "item": "Drumstel",
-        "aantal": 5,
-        "categorie": "Instrumenten"
+        "naam": "Aston",
+        "podium": "Lotte",
+        "uid": "L9dc41fC2NeWCkhSufyLufzccVG3",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Lotte",
+                "tijd": "10:15- 10:30"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Lotte",
+                "tijd": "10:45 - 11:15"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Lotte",
+                "tijd": "21:45 - 22:45"
+            }
+        ]
     },
     {
-        "item": "Podiumtrappen",
-        "aantal": 10,
-        "categorie": "Podium"
+        "naam": "NF",
+        "podium": "Lotte",
+        "uid": "Zn0MU2UhL8fJsyQzm54dmAwuIBF3",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Lotte",
+                "tijd": "13:00 - 13:15"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Lotte",
+                "tijd": "13:30 - 14:00"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Lotte",
+                "tijd": "23:00 - 00:30"
+            }
+        ]
     },
     {
-        "item": "Verlengsnoeren",
-        "aantal": 25,
-        "categorie": "Elektriciteit"
+        "naam": "TheFatRat",
+        "podium": "Aléssia",
+        "uid": "G5ucPPJlwDZTmBZ5jZq0gHbZj3w1",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Aléssia",
+                "tijd": "08:00 - 08:30"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Aléssia",
+                "tijd": "09:00 - 09:30"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Aléssia",
+                "tijd": "20:00 - 21:00"
+            }
+        ]
     },
     {
-        "item": "Handzeep",
-        "aantal": 50,
-        "categorie": "Toiletten"
+        "naam": "Neffex",
+        "podium": "Aléssia",
+        "uid": "2LVGub2p18TJJBUyOw6Crt7Z4LI2",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Aléssia",
+                "tijd": "10:00 - 10:30"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Aléssia",
+                "tijd": "11:00 - 11:30"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Aléssia",
+                "tijd": "21:15 - 22:15"
+            }
+        ]
     },
     {
-        "item": "Vegetarische wraps",
-        "aantal": 150,
-        "categorie": "Eten"
+        "naam": "BoyWithUke",
+        "podium": "Aléssia",
+        "uid": "JdbeJpPgPEP2KRmR88FHyc5N7Jq2",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Aléssia",
+                "tijd": "12:00 - 12:30"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Aléssia",
+                "tijd": "13:00 - 13:30"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Aléssia",
+                "tijd": "22:30 - 23:30"
+            }
+        ]
     },
     {
-        "item": "Waterflessen",
-        "aantal": 120,
-        "categorie": "Drinken"
-    },
-    {
-        "item": "Pleisters",
-        "aantal": 8,
-        "categorie": "EHBO"
-    },
-    {
-        "item": "Securitycamera's",
-        "aantal": 12,
-        "categorie": "Beveiliging"
-    },
-    {
-        "item": "Recyclebakken",
-        "aantal": 30,
-        "categorie": "Afval"
-    },
-    {
-        "item": "Ballonboog",
-        "aantal": 800,
-        "categorie": "Decoratie"
-    },
-    {
-        "item": "Geluidsboxen",
-        "aantal": 25,
-        "categorie": "Geluid"
-    },
-    {
-        "item": "Rookmachines",
-        "aantal": 15,
-        "categorie": "Verlichting"
-    },
-    {
-        "item": "Keyboards",
-        "aantal": 8,
-        "categorie": "Instrumenten"
-    },
-    {
-        "item": "Podiumdoeken",
-        "aantal": 20,
-        "categorie": "Podium"
-    },
-    {
-        "item": "Stroomgeneratoren",
-        "aantal": 10,
-        "categorie": "Elektriciteit"
-    },
-    {
-        "item": "Toiletreiniger",
-        "aantal": 40,
-        "categorie": "Toiletten"
-    },
-    {
-        "item": "Sushi",
-        "aantal": 100,
-        "categorie": "Eten"
-    },
-    {
-        "item": "Bierflessen",
-        "aantal": 180,
-        "categorie": "Drinken"
-    },
-    {
-        "item": "Verbandtrommels",
-        "aantal": 7,
-        "categorie": "EHBO"
-    },
-    {
-        "item": "Beveiligingshekken",
-        "aantal": 20,
-        "categorie": "Beveiliging"
-    },
-    {
-        "item": "Plastic vuilniszakken",
-        "aantal": 60,
-        "categorie": "Afval"
-    },
-    {
-        "item": "Feestverlichting",
-        "aantal": 500,
-        "categorie": "Decoratie"
+        "naam": "Imagine Dragons",
+        "podium": "Aléssia",
+        "uid": "Kz5oJmB8iMMZOKKy8BT9O1BaYZx12",
+        "agenda": [
+            {
+                "taak": "Opzetten",
+                "podium": "Aléssia",
+                "tijd": "14:00 - 14:30"
+            },
+            {
+                "taak": "Soundcheck",
+                "podium": "Aléssia",
+                "tijd": "15:00 - 15:30"
+            },
+            {
+                "taak": "Optreden",
+                "podium": "Aléssia",
+                "tijd": "23:45 - 00:45"
+            }
+        ]
     }
 ]
