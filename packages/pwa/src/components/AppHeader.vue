@@ -26,6 +26,7 @@ import { AlignJustify } from 'lucide-vue-next'
 import { ref } from 'vue'
 import useCustomUser from '@/composables/useCustomUser'
 import useRealtime from '@/composables/useRealtime'
+import { useToast } from 'vue-toastification'
 
 const { on } = useRealtime()
 const isVisible = ref(false)
@@ -46,6 +47,7 @@ export default {
   },
   setup(props) {
     const role = customUser.value?.role
+    const toast = useToast()
     console.log('customUser:', role?.toString().toLocaleLowerCase())
     if (role?.toString().toLocaleLowerCase() === 'artiest') {
       console.log('adminNotification:' + role.toString().toLocaleLowerCase())
@@ -62,6 +64,7 @@ export default {
         'adminNotification:' + role.toString().toLocaleLowerCase(),
         (data: any) => {
           console.log('data:', data)
+          toast.info(data, { timeout: 5000})
         },
       )
     }
