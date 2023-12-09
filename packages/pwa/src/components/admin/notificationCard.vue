@@ -75,6 +75,9 @@
   
   <script lang="ts">
   import { ref, watch } from 'vue';
+  import useRealtime from '@/composables/useRealtime'
+
+    const { emit } = useRealtime()
   
   export default {
     setup() {
@@ -99,14 +102,21 @@
         console.log(messageContent.value);
         if (allChecked.value) {
           console.log('all');
+          emit('adminNotification:bezoeker', messageContent.value)
+            emit('adminNotification:artiest', messageContent.value)
+            emit('adminNotification:personeel', messageContent.value)
         }
         if (visitorsChecked.value) {
           console.log('visitors');
+          emit('adminNotification:bezoeker', messageContent.value)
         }
         if (artistsChecked.value) {
           console.log('artists');
+          emit('adminNotification:artiest', messageContent.value)
+
         }if (personeelChecked.value) {
           console.log('personeel');
+          emit('adminNotification:personeel', messageContent.value)
         }
         if (!allChecked.value && !visitorsChecked.value && !artistsChecked.value && !personeelChecked.value) {
           console.log('none');

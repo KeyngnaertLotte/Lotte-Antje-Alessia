@@ -1,52 +1,88 @@
 <template>
-    <AppBurgerMenu v-if="role" :isVisible="isVisible" @toggleVisibility="toggleVisibility" :roleShow="role"/>
-      <div class="absolute top-0 left-0 right-0 px-8 py-6 bg-[#D5573B] md:py-5">
-          <div class=" text-3xl text-white flex justify-between content-center font-header md:text-2xl">
-            <div class="flex flex-col md:flex-row">
-                <p>Hey</p>
-                <p class="md:pl-3">{{naam}}!</p>
-            </div>
-              <button @click="toggleVisibility">
-                  <AlignJustify class="h-12 w-12 fill-white md:h-8 md:w-8"/>
-              </button>
-          </div>
+  <AppBurgerMenu
+    v-if="role"
+    :isVisible="isVisible"
+    @toggleVisibility="toggleVisibility"
+    :roleShow="role"
+  />
+  <div class="absolute top-0 left-0 right-0 px-8 py-6 bg-[#D5573B] md:py-5">
+    <div
+      class="text-3xl text-white flex justify-between content-center font-header md:text-2xl"
+    >
+      <div class="flex flex-col md:flex-row">
+        <p>Hey</p>
+        <p class="md:pl-3">{{ naam }}!</p>
       </div>
+      <button @click="toggleVisibility">
+        <AlignJustify class="h-12 w-12 fill-white md:h-8 md:w-8" />
+      </button>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-    import AppBurgerMenu from '@/components/AppBurgerMenu.vue';
-    import { AlignJustify } from 'lucide-vue-next';
-    import { ref } from 'vue';
-    import useCustomUser from '@/composables/useCustomUser';
-    const isVisible = ref(false); 
-    
-    const { customUser } = useCustomUser()
-    function toggleVisibility() {
-        isVisible.value = !isVisible.value;
-        // console.log("state menu", isVisible.value);
-    }
+import AppBurgerMenu from '@/components/AppBurgerMenu.vue'
+import { AlignJustify } from 'lucide-vue-next'
+import { ref } from 'vue'
+import useCustomUser from '@/composables/useCustomUser'
+import useRealtime from '@/composables/useRealtime'
 
-    export default {
-        components: { AppBurgerMenu, AlignJustify },
-        props: {
-            naam: {
-                type: String,
-                required: true,
-            },
+const { on } = useRealtime()
+const isVisible = ref(false)
+
+const { customUser } = useCustomUser()
+function toggleVisibility() {
+  isVisible.value = !isVisible.value
+  // console.log("state menu", isVisible.value);
+}
+
+export default {
+  components: { AppBurgerMenu, AlignJustify },
+  props: {
+    naam: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
+    const role = customUser.value?.role
+    console.log('customUser:', role?.toString().toLocaleLowerCase())
+    if (role?.toString().toLocaleLowerCase() === 'artiest') {
+      console.log('adminNotification:' + role.toString().toLocaleLowerCase())
+      on(
+        'adminNotification:' + role.toString().toLocaleLowerCase(),
+        (data: any) => {
+          console.log('data:', data)
         },
-        setup(props) {
-            // console.log('customUser:', customUser.value?.role);
-            const role = customUser.value?.role
-            // console.log('role:', role);
-            const naam = props.naam;
-            // console.log("scream and shout",props);
-            return {
-                isVisible,
-                toggleVisibility,
-                naam,
-                role
-            };
+      )
+    }
+    if (role?.toString().toLocaleLowerCase() === 'bezoeker') {
+      console.log('adminNotification:' + role.toString().toLocaleLowerCase())
+      on(
+        'adminNotification:' + role.toString().toLocaleLowerCase(),
+        (data: any) => {
+          console.log('data:', data)
         },
-    };
-    
-  </script>
+      )
+    }
+    if (role?.toString().toLocaleLowerCase() === 'personeel') {
+      console.log('adminNotification:' + role.toString().toLocaleLowerCase())
+      on(
+        'adminNotification:' + role.toString().toLocaleLowerCase(),
+        (data: any) => {
+          console.log('data:', data)
+        },
+      )
+    }
+    // console.log('role:', role);
+    const naam = props.naam
+    // console.log("scream and shout",props);
+    return {
+      isVisible,
+      toggleVisibility,
+      naam,
+      role,
+    }
+  },
+}
+</script>

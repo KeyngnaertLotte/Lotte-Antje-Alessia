@@ -1,6 +1,6 @@
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets'
 import { BezoekersService } from 'src/bezoekers/bezoekers.service'
-import { Server } from 'socket.io'
+import { Server, Socket } from 'socket.io'
 
 @WebSocketGateway(+process.env.WS_PORT || 3004, {
   cors: {
@@ -18,16 +18,33 @@ export class NotificationsGateway {
   @WebSocketServer()
   server: Server
 
-  @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
-    return 'Hello world!'
-  }
-
   async changeSaldoBezoeker(transactie: string, saldo: number, uid: string) {
     this.server.emit('bezoekerChangeSaldo:' + uid, {
       plaats: transactie,
       saldo: saldo,
       uid: uid,
     })
+  }
+
+
+  @SubscribeMessage('adminNotification:bezoeker')
+  handleAdminNotificationVisitors(client: Socket, message: string): void {
+    console.log('Received adminNotification:bezoeker', message);
+    // Process the message as needed, e.g., broadcast it to all visitors
+    this.server.emit('adminNotification:bezoeker', message);
+  }
+
+  @SubscribeMessage('adminNotification:artiest')
+  handleAdminNotificationArtists(client: Socket, message: string): void {
+    console.log('Received adminNotification:artiest', message);
+    // Process the message as needed, e.g., broadcast it to all artists
+    this.server.emit('adminNotification:artiest', message);
+  }
+
+  @SubscribeMessage('adminNotification:personeel')
+  handleAdminNotificationPersonnel(client: Socket, message: string): void {
+    console.log('Received adminNotification:personeel', message);
+    // Process the message as needed, e.g., broadcast it to all personnel
+    this.server.emit('adminNotification:personeel', message);
   }
 }
