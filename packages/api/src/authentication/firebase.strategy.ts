@@ -40,6 +40,15 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     return user
   }
 
+  // delete user
+  async deleteUser(uid: string) {
+    try {
+      await this.firebase.getAuth().deleteUser(uid)
+    } catch (e) {
+      throw new Error('Gebruiker niet gevonden')
+    }
+  }
+
   private async authorize(jwtToken: string): Promise<DecodedIdToken> {
     try {
       return await this.firebase

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const GET_TAKEN = gql`
-  query taak {
+  query Taken {
     taken {
       id
       plaats
@@ -10,6 +10,8 @@ export const GET_TAKEN = gql`
       category
       aantal
       deadline
+      materiaal
+      status
     }
   }
 `
@@ -27,3 +29,5 @@ export const GET_TAAK_BY_TYPE = gql`
     }
   }
 `
+
+

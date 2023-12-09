@@ -42,8 +42,6 @@ const uid = customUser.value?.uid
 const AgendaItems = ref<any | null>(null)
 
 export default {
-  components: {
-  },
   setup() {
     const getBezoekerInfo = async () => {
       console.log('uid:', uid)

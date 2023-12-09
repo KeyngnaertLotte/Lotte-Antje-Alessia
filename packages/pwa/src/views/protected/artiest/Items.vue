@@ -52,13 +52,15 @@
                 class="mx-4 mt-0 p-2 flex justify-between"
               >
                 <p>{{ item.item }}</p>
-                <button @click="minusButtonClicked(item)">
-                  <MinusIcon class="stroke-custom-brown" />
-                </button>
-                <p>{{ aantal[item.item] }}</p>
-                <button @click="plusButtonClicked(item)">
-                  <plus-icon class="stroke-custom-brown" />
-                </button>
+                <div class="flex">
+                  <button @click="minusButtonClicked(item)" class="pr-6">
+                    <MinusIcon class="stroke-custom-brown" />
+                  </button>
+                  <p>{{ aantal[item.item] }}</p>
+                  <button @click="plusButtonClicked(item)" class="pl-6">
+                    <plus-icon class="stroke-custom-brown" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -69,7 +71,7 @@
       @click="submit"
       class="w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white mt-4"
     >
-      Submit
+      Bevestigen
     </button>
   </div>
 </template>

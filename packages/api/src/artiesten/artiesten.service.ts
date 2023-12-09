@@ -72,16 +72,26 @@ export class ArtiestenService {
     const categorie = materiaal.categorie.toLocaleLowerCase()
     let type
 
-    if (categorie === 'drank' || categorie === 'eten') {
+    if (
+      categorie === 'drinken' ||
+      categorie === 'eten' ||
+      categorie === 'toiletten' ||
+      categorie === 'afval'
+    ) {
       type = 'loges'
     }
-    if (categorie === 'geluid' || categorie === 'instrument') {
+    if (categorie === 'geluid' || categorie === 'instrumenten') {
       type = 'Podium - geluid'
     }
-    if (categorie === 'licht') {
+    if (
+      categorie === 'verlichting' ||
+      categorie === 'podium' ||
+      categorie === 'elektriciteit' ||
+      categorie === 'decoratie'
+    ) {
       type = 'Podium - licht'
     }
-    if (categorie === 'andere') {
+    if (categorie === 'beveiliging' || categorie === 'ehbo') {
       type = 'Allround'
     }
     newTaak.type = type
@@ -119,9 +129,9 @@ export class ArtiestenService {
       a.podium = updateArtiestenInput?.podium
       return this.artiestRepository.save(a)
     })
-    
+
     const naam = updateArtiestenInput?.naam
-    if (naam){
+    if (naam) {
       await this.usersService.updateNaam(uid, naam)
     }
 

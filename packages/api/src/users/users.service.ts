@@ -5,6 +5,7 @@ import { Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Role, User } from './entities/user.entity'
 import { CreateUserAdminInput } from './dto/create-user-admin.input'
+import { getAuth } from 'firebase-admin/auth'
 
 @Injectable()
 export class UsersService {
@@ -71,6 +72,17 @@ export class UsersService {
 
   async remove(uid: string) {
     const user = await this.findOneByUid(uid)
+
+    getAuth()
+      .deleteUser(uid)
+      .then(() => {
+        console.log('Successfully deleted user')
+      })
+      .catch(error => {
+        console.log('Error deleting user:', error)
+      })
+
+
     await this.userRepository.remove(user)
     return `user removed`
   }

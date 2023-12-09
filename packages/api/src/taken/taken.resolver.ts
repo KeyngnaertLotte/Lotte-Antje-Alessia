@@ -49,13 +49,13 @@ export class TakenResolver {
 
   // PUT taak
   // @UseGuards(FirebaseGuard)
-  @Mutation(() => String)
-  updateTaken(
-    @Args('updateTakenInput') updateTakenInput: UpdateTakenInput,
-    @Args('id') id: string,
-  ) {
-    return this.takenService.update(id, updateTakenInput)
-  }
+  // @Mutation(() => String)
+  // updateTaken(
+  //   @Args('updateTakenInput') updateTakenInput: UpdateTakenInput,
+  //   @Args('id') id: string,
+  // ) {
+  //   return this.takenService.update(id, updateTakenInput)
+  // }
 
  
 }

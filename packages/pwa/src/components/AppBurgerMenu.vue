@@ -10,8 +10,12 @@
     </div>
     <div class="flex justify-center items-center py-12">
       <div class="flex flex-col justify-center items-center w-fit">
-        <p class="text-white font-bold text-6xl font-header md:text-4xl">Lotantsia</p>
-        <p class="text-white font-bold text-4xl self-end font-header md:text-3xl">
+        <p class="text-white font-bold text-6xl font-header md:text-4xl">
+          Lotantsia
+        </p>
+        <p
+          class="text-white font-bold text-4xl self-end font-header md:text-3xl"
+        >
           Festival
         </p>
       </div>
@@ -19,20 +23,21 @@
     <div class="px-6 py-12">
       <div class="flex flex-col justify-center gap-8">
         <router-link
-          v-for="(menuItem, index) in menuList" :key="index"
+          v-for="(menuItem, index) in menuList"
+          :key="index"
           :to="menuItem.path"
           @click="toggleVisibility"
           class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl"
-         >
-          <component :is="menuItem.icon"  class="stroke-white h-6 w-6" /> {{ menuItem.name }}
+        >
+          <component :is="menuItem.icon" class="stroke-white h-6 w-6" />
+          {{ menuItem.name }}
         </router-link>
       </div>
-      
     </div>
     <div class="h-full flex justify-center items-end pb-12">
       <button
         @click="logoutUser"
-        class="flex flex-row items-center text-3xl text-white gap-4 font-body  md:text-2xl"
+        class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl"
       >
         <LogOut class="stroke-white h-8 w-8 transform -scale-x-100" />
         UITLOGGEN
@@ -42,23 +47,32 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutDashboard , X, Clock3, Coins, LogOut, UserPlus, PackageOpen, Mic2, ListTodo, ClipboardCheck  } from 'lucide-vue-next'
+import {
+  LayoutDashboard,
+  X,
+  Clock3,
+  Coins,
+  LogOut,
+  UserPlus,
+  PackageOpen,
+  Mic2,
+  ListTodo,
+  ClipboardCheck,
+} from 'lucide-vue-next'
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
-import { Plus } from 'lucide-vue-next';
+import { Plus } from 'lucide-vue-next'
 
-const props = defineProps(
-  {
-    isVisible: {
-      type: Boolean,
-      required: true,
-    },
-    roleShow: {
-      type: String,
-      required: true,
-    },
+const props = defineProps({
+  isVisible: {
+    type: Boolean,
+    required: true,
   },
-)
+  roleShow: {
+    type: String,
+    required: true,
+  },
+})
 const emit = defineEmits()
 const { logout } = useFirebase()
 const { replace } = useRouter()
@@ -96,7 +110,7 @@ const roleMenuList = [
         name: 'Items',
         path: '/artiest/items',
         icon: Plus,
-      }
+      },
     ],
   },
   {
@@ -141,18 +155,16 @@ const roleMenuList = [
         name: 'Lijst taken',
         path: '/admin/lijst-taken',
         icon: ListTodo,
-      }
+      },
     ],
-  }
+  },
 ]
 
-const menuList = roleMenuList.find((roleMenu) => roleMenu.role === props.roleShow)?.menuList
+const menuList = roleMenuList.find(roleMenu => roleMenu.role === props.roleShow)
+  ?.menuList
 // console.log('menuList:', menuList)
 
-menuList?.forEach(element => {
-  
-  
-});
+menuList?.forEach(element => {})
 
 function toggleVisibility() {
   emit('toggle-visibility') // Emit event to toggle visibility

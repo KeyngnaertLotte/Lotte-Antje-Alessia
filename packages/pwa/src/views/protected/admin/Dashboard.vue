@@ -104,11 +104,12 @@
 <script lang="ts">
 import { useQuery } from '@vue/apollo-composable'
 import { GET_PERSONEEL } from '@/graphql/personeel.query'
-import { UPDATE_TYPE } from '@/graphql/personeel.mutation'
+import { UPDATE_TYPE, DELETE_PERSONEEL } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 import { Pencil } from 'lucide-vue-next'
 import personeelPopup from '@/components/admin/personeelPopup.vue'
+import { getAuth } from 'firebase/auth'
 
 const isModalOpen = ref(false)
 const selectedItem = ref<any | null>(null)
@@ -208,6 +209,14 @@ export default {
       )
     }
 
+    const { mutate: removePersoneel } = useMutation(DELETE_PERSONEEL)
+
+    const deletePersoneel = async (uid:string) => {
+      console.log('delete')
+      // const uid = filterPersoneel.value.uid
+      console.log(uid)
+      await removePersoneel({ uid: uid })
+    }
     return { personeelInfo, onChange, types, filterByType, filterPersoneel, handleCloseModal, handleOpenModal, isModalOpen, selectedItem }
   },
 }

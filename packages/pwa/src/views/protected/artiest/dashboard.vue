@@ -1,16 +1,17 @@
 <template>
   <cardSm
     title="item"
-    :isPopup="true"
+    :isPopup="false"
     class="col-span-1 row-start-4 row-span-4"
-    @sendDataToParent="handleDataFromChild"
+    
+    :url="'/artiest/items'"
   />
   <!-- <cardSm title="vip lijst" class="col-span-1 row-start-4 row-span-4" /> -->
-  <ItemPopUp
+  <!-- <ItemPopUp
     v-if="isModalOpen"
     :id="uid ?? ''"
     @close-modal="handleCloseModal"
-  />
+  /> -->
   <AgendaArtist />
 </template>
 
