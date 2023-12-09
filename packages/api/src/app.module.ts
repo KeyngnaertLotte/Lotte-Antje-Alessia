@@ -10,9 +10,10 @@ import { BezoekersModule } from './bezoekers/bezoekers.module'
 import { SeedModule } from './seed/seed.module'
 import { AuthenticationModule } from './authentication/authentication.module'
 import { ConfigModule } from '@nestjs/config'
-import { UsersModule } from './users/users.module'
-import { MateriaalModule } from './materiaal/materiaal.module'
-import { TakenModule } from './taken/taken.module'
+import { UsersModule } from './users/users.module';
+import { MateriaalModule } from './materiaal/materiaal.module';
+import { TakenModule } from './taken/taken.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { TakenModule } from './taken/taken.module'
     UsersModule,
     MateriaalModule,
     TakenModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

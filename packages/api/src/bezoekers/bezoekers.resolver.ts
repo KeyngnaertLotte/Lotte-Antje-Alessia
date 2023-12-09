@@ -9,14 +9,14 @@ import {
 import { FavArtiest } from './entities/favartiest.entity'
 import { UseGuards } from '@nestjs/common'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
-import { BezoekersGateway } from './bezoekers.gateway'
+import { NotificationsGateway } from 'src/notifications/notifications.gateway'
 
 
 @Resolver(() => Bezoeker)
 export class BezoekersResolver {
   constructor(
     private readonly bezoekersService: BezoekersService, 
-    private readonly gateway: BezoekersGateway
+    private readonly gateway: NotificationsGateway
     ) {}
 
   @UseGuards(FirebaseGuard)
