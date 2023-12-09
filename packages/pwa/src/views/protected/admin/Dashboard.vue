@@ -40,12 +40,14 @@
               {{ option }}
             </option>
           </select>
-          <button class="w-1/14 flex justify-center items-center" @click="handleOpenModal(item)">
+          <button
+            class="w-1/14 flex justify-center items-center"
+            @click="handleOpenModal(item)"
+          >
             <Pencil class="stroke-1.5" />
           </button>
         </div>
       </div>
-      
     </div>
     <div class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md">
       <h1 class="text-2xl font-bold font-body">Bericht</h1>
@@ -53,8 +55,7 @@
         <div class="flex flex-row w-full my-4">
           <label for="" class="mr-4">Aan: </label>
           <label for="">Alle</label>
-          <input type="checkbox">
-          
+          <input type="checkbox" />
         </div>
         <textarea
           placeholder="Typ hier je mededeling"
@@ -78,12 +79,12 @@
         <div class="flex flex-row w-full my-4">
           <label for="" class="mr-4">Voor: </label>
           <select
-          class="bg-gray-200 rounded font-pop focus:outline-none w-3/4 p-1"
-        >
-          <option v-for="option in types" :key="option" :value="option">
-            {{ option }}
-          </option>
-        </select>
+            class="bg-gray-200 rounded font-pop focus:outline-none w-3/4 p-1"
+          >
+            <option v-for="option in types" :key="option" :value="option">
+              {{ option }}
+            </option>
+          </select>
         </div>
         <div class="flex flex-row">
           <label for="" class="mr-4">Taak: </label>
@@ -98,7 +99,11 @@
       </form>
     </div>
   </div>
-  <personeelPopup v-if="isModalOpen" :personeelData="selectedItem" @close-modal="handleCloseModal"/>
+  <personeelPopup
+    v-if="isModalOpen"
+    :personeelData="selectedItem"
+    @close-modal="handleCloseModal"
+  />
 </template>
 
 <script lang="ts">
@@ -149,13 +154,13 @@ const types = [
 ]
 
 const handleOpenModal = (item: any) => {
-      isModalOpen.value = true
-      selectedItem.value = item
-    }
+  isModalOpen.value = true
+  selectedItem.value = item
+}
 
-    const handleCloseModal = () => {
-      isModalOpen.value = false
-    }
+const handleCloseModal = () => {
+  isModalOpen.value = false
+}
 
 onResult(result => {
   if (result.data) {
@@ -197,27 +202,38 @@ export default {
 
     const filterByType = (value: string) => {
       console.log('filter by type', value)
-      console.log(
-        'personeelInfo.value',
-        personeelInfo.value)
+      console.log('personeelInfo.value', personeelInfo.value)
       if (value === 'all') filterPersoneel.value = personeelInfo.value
-      else if (value === 'none') filterPersoneel.value = personeelInfo.value.filter(
-        (item: Personeel) => item.type === "",  
-      )
-      else filterPersoneel.value = personeelInfo.value.filter(
-        (item: Personeel) => item.type === value,
-      )
+      else if (value === 'none')
+        filterPersoneel.value = personeelInfo.value.filter(
+          (item: Personeel) => item.type === '',
+        )
+      else
+        filterPersoneel.value = personeelInfo.value.filter(
+          (item: Personeel) => item.type === value,
+        )
     }
 
     const { mutate: removePersoneel } = useMutation(DELETE_PERSONEEL)
 
-    const deletePersoneel = async (uid:string) => {
+    const deletePersoneel = async (uid: string) => {
       console.log('delete')
       // const uid = filterPersoneel.value.uid
       console.log(uid)
       await removePersoneel({ uid: uid })
     }
-    return { personeelInfo, onChange, types, filterByType, filterPersoneel, handleCloseModal, handleOpenModal, isModalOpen, selectedItem }
+    return {
+      personeelInfo,
+      onChange,
+      types,
+      filterByType,
+      filterPersoneel,
+      handleCloseModal,
+      handleOpenModal,
+      isModalOpen,
+      selectedItem,
+      deletePersoneel,
+    }
   },
 }
 </script>

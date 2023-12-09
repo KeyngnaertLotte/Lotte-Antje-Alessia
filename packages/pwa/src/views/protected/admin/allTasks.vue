@@ -71,7 +71,6 @@
       isEditTaskOpen.value = false
       isAddTaskOpen.value = false
       refetch()
-      isModalOpen.value = false
     }
   
   export default {
