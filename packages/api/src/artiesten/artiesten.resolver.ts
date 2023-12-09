@@ -8,6 +8,8 @@ import { FirebaseUser } from 'src/authentication/decoraters/user.decorator'
 import { UserRecord } from 'firebase-admin/auth'
 import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 import { UpdateArtiestenInput } from './dto/update-artiesten.input'
+import { Agenda } from './entities/agenda.entity'
+import { UpdateAgendaInput } from './dto/update-agenda.input'
 
 @Resolver(() => Artiest)
 export class ArtiestenResolver {
@@ -66,5 +68,14 @@ export class ArtiestenResolver {
     @Args('uid') uid: string,
   ) {
     return this.artiestenService.update(uid, updateArtiestenInput)
+  }
+
+  // @UseGuards(FirebaseGuard)
+  @Mutation(() => String)
+  UpdateAgenda(
+    @Args('AgendaInput') agendaInput: UpdateAgendaInput,
+    @Args('uid') uid: string,
+  ) {
+    return this.artiestenService.UpdateAgenda(uid,agendaInput)
   }
 }

@@ -52,14 +52,6 @@
           </select>
         </div>
         <div class="flex flex-col w-full">
-          <label for="">Aantal</label>
-          <input
-            type="number"
-            v-model="aantal"
-            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
-          />
-        </div>
-        <div class="flex flex-col w-full">
           <label for="">Deadline</label>
           <input
             type="time"
@@ -93,6 +85,14 @@
           </select>
           <!-- <p>{{ listMateriaal }}</p> -->
         </div>
+        <div class="flex flex-col w-full">
+          <label for="">Aantal</label>
+          <input
+            type="number"
+            v-model="aantal"
+            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
+          />
+        </div>
         <div class="flex flex-row justify-between w-full mt-10">
           <button
             @click="deleteTask"
@@ -118,6 +118,7 @@ import { useMutation, useQuery } from '@vue/apollo-composable'
 import { UPDATE_TAAK, REMOVE_TAAK } from '@/graphql/taak.mutation'
 import { ref } from 'vue'
 import { GET_MATERIAAL_BY_CATEGORIE } from '@/graphql/materiaal.query'
+import { CREATE_TASK } from '@/graphql/taak.mutation'
 
 const naam = ref('')
 const type = ref('')
@@ -138,7 +139,7 @@ const types = [
   'Loges',
 ]
 
-const plaatsen = ['Antje', 'Lotte', 'Allesia', 'Bar', 'Toiletten']
+const plaatsen = ['Antje', 'Lotte', 'Allesia', 'Bar', 'Toiletten', 'loges']
 
 const categorieen = [
   'geluid',
@@ -212,25 +213,17 @@ export default {
     onResult(result => {
       if (result.data) {
         listMateriaal.value = []
-        console.log('Data:', result.data.findByCategorie)
         console.log(result.data.findByCategorie.length)
         for (let i = 0; i < result.data.findByCategorie.length; i++) {
           console.log(result.data.findByCategorie[i].item)
           listMateriaal.value.push(result.data.findByCategorie[i].item)
         }
-        console.log("listmaterial",listMateriaal.value)
       }
     })
-
-
 
     const updatedData = () => {
       refetch()
     }
-
-  
-
-
 
     naam.value = props.taskData.naam
     type.value = props.taskData.type

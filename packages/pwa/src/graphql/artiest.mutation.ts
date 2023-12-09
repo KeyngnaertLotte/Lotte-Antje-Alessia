@@ -43,3 +43,9 @@ export const UPDATE_ARTIEST = gql`
     updateArtiesten(updateArtiestenInput: $updateArtiestenInput, uid: $uid)
   }
 `
+
+export const UPDATE_AGENDA = gql`
+  mutation UpdateAgenda($agendaInput: UpdateAgendaInput!, $uid: String!) {
+    UpdateAgenda(AgendaInput: $agendaInput, uid: $uid)
+  }
+`
