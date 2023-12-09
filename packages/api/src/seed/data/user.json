@@ -64,5 +64,53 @@
         "locale": "nl",
         "role": "ADMIN",
         "naam": "admin"
+    },
+    {
+        "uid": "vOdXrqEpnhd4JSGiikPU1Yaxl3G3",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Joris Vermeulen"
+    },
+    {
+        "uid": "KPWJh8Ql61YSg29EYyAIX7CrcKu1",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Eva Vandenberg"
+    },
+    {
+        "uid": "mjv0Hf0cJ0Po43RnIeH9ZmsuMyr1",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Lucas Declercq"
+    },
+    {
+        "uid": "Uc9VYRs6NXWVoikQmxfcyGlEDUw2",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Emma Dewit"
+    },
+    {
+        "uid": "ab0i2WFIkwhYVfFLAXfJh7HhCDG3",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Bram Vandewalle"
+    },
+    {
+        "uid": "spmmIl8NFecr0BP55WIi8zkO2dc2",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Lotte Verbeke"
+    },
+    {
+        "uid": "saQZVrn0gjYpgk3cBipJ5Ad2ea23",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Pieter Devos"
+    },
+    {
+        "uid": "5q33qLMWy2WTt7YZaA0oRKac2YJ3",
+        "locale": "nl",
+        "role": "PERSONEEL",
+        "naam": "Annelies Jacobs"
     }
 ]

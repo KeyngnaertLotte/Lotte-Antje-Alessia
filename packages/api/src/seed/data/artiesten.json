@@ -19,7 +19,8 @@
                 "podium": "Antje",
                 "tijd": "20:15 - 21:30"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "Brihang",
@@ -41,7 +42,8 @@
                 "podium": "Antje",
                 "tijd": "22:00 - 23:15"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "BeRightBack",
@@ -63,7 +65,8 @@
                 "podium": "Antje",
                 "tijd": "23:45 - 01:00"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "Bohnes",
@@ -85,7 +88,8 @@
                 "podium": "Lotte",
                 "tijd": "20:00 - 21:30"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "Aston",
@@ -107,7 +111,8 @@
                 "podium": "Lotte",
                 "tijd": "21:45 - 22:45"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "NF",
@@ -129,7 +134,8 @@
                 "podium": "Lotte",
                 "tijd": "23:00 - 00:30"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "TheFatRat",
@@ -151,7 +157,8 @@
                 "podium": "Aléssia",
                 "tijd": "20:00 - 21:00"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "Neffex",
@@ -173,7 +180,8 @@
                 "podium": "Aléssia",
                 "tijd": "21:15 - 22:15"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "BoyWithUke",
@@ -195,7 +203,8 @@
                 "podium": "Aléssia",
                 "tijd": "22:30 - 23:30"
             }
-        ]
+        ],
+        "benodigdheden": []
     },
     {
         "naam": "Imagine Dragons",
@@ -217,6 +226,7 @@
                 "podium": "Aléssia",
                 "tijd": "23:45 - 00:45"
             }
-        ]
+        ],
+        "benodigdheden": []
     }
 ]
