@@ -1,7 +1,7 @@
 [
     {
         "aantal": 2,
-        "category": "Geluid",
+        "category": "geluid",
         "deadline": "20:30",
         "naam": "Geluid Check",
         "plaats": "Antje",
@@ -11,7 +11,7 @@
     },
     {
         "aantal": 1,
-        "category": "Verlichting",
+        "category": "verlichting",
         "deadline": "20:30",
         "naam": "Licht Instelling",
         "plaats": "Lotte",
@@ -21,7 +21,7 @@
     },
     {
         "aantal": 3,
-        "category": "Instrumenten",
+        "category": "instrumenten",
         "deadline": "20:30",
         "naam": "Instrument Setup",
         "plaats": "Alessia",
@@ -31,7 +31,7 @@
     },
     {
         "aantal": 1,
-        "category": "Podium",
+        "category": "podium",
         "deadline": "20:30",
         "naam": "Podium Opbouw",
         "plaats": "Antje",
@@ -41,7 +41,7 @@
     },
     {
         "aantal": 2,
-        "category": "Elektriciteit",
+        "category": "elektriciteit",
         "deadline": "20:30",
         "naam": "Stroomvoorziening",
         "plaats": "Bar",
@@ -51,7 +51,7 @@
     },
     {
         "aantal": 1,
-        "category": "Toiletten",
+        "category": "toiletten",
         "deadline": "20:30",
         "naam": "Toilet Onderhoud",
         "plaats": "toiletten",
@@ -61,7 +61,7 @@
     },
     {
         "aantal": 100,
-        "category": "Eten",
+        "category": "eten",
         "deadline": "20:30",
         "naam": "Maaltijd Bereiding",
         "plaats": "Bar",
@@ -81,7 +81,7 @@
     },
     {
         "aantal": 25,
-        "category": "EHBO",
+        "category": "ehbo",
         "deadline": "20:30",
         "naam": "EHBO Post",
         "plaats": "bar",
@@ -91,7 +91,7 @@
     },
     {
         "aantal": 50,
-        "category": "Beveiliging",
+        "category": "beveiliging",
         "deadline": "20:30",
         "naam": "Beveiligingstaken",
         "plaats": "Lotte",
@@ -101,7 +101,7 @@
     },
     {
         "aantal": 500,
-        "category": "Afval",
+        "category": "afval",
         "deadline": "20:30",
         "naam": "Afvalverwerking",
         "plaats": "Antje",
@@ -111,7 +111,7 @@
     },
     {
         "aantal": 500,
-        "category": "Decoratie",
+        "category": "decoratie",
         "deadline": "20:30",
         "naam": "Decoratie Opzet",
         "plaats": "Alessia",
@@ -121,7 +121,7 @@
     },
     {
         "aantal": 5,
-        "category": "Loges",
+        "category": "loges",
         "deadline": "20:30",
         "naam": "Pizza brengen loges",
         "plaats": "loges",
