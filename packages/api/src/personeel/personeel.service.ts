@@ -145,6 +145,7 @@ export class PersoneelService {
     await personeel.then(p => {
       p.voornaam = updatePersoneel?.voornaam
       p.achternaam = updatePersoneel?.achternaam
+      p.type = updatePersoneel?.type
       return this.personeelRepository.save(p)
     })
 
