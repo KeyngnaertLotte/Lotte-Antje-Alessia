@@ -59,7 +59,7 @@ export class TakenService {
   //         console.log('aantal is hetzelfde')
   //       } else {
   //         console.log('aantal is niet hetzelfde')
-          
+
   //       }
   //     }
   //     await this.taakRepository.save(updatedTaak)
@@ -67,7 +67,7 @@ export class TakenService {
   //   }
   // }
 
-  async save(updatedTaak: UpdateTakenInput){
+  async save(updatedTaak: UpdateTakenInput) {
     await this.taakRepository.save(updatedTaak)
   }
 
@@ -86,5 +86,10 @@ export class TakenService {
   // slaat alle taken op
   saveAll(taken: Taak[]) {
     return this.taakRepository.save(taken)
+  }
+
+  // verwijdert alle taken
+  truncate() {
+    return this.taakRepository.clear()
   }
 }

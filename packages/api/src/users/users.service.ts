@@ -82,7 +82,6 @@ export class UsersService {
         console.log('Error deleting user:', error)
       })
 
-
     await this.userRepository.remove(user)
     return `user removed`
   }
@@ -91,5 +90,12 @@ export class UsersService {
     const user = await this.findOneByUid(uid)
     user.naam = naam
     return this.userRepository.save(user)
+  }
+
+  async saveAll(users: User[]): Promise<User[]> {
+    return this.userRepository.save(users)
+  }
+  async truncate(): Promise<void> {
+    await this.userRepository.clear()
   }
 }

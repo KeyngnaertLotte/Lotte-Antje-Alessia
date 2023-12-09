@@ -2,16 +2,24 @@
     {
         "uid": "heVU5Eot82b3wxUMeimpkDx52Ru2",
         "naam": "Sofie Van den Berg",
-        "saldo": 0
+        "saldo": 0,
+        "favoartiest": [
+            
+        ],
+        "transacties": []
     },
     {
-        "uid": "",
+        "uid": "GzU8IO3oZBTiCke0qZP2NjcsAGs2",
         "naam": "Jonas De Clercq",
-        "saldo": 0
+        "saldo": 0,
+        "favoartiest": [],
+        "transacties": []
     },
     {
         "uid": "IOWulnBz2bPXt8maT77b25H8M8N2",
         "naam": "Emma Dubois",
-        "saldo": 0
+        "saldo": 0,
+        "favoartiest": [],
+        "transacties": []
     }
 ]

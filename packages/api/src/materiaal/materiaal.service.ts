@@ -185,4 +185,12 @@ export class MateriaalService {
       return `taak verwijderd`
     }
   }
+
+  async saveAll(materiaal: Materiaal[]) {
+    return this.materiaalRepository.save(materiaal)
+  }
+
+  async truncate() {
+    return this.materiaalRepository.clear()
+  }
 }

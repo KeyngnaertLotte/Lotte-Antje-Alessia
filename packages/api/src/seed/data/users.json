@@ -112,5 +112,23 @@
         "locale": "nl",
         "role": "PERSONEEL",
         "naam": "Annelies Jacobs"
+    },
+    {
+        "uid": "heVU5Eot82b3wxUMeimpkDx52Ru2",
+        "locale": "nl",
+        "role": "BEZOEKER",
+        "naam": "Sofie Van den Berg"
+    },
+    {
+        "uid": "GzU8IO3oZBTiCke0qZP2NjcsAGs2",
+        "locale": "nl",
+        "role": "BEZOEKER",
+        "naam": "Jonas De Clercq"
+    },
+    {
+        "uid": "IOWulnBz2bPXt8maT77b25H8M8N2",
+        "locale": "nl",
+        "role": "BEZOEKER",
+        "naam": "Emma Dubois"
     }
 ]
