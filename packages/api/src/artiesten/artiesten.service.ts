@@ -12,6 +12,7 @@ import { MateriaalService } from 'src/materiaal/materiaal.service'
 import { TakenService } from 'src/taken/taken.service'
 import { CreateTakenInput } from 'src/taken/dto/create-taken.input'
 import { UsersService } from 'src/users/users.service'
+import { UpdateAgendaInput } from './dto/update-agenda.input'
 
 @Injectable()
 export class ArtiestenService {
@@ -148,6 +149,27 @@ export class ArtiestenService {
     }
 
     return `artiest met uid ${uid} geupdate`
+  }
+
+  async UpdateAgenda(uid: string, agenda: UpdateAgendaInput) {
+    const artiest = await this.findOneByUid(uid)
+    // search for agenda item
+    const agendaItem = artiest.agenda.find(a => a.id === agenda.id)
+    // update agenda item
+    agendaItem.taak = agenda.taak
+    agendaItem.tijd = agenda.tijd
+    agendaItem.podium = agenda.podium
+
+    if (agendaItem.podium) {
+      artiest.podium = agendaItem.podium
+      // change all the agenda items to the new podium
+      artiest.agenda.forEach(a => {
+        a.podium = agenda.podium
+      })
+    }
+
+    await this.artiestRepository.save(artiest)
+    return 'agenda geupdate'
   }
 
   async remove(uid: string) {

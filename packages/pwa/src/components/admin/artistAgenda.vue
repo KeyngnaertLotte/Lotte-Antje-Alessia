@@ -34,11 +34,10 @@ export default {
     const artist = props.artist;
 
     const handleOpenModal = (event: any) => {
-      // Emit the open-modal event with the event data
-      emit('open-modal', event);
+      const newEvent = {...event, artiest: artist.uid}
+      emit('open-modal', newEvent);
+    
     };
-
-
 
     return { artist, editEvent, handleOpenModal, isModalOpen, selectedItem };
   },
