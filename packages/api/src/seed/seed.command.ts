@@ -75,4 +75,54 @@ export class DatabaseSeedCommand {
     const taken = await this.seedService.addTakenFromJson()
     console.info(`Seeded ${taken.length} taken`)
   }
+
+  @Command({
+    command: 'seed:reset:taak',
+    describe: 'delete all data from the taak table',
+  })
+  async deleteTaken() {
+    console.info('deleting taken')
+    await this.seedService.deleteAllTaken()
+    console.info('deleted taken')
+  }
+
+  @Command({
+    command: 'seed:database:materiaal',
+    describe: 'seed the database with materiaal',
+  })
+  async seedMateriaal() {
+    console.info('seeding materiaal')
+    const materiaal = await this.seedService.addMateriaalFromJson()
+    console.info(`Seeded ${materiaal.length} materiaal`)
+  }
+
+  @Command({
+    command: 'seed:reset:materiaal',
+    describe: 'delete all data from the materiaal table',
+  })
+  async deleteMateriaal() {
+    console.info('deleting materiaal')
+    await this.seedService.deleteAllMateriaal()
+    console.info('deleted materiaal')
+  }
+
+  @Command({
+    command: 'seed:database:users',
+    describe: 'seed the database with users',
+  })
+  async seedUsers() {
+    console.info('seeding users')
+    const users = await this.seedService.addUserFromJson()
+    console.info(`Seeded ${users.length} users`)
+  }
+
+  @Command({
+    command: 'seed:reset:users',
+    describe: 'delete all data from the users table',
+  })
+  async deleteUsers() {
+    console.info('deleting users')
+    await this.seedService.deleteAllUsers()
+    console.info('deleted users')
+  }
 }

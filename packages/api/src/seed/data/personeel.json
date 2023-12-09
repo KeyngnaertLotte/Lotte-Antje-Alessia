@@ -1,10 +1,58 @@
 [
     {
-        "voornaam": "Jeroen",
-        "achternaam": "van der Heijden"
+        "voornaam": "Joris",
+        "achternaam": "Vermeulen",
+        "uid": "vOdXrqEpnhd4JSGiikPU1Yaxl3G3",
+        "type": "Podium - licht",
+        "takenlijst": []
     },
     {
-        "voornaam": "hans",
-        "achternaam": "van der Heijden"
+        "voornaam": "Eva",
+        "achternaam": "Vandenberg",
+        "uid": "KPWJh8Ql61YSg29EYyAIX7CrcKu1",
+        "type": "Podium - geluid",
+        "takenlijst": []
+    },
+    {
+        "voornaam": "Lucas",
+        "achternaam": "Declercq",
+        "uid": "mjv0Hf0cJ0Po43RnIeH9ZmsuMyr1",
+        "type": "Bar - eten",
+        "takenlijst": []
+    },
+    {
+        "voornaam": "Emma",
+        "achternaam": "Dewit",
+        "uid": "Uc9VYRs6NXWVoikQmxfcyGlEDUw2",
+        "type": "Bar - drank",
+        "takenlijst": []
+    },
+    {
+        "voornaam": "Bram",
+        "achternaam": "Vandewalle",
+        "uid": "ab0i2WFIkwhYVfFLAXfJh7HhCDG3",
+        "type": "Allround",
+        "takenlijst": []
+    },
+    {
+        "voornaam": "Lotte",
+        "achternaam": "Verbeke",
+        "uid": "spmmIl8NFecr0BP55WIi8zkO2dc2",
+        "type": "Kuisen",
+        "takenlijst": []
+    },
+    {
+        "voornaam": "Pieter",
+        "achternaam": "Devos",
+        "uid": "saQZVrn0gjYpgk3cBipJ5Ad2ea23",
+        "type": "Aanvulling",
+        "takenlijst": []
+    },
+    {
+        "voornaam": "Annelies",
+        "achternaam": "Jacobs",
+        "uid": "5q33qLMWy2WTt7YZaA0oRKac2YJ3",
+        "type": "Loges",
+        "takenlijst": []
     }
 ]

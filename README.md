@@ -1,23 +1,61 @@
 # Lotte-Antje-Alessia
 
 ## seeding
-in de data folder kan je data toevoegen in json's
 
 ### Commands
-```
-npx nestjs-command seed:database:bezoekers // voegt alle bezoekers uit de json toe aan de database
-npx nestjs-command seed:reset:bezoekers // delete alle bezoekers uit de database
+
+#### Data toevoegen
+
+```cmd
+npx nestjs-command seed:database:bezoekers
 ```
 
-```
-npx nestjs-command seed:database:personeel // voegt alle personeelslednen uit de json toe aan de database
-npx nestjs-command seed:reset:personeel // delete alle personeelsleden uit de database
+```cmd
+npx nestjs-command seed:database:personeel
 ```
 
+```cmd
+npx nestjs-command seed:database:artiesten
 ```
-npx nestjs-command seed:database:artiesten // voegt alle artiesten uit de json toe aan de database
-npx nestjs-command seed:reset:artiesten // delete alle artiesten uit de database
+
+```cmd
+npx nestjs-command seed:database:taak
 ```
+
+```cmd
+npx nestjs-command seed:database:materiaal
+```
+
+```cmd
+npx nestjs-command seed:database:users
+```
+
+#### Data verwijderen
+
+```cmd
+npx nestjs-command seed:reset:bezoekers
+```
+
+```cmd
+npx nestjs-command seed:reset:personeel
+```
+
+```cmd
+npx nestjs-command seed:reset:artiesten
+```
+
+```cmd
+npx nestjs-command seed:reset:taak
+```
+
+```cmd
+npx nestjs-command seed:reset:materiaal
+```
+
+```cmd
+npx nestjs-command seed:reset:users
+```
+
 ## vertalingen
 bij het aanpassen van de vertalingen in de spreadsheet, moet je naar `/packages/pwa` en deze commando runnen
 ```

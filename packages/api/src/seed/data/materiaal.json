@@ -11,47 +11,47 @@
     },
     {
         "item": "Gitaar",
-        "aantal": 10,
+        "aantal": 50,
         "categorie": "Instrumenten"
     },
     {
         "item": "Podiumelementen",
-        "aantal": 15,
+        "aantal": 100,
         "categorie": "Podium"
     },
     {
         "item": "Stroomkabels",
-        "aantal": 30,
+        "aantal": 150,
         "categorie": "Elektriciteit"
     },
     {
         "item": "Toiletpapier",
-        "aantal": 100,
+        "aantal": 10000,
         "categorie": "Toiletten"
     },
     {
         "item": "Pizza",
-        "aantal": 200,
+        "aantal": 10000,
         "categorie": "Eten"
     },
     {
         "item": "Frisdrank",
-        "aantal": 150,
+        "aantal": 50000,
         "categorie": "Drinken"
     },
     {
         "item": "Verbanddozen",
-        "aantal": 5,
+        "aantal": 100,
         "categorie": "EHBO"
     },
     {
-        "item": "Beveiligingspersoneel",
-        "aantal": 15,
+        "item": "fluohesjes",
+        "aantal": 150,
         "categorie": "Beveiliging"
     },
     {
         "item": "Afvalzakken",
-        "aantal": 50,
+        "aantal": 2000,
         "categorie": "Afval"
     },
     {

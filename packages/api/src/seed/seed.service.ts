@@ -10,17 +10,25 @@ import * as artiesten from './data/artiesten.json'
 import * as bezoekers from './data/bezoekers.json'
 import * as personeel from './data/personeel.json'
 import * as taken from './data/taken.json'
+import * as materiaal from './data/materiaal.json'
+import * as users from './data/users.json'
 import { Taak } from 'src/taken/entities/taken.entity'
 import { TakenService } from 'src/taken/taken.service'
+import { Materiaal } from 'src/materiaal/entities/materiaal.entity'
+import { MateriaalService } from 'src/materiaal/materiaal.service'
+import { Role, User } from 'src/users/entities/user.entity'
+import { UsersService } from 'src/users/users.service'
 
 @Injectable()
 export class SeedService {
   constructor(
-    private artiestenService: ArtiestenService, 
+    private artiestenService: ArtiestenService,
     private bezoekersService: BezoekersService,
     private personeelService: PersoneelService,
+    private materiaalService: MateriaalService,
+    private usersService: UsersService,
     private taakService: TakenService,
-    ) {}
+  ) {}
 
   async addArtiestenFromJson(): Promise<Artiest[]> {
     let deArtiesten: Artiest[] = []
@@ -28,11 +36,9 @@ export class SeedService {
       const a = new Artiest()
       a.naam = artiest.naam
       a.podium = artiest.podium
-      // a.agenda = artiest.agenda
-      // for (let opdracht of artiest.agenda){
-      //   a.agenda.push(opdracht)
-      // }
-
+      a.uid = artiest.uid
+      a.benodigdheden = artiest.benodigdheden
+      a.agenda = artiest.agenda
       deArtiesten.push(a)
     }
     return this.artiestenService.saveAll(deArtiesten)
@@ -42,13 +48,15 @@ export class SeedService {
     return this.artiestenService.truncate()
   }
 
-
   async addBezoekersFromJson(): Promise<Bezoeker[]> {
     let deBezoekers: Bezoeker[] = []
     for (let bezoeker of bezoekers) {
       const b = new Bezoeker()
       b.uid = bezoeker.uid
       b.naam = bezoeker.naam
+      b.saldo = bezoeker.saldo
+      b.favoartiest = bezoeker.favoartiest
+      b.transacties = bezoeker.transacties
 
       deBezoekers.push(b)
     }
@@ -65,6 +73,9 @@ export class SeedService {
       const p = new Personeel()
       p.achternaam = personeelLid.achternaam
       p.voornaam = personeelLid.voornaam
+      p.uid = personeelLid.uid
+      p.type = personeelLid.type
+      p.takenlijst = personeelLid.takenlijst
 
       hetPersoneel.push(p)
     }
@@ -85,11 +96,52 @@ export class SeedService {
       t.naam = taak.naam
       t.plaats = taak.plaats
       t.type = taak.type
-
+      t.materiaal = taak.materiaal
+      t.status = taak.status
 
       deTaken.push(t)
     }
     return this.taakService.saveAll(deTaken)
   }
 
+  async deleteAllTaken(): Promise<void> {
+    return this.taakService.truncate()
+  }
+
+  async addMateriaalFromJson(): Promise<Materiaal[]> {
+    // TODO
+    let hetMateriaal: Materiaal[] = []
+    for (let materiaalItem of materiaal) {
+      const m = new Materiaal()
+      m.item = materiaalItem.item
+      m.categorie = materiaalItem.categorie
+      m.aantal = materiaalItem.aantal
+
+      hetMateriaal.push(m)
+    }
+    return this.materiaalService.saveAll(hetMateriaal)
+  }
+
+  async deleteAllMateriaal(): Promise<void> {
+    return this.materiaalService.truncate()
+  }
+
+  async addUserFromJson(): Promise<User[]> {
+    let deUsers: User[] = []
+    for (let user of users) {
+      const rol = user.role.toLocaleUpperCase() as Role
+      const u = new User()
+      u.uid = user.uid
+      u.locale = user.locale
+      u.role = rol
+      u.naam = user.naam
+
+      deUsers.push(u)
+    }
+    return this.usersService.saveAll(deUsers)
+  }
+
+  async deleteAllUsers(): Promise<void> {
+    return this.usersService.truncate()
+  }
 }
