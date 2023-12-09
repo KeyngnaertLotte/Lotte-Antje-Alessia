@@ -30,7 +30,6 @@ export const benodigdhedenStub = (): Artiest => {
       podium: 'Lotte',
       aantal: 1,
       categorie: 'drank',
-      deadline: '2021-05-05T00:00:00.000Z',
     },
   ]
   return a

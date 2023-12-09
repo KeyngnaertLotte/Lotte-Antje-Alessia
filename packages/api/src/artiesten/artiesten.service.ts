@@ -36,6 +36,18 @@ export class ArtiestenService {
   ) {
     const currentArtiest = await this.findOneByUid(uid)
 
+    let currentTime = new Date()
+
+    // Add 30 minutes
+    currentTime.setMinutes(currentTime.getMinutes() + 30)
+
+    // Get the hours and minutes
+    let hours = currentTime.getHours()
+    let minutes = currentTime.getMinutes()
+
+    // Format the hours and minutes as a string
+    const deadline = `${hours}:${minutes}`
+
     // check in materiaal
     await this.materiaalService.checkMateriaal(materiaal.item, materiaal.aantal)
 
@@ -54,7 +66,6 @@ export class ArtiestenService {
       newbenodigdheden.aantal = materiaal.aantal
       newbenodigdheden.categorie = materiaal.categorie
       newbenodigdheden.podium = currentArtiest.podium
-      newbenodigdheden.deadline = materiaal.deadline
 
       currentArtiest.benodigdheden = [
         ...currentArtiest.benodigdheden,
@@ -63,11 +74,12 @@ export class ArtiestenService {
     }
 
     const newTaak = new CreateTakenInput()
-    newTaak.naam = materiaal.item
+    newTaak.naam = `${currentArtiest.naam} heeft ${materiaal.item} nodig`
     newTaak.aantal = materiaal.aantal
     newTaak.category = materiaal.categorie
     newTaak.plaats = currentArtiest.podium
-    newTaak.deadline = materiaal.deadline
+    newTaak.deadline = deadline
+    newTaak.materiaal = materiaal.item
 
     const categorie = materiaal.categorie.toLocaleLowerCase()
     let type

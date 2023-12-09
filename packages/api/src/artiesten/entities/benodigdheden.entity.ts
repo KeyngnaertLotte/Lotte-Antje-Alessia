@@ -18,7 +18,4 @@ export class Benodigdheden {
   @Field()
   aantal: number
 
-  @Column()
-  @Field()
-  deadline: string
 }
