@@ -3,7 +3,7 @@
     class="row-start-4 col-span-2 row-span-21 grid grid-rows-6 grid-cols-7 gap-4 m-4"
   >
     <div
-      class="bg-white w-full mx-auto p-6 rounded-lg shadow-md row-span-6 col-span-5"
+      class="bg-white w-full mx-auto p-6 rounded-lg shadow-md row-span-6 col-span-5 col-start-1"
     >
       <h1 class="text-2xl font-bold mb-4 font-body">Lijst van personeel</h1>
       <div class="flex items-center justify-between mb-4 px-2 bg-gray-200">
@@ -49,55 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md">
-      <h1 class="text-2xl font-bold font-body">Bericht</h1>
-      <form action="" class="flex flex-col justify-between">
-        <div class="flex flex-row w-full my-4">
-          <label for="" class="mr-4">Aan: </label>
-          <label for="">Alle</label>
-          <input type="checkbox" />
-        </div>
-        <textarea
-          placeholder="Typ hier je mededeling"
-          name=""
-          id=""
-          cols="50"
-          rows="3"
-          class="w-full block font-pop border-2 rounded-md p-1 focus:outline-none focus:border-4 focus:border-white bg-white"
-        ></textarea>
-
-        <button
-          class="py-1 bg-custom-purple text-white my-6 rounded w-1/2 self-end"
-        >
-          VERZEND
-        </button>
-      </form>
-    </div>
-    <div class="row-span-3 col-span-2 bg-white rounded-lg shadow-md p-6">
-      <h1 class="text-2xl font-bold font-body">Voeg taak toe</h1>
-      <form action="" class="flex flex-col justify-around w-full h-full">
-        <div class="flex flex-row w-full my-4">
-          <label for="" class="mr-4">Voor: </label>
-          <select
-            class="bg-gray-200 rounded font-pop focus:outline-none w-3/4 p-1"
-          >
-            <option v-for="option in types" :key="option" :value="option">
-              {{ option }}
-            </option>
-          </select>
-        </div>
-        <div class="flex flex-row">
-          <label for="" class="mr-4">Taak: </label>
-          <input type="text" class="border-b-2 border-b-black w-3/4" />
-        </div>
-
-        <button
-          class="py-1 bg-custom-orange text-white my-6 rounded w-1/2 self-end"
-        >
-          TOEVOEGEN
-        </button>
-      </form>
-    </div>
+    <notificationCard />
   </div>
   <personeelPopup
     v-if="isModalOpen"
@@ -115,6 +67,7 @@ import { ref } from 'vue'
 import { Pencil } from 'lucide-vue-next'
 import personeelPopup from '@/components/admin/personeelPopup.vue'
 import { getAuth } from 'firebase/auth'
+import notificationCard from '@/components/admin/notificationCard.vue'
 
 const isModalOpen = ref(false)
 const selectedItem = ref<any | null>(null)
@@ -178,7 +131,7 @@ onResult(result => {
 })
 
 export default {
-  components: { Pencil, personeelPopup },
+  components: { Pencil, personeelPopup, notificationCard },
 
   setup() {
     const onChange = (item: Personeel, index: number, newValue: string) => {
@@ -237,3 +190,4 @@ export default {
   },
 }
 </script>
+
