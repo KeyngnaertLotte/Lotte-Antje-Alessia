@@ -212,25 +212,17 @@ export default {
     onResult(result => {
       if (result.data) {
         listMateriaal.value = []
-        console.log('Data:', result.data.findByCategorie)
         console.log(result.data.findByCategorie.length)
         for (let i = 0; i < result.data.findByCategorie.length; i++) {
           console.log(result.data.findByCategorie[i].item)
           listMateriaal.value.push(result.data.findByCategorie[i].item)
         }
-        console.log("listmaterial",listMateriaal.value)
       }
     })
-
-
 
     const updatedData = () => {
       refetch()
     }
-
-  
-
-
 
     naam.value = props.taskData.naam
     type.value = props.taskData.type
