@@ -10,9 +10,9 @@ import { BezoekersModule } from './bezoekers/bezoekers.module'
 import { SeedModule } from './seed/seed.module'
 import { AuthenticationModule } from './authentication/authentication.module'
 import { ConfigModule } from '@nestjs/config'
-import { UsersModule } from './users/users.module';
-import { MateriaalModule } from './materiaal/materiaal.module';
-import { TakenModule } from './taken/taken.module';
+import { UsersModule } from './users/users.module'
+import { MateriaalModule } from './materiaal/materiaal.module'
+import { TakenModule } from './taken/taken.module'
 
 @Module({
   imports: [
@@ -21,15 +21,39 @@ import { TakenModule } from './taken/taken.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      playground: process.env.NODE_ENV == 'production' ? false : true,
     }),
 
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      url: 'mongodb://localhost:27027/api',
-      entities: [__dirname + '/**/*.entity.{js,ts}'],
-      synchronize: process.env.NODE_ENV == 'production' ? false : true, // Careful with this in production
-      useNewUrlParser: true,
-      useUnifiedTopology: true, // Disable deprecated warnings
+    // TypeOrmModule.forRoot({
+    //   type: 'mongodb',
+    //   url: 'mongodb://localhost:27027/api',
+    //   entities: [__dirname + '/**/*.entity.{js,ts}'],
+    //   synchronize: process.env.NODE_ENV == 'production' ? false : true, // Careful with this in production
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true, // Disable deprecated warnings
+    // }),
+
+    TypeOrmModule.forRootAsync({
+      useFactory: async () => {
+        if (process.env.NODE_ENV == 'dev') {
+          return {
+            type: 'mongodb',
+            url: 'mongodb://localhost:27027/api',
+            entities: [__dirname + '/**/*.entity.{js,ts}'],
+            useNewUrlParser: true,
+            useUnifiedTopology: true, // Disable deprecated warnings
+          }
+        } else {
+          return {
+            type: 'mongodb',
+            url: `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, // DOCKER
+            entities: [__dirname + '/**/*.entity.{js,ts}'],
+            synchronize: process.env.NODE_ENV == 'production' ? false : true, // Careful with this in production
+            useNewUrlParser: true,
+            useUnifiedTopology: true, // Disable deprecated warnings
+          }
+        }
+      },
     }),
 
     ArtiestenModule,
