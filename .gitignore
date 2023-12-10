@@ -4,10 +4,6 @@ tailwind.config.cjs
 packages/api/credentials.json
 credentials.json
 packages/pwa/src/utils/token.json
-<<<<<<< HEAD
-**/dist
-=======
 **/dist/
 packages/api/.env.production.local
->>>>>>> styling-admin
 packages/pwa/.env.production.local
