@@ -38,3 +38,13 @@ export const GET_Artiest_By_Uid = gql`
     }
   }
 `
+
+export const GET_LINEUP = gql`
+  query LineUp {
+    lineUp {
+      podium
+      tijd
+      naam
+    }
+  }
+`

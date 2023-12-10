@@ -6,18 +6,11 @@
     
     :url="'/artiest/items'"
   />
-  <!-- <cardSm title="vip lijst" class="col-span-1 row-start-4 row-span-4" /> -->
-  <!-- <ItemPopUp
-    v-if="isModalOpen"
-    :id="uid ?? ''"
-    @close-modal="handleCloseModal"
-  /> -->
   <AgendaArtist />
 </template>
 
 <script lang="ts">
-import { useQuery } from '@vue/apollo-composable'
-import { ALL_Artiesten } from '@/graphql/artiest.query'
+
 import AppHeader from '@/components/AppHeader.vue'
 import AgendaArtist from '@/components/artiest/AgendaArtist.vue'
 import cardSm from '@/components/generic/CardSm.vue'
@@ -40,9 +33,7 @@ export default {
 
     const handleDataFromChild = (data: string) => {
       dataFromChild.value = data
-      // console.log('dataFromChild:', dataFromChild.value);
       if (dataFromChild.value === 'open-popup') {
-        // console.log('open popup');
         isModalOpen.value = true
       }
     }
