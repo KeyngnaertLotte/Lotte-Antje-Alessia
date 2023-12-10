@@ -13,6 +13,7 @@ import { TakenService } from 'src/taken/taken.service'
 import { CreateTakenInput } from 'src/taken/dto/create-taken.input'
 import { UsersService } from 'src/users/users.service'
 import { UpdateAgendaInput } from './dto/update-agenda.input'
+import { LineUp } from './entities/lineup.entity'
 
 @Injectable()
 export class ArtiestenService {
@@ -170,6 +171,19 @@ export class ArtiestenService {
 
     await this.artiestRepository.save(artiest)
     return 'agenda geupdate'
+  }
+
+  async getLineUp(): Promise<LineUp[]> {
+    const artiesten = await this.artiestRepository.find()
+    const lineUp = artiesten.map(a => {
+      const agenda = a.agenda.find(a => a.taak === 'Optreden')
+      return {
+        naam: a.naam,
+        podium: a.podium,
+        tijd: agenda.tijd,
+      }
+    })
+    return lineUp
   }
 
   async remove(uid: string) {

@@ -10,6 +10,7 @@ import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 import { UpdateArtiestenInput } from './dto/update-artiesten.input'
 import { Agenda } from './entities/agenda.entity'
 import { UpdateAgendaInput } from './dto/update-agenda.input'
+import { LineUp } from './entities/lineup.entity'
 
 @Resolver(() => Artiest)
 export class ArtiestenResolver {
@@ -77,5 +78,11 @@ export class ArtiestenResolver {
     @Args('uid') uid: string,
   ) {
     return this.artiestenService.UpdateAgenda(uid,agendaInput)
+  }
+
+  
+  @Query(() => [LineUp], { name: 'lineUp' })
+  GetLineUp() {
+    return this.artiestenService.getLineUp()
   }
 }
