@@ -32,10 +32,7 @@ const { on } = useRealtime()
 const isVisible = ref(false)
 
 const { customUser } = useCustomUser()
-function toggleVisibility() {
-  isVisible.value = !isVisible.value
-  // console.log("state menu", isVisible.value);
-}
+const toast = useToast()
 
 export default {
   components: { AppBurgerMenu, AlignJustify },
@@ -47,18 +44,30 @@ export default {
   },
   setup(props) {
     const role = customUser.value?.role
-    const toast = useToast()
-    console.log('customUser:', role?.toString().toLocaleLowerCase())
+    let canReceiveNotification = true // Flag to control whether to receive notifications
+
+    function toggleVisibility() {
+      isVisible.value = !isVisible.value
+    }
+
     on(
-        'adminNotification:' + role?.toString().toLocaleLowerCase(),
-        (data: any) => {
+      'adminNotification:' + role?.toString().toLocaleLowerCase(),
+      (data: any) => {
+        if (canReceiveNotification) {
           console.log('data:', data)
-          toast.info(data, { timeout: 5000})
-        },
-      )
-    // console.log('role:', role);
+          toast.info(data, { timeout: 5000 })
+          canReceiveNotification = false
+
+          // Set a timer to reset the flag after 5 seconds
+          setTimeout(() => {
+            canReceiveNotification = true
+          }, 5000)
+        }
+      },
+    )
+
     const naam = props.naam
-    // console.log("scream and shout",props);
+
     return {
       isVisible,
       toggleVisibility,
@@ -70,8 +79,8 @@ export default {
 </script>
 
 <style>
-  .Vue-Toastification__toast{
-    background-color: #777DA7;
+  .Vue-Toastification__toast {
+    background-color: #777da7;
     color: white;
     font-weight: 700;
     font-size: 1.5rem;
