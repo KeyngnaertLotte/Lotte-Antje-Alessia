@@ -58,6 +58,7 @@ export default {
     if (messageContent.value !== '') {
       emit('messageToAdmin', messageContent.value + ' - ' + props.userName)
       closeModal()
+      messageContent.value = ''
     } 
     }
     
