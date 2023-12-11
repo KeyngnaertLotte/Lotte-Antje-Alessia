@@ -26,7 +26,10 @@
                 class="m-2 mx-4 mt-0 p-2 flex flex-col justify-between min-w-full"
               >
                 <!-- <button class="text-white flex justify-start">{{ otherLang(languages).toString() }}</button> -->
-                <button class="text-white flex justify-start" @click="setLanguage(otherLang(languages).toString())">
+                <button
+                  class="text-white flex justify-start"
+                  @click="setLanguage(otherLang(languages).toString())"
+                >
                   {{ otherLang(languages).toString() }}
                 </button>
               </div>
@@ -118,7 +121,7 @@ const { replace } = useRouter()
 
 // taal dropdown
 const languages = { nl: 'Nederlands', en: 'Engels' }
-type Languages = { nl: string, en: string }
+type Languages = { nl: string; en: string }
 type ShowState = { [key: string]: boolean }
 const showState = ref<ShowState>({})
 
@@ -165,12 +168,12 @@ const setLanguage = (selectedLang: any) => {
 
   // de key van de gekozen taal
   const selectedLangKey = Object.keys(languages).find(
-    (key) => languages[key as keyof Languages] === selectedLang
-  ) as keyof Languages;
+    key => languages[key as keyof Languages] === selectedLang,
+  ) as keyof Languages
 
   console.log('selectedLangKey: ', selectedLangKey)
 
-  setLocale({userId: userId, locale: selectedLangKey})
+  setLocale({ userId: userId, locale: selectedLangKey })
     .then(graphqlresult => {
       console.log('🎉 locale changed')
       console.log(graphqlresult?.data)
@@ -179,6 +182,7 @@ const setLanguage = (selectedLang: any) => {
       console.error(error)
     })
 
+  location.reload()
   console.log('customUser CHANGED to: ', customUser.value?.locale)
 }
 
