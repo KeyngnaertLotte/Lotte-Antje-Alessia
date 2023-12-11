@@ -33,12 +33,12 @@ describe('ArtiestenResolver', () => {
       }
     })
 
-    it('should call ArtiestenService.create one time', async () => {
+    it('should call ArtiestenService.createArtiesten one time', async () => {
       await resolver.createArtiesten(myArtiestDTO)
       expect(mockedService.create).toBeCalledTimes(1)
     })
 
-    it('should call artiestenService.create with the correct parameters', async () => {
+    it('should call artiestenService.createArtiesten with the correct parameters', async () => {
       await resolver.createArtiesten(myArtiestDTO)
       expect(mockedService.create).toBeCalledWith(myArtiestDTO)
     })

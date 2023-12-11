@@ -11,6 +11,7 @@ import {
 import { TakenService } from 'src/taken/taken.service'
 import { MateriaalService } from 'src/materiaal/materiaal.service'
 import { CreateArtiestenInput } from './dto/create-artiesten.input'
+import { UsersService } from 'src/users/users.service'
 
 describe('ArtiestenService', () => {
   let service: ArtiestenService
@@ -42,6 +43,12 @@ describe('ArtiestenService', () => {
             create: jest.fn(),
           },
         },
+        {
+          provide: UsersService,
+          useValue: {
+            findOne: jest.fn(),
+          },
+        },
       ],
     }).compile()
 
@@ -68,11 +75,9 @@ describe('ArtiestenService', () => {
       await service.create(myTestArtiest)
       expect(saveSpy).toBeCalledWith(myTestArtiest)
     })
-
     it('should return the created artiest', async () => {
       const myTestArtiestInput = createartiestInputStub()
       const myArtiestOutput = artiestStub()
-
       const r = await service.create(myTestArtiestInput)
       expect(r).toEqual(myArtiestOutput)
     })
