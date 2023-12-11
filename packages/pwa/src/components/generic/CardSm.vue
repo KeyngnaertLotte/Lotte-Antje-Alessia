@@ -26,6 +26,15 @@ const color: Record<string, any> = {
     'saldo': 'bg-custom-brown',
 }
 
+const colorAcces: Record<string, any> = {
+    'materiaal': 'hover:bg-custom-lightGreen focus:bg-custom-lightGreen',
+    'bonnetjes': 'hover:bg-custom-darkGreen focus:bg-custom-darkGreen',
+    'vip lijst': 'hover:bg-custom-darkGreen',
+    'scanner': 'hover:bg-[#9BA0C2] focus:bg-[#9BA0C2]',
+    'item': 'hover:bg-custom-orange focus:bg-custom-orange',
+    'saldo': 'hover:bg-custom-orange focus:bg-custom-orange',
+}
+
 // kleur text aan de hand van de titel
 const textColor: Record<string, any> = {
     'materiaal': 'text-black',
@@ -68,8 +77,8 @@ const handleClick = () => {
 
 <template>
   <button
-    class="rounded-md m-5 flex flex-col items-center justify-center shadow-md"
-    :class="color[$props.title], textColor[$props.title]"
+    class="rounded-md m-5 flex flex-col items-center justify-center shadow-md  focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-orange"
+    :class="color[$props.title], textColor[$props.title], colorAcces[$props.title]"
     @click="handleClick"
   >
     <p class="font-bold text-2xl self-start font-body px-3">{{ $props.title.toLocaleUpperCase() }}</p>
