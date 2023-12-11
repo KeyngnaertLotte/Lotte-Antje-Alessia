@@ -89,8 +89,8 @@ const router = createRouter({
           component: () => import('../views/protected/admin/AddAccount.vue'),
         },
         {
-          path: 'lijst-accounts',
-          component: () => import('../views/protected/admin/listAccounts.vue'),
+          path: 'artiesten-agenda',
+          component: () => import('../views/protected/admin/artistsAgendas.vue'),
         },
         {
           path: 'lijst-taken',

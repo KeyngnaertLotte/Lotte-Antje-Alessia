@@ -148,7 +148,7 @@ const roleMenuList = [
       },
       {
         name:'Agenda artiesten',
-        path: '/admin/lijst-accounts',
+        path: '/admin/artiesten-agenda',
         icon: Mic2,
       },
       {
