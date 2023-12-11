@@ -1,6 +1,6 @@
 <template>
     <div class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md col-start-6">
-      <h1 class="text-2xl font-bold font-body">Bericht</h1>
+      <h1 class="text-2xl font-bold font-body">Stuur melding</h1>
       <div class="flex flex-col justify-around h-fit gap-4 mt-2">
           <div>
             <p class="">Het bericht is voor:</p>

@@ -32,6 +32,7 @@
       </div>
     </div>
   </div>
+  <sendMessagePopup v-if="showModal" @close-modal="showModal = false"  :userName="userName"/>
 </template>
 
 <script lang="ts">
@@ -40,13 +41,16 @@ import { useQuery } from '@vue/apollo-composable'
 import { GET_Artiest_By_Uid } from '@/graphql/artiest.query'
 import useCustomUser from '@/composables/useCustomUser'
 import { MessageCircle } from 'lucide-vue-next'
+import sendMessagePopup from './sendMessagePopup.vue'
 
 const { customUser } = useCustomUser()
 const uid = customUser.value?.uid
 const AgendaItems = ref<any | null>(null)
+const showModal = ref(false)
+const userName = String(customUser.value?.naam)
 
 export default {
-  components: { MessageCircle },
+  components: { MessageCircle, sendMessagePopup },
   setup() {
     const getBezoekerInfo = async () => {
       console.log('uid:', uid)
@@ -64,12 +68,12 @@ export default {
     }
 
     const message = () => {
-      console.log('message')
+      showModal.value = true
     }
 
     getBezoekerInfo()
 
-    return { customUser, AgendaItems, message }
+    return { customUser, AgendaItems, message, showModal, userName }
   },
 }
 </script>
