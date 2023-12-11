@@ -29,18 +29,18 @@
         type="email"
         name="email"
         id="email"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="email" placeholder="Email adres"
         />
     </div>
     <div class="w-full flex flex-col h-1/3 justify-center items-center">
       <button
-      class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white "
+      class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
     >
       Verstuur e-mail
     </button>
       <RouterLink
-        class="w-full flex justify-center font-pop mt-1 inline-block rounded text-md text-custom-darkGreen hover:underline focus:outline-none "
+        class="w-full flex justify-center font-pop mt-1 inline-block rounded text-md text-custom-darkGreen focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         to="/auth/login"
       >
         Wachtwoord niet vergeten? Keer terug
