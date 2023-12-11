@@ -11,7 +11,7 @@
               id="all"
               name="all"
               value="all"
-              class="mr-2"
+              class="mr-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
               @click="disableOthers"
               v-model="allChecked"
               :disabled="isAllDisabled"
@@ -24,7 +24,7 @@
               id="visitors"
               name="visitors"
               value="visitors"
-              class="mr-2"
+              class="mr-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
               :disabled="allChecked"
               v-model="visitorsChecked"
             />
@@ -38,7 +38,7 @@
               id="artists"
               name="artists"
               value="artists"
-              class="mr-2"
+              class="mr-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
               :disabled="allChecked"
               v-model="artistsChecked"
             />
@@ -50,7 +50,7 @@
               id="personel"
               name="personel"
               value="personel"
-              class="mr-2"
+              class="mr-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
               :disabled="allChecked"
               v-model="personeelChecked"
             />
@@ -63,11 +63,11 @@
           v-model="messageContent"
           cols="50"
           rows="3"
-          class="w-full block font-pop border-2 rounded-md p-1 focus:outline-none focus:border-4 focus:border-white bg-white h-7/10"
+          class="w-full block font-pop border-2 rounded-md p-1  bg-white h-7/10 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         ></textarea>
         <button
           @click="sendMessage"
-          class="py-1 bg-custom-purple text-white rounded w-1/3 self-end"
+          class="py-1 bg-custom-purple text-white rounded w-1/3 self-end hover:bg-[#9BA0C2] focus:outline-none focus-visible:border-custom-orange focus-visible:bg-[#9BA0C2] focus-visible:ring-2 focus-visible:ring-custom-orange"
         >
           VERZEND
         </button>
@@ -124,8 +124,7 @@
           console.log('none');
         }
       };
-  
-      // Watch for changes in individual checkboxes to update the "All" checkbox state
+
       watch([visitorsChecked, artistsChecked, personeelChecked], () => {
         isAllDisabled.value =
           visitorsChecked.value || artistsChecked.value || personeelChecked.value;
