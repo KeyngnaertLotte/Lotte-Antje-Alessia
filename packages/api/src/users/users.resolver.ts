@@ -80,7 +80,7 @@ export class UsersResolver {
 
   @UseGuards(FirebaseGuard)
   @Mutation(() => User, { name: 'setLanguage' })
-  setLanguage(@Args('userId') userId: string, @Args('locale') locale: string) {
+  setLanguage(@Args('userId') userId: string, @Args('locale') locale: string){
     return this.usersService.setLanguage(userId, locale);
   }
   

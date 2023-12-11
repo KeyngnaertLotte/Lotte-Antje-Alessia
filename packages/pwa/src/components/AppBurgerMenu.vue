@@ -97,6 +97,8 @@ import { useRouter } from 'vue-router'
 import { Plus } from 'lucide-vue-next'
 import { ref } from 'vue'
 import useCustomUser from '@/composables/useCustomUser'
+import { SET_USER_LOCALE } from '@/graphql/user.mutation'
+import { useMutation } from '@vue/apollo-composable'
 
 const { firebaseUser } = useFirebase()
 
@@ -116,6 +118,7 @@ const { replace } = useRouter()
 
 // taal dropdown
 const languages = { nl: 'Nederlands', en: 'Engels' }
+type Languages = { nl: string, en: string }
 type ShowState = { [key: string]: boolean }
 const showState = ref<ShowState>({})
 
@@ -156,7 +159,27 @@ const isShow = (languages: any) => {
 // set language
 const setLanguage = (selectedLang: any) => {
   console.log('selectedLang: ', selectedLang)
-  
+
+  const userId = String(customUser.value?.uid)
+  const { mutate: setLocale } = useMutation(SET_USER_LOCALE)
+
+  // de key van de gekozen taal
+  const selectedLangKey = Object.keys(languages).find(
+    (key) => languages[key as keyof Languages] === selectedLang
+  ) as keyof Languages;
+
+  console.log('selectedLangKey: ', selectedLangKey)
+
+  setLocale({userId: userId, locale: selectedLangKey})
+    .then(graphqlresult => {
+      console.log('🎉 locale changed')
+      console.log(graphqlresult?.data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+
+  console.log('customUser CHANGED to: ', customUser.value?.locale)
 }
 
 const roleMenuList = [
