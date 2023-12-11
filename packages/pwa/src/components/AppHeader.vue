@@ -44,7 +44,7 @@ export default {
   },
   setup(props) {
     const role = customUser.value?.role
-    let canReceiveNotification = true // Flag to control whether to receive notifications
+    let canReceiveNotification = true 
 
     function toggleVisibility() {
       isVisible.value = !isVisible.value
@@ -58,7 +58,6 @@ export default {
           toast.info(data, { timeout: 5000 })
           canReceiveNotification = false
 
-          // Set a timer to reset the flag after 5 seconds
           setTimeout(() => {
             canReceiveNotification = true
           }, 5000)
