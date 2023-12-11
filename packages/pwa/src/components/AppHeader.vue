@@ -49,34 +49,13 @@ export default {
     const role = customUser.value?.role
     const toast = useToast()
     console.log('customUser:', role?.toString().toLocaleLowerCase())
-    if (role?.toString().toLocaleLowerCase() === 'artiest') {
-      console.log('adminNotification:' + role.toString().toLocaleLowerCase())
-      on(
-        'adminNotification:' + role.toString().toLocaleLowerCase(),
-        (data: any) => {
-          console.log('data:', data)
-        },
-      )
-    }
-    if (role?.toString().toLocaleLowerCase() === 'bezoeker') {
-      console.log('adminNotification:' + role.toString().toLocaleLowerCase())
-      on(
-        'adminNotification:' + role.toString().toLocaleLowerCase(),
+    on(
+        'adminNotification:' + role?.toString().toLocaleLowerCase(),
         (data: any) => {
           console.log('data:', data)
           toast.info(data, { timeout: 5000})
         },
       )
-    }
-    if (role?.toString().toLocaleLowerCase() === 'personeel') {
-      console.log('adminNotification:' + role.toString().toLocaleLowerCase())
-      on(
-        'adminNotification:' + role.toString().toLocaleLowerCase(),
-        (data: any) => {
-          console.log('data:', data)
-        },
-      )
-    }
     // console.log('role:', role);
     const naam = props.naam
     // console.log("scream and shout",props);
@@ -89,3 +68,12 @@ export default {
   },
 }
 </script>
+
+<style>
+  .Vue-Toastification__toast{
+    background-color: #777DA7;
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+</style>
