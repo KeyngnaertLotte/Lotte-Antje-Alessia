@@ -3,9 +3,6 @@
     class="col-span-2 row-start-8 row-span-17 bg-white rounded-xl m-4 grid grid-rows-17 relative"
   >
     <p class="font-bold font-body text-2xl m-3">AGENDA</p>
-    <div class="absolute top-0 right-0 m-4">
-      <MessageCircle @click="message" />
-    </div>
     <div class="overflow-y-auto row-start-3 row-span-16">
       <div
         v-for="(item, index) in AgendaItems"
@@ -32,7 +29,6 @@
       </div>
     </div>
   </div>
-  <sendMessagePopup v-if="showModal" @close-modal="showModal = false"  :userName="userName"/>
 </template>
 
 <script lang="ts">
@@ -41,7 +37,6 @@ import { useQuery } from '@vue/apollo-composable'
 import { GET_Artiest_By_Uid } from '@/graphql/artiest.query'
 import useCustomUser from '@/composables/useCustomUser'
 import { MessageCircle } from 'lucide-vue-next'
-import sendMessagePopup from './sendMessagePopup.vue'
 
 const { customUser } = useCustomUser()
 const uid = customUser.value?.uid
@@ -50,7 +45,7 @@ const showModal = ref(false)
 const userName = String(customUser.value?.naam)
 
 export default {
-  components: { MessageCircle, sendMessagePopup },
+  components: { MessageCircle },
   setup() {
     const getBezoekerInfo = async () => {
       console.log('uid:', uid)
