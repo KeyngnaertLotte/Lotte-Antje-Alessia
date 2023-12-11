@@ -51,7 +51,6 @@ export class NotificationsGateway {
   @SubscribeMessage('messageToAdmin')
   handleMessageToAdmin(client: Socket, message: string): void {
     console.log('Received messageToAdmin', message);
-    // Process the message as needed, e.g., broadcast it to all personnel
     client.broadcast.emit('messageToAdmin', message);
   }
 }
