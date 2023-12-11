@@ -1,7 +1,7 @@
 <template>
     <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
         <div class="h-1/2 w-7/8 bg-white rounded-md flex items-center justify-center relative">
-            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"><X class="h-10 w-10 stroke-white"/> </button>
+            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-custom-orange rounded-lg h-12 w-12 flex justify-center items-center hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"><X class="h-10 w-10 stroke-white"/> </button>
             <img :src="qrcode" alt="QR Code" class="w-full"/>
         </div>
     </div>
