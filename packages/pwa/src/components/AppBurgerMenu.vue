@@ -4,7 +4,7 @@
     v-if="isVisible"
   >
     <div class="flex justify-end p-4">
-      <button @click="toggleVisibility" class="justify-self-end">
+      <button @click="toggleVisibility" class="justify-self-end focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white">
         <X class="h-14 w-14 stroke-white md:h-10 md:w-10" />
       </button>
     </div>
@@ -27,7 +27,7 @@
           :key="index"
           :to="menuItem.path"
           @click="toggleVisibility"
-          class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl"
+          class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white"
         >
           <component :is="menuItem.icon" class="stroke-white h-6 w-6" />
           {{ menuItem.name }}
@@ -37,7 +37,7 @@
     <div class="h-full flex justify-center items-end pb-12">
       <button
         @click="logoutUser"
-        class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl"
+        class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white"
       >
         <LogOut class="stroke-white h-8 w-8 transform -scale-x-100" />
         UITLOGGEN
