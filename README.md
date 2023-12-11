@@ -59,7 +59,7 @@ npx nestjs-command seed:reset:users
 ## vertalingen
 bij het aanpassen van de vertalingen in de spreadsheet, moet je naar `/packages/pwa` en deze commando runnen
 ```
-npx tsx ./src/utils/sheets.ts
+npx tsx .\packages\pwa\src\utils\sheets.ts
 ```
 
 ## ideas
