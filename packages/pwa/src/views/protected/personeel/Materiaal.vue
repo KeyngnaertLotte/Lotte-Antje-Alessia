@@ -1,14 +1,14 @@
 <template>
-  <!-- <div class="mt-24"> -->
   <div class="col-span-2 row-start-4 h-fit">
     <div v-if="MateriaalByCategorie">
       <div
         v-for="categorie in Object.keys(MateriaalByCategorie)"
         :key="categorie"
+        class="flex flex-col justify-center items-center"
       >
         <button
           @click="toggleShow(categorie)"
-          class="m-4 mb-0 p-2 min-w-full border-custom-brown border-1 flex justify-between"
+          class="mt-4 p-2 w-9/10 border-custom-brown border-1 flex justify-between focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         >
           <p>{{ categorie }}</p>
           <ChevronDown class="stroke-custom-brown" />
