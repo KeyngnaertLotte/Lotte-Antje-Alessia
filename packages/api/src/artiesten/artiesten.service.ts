@@ -12,6 +12,8 @@ import { MateriaalService } from 'src/materiaal/materiaal.service'
 import { TakenService } from 'src/taken/taken.service'
 import { CreateTakenInput } from 'src/taken/dto/create-taken.input'
 import { UsersService } from 'src/users/users.service'
+import { UpdateAgendaInput } from './dto/update-agenda.input'
+import { LineUp } from './entities/lineup.entity'
 
 @Injectable()
 export class ArtiestenService {
@@ -36,6 +38,18 @@ export class ArtiestenService {
   ) {
     const currentArtiest = await this.findOneByUid(uid)
 
+    let currentTime = new Date()
+
+    // Add 30 minutes
+    currentTime.setMinutes(currentTime.getMinutes() + 30)
+
+    // Get the hours and minutes
+    let hours = currentTime.getHours()
+    let minutes = currentTime.getMinutes()
+
+    // Format the hours and minutes as a string
+    const deadline = `${hours}:${minutes}`
+
     // check in materiaal
     await this.materiaalService.checkMateriaal(materiaal.item, materiaal.aantal)
 
@@ -54,7 +68,6 @@ export class ArtiestenService {
       newbenodigdheden.aantal = materiaal.aantal
       newbenodigdheden.categorie = materiaal.categorie
       newbenodigdheden.podium = currentArtiest.podium
-      newbenodigdheden.deadline = materiaal.deadline
 
       currentArtiest.benodigdheden = [
         ...currentArtiest.benodigdheden,
@@ -63,11 +76,12 @@ export class ArtiestenService {
     }
 
     const newTaak = new CreateTakenInput()
-    newTaak.naam = materiaal.item
+    newTaak.naam = `${currentArtiest.naam} heeft ${materiaal.item} nodig`
     newTaak.aantal = materiaal.aantal
     newTaak.category = materiaal.categorie
     newTaak.plaats = currentArtiest.podium
-    newTaak.deadline = materiaal.deadline
+    newTaak.deadline = deadline
+    newTaak.materiaal = materiaal.item
 
     const categorie = materiaal.categorie.toLocaleLowerCase()
     let type
@@ -136,6 +150,40 @@ export class ArtiestenService {
     }
 
     return `artiest met uid ${uid} geupdate`
+  }
+
+  async UpdateAgenda(uid: string, agenda: UpdateAgendaInput) {
+    const artiest = await this.findOneByUid(uid)
+    // search for agenda item
+    const agendaItem = artiest.agenda.find(a => a.id === agenda.id)
+    // update agenda item
+    agendaItem.taak = agenda.taak
+    agendaItem.tijd = agenda.tijd
+    agendaItem.podium = agenda.podium
+
+    if (agendaItem.podium) {
+      artiest.podium = agendaItem.podium
+      // change all the agenda items to the new podium
+      artiest.agenda.forEach(a => {
+        a.podium = agenda.podium
+      })
+    }
+
+    await this.artiestRepository.save(artiest)
+    return 'agenda geupdate'
+  }
+
+  async getLineUp(): Promise<LineUp[]> {
+    const artiesten = await this.artiestRepository.find()
+    const lineUp = artiesten.map(a => {
+      const agenda = a.agenda.find(a => a.taak === 'Optreden')
+      return {
+        naam: a.naam,
+        podium: a.podium,
+        tijd: agenda.tijd,
+      }
+    })
+    return lineUp
   }
 
   async remove(uid: string) {

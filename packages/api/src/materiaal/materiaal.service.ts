@@ -6,6 +6,7 @@ import { ObjectId, Repository } from 'typeorm'
 import { TakenService } from 'src/taken/taken.service'
 import { UpdateTakenInput } from 'src/taken/dto/update-taken.input'
 import { check } from 'yargs'
+import { CreateTakenInput } from 'src/taken/dto/create-taken.input'
 
 @Injectable()
 export class MateriaalService {
@@ -184,6 +185,23 @@ export class MateriaalService {
       await this.takenService.remove(id)
       return `taak verwijderd`
     }
+  }
+
+  async createTaakAdmin(createTakenInput: UpdateTakenInput) {
+    await this.checkMateriaal(
+      createTakenInput.materiaal,
+      createTakenInput.aantal,
+    )
+    const newTaak = new UpdateTakenInput()
+    newTaak.naam = createTakenInput.naam
+    newTaak.aantal = createTakenInput.aantal
+    newTaak.category = createTakenInput.category
+    newTaak.plaats = createTakenInput.plaats
+    newTaak.type = createTakenInput.type
+    newTaak.deadline = createTakenInput.deadline
+    newTaak.materiaal = createTakenInput.materiaal
+    await await this.takenService.create(newTaak)
+    return `Taak ${createTakenInput.naam} aangemaakt`
   }
 
   async saveAll(materiaal: Materiaal[]) {

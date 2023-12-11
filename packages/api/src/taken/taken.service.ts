@@ -14,7 +14,7 @@ export class TakenService {
   ) {}
 
   // CREATE taak
-  create(createTakenInput: CreateTakenInput) {
+  create(createTakenInput: UpdateTakenInput) {
     const t = new Taak()
     t.plaats = createTakenInput.plaats
     t.type = createTakenInput.type
@@ -22,6 +22,7 @@ export class TakenService {
     t.category = createTakenInput.category
     t.aantal = createTakenInput.aantal
     t.deadline = createTakenInput.deadline
+    t.materiaal = createTakenInput.materiaal
     return this.taakRepository.save(t)
   }
 

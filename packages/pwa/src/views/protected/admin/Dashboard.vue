@@ -113,6 +113,7 @@ const handleOpenModal = (item: any) => {
 
 const handleCloseModal = () => {
   isModalOpen.value = false
+  refetch()
 }
 
 onResult(result => {

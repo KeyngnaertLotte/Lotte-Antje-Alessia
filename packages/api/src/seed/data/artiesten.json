@@ -5,16 +5,19 @@
         "uid": "gAYSl3edmHMs8zFvrMcE06FRoBL2",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487e5",
                 "taak": "Opzetten",
                 "podium": "Antje",
                 "tijd": "08:00 - 08:15"
             },
             {
+                "id": "6574809420f0ee1e251487e6",
                 "taak": "Soundcheck",
                 "podium": "Antje",
                 "tijd": "08:30- 09:00"
             },
             {
+                "id": "6574809420f0ee1e251487e7",
                 "taak": "Optreden",
                 "podium": "Antje",
                 "tijd": "20:15 - 21:30"
@@ -28,16 +31,19 @@
         "uid": "TTOrmIusnVTQ4WQUfnEp3OOT1ly2",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487e8",
                 "taak": "Opzetten",
                 "podium": "Antje",
                 "tijd": "15:00 - 15:15"
             },
             {
+                "id": "6574809420f0ee1e251487e9",
                 "taak": "Soundcheck",
                 "podium": "Antje",
                 "tijd": "15:30 - 16:00"
             },
             {
+                "id": "6574809420f0ee1e251487ea",
                 "taak": "Optreden",
                 "podium": "Antje",
                 "tijd": "22:00 - 23:15"
@@ -51,16 +57,19 @@
         "uid": "14EVJZi5V5PEB0NDsOvPkIz2CWj1",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487eb",
                 "taak": "Opzetten",
                 "podium": "Antje",
                 "tijd": "10:00 - 10:15"
             },
             {
+                "id": "6574809420f0ee1e251487ec",
                 "taak": "Soundcheck",
                 "podium": "Antje",
                 "tijd": "10:30 - 11:00"
             },
             {
+                "id": "6574809420f0ee1e251487ed",
                 "taak": "Optreden",
                 "podium": "Antje",
                 "tijd": "23:45 - 01:00"
@@ -74,16 +83,19 @@
         "uid": "KIWpoBSEcwNULbw7L8pIE8usjUJ2",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487ee",
                 "taak": "Opzetten",
                 "podium": "Lotte",
                 "tijd": "09:00 - 09:15"
             },
             {
+                "id": "6574809420f0ee1e251487ef",
                 "taak": "Soundcheck",
                 "podium": "Lotte",
                 "tijd": "09:30 - 10:00"
             },
             {
+                "id": "6574809420f0ee1e251487f0",
                 "taak": "Optreden",
                 "podium": "Lotte",
                 "tijd": "20:00 - 21:30"
@@ -97,16 +109,19 @@
         "uid": "L9dc41fC2NeWCkhSufyLufzccVG3",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487f1",
                 "taak": "Opzetten",
                 "podium": "Lotte",
                 "tijd": "10:15- 10:30"
             },
             {
+                "id": "6574809420f0ee1e251487f2",
                 "taak": "Soundcheck",
                 "podium": "Lotte",
                 "tijd": "10:45 - 11:15"
             },
             {
+                "id": "6574809420f0ee1e251487f3",
                 "taak": "Optreden",
                 "podium": "Lotte",
                 "tijd": "21:45 - 22:45"
@@ -120,16 +135,19 @@
         "uid": "Zn0MU2UhL8fJsyQzm54dmAwuIBF3",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487f4",
                 "taak": "Opzetten",
                 "podium": "Lotte",
                 "tijd": "13:00 - 13:15"
             },
             {
+                "id": "6574809420f0ee1e251487f5",
                 "taak": "Soundcheck",
                 "podium": "Lotte",
                 "tijd": "13:30 - 14:00"
             },
             {
+                "id": "6574809420f0ee1e251487f6",
                 "taak": "Optreden",
                 "podium": "Lotte",
                 "tijd": "23:00 - 00:30"
@@ -143,16 +161,19 @@
         "uid": "G5ucPPJlwDZTmBZ5jZq0gHbZj3w1",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487f7",
                 "taak": "Opzetten",
                 "podium": "Aléssia",
                 "tijd": "08:00 - 08:30"
             },
             {
+                "id": "6574809420f0ee1e251487f8",
                 "taak": "Soundcheck",
                 "podium": "Aléssia",
                 "tijd": "09:00 - 09:30"
             },
             {
+                "id": "6574809420f0ee1e251487f9",
                 "taak": "Optreden",
                 "podium": "Aléssia",
                 "tijd": "20:00 - 21:00"
@@ -166,16 +187,19 @@
         "uid": "2LVGub2p18TJJBUyOw6Crt7Z4LI2",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487fa",
                 "taak": "Opzetten",
                 "podium": "Aléssia",
                 "tijd": "10:00 - 10:30"
             },
             {
+                "id": "6574809420f0ee1e251487fb",
                 "taak": "Soundcheck",
                 "podium": "Aléssia",
                 "tijd": "11:00 - 11:30"
             },
             {
+                "id": "6574809420f0ee1e251487fc",
                 "taak": "Optreden",
                 "podium": "Aléssia",
                 "tijd": "21:15 - 22:15"
@@ -189,16 +213,19 @@
         "uid": "JdbeJpPgPEP2KRmR88FHyc5N7Jq2",
         "agenda": [
             {
+                "id": "6574809420f0ee1e251487fd",
                 "taak": "Opzetten",
                 "podium": "Aléssia",
                 "tijd": "12:00 - 12:30"
             },
             {
+                "id": "6574809420f0ee1e251487fe",
                 "taak": "Soundcheck",
                 "podium": "Aléssia",
                 "tijd": "13:00 - 13:30"
             },
             {
+                "id": "6574809420f0ee1e251487ff",
                 "taak": "Optreden",
                 "podium": "Aléssia",
                 "tijd": "22:30 - 23:30"
@@ -212,16 +239,19 @@
         "uid": "Kz5oJmB8iMMZOKKy8BT9O1BaYZx12",
         "agenda": [
             {
+                "id": "6574809420f0ee1e25148800",
                 "taak": "Opzetten",
                 "podium": "Aléssia",
                 "tijd": "14:00 - 14:30"
             },
             {
+                "id": "6574809420f0ee1e25148801",
                 "taak": "Soundcheck",
                 "podium": "Aléssia",
                 "tijd": "15:00 - 15:30"
             },
             {
+                "id": "6574809420f0ee1e25148802",
                 "taak": "Optreden",
                 "podium": "Aléssia",
                 "tijd": "23:45 - 00:45"

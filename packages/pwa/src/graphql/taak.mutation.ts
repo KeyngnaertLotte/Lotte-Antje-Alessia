@@ -24,3 +24,9 @@ export const REMOVE_TAAK = gql`
     removeTaak(id: $id)
   }
 `
+
+export const CREATE_TAAK_ADMIN = gql`
+  mutation createTaakAdmin($createTakenInput: UpdateTakenInput!) {
+    createTaakAdmin(createTakenInput: $createTakenInput)
+  }
+`

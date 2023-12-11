@@ -8,4 +8,7 @@ export class UpdatePersoneelInput extends PartialType(CreatePersoneelInput) {
 
   @Field(() => String, { nullable: true })
   achternaam?: string
+
+  @Field(() => String, { nullable: true })
+  type?: string
 }

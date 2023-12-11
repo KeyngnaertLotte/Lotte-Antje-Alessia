@@ -60,6 +60,8 @@
 <script lang="ts">
 import { X } from 'lucide-vue-next'
 import { reactive, ref } from 'vue'
+import { UPDATE_AGENDA } from '@/graphql/artiest.mutation'
+import { useMutation } from '@vue/apollo-composable'
 
 export default {
   props: {
@@ -81,12 +83,24 @@ export default {
       closeModal()
     }
 
-    const updateTask = () => {
+    const { mutate: updateAgenda } = useMutation(UPDATE_AGENDA)
+
+    const updateTask = async () => {
       const updatedData = reactive({ ...props.eventData })
       updatedData.taak = selectedEvent.value
       updatedData.podium = selectedPodium.value
       updatedData.tijd = startTime.value + ' - ' + endTime.value
       console.log("aaaaaaaaaaaaaa", updatedData)
+
+      const AgendaInput = {
+        id: updatedData.id,
+        taak: updatedData.taak,
+        tijd: updatedData.tijd,
+        podium: updatedData.podium,
+      }
+
+      await updateAgenda({ uid: updatedData.artiest, agendaInput: AgendaInput })
+
       closeModal()
     }
 

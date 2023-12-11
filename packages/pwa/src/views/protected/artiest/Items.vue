@@ -1,21 +1,23 @@
 <template>
-  <div class="mt-8 col-span-2 row-span-20 flex flex-col items-center">
-    <!-- show benonigdheden in the same way the items are shown -->
-    <div
-      v-if="benodigdheden"
-      class="flex flex-col items-center w-full mb-4 mt-2"
-    >
-      <div class="w-9/10 flex-col items-center justify-center">
+  <div
+    class="mt-6 col-span-2 row-span-20 flex flex-col items-center overflow-hidden relative"
+  >
+    <!-- Render the first section if benodigdheden is available -->
+    <div v-if="benodigdheden" class="flex flex-col items-center w-full mb-3">
+      <div class="w-9/10 flex-col items-center justify-center relative">
         <button
           @click="toggleShow('benodigdheden')"
-          class="my-4 p-2 w-full rounded border-1 flex justify-between bg-slate-300"
+          class="p-2 w-full rounded border-1 flex justify-between bg-slate-300"
         >
           <p>Bestelde items</p>
           <ChevronDown />
         </button>
 
         <transition name="slide-fade" class="border-2 rounded">
-          <div v-if="isShow('benodigdheden')">
+          <div
+            v-if="isShow('benodigdheden')"
+            class="absolute left-0 right-0 bg-slate-300"
+          >
             <div v-for="item in benodigdheden" :key="item.item">
               <div class="mx-4 mt-0 p-2 flex justify-between">
                 <p>{{ item.item }}</p>
@@ -27,7 +29,11 @@
       </div>
     </div>
 
-    <div v-if="MateriaalByCategorie" class="flex flex-col items-center w-full">
+    <!-- Render the rest of the content -->
+    <div
+      v-if="MateriaalByCategorie"
+      class="flex flex-col items-center w-full overflow-y-auto h-80%"
+    >
       <div
         v-for="categorie in Object.keys(MateriaalByCategorie)"
         :key="categorie"
@@ -35,10 +41,10 @@
       >
         <button
           @click="toggleShow(categorie)"
-          class="my-4 p-2 w-full border-custom-brown border-1 flex justify-between"
+          class="my-4 p-2 w-full border-slate border-2 flex justify-between rounded"
         >
           <p>{{ categorie }}</p>
-          <ChevronDown class="stroke-custom-brown" />
+          <ChevronDown class="" />
         </button>
 
         <transition name="slide-fade">
@@ -54,11 +60,11 @@
                 <p>{{ item.item }}</p>
                 <div class="flex">
                   <button @click="minusButtonClicked(item)" class="pr-6">
-                    <MinusIcon class="stroke-custom-brown" />
+                    <MinusIcon class="" />
                   </button>
                   <p>{{ aantal[item.item] }}</p>
                   <button @click="plusButtonClicked(item)" class="pl-6">
-                    <plus-icon class="stroke-custom-brown" />
+                    <plus-icon class="" />
                   </button>
                 </div>
               </div>
@@ -67,6 +73,7 @@
         </transition>
       </div>
     </div>
+
     <button
       @click="submit"
       class="w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white mt-4"
@@ -75,6 +82,8 @@
     </button>
   </div>
 </template>
+
+<!-- ... rest of the code ... -->
 
 <script lang="ts">
 import { ref, computed } from 'vue'
@@ -111,7 +120,6 @@ interface ItemType {
 
 resultArtiest(result => {
   if (result.data) {
-    console.log('Data:', result.data.artiestByUid.benodigdheden)
     benodigdheden.value = result.data.artiestByUid.benodigdheden
   }
 })
@@ -131,24 +139,18 @@ export default {
     }
 
     const minusButtonClicked = (item: any) => {
-      console.log(item, aantal)
-      aantal.value[item.item] = aantal.value[item.item] - 1
+      if (aantal.value[item.item] > 0) {
+        aantal.value[item.item] = aantal.value[item.item] - 1
+      }
     }
 
     const plusButtonClicked = (item: any) => {
-      console.log(item, aantal)
       aantal.value[item.item] = aantal.value[item.item] + 1
     }
 
     const submit = () => {
       console.log('submit')
-      console.log(aantal)
-      console.log(aantal.value)
-
       for (const item in aantal.value) {
-        console.log(item)
-        console.log(aantal.value[item])
-
         const categoryItem = materiaalInfo.value.materiaal.find(
           (materiaalItem: ItemType) => materiaalItem.item === item,
         )
@@ -167,7 +169,6 @@ export default {
           })
             .then(graphqlresult => {
               console.log('🎉 new item created in our database')
-              console.log(graphqlresult)
               refetch()
               // reset aantal
               aantal.value[item] = 0
@@ -196,28 +197,10 @@ export default {
           categorizedItems[category].push(item)
           aantal.value[item.item] = 0
         })
-        console.log('categorizedItems: ', categorizedItems)
         return categorizedItems
       }
       return null
     })
-
-    // const getBenodigdheden = async () => {
-    //   console.log('uid:', uid)
-    //   try {
-    //     const { onResult } = useQuery(GET_Artiest_By_Uid, { uid })
-    //     onResult(result => {
-    //       if (result.data) {
-    //         console.log('Data:', result.data.artiestByUid.benodigdheden)
-    //         benodigdheden.value = result.data.artiestByUid.benodigdheden
-    //       }
-    //     })
-    //   } catch (error) {
-    //     console.error('Error fetching bezoeker info:', error)
-    //   }
-    // }
-
-    // getBenodigdheden()
 
     return {
       toggleShow,
