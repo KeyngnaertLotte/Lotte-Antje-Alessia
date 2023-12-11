@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4"
+    class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4 row-start-5"
     v-if="takenInfo"
   >
     <div class="flex flex-col items-start">
@@ -12,7 +12,7 @@
         <div class="flex items-center col-span-4">
           <input
             type="checkbox"
-            class="form-checkbox accent-custom-green h-5 w-5 mr-3"
+            class="form-checkbox accent-custom-green h-5 w-5 mr-3 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             id="checkbox"
           />
           <label for="checkbox">{{ taak.naam }}</label>
