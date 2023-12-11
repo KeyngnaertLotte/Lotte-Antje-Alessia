@@ -21,7 +21,7 @@
         </select>
         <p class="w-1/14 flex justify-end items-center text-lg font-bold"></p>
       </div>
-      <div class="overflow-auto max-h-[80%]">
+      <div class="overflow-auto max-h-4/5">
         <div
           v-for="(item, index) in filterPersoneel"
           :key="item.id"
@@ -50,7 +50,6 @@
       </div>
     </div>
     <notificationCard />
-    <messagesCard />
   </div>
   <personeelPopup
     v-if="isModalOpen"
@@ -69,7 +68,6 @@ import { Pencil } from 'lucide-vue-next'
 import personeelPopup from '@/components/admin/personeelPopup.vue'
 import { getAuth } from 'firebase/auth'
 import notificationCard from '@/components/admin/notificationCard.vue'
-import messagesCard from '@/components/admin/messagesCard.vue'
 
 const isModalOpen = ref(false)
 const selectedItem = ref<any | null>(null)
@@ -134,7 +132,7 @@ onResult(result => {
 })
 
 export default {
-  components: { Pencil, personeelPopup, notificationCard, messagesCard },
+  components: { Pencil, personeelPopup, notificationCard },
 
   setup() {
     const onChange = (item: Personeel, index: number, newValue: string) => {

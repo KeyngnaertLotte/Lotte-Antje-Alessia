@@ -1,8 +1,8 @@
 <template>
-    <div class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md col-start-6">
+    <div class="row-span-full col-span-2 p-6 bg-white rounded-lg shadow-md col-start-6">
       <h1 class="text-2xl font-bold font-body">Stuur melding</h1>
-      <div class="flex flex-col justify-around h-fit gap-4 mt-2">
-          <div>
+      <div class="flex flex-col justify-start h-full gap-4 mt-2">
+          <div class="">
             <p class="">Het bericht is voor:</p>
           <div class="flex flex-row w-full items-center justify-around">
           <div>
@@ -63,7 +63,7 @@
           v-model="messageContent"
           cols="50"
           rows="3"
-          class="w-full block font-pop border-2 rounded-md p-1 focus:outline-none focus:border-4 focus:border-white bg-white "
+          class="w-full block font-pop border-2 rounded-md p-1 focus:outline-none focus:border-4 focus:border-white bg-white h-7/10"
         ></textarea>
         <button
           @click="sendMessage"
