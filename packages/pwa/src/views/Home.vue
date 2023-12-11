@@ -1,7 +1,7 @@
 <template class="bg-[#DFE6DA]">
   <div class="relative bg-[#DFE6DA]">
     <div class="absolute w-full grid grid-rows-5">
-      <router-link to="/auth/login" class="justify-self-end m-4 row-span-1"
+      <router-link to="/auth/login" class="justify-self-end m-4 row-span-1 focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white"
         ><p class="font-body font-bold text-white text-3xl">
           LOGIN
         </p></router-link
