@@ -11,8 +11,11 @@
           class="m-4 mb-0 p-2 min-w-full border-white border-1 flex justify-between"
         >
           <p class="text-white">
-            <!-- {{ $t('navigation.language', { user: firebaseUser?.displayName }) }} -->
-            {{ $t('navigation.current.language', { user: firebaseUser?.displayName }) }}
+            {{
+              $t('navigation.current.language', {
+                user: firebaseUser?.displayName,
+              })
+            }}
           </p>
           <ChevronDown class="stroke-white" />
         </button>
@@ -20,10 +23,9 @@
           <div v-if="isShow(languages)">
             <div>
               <div
-                v-for="lang in languages"
                 class="m-2 mx-4 mt-0 p-2 flex flex-col justify-between min-w-full"
               >
-                <p class="text-white">{{ lang }}</p>
+                <p class="text-white">{{ otherLang(languages).toString() }}</p>
               </div>
             </div>
           </div>
@@ -91,6 +93,7 @@ import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
 import { Plus } from 'lucide-vue-next'
 import { ref } from 'vue'
+import useCustomUser from '@/composables/useCustomUser'
 
 const { firebaseUser } = useFirebase()
 
@@ -109,7 +112,7 @@ const { logout } = useFirebase()
 const { replace } = useRouter()
 
 // taal dropdown
-const languages = ['Nederlands', 'Engels']
+const languages = {'nl':'Nederlands', 'en':'Engels'}
 type ShowState = { [key: string]: boolean }
 const showState = ref<ShowState>({})
 
@@ -117,7 +120,33 @@ const toggleShow = (languages: any) => {
   showState.value[languages] = !showState.value[languages]
 }
 
+// show current language user
+const { customUser } = useCustomUser()
+
+
+const otherLang = (languages: any) => {
+  const currentLanguageCode = customUser.value?.locale;
+
+  const isCurrentLanguageInList = languages.hasOwnProperty(currentLanguageCode);
+
+  const filteredLanguages = isCurrentLanguageInList
+    ? Object.fromEntries(
+        Object.entries(languages).filter(([key]) => key !== currentLanguageCode)
+      )
+    : languages;
+
+  console.log('lijst van talen nu: ', filteredLanguages)
+  console.log('VALUES: ', Object.values(filteredLanguages))
+
+  return Object.values(filteredLanguages) || false;
+};
+
+
 const isShow = (languages: any) => {
+  // remove current language from dropdown
+  console.log('customUser:', customUser.value?.locale)
+  console.log('languages:', languages)
+
   return showState.value[languages] || false
 }
 

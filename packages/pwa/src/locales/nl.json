@@ -9,6 +9,7 @@
     "navigation.alletaken": "Alle taken",
     "navigation.logout": "Uitloggen",
     "navigation.language": "Taal",
+    "navigation.current.language": "Nederlands",
     "taken.alletaken": "Alle open taken",
     "taken.claim": "Claim hier je taak",
     "dashboard.card.material": "Materiaal",
