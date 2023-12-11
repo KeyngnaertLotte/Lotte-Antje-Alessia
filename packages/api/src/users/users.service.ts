@@ -80,4 +80,14 @@ export class UsersService {
     user.naam = naam
     return this.userRepository.save(user)
   }
+
+  async setLanguage(userId: string, locale: string) {
+    // Fetch the user from the database
+    const user = await this.findOneByUid(userId);
+
+    // Set the new language
+    user.locale = locale;
+
+    return this.userRepository.save(user);
+  }
 }

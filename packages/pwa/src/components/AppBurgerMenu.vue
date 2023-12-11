@@ -25,7 +25,10 @@
               <div
                 class="m-2 mx-4 mt-0 p-2 flex flex-col justify-between min-w-full"
               >
-                <p class="text-white">{{ otherLang(languages).toString() }}</p>
+                <!-- <button class="text-white flex justify-start">{{ otherLang(languages).toString() }}</button> -->
+                <button class="text-white flex justify-start" @click="setLanguage(otherLang(languages).toString())">
+                  {{ otherLang(languages).toString() }}
+                </button>
               </div>
             </div>
           </div>
@@ -112,7 +115,7 @@ const { logout } = useFirebase()
 const { replace } = useRouter()
 
 // taal dropdown
-const languages = {'nl':'Nederlands', 'en':'Engels'}
+const languages = { nl: 'Nederlands', en: 'Engels' }
 type ShowState = { [key: string]: boolean }
 const showState = ref<ShowState>({})
 
@@ -123,24 +126,24 @@ const toggleShow = (languages: any) => {
 // show current language user
 const { customUser } = useCustomUser()
 
-
 const otherLang = (languages: any) => {
-  const currentLanguageCode = customUser.value?.locale;
+  const currentLanguageCode = customUser.value?.locale
 
-  const isCurrentLanguageInList = languages.hasOwnProperty(currentLanguageCode);
+  const isCurrentLanguageInList = languages.hasOwnProperty(currentLanguageCode)
 
   const filteredLanguages = isCurrentLanguageInList
     ? Object.fromEntries(
-        Object.entries(languages).filter(([key]) => key !== currentLanguageCode)
+        Object.entries(languages).filter(
+          ([key]) => key !== currentLanguageCode,
+        ),
       )
-    : languages;
+    : languages
 
   console.log('lijst van talen nu: ', filteredLanguages)
   console.log('VALUES: ', Object.values(filteredLanguages))
 
-  return Object.values(filteredLanguages) || false;
-};
-
+  return Object.values(filteredLanguages) || false
+}
 
 const isShow = (languages: any) => {
   // remove current language from dropdown
@@ -148,6 +151,12 @@ const isShow = (languages: any) => {
   console.log('languages:', languages)
 
   return showState.value[languages] || false
+}
+
+// set language
+const setLanguage = (selectedLang: any) => {
+  console.log('selectedLang: ', selectedLang)
+  
 }
 
 const roleMenuList = [
