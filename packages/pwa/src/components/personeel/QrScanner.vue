@@ -89,7 +89,7 @@ const scanButtonClick = () => {
     >
       <button
         @click="closeModal"
-        class="absolute z-10 top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"
+        class="absolute z-10 top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-custom-orange rounded-lg h-12 w-12 flex justify-center items-center hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
       >
         <X class="h-10 w-10 stroke-white" />
       </button>
@@ -105,13 +105,13 @@ const scanButtonClick = () => {
           <input
             type="number"
             v-model.number="price"
-            class="block font-pop w-2/5 border-b-2 text-xl border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+            class="block font-pop w-2/5 border-b-2 text-xl border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
 
         
         <div class="w-3/4">
-          <select v-model="selectedPlace" class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none">
+          <select v-model="selectedPlace" class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">
             <option value="" disabled>Selecteer plaats</option>
             <option value="Bar 1">Bar 1</option>
             <option value="Bar 2">Bar 2</option>
@@ -123,7 +123,7 @@ const scanButtonClick = () => {
         </div>
 
         <button
-          class="mt-6 w-full rounded-md bg-custom-orange py-2 font-body font-bold text-2xl text-white flex items-center justify-center gap-4"
+          class="mt-6 w-full rounded-md bg-custom-orange py-2 font-body font-bold text-2xl text-white flex items-center justify-center gap-4 hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
           @click="scanButtonClick"
         >
           Scan
