@@ -6,7 +6,7 @@ import EventPopup from '@/components/admin/eventPopup.vue';
   >
     <div class="bg-white w-full h-[95%] rounded-lg m-4 p-6">
       <h1 class="text-2xl font-bold mb-4 font-body">Agenda alle artiesten</h1>
-      <div class="grid grid-rows-1 grid-cols-10 w-full">
+      <div class="grid grid-rows-1 grid-cols-10 w-full bg-gray-200 mb-4">
         <h2 class="col-span-1"></h2>
         <h2 class="col-span-3 text-center text-lg font-bold">Antje</h2>
         <h2 class="col-span-3 text-center text-lg font-bold">Lotte</h2>
