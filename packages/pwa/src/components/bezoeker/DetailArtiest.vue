@@ -1,8 +1,8 @@
 <template>
     <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
         <div class="relative bg-white w-9/10 h-3/4 rounded-lg flex flex-col  items-center p-6">
-            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"><X class="h-10 w-10 stroke-white"/> </button>
-            <button @click="toggleFavorite" class="font-body font-bold text-3xl flex flex-row justify-center items-center gap-2">{{ currentArtist.artistName }} <p v-if="isBezoeker" class="h-12 w-12 flex justify-center items-center"><Heart :class="heartColor" /></p></button>
+            <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-custom-orange rounded-lg h-12 w-12 flex justify-center items-center hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"><X class="h-10 w-10 stroke-white"/> </button>
+            <button @click="toggleFavorite" class="font-body font-bold text-3xl flex flex-row justify-center items-center gap-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">{{ currentArtist.artistName }} <p v-if="isBezoeker" class="h-12 w-12 flex justify-center items-center"><Heart :class="heartColor" /></p></button>
             <p class="font-body text-xl">{{ currentArtist.time }}</p>
             <img :src=currentArtist.imgLink alt="aaaaaaaaaaaaaaa" class="my-6">
             <p class="font-pop text-lg text-justify">{{ currentArtist.info }}</p>

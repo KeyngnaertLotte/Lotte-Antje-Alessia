@@ -4,7 +4,7 @@
     <button
       v-for="artiest in lineUpAntje"
       @click="() => openModal(artiest.naam)"
-      class="bg-custom-darkGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full"
+      class="bg-custom-darkGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-custom-lightGreen focus:bg-custom-lightGreen"
     >
       <p class="font-body text-2xl font-bold text-white leading-none">
         {{ artiest.naam }}
@@ -19,7 +19,7 @@
     <button
       v-for="artiest in lineUpLotte"
       @click="() => openModal(artiest.naam)"
-      class="bg-custom-purple my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full"
+      class="bg-custom-purple my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-[#9BA0C2] hover:text-black focus:bg-[#9BA0C2]"
     >
       <p class="font-body text-2xl font-bold text-white leading-none">
         {{ artiest.naam }}
@@ -34,7 +34,7 @@
     <button
       v-for="artiest in lineUpAlessia"
       @click="() => openModal(artiest.naam)"
-      class="bg-custom-orange my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full"
+      class="bg-custom-orange my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-custom-brown focus:bg-custom-brown"
     >
       <p class="font-body text-2xl font-bold text-white leading-none">
         {{ artiest.naam }}
