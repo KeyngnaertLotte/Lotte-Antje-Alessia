@@ -5,7 +5,7 @@
     <div class="bg-white w-9/10 h-9/10 rounded-lg relative">
       <button
         @click="closeModal"
-        class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"
+        class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-custom-orange rounded-lg h-12 w-12 flex justify-center items-center hover:bg-custom-brown focus:outline-custom-brown focus:bg-custom-brown"
       >
         <X class="h-10 w-10 stroke-white" />
       </button>
@@ -17,7 +17,7 @@
           <input
             type="text"
             v-model="naam"
-            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
+            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-custom-purple" 
           />
         </div>
         <div class="flex flex-col w-full">
@@ -33,7 +33,7 @@
                 name="type"
                 :id="option"
                 :value="option"
-                class="mr-2"
+                class="mr-2 focus:outline-custom-purple"
                 v-model="type"
               />
               <label :for="option">{{ option }}</label>
@@ -45,7 +45,7 @@
           <select
             name=""
             id=""
-            class="bg-gray-200 rounded font-pop focus:outline-none p-2"
+            class="bg-gray-200 rounded font-pop focus:outline-custom-purple p-2"
             v-model="plaats"
           >
             <option v-for="plaats in plaatsen">{{ plaats }}</option>
@@ -56,7 +56,7 @@
           <input
             type="time"
             v-model="deadline"
-            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
+            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-custom-purple"
           />
         </div>
         <div class="flex flex-col w-full">
@@ -64,7 +64,7 @@
           <select
             name=""
             id=""
-            class="bg-gray-200 rounded font-pop focus:outline-none p-2"
+            class="bg-gray-200 rounded font-pop p-2 focus:outline-custom-purple"
             v-model="categorie"
             @change="updatedData"
           >
@@ -76,33 +76,32 @@
           <select
             name=""
             id=""
-            class="bg-gray-200 rounded font-pop focus:outline-none p-2"
+            class="bg-gray-200 rounded font-pop focus:outline-custom-purple p-2 "
             v-model="materiaal"
           >
             <option v-for="i in listMateriaal">
               {{ i }}
             </option>
           </select>
-          <!-- <p>{{ listMateriaal }}</p> -->
         </div>
         <div class="flex flex-col w-full">
           <label for="">Aantal</label>
           <input
             type="number"
             v-model="aantal"
-            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
+            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-custom-purple"
           />
         </div>
         <div class="flex flex-row justify-between w-full mt-10">
           <button
             @click="deleteTask"
-            class="py-1 bg-gray-200 text-custom-brown my-6 rounded w-1/5 self-end"
+            class="py-1 bg-gray-200 text-custom-brown my-6 rounded w-1/5 self-end hover:bg-gray-300 focus:outline-custom-purple focus:bg-gray-200"
           >
             DELETE
           </button>
           <button
             @click="updateTask"
-            class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end"
+            class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end hover:bg-custom-brown focus:outline-custom-purple focus:bg-custom-brown"
           >
             UPDATE
           </button>
