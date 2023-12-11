@@ -13,6 +13,12 @@
           'rounded-lg',
           { 'bg-custom-darkGreen': activeButton === 1 },
           { 'text-white': activeButton === 1 },
+          'hover:bg-custom-darkGreen',
+          'hover:text-white',
+          'focus:outline-none',
+          'focus:ring-3',
+          'focus:ring-custom-darkGreen',
+
         ]"
         @click="handleButtonClick(1)"
       >
@@ -27,6 +33,11 @@
           'rounded-lg',
           { 'bg-custom-purple': activeButton === 2 },
           { 'text-white': activeButton === 2 },
+          'hover:bg-custom-purple',
+          'hover:text-white',
+          'focus:outline-none',
+          'focus:ring-3',
+          'focus:ring-custom-purple',
         ]"
         @click="handleButtonClick(2)"
       >
@@ -41,6 +52,11 @@
           'rounded-lg',
           { 'bg-custom-orange': activeButton === 3 },
           { 'text-white': activeButton === 3 },
+          'hover:bg-custom-orange',
+          'hover:text-white',
+          'focus:outline-none',
+          'focus:ring-3',
+          'focus:ring-custom-orange',
         ]"
         @click="handleButtonClick(3)"
       >
