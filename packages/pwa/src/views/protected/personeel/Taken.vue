@@ -4,8 +4,8 @@
     v-if="takenInfo"
   >
     <div class="flex flex-col items-start">
-      <h1 class="font-bold text-xl">Alle open taken</h1>
-      <h2 class="font-bold text-sm text-gray-600">Claim hier je taak</h2>
+      <h1 class="font-bold text-xl">{{ $t('taken.alle_open_taken') }}</h1>
+      <h2 class="font-bold text-sm text-gray-600">{{ $t('taken.claim') }}</h2>
     </div>
     <div class="mt-3" v-for="taken in takenInfo">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-1" v-for="taak in taken">
