@@ -62,6 +62,20 @@ bij het aanpassen van de vertalingen in de spreadsheet, moet je naar `/packages/
 npx tsx .\packages\pwa\src\utils\sheets.ts
 ```
 
+## test frontend
+
+```cmd
+$env:FIREBASE_AUTH_EMULATOR_HOST='127.0.0.1:9099'
+```
+
+```cmd
+$env:VITE_EMULATION='true'
+```
+
+```cmd
+npm run dev:emulate
+```
+
 ## ideas
 
 ### Bezoekers
