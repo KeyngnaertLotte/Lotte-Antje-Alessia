@@ -2,9 +2,9 @@
       <div class="col-span-2 row-start-5 bg-custom-purple flex justify-between mx-4  rounded-md h-[7rem] p-2">
         <div class="text-white font-bold flex flex-col w-3/5 gap-2">
           <p class="font-body text-xl mx-2">Saldo</p>
-          <p class="font-pop text-4xl self-center w-full" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid"> € {{ bezoekerInfo.bezoekerByUid.saldo }}</p>
+          <p class="font-pop text-4xl self-center w-full pl-4" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid"> € {{ bezoekerInfo.bezoekerByUid.saldo }}</p>
         </div>
-        <button @click="handleModal" class="bg-white px-4 py-2 text-custom-purple rounded-md font-pop font-bold mx-4 self-center">VOEG TOE</button>
+        <button @click="handleModal" class="bg-white px-4 py-2 text-custom-purple rounded-md font-pop font-bold mx-4 self-center hover:bg-custom-purple hover:border-white hover:border-2 hover:text-white focus:outline-none focus-visible:border-white  focus-visible:bg-custom-purple focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white">VOEG TOE</button>
       </div>
       <div class="mx-4 bg-white row-start-9 p-4 rounded-md col-span-2 row-span-15">
         <p class="font-body text-xl font-bold">TRANSACTIES</p>
