@@ -2,7 +2,7 @@
     <div class="col-span-2 rounded-lg bg-white row-span-22 m-5 p-6">
       <div class="w-full flex flex-row justify-between mb-4">
         <h1 class="text-2xl font-bold font-body">Alle taken</h1>
-        <button class="flex items-start justify-start bg-custom-orange rounded-lg hover:bg-custom-brown focus:outline-custom-brown focus:bg-custom-brown" @click="handleOpenAddTask"><Plus class="w-10 h-10 stroke-white "/></button>
+        <button class="flex items-start justify-start bg-custom-orange rounded-lg hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange" @click="handleOpenAddTask"><Plus class="w-10 h-10 stroke-white "/></button>
       </div>
       <div class="flex items-center justify-between mb-4 px-2 bg-gray-200">
         <h2 class="text-lg font-bold w-1/4">Naam</h2>
@@ -25,7 +25,7 @@
           <p class="w-1/4">{{ item.deadline }}</p>
           <p class="w-1/4">{{ item.materiaal }}</p>
           <p class="w-1/4">{{ item.status }}</p>
-          <button @click="handleOpenEditTask(item)" class="w-1/14 flex justify-center items-center focus:outline-custom-orange">
+          <button @click="handleOpenEditTask(item)" class="w-1/14 flex justify-center items-center focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">
             <Pencil class="stroke-1.5 hover:stroke-custom-orange" />
           </button>
         </div>
