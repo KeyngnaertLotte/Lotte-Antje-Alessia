@@ -21,7 +21,7 @@
         </select>
         <p class="w-1/14 flex justify-end items-center text-lg font-bold"></p>
       </div>
-      <div class="overflow-auto max-h-[80%]">
+      <div class="overflow-auto max-h-4/5">
         <div
           v-for="(item, index) in filterPersoneel"
           :key="item.id"

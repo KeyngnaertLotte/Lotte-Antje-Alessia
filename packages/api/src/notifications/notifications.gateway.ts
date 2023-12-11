@@ -38,13 +38,19 @@ export class NotificationsGateway {
   handleAdminNotificationArtists(client: Socket, message: string): void {
     console.log('Received adminNotification:artiest', message);
     // Process the message as needed, e.g., broadcast it to all artists
-    this.server.emit('adminNotification:artiest', message);
+    client.broadcast.emit('adminNotification:artiest', message);
   }
 
   @SubscribeMessage('adminNotification:personeel')
   handleAdminNotificationPersonnel(client: Socket, message: string): void {
     console.log('Received adminNotification:personeel', message);
     // Process the message as needed, e.g., broadcast it to all personnel
-    this.server.emit('adminNotification:personeel', message);
+    client.broadcast.emit('adminNotification:personeel', message);
+  }
+
+  @SubscribeMessage('messageToAdmin')
+  handleMessageToAdmin(client: Socket, message: string): void {
+    console.log('Received messageToAdmin', message);
+    client.broadcast.emit('messageToAdmin', message);
   }
 }
