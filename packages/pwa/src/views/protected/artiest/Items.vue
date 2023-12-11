@@ -3,11 +3,11 @@
     class="mt-6 col-span-2 row-span-20 flex flex-col items-center overflow-hidden relative"
   >
     <!-- Render the first section if benodigdheden is available -->
-    <div v-if="benodigdheden" class="flex flex-col items-center w-full mb-3">
+    <div v-if="benodigdheden" class="flex flex-col items-center w-full mb-3 ">
       <div class="w-9/10 flex-col items-center justify-center relative">
         <button
           @click="toggleShow('benodigdheden')"
-          class="p-2 w-full rounded border-1 flex justify-between bg-slate-300"
+          class="p-2 w-full rounded border-1 flex justify-between bg-slate-300 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         >
           <p>Bestelde items</p>
           <ChevronDown />
@@ -41,7 +41,7 @@
       >
         <button
           @click="toggleShow(categorie)"
-          class="my-4 p-2 w-full border-slate border-2 flex justify-between rounded"
+          class="my-4 p-2 w-full border-slate border-2 flex justify-between rounded focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         >
           <p>{{ categorie }}</p>
           <ChevronDown class="" />
@@ -59,11 +59,11 @@
               >
                 <p>{{ item.item }}</p>
                 <div class="flex">
-                  <button @click="minusButtonClicked(item)" class="pr-6">
+                  <button @click="minusButtonClicked(item)" class="pr-6 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">
                     <MinusIcon class="" />
                   </button>
                   <p>{{ aantal[item.item] }}</p>
-                  <button @click="plusButtonClicked(item)" class="pl-6">
+                  <button @click="plusButtonClicked(item)" class="pl-6 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">
                     <plus-icon class="" />
                   </button>
                 </div>
@@ -76,7 +76,7 @@
 
     <button
       @click="submit"
-      class="w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white mt-4"
+      class="w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white mt-4 hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
     >
       Bevestigen
     </button>
