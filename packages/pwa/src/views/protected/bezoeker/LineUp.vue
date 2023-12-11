@@ -33,7 +33,6 @@
 
     onMounted(() => {
         refetch()
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     });
 
     interface BezoekerInfo {

@@ -87,7 +87,7 @@ const validateAantalInput = () => {
   <div class="bg-white shadow-md p-4 rounded-2xl col-span-2 h-fit mx-4">
     <div class="flex items-center justify-between">
       <h1 class="font-bold text-xl">Takenlijst</h1>
-      <button @click="openAddTaskPopup">
+      <button @click="openAddTaskPopup" class="focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">
         <PlusCircle class="stroke-custom-blue" />
       </button>
     </div>
@@ -96,7 +96,7 @@ const validateAantalInput = () => {
         <div class="flex items-center col-span-4">
           <input
             type="checkbox"
-            class="form-checkbox accent-custom-green h-5 w-5 mr-3"
+            class="form-checkbox accent-custom-green h-5 w-5 mr-3 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             id="checkbox"
           />
           <label for="checkbox">{{ taak.naam }}</label>
@@ -111,12 +111,12 @@ const validateAantalInput = () => {
       <div class="h-1/2 w-7/8 bg-white rounded-md flex justify-center relative">
         <button
           @click="closeAddTaskPopup"
-          class="absolute top-[-1rem] right-[-0.5rem] flex flex-row bg-[#D5573B] rounded-lg h-12 w-12 justify-center items-center"
+          class="absolute top-[-1rem] right-[-0.5rem] flex flex-row bg-custom-orange rounded-lg h-12 w-12 justify-center items-center hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
         >
           <X class="h-10 w-10 stroke-white" />
         </button>
         <div class="flex flex-col justify-around items-center h-full">
-          <h1 class="text-3xl font-body font-bold text-custom-orange my-6">
+          <h1 class="text-3xl font-body font-bold text-custom-orange my-6 ">
             Taak toevoegen
           </h1>
 
@@ -124,11 +124,11 @@ const validateAantalInput = () => {
             v-model="newTaskName"
             type="text"
             placeholder="Taak naam"
-            class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+            class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
           <select
             v-model="newTaskPlaats"
-            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none"
+            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           >
             <option disabled value="" class="text-gray">Plaats</option>
             <option class="text-black">Lotte</option>
@@ -141,7 +141,7 @@ const validateAantalInput = () => {
           </select>
           <select
             v-model="newTaskType"
-            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none"
+            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           >
             <option disabled value="" class="text-gray">Type</option>
             <option class="text-black">Podium - licht</option>
@@ -154,7 +154,7 @@ const validateAantalInput = () => {
             <option class="text-black">Loges</option>
           </select>
           <select
-            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none"
+            class="w-full bg-gray-200 rounded font-pop p-2 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="newTaskCategory"
           >
             <option disabled value="" class="text-gray">Categorie</option>
@@ -171,16 +171,16 @@ const validateAantalInput = () => {
             max="100"
             min="1"
             @input="validateAantalInput"
-            class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+            class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
           <input
             v-model="newTaskDeadline"
             type="time"
-            class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+            class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
           <button
             @click="addTask"
-            class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4 items-center justify-center"
+            class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white flex gap-4 items-center justify-center hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
           >
             Voeg toe
           </button>
@@ -193,7 +193,7 @@ const validateAantalInput = () => {
       <div class="flex justify-center items-center">
         <p
           v-if="showMessageCreated == true"
-          class="bg-[#777DA7] text-white rounded-md p-3 opacity-85 shadow-sm"
+          class="bg-custom-purple text-white rounded-md p-3 opacity-85 shadow-sm"
         >
           Taak toegevoegd!
         </p>

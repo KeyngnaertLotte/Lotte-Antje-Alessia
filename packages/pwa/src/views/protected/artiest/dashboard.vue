@@ -2,7 +2,7 @@
   <cardSm
     title="item"
     :isPopup="false"
-    class="col-span-1 row-start-4 row-span-4"
+    class="col-span-1 row-start-4 row-span-4 "
     
     :url="'/artiest/items'"
   />

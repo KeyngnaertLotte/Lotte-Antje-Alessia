@@ -25,7 +25,7 @@
         type="email"
         name="email"
         id="email"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" 
         v-model="loginCredentials.email" placeholder="Email adres"
       />
     </div>
@@ -40,12 +40,12 @@
         type="password"
         name="password"
         id="password"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:border-b-4 focus:border-custom-darkGreen text-xl"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="loginCredentials.password" placeholder="Wachtwoord"
       />
       <RouterLink
         to="/auth/forgot-password"
-        class="w-9/10 font-pop mt-1 inline-block rounded text-md text-custom-darkGreen hover:underline focus:outline-none "
+        class="w-9/10 font-pop mt-1 inline-block rounded text-md text-custom-darkGreen focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
       >
         Passwoord vergeten
       </RouterLink>
@@ -54,13 +54,13 @@
 
     <div class="w-full flex flex-col h-1/3 justify-center items-center">
       <button
-      class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white "
+      class="mt-6 w-9/10 rounded-md bg-custom-orange py-2 px-4 font-body font-bold text-2xl text-white hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
     >
       Login
     </button>
     <div class="flex justify-center">
       <RouterLink
-        class="mt-1 font-pop inline-block rounded text-center text-md text-custom-darkGreen focus:outline-none focus-visible:ring-2 "
+        class="mt-1 font-pop inline-block rounded text-center text-md text-custom-darkGreen focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         to="/auth/register"
       >
         Geen account? Maak hier één aan.

@@ -10,7 +10,7 @@
         <h2 class="text-lg font-bold w-1/4">Achternaam</h2>
         <h2 class="text-lg font-bold w-1/4">Voornaam</h2>
         <select
-          class="text-lg font-bold w-1/4 p-2 rounded-md bg-gray-200"
+          class="text-lg font-bold w-1/4 p-2 rounded-md bg-gray-200 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           @change="filterByType(($event.target as HTMLInputElement)?.value)"
         >
           <option value="all" selected>Type</option>
@@ -21,7 +21,7 @@
         </select>
         <p class="w-1/14 flex justify-end items-center text-lg font-bold"></p>
       </div>
-      <div class="overflow-auto max-h-4/5">
+      <div class="overflow-auto max-h-8/10">
         <div
           v-for="(item, index) in filterPersoneel"
           :key="item.id"
@@ -30,7 +30,7 @@
           <p class="w-1/4">{{ item.achternaam }}</p>
           <p class="w-1/4">{{ item.voornaam }}</p>
           <select
-            class="w-1/4 border p-2 rounded-md"
+            class="w-1/4 border p-2 rounded-md focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="item.type"
             @change="
               onChange(item, index, ($event.target as HTMLInputElement)?.value)
@@ -41,7 +41,7 @@
             </option>
           </select>
           <button
-            class="w-1/14 flex justify-center items-center"
+            class="w-1/14 flex justify-center items-center focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             @click="handleOpenModal(item)"
           >
             <Pencil class="stroke-1.5" />
