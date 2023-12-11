@@ -108,7 +108,7 @@
         }
         if (visitorsChecked.value) {
           console.log('visitors');
-          emit('adminNotification:admin', messageContent.value, 'bezoeker')
+          emit('adminNotification:bezoeker', messageContent.value)
         }
         if (artistsChecked.value) {
           console.log('artists');

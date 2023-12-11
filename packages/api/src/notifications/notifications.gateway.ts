@@ -27,11 +27,24 @@ export class NotificationsGateway {
   }
 
 
-  @SubscribeMessage('adminNotification:admin')
-  handleAdminNotificationVisitors(client: Socket, message: string, role: string): void {
-    console.log('Received adminNotification:' + role, message);
+  @SubscribeMessage('adminNotification:bezoeker')
+  handleAdminNotificationVisitors(client: Socket, message: string): void {
+    console.log('Received adminNotification:bezoeker', message);
     // Process the message as needed, e.g., broadcast it to all visitors
-    client.broadcast.emit('adminNotification:' + role, message);
+    client.broadcast.emit('adminNotification:bezoeker', message);
   }
 
+  @SubscribeMessage('adminNotification:artiest')
+  handleAdminNotificationArtists(client: Socket, message: string): void {
+    console.log('Received adminNotification:artiest', message);
+    // Process the message as needed, e.g., broadcast it to all artists
+    this.server.emit('adminNotification:artiest', message);
+  }
+
+  @SubscribeMessage('adminNotification:personeel')
+  handleAdminNotificationPersonnel(client: Socket, message: string): void {
+    console.log('Received adminNotification:personeel', message);
+    // Process the message as needed, e.g., broadcast it to all personnel
+    this.server.emit('adminNotification:personeel', message);
+  }
 }
