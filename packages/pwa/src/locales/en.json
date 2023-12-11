@@ -8,6 +8,8 @@
     "navigation.materiaal": "Material",
     "navigation.alletaken": "All tasks",
     "navigation.logout": "Log out",
+    "navigation.language": "Language",
+    "navigation.current.language": "English",
     "taken.alletaken": "All open tasks",
     "taken.claim": "Claim here your task",
     "dashboard.card.material": "Material",
