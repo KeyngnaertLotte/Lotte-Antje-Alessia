@@ -1,5 +1,5 @@
 <template>
-  <button v-for="event in artist.agenda" :key="event.tijd" :class="calculateEventClass(event)" class="col-span-3 w-9/10 h-9/10 flex flex-col rounded-lg  justify-self-center" @click="handleOpenModal(event)">
+  <button v-for="event in artist.agenda" :key="event.tijd" :class="calculateEventClass(event)" class="col-span-3 w-9/10 h-9/10 flex flex-col rounded-lg justify-self-center" @click="handleOpenModal(event)">
     <div class="flex flex-row justify-between w-full p-2">
     <h3 class="text-md font-bold ">{{ artist.naam }}</h3>
     <p>{{ event.tijd }}</p>
@@ -52,6 +52,7 @@ export default {
       // Set the col-start based on event.podium
       let colStart;
       let bgColor;
+      let txtColor = 'text-black'
       switch (event.podium) {
         case 'Antje':
           colStart = 2;
@@ -60,16 +61,23 @@ export default {
         case 'Lotte':
           colStart = 5;
           bgColor = 'purple';
+          txtColor = 'text-white'
           break;
         case 'Aléssia':
           colStart = 8;
           bgColor = 'orange';
+          txtColor = 'text-white'
           break;
         default:
-          colStart = 2; // Default to col-start-2 if the podium is not recognized
+          colStart = 2; 
       }
+      let hoverColor;
+      if (bgColor === 'darkGreen') hoverColor = "hover:bg-custom-lightGreen focus:bg-custom-lightGreen"
+      else if (bgColor === 'purple') hoverColor = "hover:bg-[#9BA0C2] hover:text-black focus:bg-[#9BA0C2]"
+      else if (bgColor === 'orange') hoverColor = "hover:bg-custom-brown focus:bg-custom-brown"
+      
 
-      return `col-start-${colStart} row-start-${startRow} row-span-${rowSpan} bg-custom-${bgColor}`;
+      return `col-start-${colStart} row-start-${startRow} row-span-${rowSpan} bg-custom-${bgColor}  ${hoverColor} ${txtColor}`;
     },
   },
 };
