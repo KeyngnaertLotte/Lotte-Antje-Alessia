@@ -130,5 +130,11 @@
         "locale": "nl",
         "role": "BEZOEKER",
         "naam": "Emma Dubois"
+    },
+    {
+        "uid": "P9A3p5SRyteWVhptQ1Kc0nxN7Y32",
+        "locale": "nl",
+        "role": "ADMIN",
+        "naam": "Docent"
     }
 ]

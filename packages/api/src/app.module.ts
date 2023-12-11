@@ -13,6 +13,7 @@ import { ConfigModule } from '@nestjs/config'
 import { UsersModule } from './users/users.module';
 import { MateriaalModule } from './materiaal/materiaal.module';
 import { TakenModule } from './taken/taken.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { TakenModule } from './taken/taken.module';
     UsersModule,
     MateriaalModule,
     TakenModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

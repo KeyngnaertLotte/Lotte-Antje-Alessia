@@ -34,11 +34,12 @@
           isModalOpen.value = false;
         })
 
+  
+
   onResult((result) => {
     if (result.data) {
       console.log('Data:', result.data);
-      bezoekerInfo.value = result.data;  // Update the ref with the fetched data
-      // console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
+      bezoekerInfo.value = result.data;  
     }
   });
 
