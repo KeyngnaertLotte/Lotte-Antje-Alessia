@@ -12,13 +12,13 @@
     <div class="">
       <label
         for="rol"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        class="text-md block font-semibold  text-gray-700 dark:text-gray-200"
       >
         Rol
       </label>
       <select
         v-model="newUser.role"
-        class="w-full px-3 py-2 border border-gray-300 rounded mb-4"
+        class="w-full px-3 py-2 border border-gray-300 rounded mb-4 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
       >
         <option>Personeel</option>
         <option>Artiest</option>
@@ -36,7 +36,7 @@
         type="text"
         name="nickname"
         id="nickname"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="newUser.name"
       />
     </div>
@@ -53,7 +53,7 @@
           type="text"
           name="voornaam"
           id="voornaam"
-          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           v-model="newUser.voornaam"
         />
       </div>
@@ -68,7 +68,7 @@
           type="text"
           name="achternaam"
           id="achternaam"
-          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:ring-2 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50 focus-visible:border-blue-500 focus-visible:ring-blue-400"
+          class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           v-model="newUser.achternaam"
         />
       </div>
@@ -85,7 +85,7 @@
         type="email"
         name="email"
         id="email"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
+        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="newUser.email"
       />
     </div>
@@ -101,13 +101,13 @@
         type="password"
         name="password"
         id="password"
-        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-50"
+        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="newUser.password"
       />
     </div>
 
     <button
-      class="mt-6 w-1/3 rounded-md border-2 bg-custom-orange self-center py-2 px-4 font-semibold text-white hover:bg-custom-brown focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
+      class="mt-6 w-1/3 rounded-md border-2 bg-custom-orange self-center py-2 px-4 font-semibold text-white hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
     >
       Registreer
     </button>
