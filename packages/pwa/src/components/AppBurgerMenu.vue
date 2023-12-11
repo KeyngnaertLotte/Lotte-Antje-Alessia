@@ -4,7 +4,6 @@
     v-if="isVisible"
   >
     <div class="flex justify-between p-4">
-      <!-- TEST -->
       <div class="h-[80px]">
         <button
           @click="toggleShow(languages)"
@@ -25,7 +24,6 @@
               <div
                 class="m-2 mx-4 mt-0 p-2 flex flex-col justify-between min-w-full"
               >
-                <!-- <button class="text-white flex justify-start">{{ otherLang(languages).toString() }}</button> -->
                 <button
                   class="text-white flex justify-start"
                   @click="setLanguage(otherLang(languages).toString())"
@@ -37,7 +35,6 @@
           </div>
         </transition>
       </div>
-      <!-- TEST -->
 
       <button @click="toggleVisibility" class="justify-self-end">
         <X class="h-14 w-14 stroke-white" />
@@ -64,8 +61,8 @@
           @click="toggleVisibility"
           class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl"
         >
-          <component :is="menuItem.icon" class="stroke-white h-6 w-6" />
-          {{ menuItem.name }}
+          <component :is="menuItem.icon" class="stroke-white h-6 w-6"/>
+          {{ $t(`navigation.${menuItem.name.replace(/\s+/g, '_').toLowerCase()}`) }}
         </router-link>
       </div>
     </div>
