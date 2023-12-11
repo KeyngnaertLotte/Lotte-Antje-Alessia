@@ -50,6 +50,7 @@
       </div>
     </div>
     <notificationCard />
+    <messagesCard />
   </div>
   <personeelPopup
     v-if="isModalOpen"
@@ -68,6 +69,7 @@ import { Pencil } from 'lucide-vue-next'
 import personeelPopup from '@/components/admin/personeelPopup.vue'
 import { getAuth } from 'firebase/auth'
 import notificationCard from '@/components/admin/notificationCard.vue'
+import messagesCard from '@/components/admin/messagesCard.vue'
 
 const isModalOpen = ref(false)
 const selectedItem = ref<any | null>(null)
@@ -132,7 +134,7 @@ onResult(result => {
 })
 
 export default {
-  components: { Pencil, personeelPopup, notificationCard },
+  components: { Pencil, personeelPopup, notificationCard, messagesCard },
 
   setup() {
     const onChange = (item: Personeel, index: number, newValue: string) => {
