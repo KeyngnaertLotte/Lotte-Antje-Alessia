@@ -1,11 +1,11 @@
 <template>
   <div
-    class="max-w-screen max-h-screen h-screen bg-[#D5573B] relative z-1 flex flex-col overflow-hidden md:max-w-1/2 md:absolute md:right-0"
+    class="max-w-screen max-h-screen h-screen bg-custom-orange relative z-1 flex flex-col overflow-hidden md:max-w-1/2 md:absolute md:right-0"
     v-if="isVisible"
   >
     <div class="flex justify-end p-4">
       <button @click="toggleVisibility" class="justify-self-end">
-        <X class="h-14 w-14 stroke-white" />
+        <X class="h-14 w-14 stroke-white md:h-10 md:w-10" />
       </button>
     </div>
     <div class="flex justify-center items-center py-12">
