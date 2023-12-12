@@ -4,7 +4,7 @@
     v-if="takenInfo"
   >
     <div class="flex flex-col items-start">
-      <h1 class="font-bold text-xl">{{ $t('taken.alle_open_taken') }}</h1>
+      <h1 class="font-bold text-xl">{{ $t('taken.alle.open.taken') }}</h1>
       <h2 class="font-bold text-sm text-gray-600">{{ $t('taken.claim') }}</h2>
     </div>
     <div class="mt-3" v-for="taken in takenInfo">

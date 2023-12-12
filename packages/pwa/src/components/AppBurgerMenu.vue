@@ -62,7 +62,7 @@
           class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl"
         >
           <component :is="menuItem.icon" class="stroke-white h-6 w-6"/>
-          {{ $t(`navigation.${menuItem.name.replace(/\s+/g, '_').toLowerCase()}`) }}
+          {{ $t(`navigation.${menuItem.name.replace(/\s+/g, '.').toLowerCase()}`) }}
         </router-link>
       </div>
     </div>
