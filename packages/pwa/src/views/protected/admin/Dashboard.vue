@@ -6,13 +6,13 @@
       class="bg-white w-full mx-auto p-6 rounded-lg shadow-md row-span-6 col-span-5"
     >
       <h1 class="text-2xl font-bold mb-4 font-body">
-        {{ $t('dashboard.lijst.personeel') }}
+        Lijst van personeel
       </h1>
       <div class="flex items-center justify-between mb-4 px-2 bg-gray-200">
         <h2 class="text-lg font-bold w-1/4">
-          {{ $t('personeel.achternaam') }}
+          Achternaam
         </h2>
-        <h2 class="text-lg font-bold w-1/4">{{ $t('personeel.voornaam') }}</h2>
+        <h2 class="text-lg font-bold w-1/4">Voornaam</h2>
         <select
           class="text-lg font-bold w-1/4 p-2 rounded-md bg-gray-200"
           @change="filterByType(($event.target as HTMLInputElement)?.value)"
@@ -52,16 +52,16 @@
     </div>
     <div class="row-span-3 col-span-2 p-6 bg-white rounded-lg shadow-md">
       <h1 class="text-2xl font-bold font-body">
-        {{ $t('dashboard.bericht') }}
+        Bericht
       </h1>
       <form action="" class="flex flex-col justify-between">
         <div class="flex flex-row w-full my-4">
-          <label for="" class="mr-4">{{ $t('bericht.aan') }}</label>
-          <label for="">{{ $t('bericht.alle') }}</label>
+          <label for="" class="mr-4">Aan: </label>
+          <label for="">alle</label>
           <input type="checkbox" />
         </div>
         <textarea
-          :placeholder="$t('bericht.mededeling')"
+          placeholder="Typ hier je mededeling"
           name=""
           id=""
           cols="50"
@@ -72,15 +72,15 @@
         <button
           class="py-1 bg-custom-purple text-white my-6 rounded w-1/2 self-end"
         >
-          {{ $t('bericht.verzend').toUpperCase() }}
+          VERZEND
         </button>
       </form>
     </div>
     <div class="row-span-3 col-span-2 bg-white rounded-lg shadow-md p-6">
-      <h1 class="text-2xl font-bold font-body">{{  $t('dashboard.voeg.taak.toe') }}</h1>
+      <h1 class="text-2xl font-bold font-body">Voeg taak toe</h1>
       <form action="" class="flex flex-col justify-around w-full h-full">
         <div class="flex flex-row w-full my-4">
-          <label for="" class="mr-4">{{  $t('taak.voor') }}</label>
+          <label for="" class="mr-4">Voor: </label>
           <select
             class="bg-gray-200 rounded font-pop focus:outline-none w-3/4 p-1"
           >
@@ -90,14 +90,14 @@
           </select>
         </div>
         <div class="flex flex-row">
-          <label for="" class="mr-4">{{  $t('taak.taak') }}</label>
+          <label for="" class="mr-4">Taak: </label>
           <input type="text" class="border-b-2 border-b-black w-3/4" />
         </div>
 
         <button
           class="py-1 bg-custom-orange text-white my-6 rounded w-1/2 self-end"
         >
-          {{ $t('taak.toevoegen').toUpperCase() }}
+          TOEVOEGEN
         </button>
       </form>
     </div>

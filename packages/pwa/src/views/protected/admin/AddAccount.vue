@@ -11,7 +11,7 @@
           for="rol"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Rol
+        Rol
         </label>
         <select
           v-model="newUser.role"
@@ -44,7 +44,7 @@
           for="voornaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Voornaam
+        Voornaam
         </label>
         <input
           type="text"
@@ -59,7 +59,7 @@
           for="achternaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Achternaam
+        Achternaam
         </label>
         <input
           type="text"
@@ -79,7 +79,7 @@
           for="email"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Email address
+        Email adres
         </label>
         <input
           type="email"
@@ -95,7 +95,7 @@
           for="password"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Password
+        Password
         </label>
         <input
           type="password"
@@ -109,7 +109,7 @@
       <button
         class="mt-6 w-1/3 rounded-md border-2 bg-custom-orange self-center py-2 px-4 font-semibold text-white hover:bg-custom-brown focus:outline-none focus-visible:border-blue-300 focus-visible:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-300"
       >
-        Registreer
+      Registreer
       </button>
     </form>
 </template>
