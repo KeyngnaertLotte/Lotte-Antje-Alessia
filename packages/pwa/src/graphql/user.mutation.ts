@@ -22,3 +22,12 @@ export const ADD_USER_ADMIN = gql`
     }
   }
 `
+
+export const SET_USER_LOCALE = gql`
+  mutation SetLanguage($userId: String!, $locale: String!) {
+    setLanguage(userId: $userId, locale: $locale) {
+      uid
+      locale
+    }
+  }
+`

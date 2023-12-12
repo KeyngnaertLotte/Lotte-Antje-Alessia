@@ -10,6 +10,7 @@
             <p class="font-pop text-lg text-justify"> {{ currentArtist.top }} </p>
         </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts" >
@@ -101,100 +102,100 @@
         top: "Meest gekende liedjes: Bones, Believer, Demons, Thunder en Enemy"
         },
 
-        
-    ]
+// ]
 
-    export default {
-        
-    props: {
-        artist: {
-        type: String,
-        required: true
-        },
-        modalState: {
-            type: Boolean,
-            required: true
-        },
-        isBezoeker: {
-            type: Boolean,
-            required: true
-        }
+export default {
+  props: {
+    artist: {
+      type: String,
+      required: true,
     },
-    emits: ['close-modal'],
-    components: {
-        Heart,
-        X
+    modalState: {
+      type: Boolean,
+      required: true,
     },
-       
+    isBezoeker: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  emits: ['close-modal'],
+  components: {
+    Heart,
+    X,
+  },
+
   setup(props, { emit }) {
-    
     function closeModal() {
-        emit('close-modal')
+      emit('close-modal')
     }
-    
+
     onMounted(() => {
-        console.log("mounted")
-    });
-    
+      console.log('mounted')
+    })
+
     const { mutate: addFavoArtiest } = useMutation(ADD_FAVOARTIEST)
     const { mutate: removeFavoArtiest } = useMutation(REMOVE_FAVOARTIEST)
-    const isBezoeker = ref(props.isBezoeker);
+    const isBezoeker = ref(props.isBezoeker)
 
-    const currentArtist = ref();
+    const currentArtist = ref()
 
-
-    artistList.forEach((element) => {
-      if (element.artistName === props.artist) {
-        currentArtist.value = element;
-      }
-    });
-
-    
+    // artistList.forEach(element => {
+    //   if (element.artistName === props.artist) {
+    //     currentArtist.value = element
+    //   }
+    // })
 
     // Assuming the GraphQL query result is stored in the 'result' variable
-    const { error, result, loading, refetch, onResult } = useQuery(GET_FAVOARTISTS_BY_ID, { uid });
+    const { error, result, loading, refetch, onResult } = useQuery(
+      GET_FAVOARTISTS_BY_ID,
+      { uid },
+    )
 
-    onResult((result) => {
-    if (result.data) {
+    onResult(result => {
+      if (result.data) {
         for (const artiest of result.data.bezoekersFavorite) {
-            console.log(artiest.artiest)
-            const doesIt = artiest.artiest.includes(currentArtist.value.artistName.toUpperCase())
-            console.log(doesIt)
-          if (doesIt) heartColor.value = "w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen"
-          else heartColor.value = "w-10 h-10 fill-none"
+          console.log(artiest.artiest)
+          const doesIt = artiest.artiest.includes(
+            currentArtist.value.artistName.toUpperCase(),
+          )
+          console.log(doesIt)
+          if (doesIt)
+            heartColor.value =
+              'w-10 h-10 fill-custom-darkGreen stroke-custom-darkGreen'
+          else heartColor.value = 'w-10 h-10 fill-none'
         }
-    }
-  });
+      }
+    })
 
-  const toggleFavorite = () => {
-    //   console.log("before", favorite.value);
-      favorite.value = !favorite.value;
-    //   console.log(props.artist)
-    //   console.log(uid)
+    const toggleFavorite = () => {
+      //   console.log("before", favorite.value);
+      favorite.value = !favorite.value
+      //   console.log(props.artist)
+      //   console.log(uid)
       if (favorite.value) {
         addFavoArtiest({ uid: uid, artiest: props.artist.toUpperCase() })
-        .then((graphqlresult) => {
-            console.log('🎉 new favoartiest added to Bezoeker');
-            console.log(graphqlresult?.data); // Access the returned data
+          .then(graphqlresult => {
+            console.log('🎉 new favoartiest added to Bezoeker')
+            console.log(graphqlresult?.data) // Access the returned data
             refetch()
-        })
-        .catch((error) => {
+          })
+          .catch(error => {
             console.error(error)
-        })
-        }
-        else {
-            removeFavoArtiest({ uid: uid, artiest: props.artist.toUpperCase() })
-            .then((graphqlresult) => {
-                console.log('🎉 favoartiest removed from Bezoeker');
-                console.log(graphqlresult?.data); // Access the returned data
-                refetch()
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-        }
-    //   console.log("after", favorite.value);
-    };
+          })
+      } else {
+        removeFavoArtiest({ uid: uid, artiest: props.artist.toUpperCase() })
+          .then(graphqlresult => {
+            console.log('🎉 favoartiest removed from Bezoeker')
+            console.log(graphqlresult?.data) // Access the returned data
+            refetch()
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+      //   console.log("after", favorite.value);
+    }
 
     const { onResult: onResultLineUp } = useQuery(GET_LINEUP)
     onResultLineUp(result => {
@@ -221,10 +222,8 @@
       favorite,
       heartColor,
       isBezoeker,
-        closeModal
-    };
-  }
-};
-
-
+      closeModal,
+    }
+  },
+}
 </script>

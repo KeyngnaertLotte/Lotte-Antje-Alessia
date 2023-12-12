@@ -81,7 +81,8 @@ const handleClick = () => {
     :class="color[$props.title], textColor[$props.title], colorAcces[$props.title]"
     @click="handleClick"
   >
-    <p class="font-bold text-2xl self-start font-body px-3">{{ $props.title.toLocaleUpperCase() }}</p>
+    <!-- <p class="font-bold text-2xl self-start font-body px-3">{{ $props.title.toLocaleUpperCase() }}</p> -->
+    <p class="font-bold text-2xl self-start font-body px-3">{{ $t(`card.${$props.title}`) }}</p>
     <div class="flex justify-center items-center my-2">
       <p v-if="$props.title === 'saldo'" class="font-pop font-extrabold text-3xl pt-4">
         € {{ $props.value }}

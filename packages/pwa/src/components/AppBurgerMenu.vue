@@ -3,7 +3,39 @@
     class="max-w-screen max-h-screen h-screen bg-custom-orange relative z-1 flex flex-col overflow-hidden md:max-w-1/2 md:absolute md:right-0"
     v-if="isVisible"
   >
-    <div class="flex justify-end p-4">
+    <div class="flex justify-between p-4">
+      <div class="h-[80px]">
+        <button
+          @click="toggleShow(languages)"
+          class="m-4 mb-0 p-2 min-w-full border-white border-1 flex justify-between"
+        >
+          <p class="text-white">
+            {{
+              $t('navigation.current.language', {
+                user: firebaseUser?.displayName,
+              })
+            }}
+          </p>
+          <ChevronDown class="stroke-white" />
+        </button>
+        <transition name="slide-fade">
+          <div v-if="isShow(languages)">
+            <div>
+              <div
+                class="m-2 mx-4 mt-0 p-2 flex flex-col justify-between min-w-full"
+              >
+                <button
+                  class="text-white flex justify-start"
+                  @click="setLanguage(otherLang(languages).toString())"
+                >
+                  {{ otherLang(languages).toString() }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+
       <button @click="toggleVisibility" class="justify-self-end focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white">
         <X class="h-14 w-14 stroke-white md:h-10 md:w-10" />
       </button>
@@ -30,7 +62,7 @@
           class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white"
         >
           <component :is="menuItem.icon" class="stroke-white h-6 w-6" />
-          {{ menuItem.name }}
+          {{ $t(`navigation.${menuItem.name.replace(/\s+/g, '.').toLowerCase()}`) }}
         </router-link>
       </div>
     </div>
@@ -40,7 +72,7 @@
         class="flex flex-row items-center text-3xl text-white gap-4 font-body md:text-2xl focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white"
       >
         <LogOut class="stroke-white h-8 w-8 transform -scale-x-100" />
-        UITLOGGEN
+        {{ $t('account.log.out', { user: firebaseUser?.displayName }) }}
       </button>
     </div>
   </div>
@@ -58,10 +90,17 @@ import {
   Mic2,
   ListTodo,
   ClipboardCheck,
+  ChevronDown,
 } from 'lucide-vue-next'
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'
 import { Plus } from 'lucide-vue-next'
+import { ref } from 'vue'
+import useCustomUser from '@/composables/useCustomUser'
+import { SET_USER_LOCALE } from '@/graphql/user.mutation'
+import { useMutation } from '@vue/apollo-composable'
+
+const { firebaseUser } = useFirebase()
 
 const props = defineProps({
   isVisible: {
@@ -76,6 +115,73 @@ const props = defineProps({
 const emit = defineEmits()
 const { logout } = useFirebase()
 const { replace } = useRouter()
+
+// taal dropdown
+const languages = { nl: 'Nederlands', en: 'Engels' }
+type Languages = { nl: string; en: string }
+type ShowState = { [key: string]: boolean }
+const showState = ref<ShowState>({})
+
+const toggleShow = (languages: any) => {
+  showState.value[languages] = !showState.value[languages]
+}
+
+// show current language user
+const { customUser } = useCustomUser()
+
+const otherLang = (languages: any) => {
+  const currentLanguageCode = customUser.value?.locale
+
+  const isCurrentLanguageInList = languages.hasOwnProperty(currentLanguageCode)
+
+  const filteredLanguages = isCurrentLanguageInList
+    ? Object.fromEntries(
+        Object.entries(languages).filter(
+          ([key]) => key !== currentLanguageCode,
+        ),
+      )
+    : languages
+
+  console.log('lijst van talen nu: ', filteredLanguages)
+  console.log('VALUES: ', Object.values(filteredLanguages))
+
+  return Object.values(filteredLanguages) || false
+}
+
+const isShow = (languages: any) => {
+  // remove current language from dropdown
+  console.log('customUser:', customUser.value?.locale)
+  console.log('languages:', languages)
+
+  return showState.value[languages] || false
+}
+
+// set language
+const setLanguage = (selectedLang: any) => {
+  console.log('selectedLang: ', selectedLang)
+
+  const userId = String(customUser.value?.uid)
+  const { mutate: setLocale } = useMutation(SET_USER_LOCALE)
+
+  // de key van de gekozen taal
+  const selectedLangKey = Object.keys(languages).find(
+    key => languages[key as keyof Languages] === selectedLang,
+  ) as keyof Languages
+
+  console.log('selectedLangKey: ', selectedLangKey)
+
+  setLocale({ userId: userId, locale: selectedLangKey })
+    .then(graphqlresult => {
+      console.log('🎉 locale changed')
+      console.log(graphqlresult?.data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+
+  location.reload()
+  console.log('customUser CHANGED to: ', customUser.value?.locale)
+}
 
 const roleMenuList = [
   {
@@ -176,3 +282,19 @@ const logoutUser = () => {
   })
 }
 </script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+</style>

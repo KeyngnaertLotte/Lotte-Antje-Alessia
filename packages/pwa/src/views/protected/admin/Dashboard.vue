@@ -5,9 +5,13 @@
     <div
       class="bg-white w-full mx-auto p-6 rounded-lg shadow-md row-span-6 col-span-5 col-start-1"
     >
-      <h1 class="text-2xl font-bold mb-4 font-body">Lijst van personeel</h1>
+      <h1 class="text-2xl font-bold mb-4 font-body">
+        Lijst van personeel
+      </h1>
       <div class="flex items-center justify-between mb-4 px-2 bg-gray-200">
-        <h2 class="text-lg font-bold w-1/4">Achternaam</h2>
+        <h2 class="text-lg font-bold w-1/4">
+          Achternaam
+        </h2>
         <h2 class="text-lg font-bold w-1/4">Voornaam</h2>
         <select
           class="text-lg font-bold w-1/4 p-2 rounded-md bg-gray-200 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"

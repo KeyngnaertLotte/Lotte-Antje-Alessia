@@ -6,86 +6,91 @@
         </div>
         <button @click="handleModal" class="bg-white px-4 py-2 text-custom-purple rounded-md font-pop font-bold mx-4 self-center hover:bg-custom-purple hover:border-white hover:border-2 hover:text-white focus:outline-none focus-visible:border-white  focus-visible:bg-custom-purple focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white">VOEG TOE</button>
       </div>
-      <div class="mx-4 bg-white row-start-9 p-4 rounded-md col-span-2 row-span-15">
-        <p class="font-body text-xl font-bold">TRANSACTIES</p>
-        <div class="font-pop text-lg mt-5" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid">
-          <div v-for="(transactie, index) in reversedTransacties" :key="index" :class="['flex', 'justify-between', transactieColor(transactie.transactie)]">
-            <p>{{ transactie.transactie }}</p>
-            <p>€ {{ transactie.aantal }}</p>
-          </div>
-        </div>
-      </div>
-      <SaldoPopup :id="uid ?? ''" v-if="isModalOpen" @close-modal="handleCloseModal"/>
-  </template>
-  
-  <script lang="ts">
+    </div>
+  </div>
+  <SaldoPopup
+    :id="uid ?? ''"
+    v-if="isModalOpen"
+    @close-modal="handleCloseModal"
+  />
+</template>
+
+<script lang="ts">
 import useCustomUser from '@/composables/useCustomUser'
 import { provideApolloClient, useQuery } from '@vue/apollo-composable'
 import { GET_BEZOEKER_BY_UID } from '@/graphql/bezoeker.query'
 import useGraphql from '../../../composables/useGraphql'
-import { onMounted, ref } from 'vue';
-import SaldoPopup from '@/components/bezoeker/SaldoPopup.vue';
+import { onMounted, ref } from 'vue'
+import SaldoPopup from '@/components/bezoeker/SaldoPopup.vue'
 
-const { customUser } = useCustomUser();
-const { apolloClient } = useGraphql();
-provideApolloClient(apolloClient);
-const uid = customUser.value?.uid;
-const bezoekerInfo = ref<any | null>(null);
-const isModalOpen = ref(false);
+const { customUser } = useCustomUser()
+const { apolloClient } = useGraphql()
+provideApolloClient(apolloClient)
+const uid = customUser.value?.uid
+const bezoekerInfo = ref<any | null>(null)
+const isModalOpen = ref(false)
 
 export default {
   components: {
-    SaldoPopup
+    SaldoPopup,
   },
   setup() {
     onMounted(() => {
-      getBezoekerInfo();
-    });
-    return { getBezoekerInfo, bezoekerInfo, isModalOpen, handleModal, handleCloseModal, uid };
+      getBezoekerInfo()
+    })
+    return {
+      getBezoekerInfo,
+      bezoekerInfo,
+      isModalOpen,
+      handleModal,
+      handleCloseModal,
+      uid,
+    }
   },
   computed: {
     reversedTransacties() {
       if (this.bezoekerInfo && this.bezoekerInfo.bezoekerByUid) {
         // Use slice() to create a shallow copy of the array and then reverse it
-        console.log('transacties:', this.bezoekerInfo.bezoekerByUid.transacties.slice());
-        return this.bezoekerInfo.bezoekerByUid.transacties.slice().reverse();
+        console.log(
+          'transacties:',
+          this.bezoekerInfo.bezoekerByUid.transacties.slice(),
+        )
+        return this.bezoekerInfo.bezoekerByUid.transacties.slice().reverse()
       }
-      return [];
+      return []
     },
-    
-    
   },
   methods: {
     transactieColor(naam: string) {
-      if (naam === "Saldo Verhoging") {
-        return "text-custom-darkGreen";
+      if (naam === 'Saldo Verhoging') {
+        return 'text-custom-darkGreen'
       } else {
-        return "text-custom-orange";
+        return 'text-custom-orange'
       }
     },
   },
-};
+}
 
 const handleModal = () => {
-      isModalOpen.value = true;
-    }
-    const handleCloseModal = () => {
-        isModalOpen.value = false;
-      }
+  isModalOpen.value = true
+}
+const handleCloseModal = () => {
+  isModalOpen.value = false
+}
 
 const getBezoekerInfo = async () => {
-        // console.log('uid:', uid);
-      try {
-        const { onResult } = useQuery(GET_BEZOEKER_BY_UID, { uid });
-        onResult((result) => {
-          if (result.data) {
-            console.log('Data:', result.data);
-            bezoekerInfo.value = result.data;  // Update the ref with the fetched data
-            // console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
-          }
-        });
-      } catch (error) {
-        console.error('Error fetching bezoeker info:', error);
+  // console.log('uid:', uid);
+  try {
+    const { onResult } = useQuery(GET_BEZOEKER_BY_UID, { uid })
+    onResult(result => {
+      if (result.data) {
+        console.log('Data:', result.data)
+        bezoekerInfo.value = result.data // Update the ref with the fetched data
+        // console.log('bezoekerInfo:', bezoekerInfo.value.bezoekerByUid.naam);
       }
-    };
+    })
+  } catch (error) {
+    console.error('Error fetching bezoeker info:', error)
+  }
+}
 </script>

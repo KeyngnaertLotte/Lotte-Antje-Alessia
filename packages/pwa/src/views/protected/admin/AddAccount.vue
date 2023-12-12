@@ -47,7 +47,7 @@
           for="voornaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Voornaam
+        Voornaam
         </label>
         <input
           type="text"
@@ -62,7 +62,7 @@
           for="achternaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-          Achternaam
+        Achternaam
         </label>
         <input
           type="text"

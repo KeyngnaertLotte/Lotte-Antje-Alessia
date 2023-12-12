@@ -2,7 +2,7 @@
   <div
     class="col-span-2 row-start-8 row-span-17 bg-white rounded-xl m-4 grid grid-rows-17"
   >
-    <p class="font-bold font-body text-2xl m-3">FAVORIETE ARTIESTEN</p>
+    <p class="font-bold font-body text-2xl m-3">{{ $t('dashboard.favo.artiesten') }}</p>
     <div class="flex flex-row w-full justify-around row-start-3 font-body">
       <button
         :class="[

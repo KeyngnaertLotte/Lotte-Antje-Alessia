@@ -77,4 +77,11 @@ export class UsersResolver {
   // removeUser(@Args('string', { type: () => String }) uid: string) {
   //   return this.usersService.remove(uid)
   // }
+
+  @UseGuards(FirebaseGuard)
+  @Mutation(() => User, { name: 'setLanguage' })
+  setLanguage(@Args('userId') userId: string, @Args('locale') locale: string){
+    return this.usersService.setLanguage(userId, locale);
+  }
+  
 }

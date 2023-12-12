@@ -13,10 +13,10 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = path.join(process.cwd(), '/src/utils/token.json')
+const TOKEN_PATH = path.join(process.cwd(), '/packages/pwa/src/utils/token.json')
 const CREDENTIALS_PATH = path.join(
   process.cwd(),
-  '/src/utils/credentials.json',
+  '/packages/pwa/src/utils/credentials.json',
 )
 
 /**
@@ -103,7 +103,7 @@ async function generateTranslations(auth) {
     // .d.ts
 
     await fs.writeFile(
-      path.join(process.cwd(), `/src/locales/${locale}.json`),
+      path.join(process.cwd(), `packages/pwa/src/locales/${locale}.json`),
       JSON.stringify(translations),
     )
   }

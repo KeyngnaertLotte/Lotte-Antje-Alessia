@@ -98,4 +98,14 @@ export class UsersService {
   async truncate(): Promise<void> {
     await this.userRepository.clear()
   }
+
+  async setLanguage(userId: string, locale: string) {
+    // Fetch the user from the database
+    const user = await this.findOneByUid(userId);
+
+    // Set the new language
+    user.locale = locale;
+
+    return this.userRepository.save(user);
+  }
 }
