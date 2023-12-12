@@ -21,4 +21,19 @@ import { UsersModule } from 'src/users/users.module'
   ],
   providers: [DatabaseSeedCommand, SeedService],
 })
-export class SeedModule {}
+export class SeedModule {
+  async seedE2ETestDB() {
+    console.debug('E2E_TEST running, seeding database')
+    await this.seedService.addArtiestenFromJson()
+    await this.seedService.addBezoekersFromJson()
+    await this.seedService.addPersoneelFromJson()
+    await this.seedService.addTakenFromJson()
+    await this.seedService.addMateriaalFromJson()
+    await this.seedService.addUserFromJson()
+  }
+
+  constructor(private readonly seedService: SeedService) {
+    // A spy is obviously better than an if-statement
+    if (process.env.FIREBASE_AUTH_EMULATOR_HOST) this.seedE2ETestDB()
+  }
+}

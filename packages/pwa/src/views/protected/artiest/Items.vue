@@ -63,7 +63,7 @@
                     <MinusIcon class="" />
                   </button>
                   <p>{{ aantal[item.item] }}</p>
-                  <button @click="plusButtonClicked(item)" class="pl-6 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">
+                  <button data-testid='plus' @click="plusButtonClicked(item)" class="pl-6">
                     <plus-icon class="" />
                   </button>
                 </div>

@@ -2,7 +2,13 @@
   "name": "lotte-antje-alessia",
   "version": "0.0.0",
   "scripts": {
-    "dev": "todo"
+    "dev": "npx lerna run --scope={pwa,api} dev --stream",
+    "dev:api": "npx lerna run --scope=api dev",
+    "dev:pwa": "npx lerna run --scope=pwa dev",
+    "dev:emulate": "npx lerna run --scope={pwa,api} dev:emulate --stream",
+    "translate:pwa": "npx run generate:translations -w pwa",
+    "build:pwa": "npx lerna run --scope=pwa build",
+    "build:api": "npx lerna run --scope=api build"
   },
   "repository": {
     "type": "git",
@@ -31,5 +37,8 @@
   },
   "dependencies": {
     "vue-qrcode-reader": "^5.4.1"
+  },
+  "devDependencies": {
+    "lerna": "^8.0.0"
   }
 }
