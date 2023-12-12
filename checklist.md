@@ -16,7 +16,7 @@
 ## Autorisatie en Authenticatie
 
 - [x] Firebase of een vergelijkbare service wordt gebruikt voor autorisatie en authenticatie.
-- [ ] De PKCE-flow wordt toegepast voor beveiligde autorisatie.
+- [x] De PKCE-flow wordt toegepast voor beveiligde autorisatie.
 - [x] Er zijn minimaal twee rollen: gebruiker en administrator.
 - [x] Een admin-account met e-mail "docent@howest.be" en wachtwoord "P@ssword123" is voorzien.
 
@@ -76,7 +76,7 @@
 
 ## Testing
 
-- [ ] Er is minstens één goede unit test en één integratietest.
+- [x] Er is minstens één goede unit test en één integratietest.
 - [ ] Testing maakt deel uit van de deployment pipeline, inclusief snelheidstests en functionele tests.
 
 ## Styling
@@ -88,11 +88,11 @@
 ## PWA (Progressive Web App)
 
 - [x] De web-app kan fullscreen worden gelanceerd en heeft een correcte PWA-setup.
-- [ ] Er is een relevante service-worker geïmplementeerd.
+- [x] Er is een relevante service-worker geïmplementeerd.
 
 ## Multi-language
 
-- [ ] De applicatie is meertalig gemaakt, wat een meerwaarde biedt voor gebruikers.
+- [x] De applicatie is meertalig gemaakt, wat een meerwaarde biedt voor gebruikers.
 
 ## Error Logging
 
@@ -105,13 +105,13 @@
 
 ## Staging / Deployment
 
-- [ ] De frontend draait volledig in Docker.
-- [ ] Gitflow wordt aangeraden voor versiebeheer.
+- [x] De frontend draait volledig in Docker.
+- [x] Gitflow wordt aangeraden voor versiebeheer.
 
 ## Build Optimalisatie
 
 - [x] Vite wordt gebruikt voor een betere levering van JS-bestanden.
-- [ ] Bestanden worden optimaal geminifieerd voor een snellere levering.
+- [x] Bestanden worden optimaal geminifieerd voor een snellere levering.
 
 ## Eigen Inbreng
 
