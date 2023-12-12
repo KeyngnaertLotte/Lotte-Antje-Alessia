@@ -1,5 +1,5 @@
 version: '3.1'
-name: api-lotantsia-production2
+name: api-lotantsia-production
 
 services:
   mongodb:
@@ -21,7 +21,7 @@ services:
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/my-google-secret
     ports:
-      - 3001:3001 # External:What Is Set In Main.ts
+      - 8000:8000 # External:What Is Set In Main.ts
     secrets:
       - my-google-secret
 

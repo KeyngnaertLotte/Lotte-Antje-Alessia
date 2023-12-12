@@ -16,7 +16,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe())
 
-  await app.listen(3001)
+  await app.listen(8000)
   console.info(`Server is running on: ${await app.getUrl()}`)
   console.info(`Server is running on: ${await app.getUrl()}/graphql`)
 }
