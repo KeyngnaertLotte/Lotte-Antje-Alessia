@@ -22,6 +22,7 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/my-google-secret
     ports:
       - 8000:8000 # External:What Is Set In Main.ts
+      - 3004:3004 # Socket
     secrets:
       - my-google-secret
 
