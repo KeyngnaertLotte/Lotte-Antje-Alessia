@@ -172,11 +172,11 @@ export default {
 
     const currentArtist = ref()
 
-    artistList.forEach(element => {
-      if (element.artistName === props.artist) {
-        currentArtist.value = element
-      }
-    })
+    // artistList.forEach(element => {
+    //   if (element.artistName === props.artist) {
+    //     currentArtist.value = element
+    //   }
+    // })
 
     // Assuming the GraphQL query result is stored in the 'result' variable
     const { error, result, loading, refetch, onResult } = useQuery(
