@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
         <div class="relative bg-white w-9/10 h-3/4 rounded-lg flex flex-col  items-center p-6">
             <button @click="closeModal" class="absolute top-[-1rem] right-[-0.5rem] flex justify-end bg-custom-orange rounded-lg h-12 w-12 flex justify-center items-center hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"><X class="h-10 w-10 stroke-white"/> </button>
@@ -102,7 +103,7 @@
         top: "Meest gekende liedjes: Bones, Believer, Demons, Thunder en Enemy"
         },
 
-// ]
+]
 
 export default {
   props: {
