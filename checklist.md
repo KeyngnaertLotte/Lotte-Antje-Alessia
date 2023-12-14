@@ -34,7 +34,7 @@
 ## Framework
 
 - [x] Een geschikte projectstructuur is gekozen.
-- [ ] Een seeder maakt de database automatisch aan bij het opstarten van de applicatie.
+- [x] Een seeder maakt de database automatisch aan bij het opstarten van de applicatie.
 
 ## Foutcontrole
 
@@ -48,7 +48,7 @@
 ## Staging / Deployment
 
 - [x] De applicatie draait volledig in Docker.
-- [ ] De Docker image is beschikbaar op DockerHub / Harbor (optioneel).
+- [x] De Docker image is beschikbaar op DockerHub / Harbor (optioneel).
 - [ ] Een geschikte Kubernetes deployment methodiek is gekozen (Canary, blue-green, rolling, enz.) (optioneel).
 
 ## Testing
