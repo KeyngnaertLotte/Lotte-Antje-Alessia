@@ -27,15 +27,39 @@
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_TAAK_BY_TYPE } from '@/graphql/taak.query'
+import useCustomUser from '@/composables/useCustomUser'
+import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
+
 type ShowState = { [key: string]: boolean }
 
 const takenInfo = ref<any | null>(null)
+const typePersoneel = ref<string>('')
 
 export default {
   setup() {
     const showState = ref<ShowState>({})
+
+    const { customUser } = useCustomUser()
+    const uid = customUser.value?.uid
+
+    const { onResult: personeelResult, refetch } = useQuery(
+      GET_PERSONEEL_BY_UID,
+      { uid: uid },
+    )
+
+    // get type van personeel
+    personeelResult((result) => {
+      if (result.data) {
+        typePersoneel.value = result.data.type
+        console.log('typePersoneel: ', typePersoneel.value)
+      }
+    })
+    
+    // const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
+    //   type: typePersoneel,
+    // })
     const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
-      type: 'Podium - licht (Aléssia)',
+      type: 'Podium - licht',
     })
 
     const toggleShow = (category: string) => {
