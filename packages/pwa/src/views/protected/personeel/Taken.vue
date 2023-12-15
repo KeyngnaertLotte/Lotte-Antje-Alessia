@@ -27,39 +27,29 @@
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_TAAK_BY_TYPE } from '@/graphql/taak.query'
-import useCustomUser from '@/composables/useCustomUser'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
-
 type ShowState = { [key: string]: boolean }
+import useCustomUser from '@/composables/useCustomUser'
 
 const takenInfo = ref<any | null>(null)
-const typePersoneel = ref<string>('')
 
 export default {
   setup() {
-    const showState = ref<ShowState>({})
-
+    //get user
     const { customUser } = useCustomUser()
-    const uid = customUser.value?.uid
+    console.log('customUser: ', customUser.value?.uid)
 
-    const { onResult: personeelResult, refetch } = useQuery(
-      GET_PERSONEEL_BY_UID,
-      { uid: uid },
-    )
-
-    // get type van personeel
-    personeelResult((result) => {
-      if (result.data) {
-        typePersoneel.value = result.data.type
-        console.log('typePersoneel: ', typePersoneel.value)
-      }
+    const { result: personeelResult } = useQuery(GET_PERSONEEL_BY_UID, {
+      uid: customUser.value?.uid,
     })
-    
-    // const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
-    //   type: typePersoneel,
-    // })
+
+    console.log('personeelResult: ', personeelResult.value.personeelByUid.type)
+
+    const type = personeelResult.value.personeelByUid.type
+
+    const showState = ref<ShowState>({})
     const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
-      type: 'Podium - licht',
+      type: type,
     })
 
     const toggleShow = (category: string) => {
