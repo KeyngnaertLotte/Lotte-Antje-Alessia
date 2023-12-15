@@ -39,18 +39,31 @@ export default {
     const { customUser } = useCustomUser()
     console.log('customUser: ', customUser.value?.uid)
 
-    const { result: personeelResult } = useQuery(GET_PERSONEEL_BY_UID, {
+    const { onResult: personeelResult } = useQuery(GET_PERSONEEL_BY_UID, {
       uid: customUser.value?.uid,
     })
 
-    console.log('personeelResult: ', personeelResult.value.personeelByUid.type)
-
-    const type = personeelResult.value.personeelByUid.type
+    personeelResult(result => {
+      if (result.data) {
+        console.log('personeelResult: ', result.data.personeelByUid.type)
+        const type = result.data.personeelByUid.type
+        const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
+          type,
+        })
+        onResult(result => {
+          if (result.data) {
+            console.log('TYPE: ', type)
+            takenInfo.value = result.data
+            console.log('takenInfo: ', takenInfo.value)
+            const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
+              type: type,
+            })
+          }
+        })
+      }
+    })
 
     const showState = ref<ShowState>({})
-    const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
-      type: type,
-    })
 
     const toggleShow = (category: string) => {
       showState.value[category] = !showState.value[category]
@@ -59,13 +72,6 @@ export default {
     const isShow = (category: string) => {
       return showState.value[category] || false
     }
-
-    onResult(result => {
-      if (result.data) {
-        takenInfo.value = result.data
-        console.log('takenInfo: ', takenInfo.value)
-      }
-    })
 
     return {
       toggleShow,
