@@ -10,11 +10,13 @@
     <div class="mt-3" v-for="taken in takenInfo">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-1" v-for="taak in taken">
         <div class="flex items-center col-span-4">
-          <input
-            type="checkbox"
-            class="form-checkbox accent-custom-green h-5 w-5 mr-3 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+          <button
+            @click="ClaimTaak(taak.id)"
             id="checkbox"
-          />
+            class="px-3 py-1 bg-custom-orange text-white my-2 mx-2 rounded w-fit hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
+          >
+            Claim
+          </button>
           <label for="checkbox">{{ taak.naam }}</label>
         </div>
         <p class="text-end col-span-1 self-center">{{ taak.deadline }}</p>
@@ -28,14 +30,14 @@ import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_TAAK_BY_TYPE } from '@/graphql/taak.query'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
-type ShowState = { [key: string]: boolean }
+import { ADD_TAAK } from '@/graphql/personeel.mutation'
 import useCustomUser from '@/composables/useCustomUser'
+import { useMutation } from '@vue/apollo-composable'
 
 const takenInfo = ref<any | null>(null)
 
 export default {
   setup() {
-    //get user
     const { customUser } = useCustomUser()
     console.log('customUser: ', customUser.value?.uid)
 
@@ -63,19 +65,22 @@ export default {
       }
     })
 
-    const showState = ref<ShowState>({})
+    const ClaimTaak = (taakId: string) => {
+      console.log('claim deze taak: ', taakId)
+      // voeg deze taak toe aan de taken van personeel
+      const { mutate: addTaak } = useMutation(ADD_TAAK)
+      addTaak({
+        taakId: taakId,
+        uid: customUser.value?.uid,
+      })
+      console.log('taak geclaimed')
 
-    const toggleShow = (category: string) => {
-      showState.value[category] = !showState.value[category]
-    }
-
-    const isShow = (category: string) => {
-      return showState.value[category] || false
+      // verwijder deze taak uit de taken van de taak
+      
     }
 
     return {
-      toggleShow,
-      isShow,
+      ClaimTaak,
       takenInfo,
     }
   },

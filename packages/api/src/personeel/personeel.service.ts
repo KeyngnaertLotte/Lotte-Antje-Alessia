@@ -140,7 +140,7 @@ export class PersoneelService {
   }
 
   async update(uid: string, updatePersoneel: UpdatePersoneelInput) {
-    // update artiest
+    // update personeel
     const personeel = this.findOneByUid(uid)
     await personeel.then(p => {
       p.voornaam = updatePersoneel?.voornaam
