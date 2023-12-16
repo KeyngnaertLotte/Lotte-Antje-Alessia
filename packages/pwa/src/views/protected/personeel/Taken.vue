@@ -10,14 +10,28 @@
     <div class="mt-3" v-for="taken in takenInfo">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-1" v-for="taak in taken">
         <div class="flex items-center col-span-4">
-          <button
+          <!-- <button
             @click="ClaimTaak(taak.id)"
-            id="checkbox"
+            id="claimbutton"
             class="px-3 py-1 bg-custom-orange text-white my-2 mx-2 rounded w-fit hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
           >
             Claim
+          </button> -->
+          <button
+            @click="ClaimTaak(taak.id)"
+            :id="taak.id"
+            class="px-3 py-1 text-white my-2 mx-2 rounded w-fit focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
+            :class="{
+              'bg-custom-orange': taak.status === false,
+              'hover:bg-custom-brown': taak.status === false,
+              'bg-gray-400': taak.status === true,
+              'hover:bg-gray-500': taak.status === true,
+            }"
+            :disabled="taak.status === true"
+          >
+            Claim
           </button>
-          <label for="checkbox">{{ taak.naam }}</label>
+          <label :for="taak.id">{{ taak.naam }}</label>
         </div>
         <p class="text-end col-span-1 self-center">{{ taak.deadline }}</p>
       </div>
@@ -80,10 +94,12 @@ export default {
       const { mutate: updateTaak } = useMutation(UPDATE)
       updateTaak({
         id: taakId,
-        updateTakenInput: {status: true}
+        updateTakenInput: { status: true },
       })
       console.log('taak geupdate')
+      location.reload()
     }
+
 
     return {
       ClaimTaak,

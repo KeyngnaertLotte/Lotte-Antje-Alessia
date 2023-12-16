@@ -21,6 +21,7 @@ export const GET_TAAK_BY_TYPE = gql`
     findByType(type: $type) {
       id
       plaats
+      status
       type
       naam
       category
