@@ -29,6 +29,7 @@
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_TAAK_BY_TYPE } from '@/graphql/taak.query'
+import { UPDATE } from '@/graphql/taak.mutation'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
 import { ADD_TAAK } from '@/graphql/personeel.mutation'
 import useCustomUser from '@/composables/useCustomUser'
@@ -76,7 +77,12 @@ export default {
       console.log('taak geclaimed')
 
       // verwijder deze taak uit de taken van de taak
-      
+      const { mutate: updateTaak } = useMutation(UPDATE)
+      updateTaak({
+        id: taakId,
+        updateTakenInput: {status: true}
+      })
+      console.log('taak geupdate')
     }
 
     return {
