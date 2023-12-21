@@ -1,5 +1,5 @@
 <template>
-  <form submit.prevent="updatePersoneel"
+  <form @submit.prevent="updateTask"
     class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div class="bg-white w-9/10 h-9/10 rounded-lg relative">

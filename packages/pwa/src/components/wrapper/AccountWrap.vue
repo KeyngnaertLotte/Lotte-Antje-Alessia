@@ -6,6 +6,7 @@
       'grid-cols-2',
       'grid-rows-24',
       'h-screen',
+      'font-pop',
       `${bgColorClass}`,
     ]"
   >
@@ -30,7 +31,6 @@ export default {
     AppHeader,
   },
   setup() {
-    // console.log('userName:', userName);
     userName = customUser.value?.naam
     return {
       userName,
@@ -40,7 +40,6 @@ export default {
   computed: {
     bgColorClass() {
       const routeSegment = this.$route.path.split('/')[2]
-      // console.log('routeSegment:', routeSegment);
       return routeSegment === 'lineup' ? 'bg-primary' : 'bg-secondary'
     },
   },
