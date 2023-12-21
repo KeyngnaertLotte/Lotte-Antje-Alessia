@@ -4,7 +4,6 @@ import { Taak } from './entities/taken.entity'
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { UpdateResult } from 'typeorm'
-import { ObjectId } from 'mongodb'
 
 describe('TakenService', () => {
   let service: TakenService

@@ -1,4 +1,4 @@
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql'
+import { InputType, Field} from '@nestjs/graphql'
 
 @InputType()
 export class CreateBenodigdhedenInput {

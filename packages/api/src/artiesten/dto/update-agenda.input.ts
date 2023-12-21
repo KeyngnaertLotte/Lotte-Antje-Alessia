@@ -1,4 +1,4 @@
-import { InputType, Int, Field } from '@nestjs/graphql'
+import { InputType, Field } from '@nestjs/graphql'
 import { Agenda } from '../entities/agenda.entity'
 
 @InputType()

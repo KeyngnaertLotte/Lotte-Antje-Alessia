@@ -135,6 +135,18 @@ npm run dev:emulate
 npx jest <filename>
 ```
 
+## e2e test
+
+instellen van node env variabele
+
+```cmd
+$env:NODE_ENV='dev'    
+```
+
+```cmd
+npm run test:e2e -w api
+```
+
 ## Docker production
 
 - Maak een .env.production.local file aan voor zowel de api als de pwa. Kopieer de inhoud van de .env file.

@@ -109,7 +109,6 @@ export class SeedService {
   }
 
   async addMateriaalFromJson(): Promise<Materiaal[]> {
-    // TODO
     let hetMateriaal: Materiaal[] = []
     for (let materiaalItem of materiaal) {
       const m = new Materiaal()

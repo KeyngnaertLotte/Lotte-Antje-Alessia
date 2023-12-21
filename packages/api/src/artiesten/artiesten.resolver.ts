@@ -24,7 +24,7 @@ export class ArtiestenResolver {
     return this.artiestenService.create(createArtiestenInput)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Query(() => [Artiest], { name: 'artiesten' })
   findAll(@FirebaseUser() currentUser: UserRecord) {
     console.log(currentUser)
@@ -71,7 +71,7 @@ export class ArtiestenResolver {
     return this.artiestenService.update(uid, updateArtiestenInput)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   UpdateAgenda(
     @Args('AgendaInput') agendaInput: UpdateAgendaInput,
@@ -80,7 +80,6 @@ export class ArtiestenResolver {
     return this.artiestenService.UpdateAgenda(uid,agendaInput)
   }
 
-  
   @Query(() => [LineUp], { name: 'lineUp' })
   GetLineUp() {
     return this.artiestenService.getLineUp()

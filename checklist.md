@@ -38,8 +38,8 @@
 
 ## Foutcontrole
 
-- [ ] Het crashen van de applicatie wordt voorkomen door het gebruik van een try/catch-structuur met gedetailleerde logging.
-- [ ] Foutboodschappen worden altijd in JSON-formaat naar de frontend gestuurd.
+- [x] Het crashen van de applicatie wordt voorkomen door het gebruik van een try/catch-structuur met gedetailleerde logging.
+- [x] Foutboodschappen worden altijd in JSON-formaat naar de frontend gestuurd.
 
 ## Source Controle
 
@@ -53,7 +53,7 @@
 
 ## Testing
 
-- [ ] Er zijn unittests en integratietests voor de API.
+- [x] Er zijn unittests en integratietests voor de API.
 - [ ] Testing maakt deel uit van GitHub Actions / deployment.
 
 ## Extra Features
@@ -68,7 +68,7 @@
 - [x] De frontend heeft een doordacht ontwerp dat een probleem oplost.
 - [x] De gebruikerservaring en gebruikersinterface zijn van hoge kwaliteit.
 - [x] Er worden correcte design-patterns toegepast.
-- [ ] Er is aandacht besteed aan toegankelijkheid (a11y).
+- [x] Er is aandacht besteed aan toegankelijkheid (a11y).
 
 ## Framework
 
@@ -83,7 +83,7 @@
 
 - [x] Tailwind CSS of UnoCSS wordt gebruikt voor styling.
 - [ ] Er zijn ghosts, skeletons of loading states voor een betere gebruikerservaring.
-- [ ] Input-validatie en foutmeldingen zijn geïmplementeerd.
+- [x] Input-validatie en foutmeldingen zijn geïmplementeerd.
 
 ## PWA (Progressive Web App)
 
@@ -100,8 +100,8 @@
 
 ## Development Setup
 
-- [ ] CodeClimate wordt gebruikt voor code testing en reviews.
-- [ ] Npm-packages worden op een correcte manier gebruikt, zonder onnodige packages en met juiste flags.
+- [x] CodeClimate wordt gebruikt voor code testing en reviews.
+- [x] Npm-packages worden op een correcte manier gebruikt, zonder onnodige packages en met juiste flags.
 
 ## Staging / Deployment
 

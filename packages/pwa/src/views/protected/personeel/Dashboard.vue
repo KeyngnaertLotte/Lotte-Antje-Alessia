@@ -27,9 +27,9 @@ import { provideApolloClient } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
 import useFirebase from '@/composables/useFirebase'
-const { firebaseUser, logout } = useFirebase()
+const { firebaseUser } = useFirebase()
 firebaseUser.value?.getIdToken().then(token => {
-  console.log(`{"Authorization": "Bearer ${token}"}`)
+  // console.log(`{"Authorization": "Bearer ${token}"}`)
 })
 
 const { customUser } = useCustomUser()
@@ -61,19 +61,19 @@ export default {
 
     const { onResult, refetch } = useQuery(GET_PERSONEEL_BY_UID, { uid })
     const getPersoneelInfo = async () => {
-      console.log('uid:', uid)
+      // console.log('uid:', uid)
       try {
         onResult(result => {
           if (result.data) {
-            console.log('Data:', result.data)
+            // console.log('Data:', result.data)
             personeelInfo.value = result.data // Update the ref with the fetched data
-            console.log(
-              'personeelInfo:',
-              personeelInfo.value.personeelByUid.achternaam,
-            )
+            // console.log(
+            //   'personeelInfo:',
+            //   personeelInfo.value.personeelByUid.achternaam,
+            // )
 
             takenlijst.value = personeelInfo.value.personeelByUid.takenlijst
-            console.log('takenlijst:', takenlijst.value)
+            // console.log('takenlijst:', takenlijst.value)
           }
         })
       } catch (error) {

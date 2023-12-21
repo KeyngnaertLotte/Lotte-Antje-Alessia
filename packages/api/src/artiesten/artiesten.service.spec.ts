@@ -5,7 +5,6 @@ import { Artiest } from './entities/artiesten.entity'
 import { getRepositoryToken } from '@nestjs/typeorm'
 import {
   artiestStub,
-  benodigdhedenStub,
   createartiestInputStub,
   materiaalStub,
   resultMateriaalStub,
@@ -14,7 +13,6 @@ import { TakenService } from 'src/taken/taken.service'
 import { MateriaalService } from 'src/materiaal/materiaal.service'
 import { CreateArtiestenInput } from './dto/create-artiesten.input'
 import { UsersService } from 'src/users/users.service'
-import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 
 describe('ArtiestenService', () => {
   let service: ArtiestenService

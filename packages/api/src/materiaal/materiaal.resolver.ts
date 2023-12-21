@@ -2,7 +2,6 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql'
 import { MateriaalService } from './materiaal.service'
 import { Materiaal } from './entities/materiaal.entity'
 import { CreateMateriaalInput } from './dto/create-materiaal.input'
-import { UpdateMateriaalInput } from './dto/update-materiaal.input'
 import { UseGuards } from '@nestjs/common'
 import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
 import { UpdateTakenInput } from 'src/taken/dto/update-taken.input'
@@ -37,12 +36,13 @@ export class MateriaalResolver {
     return this.materiaalService.findAllCategories()
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   removeTaak(@Args('id', { type: () => String }) id: string) {
     return this.materiaalService.remove(id)
   }
 
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   updateTaken(
     @Args('updateTakenInput') updateTakenInput: UpdateTakenInput,
@@ -51,6 +51,7 @@ export class MateriaalResolver {
     return this.materiaalService.updateTaak(id, updateTakenInput)
   }
 
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   createTaakAdmin(
     @Args('createTakenInput') createTakenInput: UpdateTakenInput,

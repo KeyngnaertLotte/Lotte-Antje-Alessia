@@ -42,7 +42,7 @@ export class BezoekersResolver {
     return this.bezoekersService.findOneByUid(uid)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Query(() => [FavArtiest], { name: 'bezoekersFavorite' })
   findFavoArtiestsByUid(
     @Args('uid', { type: () => String }) uid: string,
@@ -77,7 +77,7 @@ export class BezoekersResolver {
     return this.bezoekersService.addSaldo(uid, aantal)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Mutation(() => Bezoeker)
   removeSaldoFromBezoeker(
     @Args('uid', { type: () => String }) uid: string,

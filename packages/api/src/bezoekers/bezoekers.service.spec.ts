@@ -4,7 +4,6 @@ import { getRepositoryToken } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Bezoeker } from './entities/bezoeker.entity'
 import { createBezoekerInputStub, bezoekerStub } from './stubs/bezoekers.stub'
-import { CreateBezoekerInput } from './dto/create-bezoeker.input'
 
 describe('BezoekersService', () => {
   let service: BezoekersService
