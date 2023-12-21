@@ -60,9 +60,11 @@ const onDetect = (result: any) => {
 
 const scanButtonClick = () => {
   // Access the input value using the ref
+  console.log('Show Camera:', enteredValue)
   enteredValue = price.value
   // console.log('Entered Value:', enteredValue)
   console.log('Selected Place:', selectedPlace.value)
+  console.log('Price:', price.value)
   showCamera.value = true
 }
 </script>
@@ -77,7 +79,7 @@ const scanButtonClick = () => {
         <h1 class="text-2xl font-body font-bold text-custom-orange my-4">Geef een bedrag in:</h1>
         <div class="flex flex-row w-full items-center justify-center mb-4">
           <p class="font-pop text-4xl text-custom-darkGreen">€</p>
-          <input type="number" name="amountInput" required v-model="enteredValue" min="0.01" step="0.01" class="block font-pop mx-2 w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" />
+          <input type="number" name="amountInput" required v-model="price" min="0.01" step="0.01" class="block font-pop mx-2 w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" />
         </div>
         <div class="w-full flex items-center justify-center">
           

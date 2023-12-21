@@ -81,7 +81,7 @@
         class="mt-1 font-pop inline-block rounded text-center text-md text-custom-darkGreen focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         to="/auth/login"
       >
-        Already have an account?
+        Heb je al een account?
       </RouterLink>
     </div>
     </div>
