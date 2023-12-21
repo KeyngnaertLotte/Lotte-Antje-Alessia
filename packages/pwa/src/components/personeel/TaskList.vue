@@ -8,7 +8,7 @@
         @click="handleClick"
         class="focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
       >
-        <PlusCircle class="stroke-custom-blue" />
+        <PlusCircle class="stroke-custom-purple" />
       </button>
     </div>
     <div class="mt-3" v-for="taak in takenlijst">
