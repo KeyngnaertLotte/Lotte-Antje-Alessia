@@ -136,7 +136,15 @@ const types = [
   'Loges',
 ]
 
-const plaatsen = ['Antje', 'Lotte', 'Allesia', 'Bar', 'Toiletten', 'loges']
+const plaatsen = [
+  'Antje',
+  'Lotte',
+  'Aléssia',
+  'Bar',
+  'Toiletten',
+  'Loges',
+  'Magazijn',
+]
 
 const categorieen = [
   'geluid',
@@ -153,7 +161,6 @@ const categorieen = [
   'decoratie',
 ]
 
-//ref list with strings
 let listMateriaal = ref<string[]>([])
 
 export default {
@@ -230,14 +237,11 @@ export default {
     deadline.value = props.taskData.deadline
     materiaal.value = props.taskData.materiaal
 
-    // const currentData = props.taskData
-
     return {
       closeModal,
       types,
       plaatsen,
       categorieen,
-      // currentData,
       deleteTask,
       updateTask,
       naam,
