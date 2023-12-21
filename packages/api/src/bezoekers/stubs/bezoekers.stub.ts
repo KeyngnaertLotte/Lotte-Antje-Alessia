@@ -14,5 +14,6 @@ export const bezoekerStub = (): Bezoeker => {
     b.naam = 'test';
     b.saldo = 0;
     b.favoartiest = [];
+    b.transacties = [];
     return b;
 }
