@@ -99,7 +99,7 @@ const router = createRouter({
         },
         {
           path: 'lijst-taken',
-          component: () => import('../views/protected/admin/allTasks.vue'),
+          component: () => import('../views/protected/admin/AllTasks.vue'),
         }
       ],
     },
