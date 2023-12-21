@@ -74,7 +74,7 @@ export default {
           }
           categorizedItems[category].push(item)
         })
-        console.log('categorizedItems: ', categorizedItems)
+        // console.log('categorizedItems: ', categorizedItems)
         return categorizedItems
       }
       return null

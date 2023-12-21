@@ -97,19 +97,19 @@ const takenlijst = ref<any | null>(null)
 
 const { onResult, refetch } = useQuery(GET_PERSONEEL_BY_UID, { uid })
 const getPersoneelInfo = async () => {
-  console.log('uid:', uid)
+  // console.log('uid:', uid)
   try {
     onResult(result => {
       if (result.data) {
-        console.log('Data:', result.data)
-        personeelInfo.value = result.data // Update the ref with the fetched data
-        console.log(
-          'personeelInfo:',
-          personeelInfo.value.personeelByUid.achternaam,
-        )
+        // console.log('Data:', result.data)
+        // personeelInfo.value = result.data // Update the ref with the fetched data
+        // console.log(
+        //   'personeelInfo:',
+        //   personeelInfo.value.personeelByUid.achternaam,
+        // )
 
         takenlijst.value = personeelInfo.value.personeelByUid.takenlijst
-        console.log('takenlijst:', takenlijst.value)
+        // console.log('takenlijst:', takenlijst.value)
       }
     })
   } catch (error) {
@@ -121,20 +121,20 @@ getPersoneelInfo()
 
 
 const taakDone = (taakId: string) => {
-  console.log('taak done')
+  // console.log('taak done')
   currentTaakId.value = taakId
   showTaskDonePopup.value = true
 }
 
 const deleteTask = () => {
   const taakId = currentTaakId.value
-  console.log('delete task: ', taakId)
+  // console.log('delete task: ', taakId)
 
   const { mutate: removeTaak } = useMutation(REMOVE_TASK_FROM_LIST)
 
   removeTaak({ id: taakId, uid: uid })
-  console.log('taakId is: ', taakId)
-  console.log('taak verwijderd')
+  // console.log('taakId is: ', taakId)
+  // console.log('taak verwijderd')
   showTaskDonePopup.value = false
   refetch()
 }

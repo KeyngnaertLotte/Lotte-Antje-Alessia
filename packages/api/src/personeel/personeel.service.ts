@@ -44,7 +44,7 @@ export class PersoneelService {
 
     // zoek taak op
     const taak = await this.takenService.findOneById(taakId)
-    console.log('taak ', taak)
+    // console.log('taak ', taak)
 
     // push taak naar takenlijst
     const newTaak = new CreateTaakInput()
@@ -67,13 +67,13 @@ export class PersoneelService {
     const personeel: Personeel[] = await this.personeelRepository.find({
       where: { uid: uid },
     })
-    console.log(personeel)
+    // console.log(personeel)
 
     const updated = await this.personeelRepository.update(
       { id: personeel[0].id },
       { type: type },
     )
-    console.log(updated)
+    // console.log(updated)
 
     return `personeel met uid ${uid} geupdate`
   }
@@ -84,7 +84,7 @@ export class PersoneelService {
 
   findOneById(id: string): Promise<Personeel> {
     const obj = new Object(id)
-    console.log(obj)
+    // console.log(obj)
     // @ts-ignore
     return this.personeelRepository.findOne({ _id: new ObjectId(id) })
   }
@@ -104,19 +104,19 @@ export class PersoneelService {
       if (!taakObj) throw new Error('Taak niet gevonden')
       else {
 
-        console.log('personeelObj', personeelObj.takenlijst[0].id)
-        console.log('taakObj', taakObj.id)
+        // console.log('personeelObj', personeelObj.takenlijst[0].id)
+        // console.log('taakObj', taakObj.id)
 
         const taakItem = personeelObj.takenlijst.find(
           taak => taak.id && String(taak.id) === String(taakObj.id),
         )
 
-        console.log('taakItem', taakItem)
+        // console.log('taakItem', taakItem)
 
         // delete taakItem uit takenlijst
         personeelObj.takenlijst.splice(personeelObj.takenlijst.indexOf(taakItem), 1)
 
-        console.log('personeelObj takenlijst', personeelObj.takenlijst)
+        // console.log('personeelObj takenlijst', personeelObj.takenlijst)
 
         // save personeel
         await this.personeelRepository.save(personeelObj)
@@ -147,8 +147,8 @@ export class PersoneelService {
       const uservoor = usernaam.split(' ')[0]
       let userachter = usernaam.split(' ').slice(1).join(' ')
 
-      console.log(uservoor)
-      console.log(userachter)
+      // console.log(uservoor)
+      // console.log(userachter)
 
       if (updatePersoneel?.voornaam) {
         const naam = updatePersoneel?.voornaam + ' ' + userachter
