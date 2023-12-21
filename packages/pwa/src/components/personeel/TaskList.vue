@@ -161,20 +161,18 @@ import { ref, getCurrentInstance } from 'vue'
 import { PlusCircle, X } from 'lucide-vue-next'
 import { useMutation } from '@vue/apollo-composable'
 import { REMOVE_TAAK_BIJ_PERSONEEL } from '@/graphql/personeel.mutation'
-import { CREATE_TASK, REMOVE_TASK_FROM_LIST} from '@/graphql/taak.mutation'
+import { CREATE_TASK, REMOVE_TASK_FROM_LIST } from '@/graphql/taak.mutation'
 import useFirebase from '@/composables/useFirebase'
 import useCustomUser from '@/composables/useCustomUser'
+import { useQuery } from '@vue/apollo-composable'
+import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
 
 import useLanguage from '@/composables/useLanguage'
 import { useI18n } from 'vue-i18n'
 import { SUPPORTED_LOCALES } from '@/bootstrap/i18n'
 import { stringify } from 'querystring'
 
-const props = defineProps({
-  takenlijst: {
-    type: Array as () => Array<any>,
-  },
-})
+
 
 const { customUser } = useCustomUser()
 const uid = customUser.value?.uid
@@ -209,6 +207,7 @@ const openTaskDonePopup = (taakId: string) => {
 
 const closeTaskDonePopup = () => {
   showTaskDonePopup.value = false
+  refetch()
 }
 
 const hideMessage = () => {
@@ -257,6 +256,34 @@ const addTask = () => {
   }
 }
 
+const personeelInfo = ref<any | null>(null)
+const takenlijst = ref<any | null>(null)
+
+const { onResult, refetch } = useQuery(GET_PERSONEEL_BY_UID, { uid })
+const getPersoneelInfo = async () => {
+  console.log('uid:', uid)
+  try {
+    onResult(result => {
+      if (result.data) {
+        console.log('Data:', result.data)
+        personeelInfo.value = result.data // Update the ref with the fetched data
+        console.log(
+          'personeelInfo:',
+          personeelInfo.value.personeelByUid.achternaam,
+        )
+
+        takenlijst.value = personeelInfo.value.personeelByUid.takenlijst
+        console.log('takenlijst:', takenlijst.value)
+      }
+    })
+  } catch (error) {
+    console.error('Error fetching personeel info:', error)
+  }
+}
+
+getPersoneelInfo()
+
+
 const taakDone = (taakId: string) => {
   console.log('taak done')
   currentTaakId.value = taakId
@@ -274,6 +301,7 @@ const deleteTask = () => {
   console.log('taakId is: ', taakId)
   console.log('taak verwijderd')
   showTaskDonePopup.value = false
+  refetch()
 }
 
 const validateAantalInput = () => {
