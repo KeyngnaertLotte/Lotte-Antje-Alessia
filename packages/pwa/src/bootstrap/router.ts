@@ -95,7 +95,7 @@ const router = createRouter({
         },
         {
           path: 'artiesten-agenda',
-          component: () => import('../views/protected/admin/artistsAgendas.vue'),
+          component: () => import('../views/protected/admin/ArtistsAgendas.vue'),
         },
         {
           path: 'lijst-taken',

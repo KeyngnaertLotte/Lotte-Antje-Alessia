@@ -36,8 +36,8 @@ import EventPopup from '@/components/admin/eventPopup.vue';
 import { useQuery } from '@vue/apollo-composable'
 import { ALL_Artiesten } from '@/graphql/artiest.query'
 import { Pencil } from 'lucide-vue-next'
-import agendaTimes from '@/components/admin/agendaTimes.vue'
-import artistAgenda from '@/components/admin/artistAgenda.vue'
+import agendaTimes from '@/components/admin/AgendaTimes.vue'
+import artistAgenda from '@/components/admin/ArtistAgenda.vue'
 import { computed, ref } from 'vue'
 import EventPopup from '@/components/admin/eventPopup.vue'
 
