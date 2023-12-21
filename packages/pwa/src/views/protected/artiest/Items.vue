@@ -7,7 +7,7 @@
       <div class="w-9/10 flex-col items-center justify-center relative h-full">
         <button
           @click="toggleShow('benodigdheden')"
-          class="mt-4 p-2 w-full bg-custom-brown text-white rounded-lg border-1 flex justify-between focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+          class="mt-4 p-2 w-full bg-custom-brown text-white rounded-lg border-1 flex justify-between focus:outline-none focus-visible:border-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange focus-visible:ring-2"
         >
           <p>Bestelde items</p>
           <ChevronDown />
