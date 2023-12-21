@@ -27,7 +27,7 @@
         if (result.data) {
         console.log('Data:', result.data);
         bezoekerInfo.value = result.data;
-        bezoekerInfoLoaded.value = true; // Data is now available
+        bezoekerInfoLoaded.value = true; 
         }
     });
 
