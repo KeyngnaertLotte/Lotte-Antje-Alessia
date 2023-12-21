@@ -18,7 +18,7 @@
           <input
             type="text"
             v-model="data.voornaam" required
-            class="block font-pop mx-2 w-full border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+            class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
         <div class="flex flex-col w-full mb-6">
@@ -26,14 +26,14 @@
           <input
             type="text"
             v-model="data.achternaam" required
-            class="block font-pop mx-2 w-full border-b-2 border-custom-darkGreen p-1 focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+            class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
         <div class="flex flex-col w-full">
           <p for="">Type</p>
           <div class="flex flex-row justify-between items-center mt-1">
             <select
-              class="p-2 w-full border-custom-darkGreen rounded-lg border-2 flex justify-between focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+              class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
               v-model="data.type"
             >
               <option v-for="option in types" :key="option" :value="option">
