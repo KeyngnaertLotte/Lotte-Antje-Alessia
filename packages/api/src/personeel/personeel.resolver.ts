@@ -47,7 +47,7 @@ export class PersoneelResolver {
   }
 
   // create takenlijst
-  @Mutation(() => Personeel, { name: 'deleteTaakInput' })
+  @Mutation(() => String)
   DeleteTaakInput(
     @Args('taakId')
     taakId: string,
