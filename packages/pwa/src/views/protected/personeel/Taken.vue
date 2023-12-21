@@ -18,7 +18,6 @@
               'bg-custom-orange': taak.status === false,
               'hover:bg-custom-brown': taak.status === false,
               'bg-gray-400': taak.status === true,
-              'hover:bg-gray-500': taak.status === true,
             }"
             :disabled="taak.status === true"
           >
@@ -52,8 +51,6 @@ export default {
     const { onResult: personeelResult } = useQuery(GET_PERSONEEL_BY_UID, {
       uid: customUser.value?.uid,
     })
-
-    
 
     personeelResult(result => {
       if (result.data) {
