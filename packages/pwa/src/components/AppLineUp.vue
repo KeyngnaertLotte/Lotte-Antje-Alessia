@@ -107,8 +107,10 @@ export default {
       if (result) {
         isBezoeker.value = true
       }
+
       isModalOpen.value = true
       artist.value = artistName
+      console.log(artist.value)
     }
 
     const isArtistInFavorites = computed(() => {
