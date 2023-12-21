@@ -14,7 +14,7 @@ export default defineConfig({
         purple: '#777DA7',
         orange: '#D5573B',
         brown: '#885053',
-        lightPurple : '9BA0C2',
+        lightPurple : '#9BA0C2',
       }
     },
     fontFamily: {
