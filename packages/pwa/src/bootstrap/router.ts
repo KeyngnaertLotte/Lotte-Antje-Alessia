@@ -51,7 +51,7 @@ const router = createRouter({
       children: [
         {
           path: 'dashboard',
-          component: () => import('../views/protected/artiest/dashboard.vue'),
+          component: () => import('../views/protected/artiest/Dashboard.vue'),
         },
         {
           path: 'items',

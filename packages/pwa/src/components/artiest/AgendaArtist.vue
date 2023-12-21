@@ -16,7 +16,7 @@
           'm-4',
           'mt-0',
           'rounded-lg',
-          `bg-[#94C9A9]`,
+          `bg-custom-darkGreen`,
         ]"
       >
         <p class="font-bold text-white text-2xl font-body self-start">

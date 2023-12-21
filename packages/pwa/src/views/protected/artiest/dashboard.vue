@@ -10,8 +10,6 @@
 </template>
 
 <script lang="ts">
-import { useQuery } from '@vue/apollo-composable'
-import { ALL_Artiesten } from '@/graphql/artiest.query'
 import AppHeader from '@/components/AppHeader.vue'
 import AgendaArtist from '@/components/artiest/AgendaArtist.vue'
 import cardSm from '@/components/generic/CardSm.vue'

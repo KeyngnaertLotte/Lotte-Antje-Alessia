@@ -2,7 +2,6 @@
   <div
     class="col-span-2 row-start-4 row-span-21 bg-white rounded-xl m-6 overflow-hidden relative pt-6 flex flex-col justify-center items-center"
   >
-    <!-- Render the first section if benodigdheden is available -->
     <div v-if="benodigdheden" class="flex flex-col items-center w-full mb-3">
       <div class="w-9/10 flex-col items-center justify-center relative h-full">
         <button
@@ -29,7 +28,6 @@
       </div>
     </div>
 
-    <!-- Render the rest of the content -->
     <div
       v-if="MateriaalByCategorie"
       class="flex flex-col items-center w-full overflow-y-auto h-80%"
@@ -90,7 +88,6 @@
   </div>
 </template>
 
-<!-- ... rest of the code ... -->
 
 <script lang="ts">
 import { ref, computed } from 'vue'
@@ -115,7 +112,6 @@ const {
 
 const { mutate: createItem } = useMutation(CREATE_ITEM)
 const materiaalInfo = ref<any | null>(null)
-// const aantal[item] = ref<number>(0)
 const aantal = ref<Record<string, number>>({})
 const benodigdheden = ref<any | null>(null)
 
@@ -175,9 +171,8 @@ export default {
             uid: uid,
           })
             .then(graphqlresult => {
-              console.log('🎉 new item created in our database')
+              // console.log('🎉 new item created in our database')
               refetch()
-              // reset aantal
               aantal.value[item] = 0
             })
             .catch(error => {
