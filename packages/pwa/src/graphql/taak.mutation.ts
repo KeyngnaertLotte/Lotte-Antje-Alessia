@@ -22,7 +22,7 @@ export const UPDATE_TAAK = gql`
 // voor "alle open taken"
 export const UPDATE_STATUS = gql`
   mutation update($id: String!, $status: Boolean!) {
-    updateTaken(status: $status, id: $id)
+    updateTakenStatus(status: $status, id: $id)
   }
 `
 
