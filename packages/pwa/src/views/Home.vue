@@ -17,7 +17,7 @@
     <img src="../images/bg.png" alt="" class="w-screen" v-else>
   </div>
   <div class="bg-primary">
-    <AppLineUp />
+    <AppLineUp/>
     <AppFooter />
   </div>
 </template>
