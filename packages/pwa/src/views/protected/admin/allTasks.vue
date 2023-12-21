@@ -40,8 +40,8 @@
   import { GET_TAKEN } from '@/graphql/taak.query'
   import { computed, ref } from 'vue'
   import { Pencil, Plus  } from 'lucide-vue-next'
-  import TaskPopup from '@/components/admin/taskPopup.vue'
-  import addTaskPopup from '@/components/admin/addTaskPopup.vue'
+  import TaskPopup from '@/components/admin/TaskPopup.vue'
+  import addTaskPopup from '@/components/admin/AddTaskPopup.vue'
   
   const data = ref<any | null>(null)
   const isEditTaskOpen = ref(false)
