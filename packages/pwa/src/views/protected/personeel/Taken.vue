@@ -43,7 +43,7 @@ import useCustomUser from '@/composables/useCustomUser'
 import { useMutation } from '@vue/apollo-composable'
 
 const takenInfo = ref<any | null>(null)
-
+let refetchFunction: any = null
 export default {
   setup() {
     const { customUser } = useCustomUser()
@@ -53,13 +53,17 @@ export default {
       uid: customUser.value?.uid,
     })
 
+    
+
     personeelResult(result => {
       if (result.data) {
         console.log('personeelResult: ', result.data.personeelByUid.type)
         const type = result.data.personeelByUid.type
-        const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
+        const { onResult, refetch } = useQuery(GET_TAAK_BY_TYPE, {
           type,
         })
+        refetchFunction = refetch
+
         onResult(result => {
           if (result.data) {
             console.log('TYPE: ', type)
@@ -87,9 +91,7 @@ export default {
         status: true,
       })
       console.log('taak geupdate')
-
-      // reload de pagina
-      location.reload()
+      refetchFunction()
     }
 
     return {
