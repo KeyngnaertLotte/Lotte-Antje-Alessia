@@ -67,10 +67,9 @@ import { useQuery } from '@vue/apollo-composable'
 import { GET_PERSONEEL } from '@/graphql/personeel.query'
 import { UPDATE_TYPE, DELETE_PERSONEEL } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
-import { ref } from 'vue'
+import { onActivated, onBeforeMount, onMounted, onUpdated, ref } from 'vue'
 import { Pencil } from 'lucide-vue-next'
 import personeelPopup from '@/components/admin/personeelPopup.vue'
-import { getAuth } from 'firebase/auth'
 import notificationCard from '@/components/admin/notificationCard.vue'
 
 const isModalOpen = ref(false)
@@ -78,6 +77,11 @@ const selectedItem = ref<any | null>(null)
 
 // const { error, result: bezoekerResult, loading, refetch, onResult } =  useQuery(GET_BEZOEKER_BY_UID, { uid });
 const { error, onResult, refetch } = useQuery(GET_PERSONEEL)
+
+onMounted(() => {
+  console.log('mounted')
+  refetch()
+})
 
 interface Personeel {
   id: string

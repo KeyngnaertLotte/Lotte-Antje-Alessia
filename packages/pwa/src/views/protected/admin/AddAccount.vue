@@ -5,14 +5,10 @@
   >
     <h1 class="text-2xl font-bold mb-4 font-body">Maak een account</h1>
 
-    <div v-if="errorMessage">
-      <p class="text-red-600">{{ errorMessage }}</p>
-    </div>
-
     <div class="">
       <label
         for="rol"
-        class="text-md block font-semibold  text-gray-700 dark:text-gray-200"
+        class="text-md block font-semibold text-gray-700 dark:text-gray-200"
       >
         Rol
       </label>
@@ -37,7 +33,9 @@
         name="nickname"
         id="nickname"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-        v-model="newUser.name" required
+        v-model="newUser.name"
+        required
+        placeholder="Artiestennaam"
       />
     </div>
 
@@ -47,14 +45,16 @@
           for="voornaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-        Voornaam
+          Voornaam
         </label>
         <input
           type="text"
           name="voornaam"
           id="voornaam"
           class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-          v-model="newUser.voornaam" required
+          v-model="newUser.voornaam"
+          required
+          placeholder="Voornaam"
         />
       </div>
       <div class="flex flex-col justify-center items-start w-1/2">
@@ -62,15 +62,17 @@
           for="achternaam"
           class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
         >
-        Achternaam
+          Achternaam
         </label>
         <input
           type="text"
           name="achternaam"
           id="achternaam"
           class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-          v-model="newUser.achternaam" required
-        /> 
+          v-model="newUser.achternaam"
+          required
+          placeholder="Achternaam"
+        />
       </div>
     </div>
 
@@ -79,14 +81,16 @@
         for="email"
         class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
       >
-        Email address
+        E-mailadres
       </label>
       <input
         type="email"
         name="email"
         id="email"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-        v-model="newUser.email" required
+        v-model="newUser.email"
+        required
+        placeholder="Example@mail.com"
       />
     </div>
 
@@ -95,14 +99,15 @@
         for="password"
         class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
       >
-        Password
+        Wachtwoord
       </label>
       <input
         type="password"
         name="password"
         id="password"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-        v-model="newUser.password" required
+        v-model="newUser.password"
+        required
       />
     </div>
 
@@ -198,10 +203,20 @@ export default {
                   .then(graphqlresult => {
                     console.log('🎉 new personeel created in our database')
                     console.log(graphqlresult)
+
+                    newUser.name = ''
+                    newUser.voornaam = ''
+                    newUser.achternaam = ''
+                    newUser.email = ''
+                    newUser.password = ''
+                    newUser.role = 'Personeel'
+
+                    alert('Account aangemaakt')
                     //redirect to the home page
                   })
                   .catch(error => {
                     errorMessage.value = error.message
+                    alert('Er is iets misgelopen')
                   })
               }
               if (newUser.role === 'Artiest') {
