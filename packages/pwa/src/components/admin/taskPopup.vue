@@ -1,5 +1,5 @@
 <template>
-  <form submit.prevent="updatePersoneel"
+  <form @submit.prevent="updateTask"
     class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div class="bg-white w-9/10 h-9/10 rounded-lg relative">
@@ -12,7 +12,7 @@
 
       <div class="w-full h-full p-6">
         <h1 class="text-2xl font-bold mb-4 font-body">Pas taak aan</h1>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-2">
           <label for="">Taak naam</label>
           <input
             type="text"
@@ -20,7 +20,7 @@
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" 
           />
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-2">
           <p for="">Type</p>
           <div class="flex flex-row justify-between items-center">
             <div
@@ -40,17 +40,17 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-2">
           <label for="">Plaats</label>
           <select
             required
-            class="bg-gray-200 rounded font-pop p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+            class="bg-gray-200 rounded p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="plaats"
           >
             <option v-for="plaats in plaatsen">{{ plaats }}</option>
           </select>
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-2">
           <label for="">Deadline</label>
           <input
             type="time"
@@ -59,22 +59,22 @@
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-2">
           <label for="">Categorie</label>
           <select
             required
-            class="bg-gray-200 rounded font-pop p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+            class="bg-gray-200 rounded p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="categorie"
             @change="updatedData"
           >
             <option v-for="categorie in categorieen">{{ categorie }}</option>
           </select>
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-2">
           <label for="">Materiaal</label>
           <select
             required
-            class="bg-gray-200 rounded font-pop p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+            class="bg-gray-200 rounded p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="materiaal"
           >
             <option v-for="i in listMateriaal">
@@ -82,7 +82,7 @@
             </option>
           </select>
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-2">
           <label for="">Aantal</label>
           <input
             type="number"
@@ -90,7 +90,7 @@
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
-        <div class="flex flex-row justify-between w-full mt-10">
+        <div class="flex flex-row justify-between w-full">
           <button
             @click="deleteTask"
             class="py-1 bg-gray-200 text-custom-brown my-6 rounded w-1/5 self-end hover:bg-gray-300 focus:outline-none focus-visible:border-custom-orange focus-visible:bg-gray-300 focus-visible:ring-2 focus-visible:ring-custom-orange"
@@ -115,7 +115,6 @@ import { useMutation, useQuery } from '@vue/apollo-composable'
 import { UPDATE_TAAK, REMOVE_TAAK } from '@/graphql/taak.mutation'
 import { ref } from 'vue'
 import { GET_MATERIAAL_BY_CATEGORIE } from '@/graphql/materiaal.query'
-import { CREATE_TASK } from '@/graphql/taak.mutation'
 
 const naam = ref('')
 const type = ref('')

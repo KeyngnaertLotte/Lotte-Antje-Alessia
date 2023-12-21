@@ -1,4 +1,3 @@
-import EventPopup from '@/components/admin/eventPopup.vue';
 <template>
   <div
     class="col-span-2 row-span-22 flex flex-row items-center justify-center"
@@ -8,11 +7,11 @@ import EventPopup from '@/components/admin/eventPopup.vue';
       <h1 class="text-2xl font-bold mb-4 font-body">Agenda alle artiesten</h1>
       <div class="grid grid-rows-1 grid-cols-10 w-full bg-gray-200 mb-4">
         <h2 class="col-span-1"></h2>
-        <h2 class="col-span-3 text-center text-lg font-bold">Antje</h2>
-        <h2 class="col-span-3 text-center text-lg font-bold">Lotte</h2>
-        <h2 class="col-span-3 text-center text-lg font-bold">Aléssia</h2>
+        <h2 class="col-span-3 text-center text-lg font-bold font-body">ANTJE</h2>
+        <h2 class="col-span-3 text-center text-lg font-bold font-body">Lotte</h2>
+        <h2 class="col-span-3 text-center text-lg font-bold font-body">Aléssia</h2>
       </div>
-      <div class="overflow-auto max-h-[80%]">
+      <div class="overflow-auto max-h-8/10">
         <div class="grid grid-rows-35 grid-cols-10">
           <agendaTimes />
           <artistAgenda
@@ -36,9 +35,9 @@ import EventPopup from '@/components/admin/eventPopup.vue';
 import { useQuery } from '@vue/apollo-composable'
 import { ALL_Artiesten } from '@/graphql/artiest.query'
 import { Pencil } from 'lucide-vue-next'
-import agendaTimes from '@/components/admin/agendaTimes.vue'
-import artistAgenda from '@/components/admin/artistAgenda.vue'
-import { computed, ref } from 'vue'
+import agendaTimes from '@/components/admin/AgendaTimes.vue'
+import artistAgenda from '@/components/admin/ArtistAgenda.vue'
+import { ref } from 'vue'
 import EventPopup from '@/components/admin/eventPopup.vue'
 
 const data = ref<any | null>(null)

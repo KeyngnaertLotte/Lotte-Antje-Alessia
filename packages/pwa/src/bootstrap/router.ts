@@ -10,11 +10,6 @@ const router = createRouter({
       path: '/',
       component: () => import('../views/Home.vue'),
     },
-    // delete lang
-    {
-      path: '/lang',
-      component: () => import('../views/Language.vue'),
-    },
 
     {
       path: '/bezoeker',
@@ -30,17 +25,9 @@ const router = createRouter({
           component: () => import('../views/protected/bezoeker/LineUp.vue'),
         },
         {
-          path: 'map',
-          component: () => import('../views/protected/bezoeker/Map.vue'),
-        },
-        {
           path: 'saldo',
           component: () => import('../views/protected/bezoeker/MyCoins.vue'),
         },
-        // {
-        //   path: 'new',
-        //   component: () => import('../views/protected/events/AddEvent.vue'),
-        // },
       ],
     },
 
@@ -51,7 +38,7 @@ const router = createRouter({
       children: [
         {
           path: 'dashboard',
-          component: () => import('../views/protected/artiest/dashboard.vue'),
+          component: () => import('../views/protected/artiest/Dashboard.vue'),
         },
         {
           path: 'items',
@@ -95,11 +82,11 @@ const router = createRouter({
         },
         {
           path: 'artiesten-agenda',
-          component: () => import('../views/protected/admin/artistsAgendas.vue'),
+          component: () => import('../views/protected/admin/ArtistsAgendas.vue'),
         },
         {
           path: 'lijst-taken',
-          component: () => import('../views/protected/admin/allTasks.vue'),
+          component: () => import('../views/protected/admin/AllTasks.vue'),
         }
       ],
     },

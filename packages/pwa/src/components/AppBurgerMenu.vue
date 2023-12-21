@@ -144,23 +144,23 @@ const otherLang = (languages: any) => {
       )
     : languages
 
-  console.log('lijst van talen nu: ', filteredLanguages)
-  console.log('VALUES: ', Object.values(filteredLanguages))
+  // console.log('lijst van talen nu: ', filteredLanguages)
+  // console.log('VALUES: ', Object.values(filteredLanguages))
 
   return Object.values(filteredLanguages) || false
 }
 
 const isShow = (languages: any) => {
   // remove current language from dropdown
-  console.log('customUser:', customUser.value?.locale)
-  console.log('languages:', languages)
+  // console.log('customUser:', customUser.value?.locale)
+  // console.log('languages:', languages)
 
   return showState.value[languages] || false
 }
 
 // set language
 const setLanguage = (selectedLang: any) => {
-  console.log('selectedLang: ', selectedLang)
+  // console.log('selectedLang: ', selectedLang)
 
   const userId = String(customUser.value?.uid)
   const { mutate: setLocale } = useMutation(SET_USER_LOCALE)
@@ -170,19 +170,19 @@ const setLanguage = (selectedLang: any) => {
     key => languages[key as keyof Languages] === selectedLang,
   ) as keyof Languages
 
-  console.log('selectedLangKey: ', selectedLangKey)
+  // console.log('selectedLangKey: ', selectedLangKey)
 
   setLocale({ userId: userId, locale: selectedLangKey })
     .then(graphqlresult => {
-      console.log('🎉 locale changed')
-      console.log(graphqlresult?.data)
+      // console.log('🎉 locale changed')
+      // console.log(graphqlresult?.data)
     })
     .catch(error => {
       console.error(error)
     })
 
   location.reload()
-  console.log('customUser CHANGED to: ', customUser.value?.locale)
+  // console.log('customUser CHANGED to: ', customUser.value?.locale)
 }
 
 const roleMenuList = [
@@ -275,7 +275,7 @@ const menuList = roleMenuList.find(roleMenu => roleMenu.role === props.roleShow)
 menuList?.forEach(element => {})
 
 function toggleVisibility() {
-  emit('toggle-visibility') // Emit event to toggle visibility
+  emit('toggle-visibility') 
 }
 
 const logoutUser = () => {

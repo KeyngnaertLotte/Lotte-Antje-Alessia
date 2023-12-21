@@ -1,5 +1,7 @@
 <template>
-  <div class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
+  <div
+    class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
+  >
     <div class="h-1/2 w-7/8 bg-white rounded-md flex justify-center relative">
       <button
         @click="closeModal"
@@ -7,18 +9,23 @@
       >
         <X class="h-10 w-10 stroke-white" />
       </button>
-      <form @submit.prevent="checkAndCloseModal" class="flex flex-col justify-around items-center h-full">
+      <form
+        @submit.prevent="checkAndCloseModal"
+        class="flex flex-col justify-around items-center h-full"
+      >
         <h1 class="text-3xl font-body font-bold text-custom-orange my-6">
           Voer een bedrag in
         </h1>
         <div class="flex justify-center items-center gap-2 w-3/4">
-          <p class="font-pop text-4xl text-custom-darkGreen">€</p>
+          <p class="text-4xl text-custom-darkGreen">€</p>
           <input
             v-model="amount"
             type="number"
             name="amountInput"
-            required min="0.01" step="0.01"
-            class="block font-pop mx-2 w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+            required
+            min="0.01"
+            step="0.01"
+            class="block mx-2 w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
         <button
@@ -50,34 +57,32 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const amount = ref('');
+    const amount = ref('')
 
     const closeModal = () => {
-      emit('close-modal');
+      emit('close-modal')
     }
 
     const checkAndCloseModal = () => {
-  const saldoValue = parseFloat(amount.value);
-  console.log('Parsed saldoValue:', saldoValue);
+      const saldoValue = parseFloat(amount.value)
+      console.log('Parsed saldoValue:', saldoValue)
 
-  const { mutate: addSaldo } = useMutation(ADD_SALDO);
+      const { mutate: addSaldo } = useMutation(ADD_SALDO)
 
-  if (!isNaN(saldoValue)) {
-    // Ensure that it's a valid number and greater than 0
-    addSaldo({ uid: props.id, saldo: saldoValue })
-      .then((graphqlresult) => {
-        console.log('🎉 new transactie added to Bezoeker');
-        console.log(graphqlresult?.data); // Access the returned data
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    closeModal();
-  } else {
-    console.log('Invalid input: Please enter a valid number greater than 0');
-  }
-};
-
+      if (!isNaN(saldoValue)) {
+        addSaldo({ uid: props.id, saldo: saldoValue })
+          .then(graphqlresult => {
+            console.log('🎉 new transactie added to Bezoeker')
+            console.log(graphqlresult?.data)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+        closeModal()
+      } else {
+        console.log('Invalid input: Please enter a valid number greater than 0')
+      }
+    }
 
     return {
       amount,

@@ -8,13 +8,13 @@
     <div class="">
       <label
         for="rol"
-        class="text-md block font-semibold text-gray-700 dark:text-gray-200"
+        class="text-md block font-semibold text-black"
       >
         Rol
       </label>
       <select
         v-model="newUser.role"
-        class="w-full px-3 py-2 border border-gray-300 rounded mb-4 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+        class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
       >
         <option>Personeel</option>
         <option>Artiest</option>
@@ -24,7 +24,7 @@
     <div v-if="shouldShowArtiestFields" class="">
       <label
         for="nickname"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        class="text-md block font-semibold tracking-wider text-black"
       >
         Artiestennaam
       </label>
@@ -43,7 +43,7 @@
       <div class="flex flex-col justify-center items-start w-1/2 mr-4">
         <label
           for="voornaam"
-          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+          class="text-md block font-semibold tracking-wider text-black"
         >
           Voornaam
         </label>
@@ -60,7 +60,7 @@
       <div class="flex flex-col justify-center items-start w-1/2">
         <label
           for="achternaam"
-          class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+          class="text-md block font-semibold tracking-wider text-black"
         >
           Achternaam
         </label>
@@ -79,7 +79,7 @@
     <div class="">
       <label
         for="email"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        class="text-md block font-semibold tracking-wider text-black"
       >
         E-mailadres
       </label>
@@ -97,7 +97,7 @@
     <div class="">
       <label
         for="password"
-        class="text-md block font-semibold tracking-wider text-gray-700 dark:text-gray-200"
+        class="text-md block font-semibold tracking-wider text-black"
       >
         Wachtwoord
       </label>
@@ -112,7 +112,7 @@
     </div>
 
     <button
-      class="mt-6 w-1/3 rounded-md border-2 bg-custom-orange self-center py-2 px-4 font-semibold text-white hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
+      class="mt-6 w-1/3 font-body rounded-md border-2 bg-custom-orange self-center py-2 px-4  text-white hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
     >
       Registreer
     </button>
@@ -136,7 +136,6 @@ export default {
     const { mutate: addPersoneel } = useMutation(ADD_PERSONEEL)
     const { mutate: addArtiest } = useMutation(ADD_ARTIEST)
     const errorMessage: Ref<string> = ref('')
-    const { push } = useRouter()
 
     const shouldShowArtiestFields = computed(() => newUser.role === 'Artiest')
     const shouldShowPersoneelFields = computed(
@@ -165,16 +164,14 @@ export default {
         return
       }
 
-      // User the register function from the useFirebase composable
+      
       registerAdmin(newUser.name, newUser.email, newUser.password)
         .then((newFireBaseUser: any) => {
-          console.log('🎉 new firebase user created in firebase')
-          console.log(newFireBaseUser)
-          console.log('uid', newFireBaseUser.uid)
+          // console.log('🎉 new firebase user created in firebase')
+          // console.log(newFireBaseUser)
+          // console.log('uid', newFireBaseUser.uid)
 
-          //create user in our own database with the same uid
-          //use the mutation we created in the graphql folder
-          console.log('new user role: ', newUser.role)
+          // console.log('new user role: ', newUser.role)
           if (newUser.role === 'Personeel') {
             newUser.name = newUser.voornaam + ' ' + newUser.achternaam
           } else if (newUser.role === 'Artiest') {
@@ -189,8 +186,8 @@ export default {
             },
           })
             .then(graphqlresult => {
-              console.log('🎉 new user created in our database')
-              console.log(graphqlresult)
+              // console.log('🎉 new user created in our database')
+              // console.log(graphqlresult)
               if (newUser.role === 'Personeel') {
                 addPersoneel({
                   createPersoneelInput: {
@@ -201,8 +198,8 @@ export default {
                   },
                 })
                   .then(graphqlresult => {
-                    console.log('🎉 new personeel created in our database')
-                    console.log(graphqlresult)
+                    // console.log('🎉 new personeel created in our database')
+                    // console.log(graphqlresult)
 
                     newUser.name = ''
                     newUser.voornaam = ''
@@ -212,7 +209,6 @@ export default {
                     newUser.role = 'Personeel'
 
                     alert('Account aangemaakt')
-                    //redirect to the home page
                   })
                   .catch(error => {
                     errorMessage.value = error.message
@@ -227,9 +223,8 @@ export default {
                   },
                 })
                   .then(graphqlresult => {
-                    console.log('🎉 new artiest created in our database')
-                    console.log(graphqlresult)
-                    //redirect to the home page
+                    // console.log('🎉 new artiest created in our database')
+                    // console.log(graphqlresult)
                   })
                   .catch(error => {
                     errorMessage.value = error.message

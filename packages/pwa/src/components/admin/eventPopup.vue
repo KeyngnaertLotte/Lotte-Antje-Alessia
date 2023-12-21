@@ -90,7 +90,6 @@ export default {
       updatedData.taak = selectedEvent.value
       updatedData.podium = selectedPodium.value
       updatedData.tijd = startTime.value + ' - ' + endTime.value
-      console.log("aaaaaaaaaaaaaa", updatedData)
 
       const AgendaInput = {
         id: updatedData.id,
