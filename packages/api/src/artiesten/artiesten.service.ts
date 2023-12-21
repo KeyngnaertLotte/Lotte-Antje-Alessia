@@ -92,7 +92,7 @@ export class ArtiestenService {
       categorie === 'toiletten' ||
       categorie === 'afval'
     ) {
-      type = 'loges'
+      type = 'Loges'
     }
     if (categorie === 'geluid' || categorie === 'instrumenten') {
       type = 'Podium - geluid'
