@@ -17,7 +17,7 @@
           <input
             type="text"
             v-model="naam"
-            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" 
+            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
         <div class="flex flex-col w-full">
@@ -138,7 +138,15 @@ const types = [
   'Loges',
 ]
 
-const plaatsen = ['Antje', 'Lotte', 'Allesia', 'Bar', 'Toiletten', 'loges']
+const plaatsen = [
+  'Antje',
+  'Lotte',
+  'Aléssia',
+  'Bar',
+  'Toiletten',
+  'Loges',
+  'Magazijn',
+]
 
 const categorieen = [
   'geluid',
@@ -155,7 +163,6 @@ const categorieen = [
   'decoratie',
 ]
 
-//ref list with strings
 let listMateriaal = ref<string[]>([])
 
 export default {
@@ -232,14 +239,11 @@ export default {
     deadline.value = props.taskData.deadline
     materiaal.value = props.taskData.materiaal
 
-    // const currentData = props.taskData
-
     return {
       closeModal,
       types,
       plaatsen,
       categorieen,
-      // currentData,
       deleteTask,
       updateTask,
       naam,
