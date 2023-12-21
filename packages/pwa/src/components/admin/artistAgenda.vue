@@ -7,8 +7,8 @@
     @click="handleOpenModal(event)"
   >
     <div class="flex flex-row justify-between w-full p-2">
-      <h3 class="text-md font-bold">{{ artist.naam }}</h3>
-      <p>{{ event.tijd }}</p>
+      <h3 class="font-body font-bold">{{ artist.naam }}</h3>
+      <p class="font-body">{{ event.tijd }}</p>
     </div>
     <p class="w-full p-2 pb-4 text-center">{{ event.taak }}</p>
   </button>
