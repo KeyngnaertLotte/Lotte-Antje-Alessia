@@ -15,7 +15,6 @@ export class UsersService {
   ) {}
 
   create(createUserInput: CreateUserInput) {
-    // return new Error('This action adds a new user')
     const user = new User()
     user.uid = createUserInput.uid
     user.locale = createUserInput.locale ?? 'nl'
@@ -25,24 +24,16 @@ export class UsersService {
   }
 
   createAdmin(createUserAdminInput: CreateUserAdminInput) {
-    // return new Error('This action adds a new user')
-
     const tempRole: Role = createUserAdminInput.role.toLocaleUpperCase() as Role
     const user = new User()
     user.uid = createUserAdminInput.uid
     user.locale = createUserAdminInput.locale ?? 'nl'
     user.role = tempRole ?? Role.BEZOEKER
-    // tempRole ??
     user.naam = createUserAdminInput.naam
     return this.userRepository.save(user)
   }
 
-  // getUsersByRole(role: string): Promise<User[]> {
-  //   return this.userRepository.find({ where: { role: role } })
-  // }
-
   async getUsersArtiestPersoneel(): Promise<User[]> {
-    // const list: User[] = []
     const artiesten = this.userRepository.find({
       where: { role: Role.ARTIEST },
     })
@@ -72,7 +63,6 @@ export class UsersService {
 
   async remove(uid: string) {
     const user = await this.findOneByUid(uid)
-
     getAuth()
       .deleteUser(uid)
       .then(() => {

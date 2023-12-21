@@ -1,5 +1,5 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql'
-import { Column, ObjectIdColumn } from 'typeorm'
+import { ObjectType, Field } from '@nestjs/graphql'
+import { Column } from 'typeorm'
 @ObjectType()
 export class Agenda {
   @Column()

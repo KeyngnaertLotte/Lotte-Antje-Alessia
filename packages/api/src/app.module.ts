@@ -47,14 +47,6 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
             useUnifiedTopology: true, // Disable deprecated warnings
           }
         } else {
-          // return {
-          //   type: 'mongodb',
-          //   url: `mongodb://localhost:27027/api`, // DOCKER
-          //   entities: [__dirname + '/**/*.entity.{js,ts}'],
-          //   synchronize: process.env.NODE_ENV == 'production' ? false : true, // Careful with this in production
-          //   useNewUrlParser: true,
-          //   useUnifiedTopology: true, // Disable deprecated warnings
-          // }
           if (process.env.NODE_ENV == 'dev') {
             return {
               type: 'mongodb',
@@ -76,15 +68,6 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
         }
       },
     }),
-
-    // TypeOrmModule.forRoot({
-    //   type: 'mongodb',
-    //   url: 'mongodb://localhost:27027/api',
-    //   entities: [__dirname + '/**/*.entity.{js,ts}'],
-    //   synchronize: process.env.NODE_ENV == 'production' ? false : true, // Careful with this in production
-    //   useNewUrlParser: true,
-    //   useUnifiedTopology: true, // Disable deprecated warnings
-    // }),
 
     ArtiestenModule,
     BezoekersModule,

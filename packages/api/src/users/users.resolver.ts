@@ -40,14 +40,6 @@ export class UsersResolver {
     return this.usersService.findAll()
   }
 
-  @Query(() => [User])
-  findByRole() {
-    // convert role to Role
-
-    // const roleUpdated = role.toLocaleUpperCase() as Role
-
-    return this.usersService.getUsersArtiestPersoneel()
-  }
 
   @UseGuards(FirebaseGuard)
   @Query(() => User, { name: 'user' })
@@ -61,10 +53,6 @@ export class UsersResolver {
     return this.usersService.findOneByUid(uid)
   }
 
-  // @Query(() => [User], { name: 'usersByRole' })
-  // getByUserRole(@Args('role', { type: () => Role }) role: Role) {
-  //   return this.usersService.getUsersByRole(role)
-  // }
 
   @UseGuards(FirebaseGuard)
   @Mutation(() => User)
@@ -72,16 +60,9 @@ export class UsersResolver {
     return this.usersService.update(updateUserInput.id, updateUserInput)
   }
 
-  // @UseGuards(FirebaseGuard)
-  // @Mutation(() => String)
-  // removeUser(@Args('string', { type: () => String }) uid: string) {
-  //   return this.usersService.remove(uid)
-  // }
-
   @UseGuards(FirebaseGuard)
   @Mutation(() => User, { name: 'setLanguage' })
-  setLanguage(@Args('userId') userId: string, @Args('locale') locale: string){
-    return this.usersService.setLanguage(userId, locale);
+  setLanguage(@Args('userId') userId: string, @Args('locale') locale: string) {
+    return this.usersService.setLanguage(userId, locale)
   }
-  
 }

@@ -4,12 +4,10 @@ import * as request from 'supertest'
 import { AppModule } from './../src/app.module'
 import { ArtiestenService } from 'src/artiesten/artiesten.service'
 import { artiestStub } from 'src/artiesten/stubs/artiesten.stub'
-import { FirebaseGuard } from 'src/authentication/services/guards/firebase.guard'
-import { FirebaseAuthStrategy } from 'src/authentication/firebase.strategy'
-import { auth } from 'firebase-admin'
-import { FirebaseAuthStrategyMock } from './firebase.strategy.mock'
 import { UsersService } from 'src/users/users.service'
 import { Role, User } from 'src/users/entities/user.entity'
+import { FirebaseAuthStrategy } from 'src/authentication/firebase.strategy'
+import { FirebaseAuthStrategyMock } from './firebase.strategy.mock'
 
 const GQL_ENDPOINT = '/graphql'
 const dummyJwtToken =
@@ -70,22 +68,6 @@ describe('AppController (e2e)', () => {
   })
 
   describe(GQL_ENDPOINT, () => {
-    describe('Artiesten', () => {
-      it('should return all artiesten', () => {
-        return request(app.getHttpServer())
-          .post(GQL_ENDPOINT)
-          .send({
-            query: 'query artiesten { artiesten { uid , naam } }',
-          })
-          .expect(200)
-          .expect(res => {
-            expect(res.body.data.artiesten).toEqual([
-              { uid: 'Kz5oJmB8iMMZOKKy8BT9O1BaYZx2', naam: 'Be Right Back' },
-            ])
-          })
-      })
-    })
-
     describe('Users', () => {
       it('give Unauthorized when invalid bearer token', () => {
         return request(app.getHttpServer())

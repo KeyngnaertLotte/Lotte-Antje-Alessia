@@ -47,6 +47,7 @@ export class PersoneelResolver {
   }
 
   // create takenlijst
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   DeleteTaakInput(
     @Args('taakId')
@@ -80,7 +81,7 @@ export class PersoneelResolver {
     return this.personeelService.findOneByUid(uid)
   }
 
-  // @UseGuards(FirebaseGuard)
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   removePersoneel(@Args('string', { type: () => String }) uid: string) {
     return this.personeelService.remove(uid)
@@ -94,21 +95,4 @@ export class PersoneelResolver {
   ) {
     return this.personeelService.update(uid, updatePersoneelInput)
   }
-
-  // update personeel
-  // @Mutation(() => Personeel)
-  // updatePersoneel(
-  //   @Args('updatePersoneelInput') updatePersoneelInput: UpdatePersoneelInput,
-  // ) {
-  //   return this.personeelService.update(
-  //     updatePersoneelInput.id,
-  //     updatePersoneelInput,
-  //   )
-  // }
-
-  // delete personeel
-  // @Mutation(() => Personeel)
-  // removePersoneel(@Args('id', { type: () => Int }) id: number) {
-  //   return this.personeelService.remove(id)
-  // }
 }
