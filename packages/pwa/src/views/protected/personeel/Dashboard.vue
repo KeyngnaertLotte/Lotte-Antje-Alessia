@@ -91,9 +91,6 @@ export default {
       dataFromChild,
       isModalOpen,
       handleCloseModal,
-      // PersoneelLoading,
-      // PersoneelError,
-      // PersoneelData,
     }
   },
 }
