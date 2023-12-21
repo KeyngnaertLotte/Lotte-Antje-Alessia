@@ -35,8 +35,8 @@ export const REMOVE_TAAK = gql`
 
 // voor "alle open taken"
 export const REMOVE_TASK_FROM_LIST = gql`
-  mutation Remove($id: String!) {
-    removeTaak(id: $id)
+  mutation DeleteTaakInput($id: String!, $uid: String!) {
+    DeleteTaakInput(taakId: $id, uid: $uid)
   }
 `
 

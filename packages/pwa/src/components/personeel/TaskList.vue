@@ -163,6 +163,7 @@ import { useMutation } from '@vue/apollo-composable'
 import { REMOVE_TAAK_BIJ_PERSONEEL } from '@/graphql/personeel.mutation'
 import { CREATE_TASK, REMOVE_TASK_FROM_LIST} from '@/graphql/taak.mutation'
 import useFirebase from '@/composables/useFirebase'
+import useCustomUser from '@/composables/useCustomUser'
 
 import useLanguage from '@/composables/useLanguage'
 import { useI18n } from 'vue-i18n'
@@ -174,6 +175,9 @@ const props = defineProps({
     type: Array as () => Array<any>,
   },
 })
+
+const { customUser } = useCustomUser()
+const uid = customUser.value?.uid
 
 const { mutate: createTask } = useMutation(CREATE_TASK)
 
@@ -263,13 +267,10 @@ const deleteTask = () => {
   const taakId = currentTaakId.value
   console.log('delete task: ', taakId)
 
-  const { mutate: removeTaakBijPersoneel } = useMutation(
-    REMOVE_TAAK_BIJ_PERSONEEL,
-  )
   const { mutate: removeTaak } = useMutation(REMOVE_TASK_FROM_LIST)
 
   // removeTaakBijPersoneel({ id: taakId })
-  removeTaak({ id: taakId })
+  removeTaak({ id: taakId, uid: uid })
   console.log('taakId is: ', taakId)
   console.log('taak verwijderd')
   showTaskDonePopup.value = false

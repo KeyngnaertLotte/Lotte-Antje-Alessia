@@ -10,6 +10,7 @@ import { Taak } from 'src/taken/entities/taken.entity'
 import { TakenService } from 'src/taken/taken.service'
 import { CreateTaakInput } from './dto/create-taak.input'
 import { UsersService } from 'src/users/users.service'
+import { MateriaalService } from 'src/materiaal/materiaal.service'
 
 @Injectable()
 export class PersoneelService {
@@ -18,6 +19,7 @@ export class PersoneelService {
     private readonly personeelRepository: Repository<Personeel>,
     private readonly takenService: TakenService,
     private readonly usersService: UsersService,
+    private readonly materiaalService: MateriaalService,
   ) {}
 
   // CREATE personeel
@@ -109,22 +111,6 @@ export class PersoneelService {
       const taakObj = await this.takenService.findOneById(taakId)
       if (!taakObj) throw new Error('Taak niet gevonden')
       else {
-        // delete taak uit takenlijst
-
-        // Find the index of the item with the given taakId in takenlijst
-        // const index = personeelObj.takenlijst.findIndex(
-        //   taak => taak.id && String(taak.id) === String(taakObj.id),
-        // )
-
-        // if (index !== -1) {
-        //   // Remove the item from takenlijst
-        //   personeelObj.takenlijst.splice(index, 1)
-
-        //   console.log('LIJST NA VERWIJDEREN: ', personeelObj.takenlijst)
-
-        //   // Save the updated personeel object
-        //   await this.personeelRepository.save(personeelObj)
-        // }
 
         console.log('personeelObj', personeelObj.takenlijst[0].id)
         console.log('taakObj', taakObj.id)
@@ -144,7 +130,7 @@ export class PersoneelService {
         await this.personeelRepository.save(personeelObj)
 
         // delete taak uit grote takenlijst
-        this.takenService.remove(taakId)
+        this.materiaalService.remove(taakId)
 
         return "Taak verwijderd uit personeelslijst en grote takenlijst"
       }
