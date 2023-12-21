@@ -1,5 +1,5 @@
 <template>
-  <div
+  <form submit.prevent="updatePersoneel"
     class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div class="bg-white w-9/10 h-9/10 rounded-lg relative">
@@ -16,7 +16,7 @@
           <label for="">Taak naam</label>
           <input
             type="text"
-            v-model="naam"
+            v-model="naam"  required
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" 
           />
         </div>
@@ -43,8 +43,7 @@
         <div class="flex flex-col w-full">
           <label for="">Plaats</label>
           <select
-            name=""
-            id=""
+            required
             class="bg-gray-200 rounded font-pop p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="plaats"
           >
@@ -55,15 +54,15 @@
           <label for="">Deadline</label>
           <input
             type="time"
-            v-model="deadline"
+            pattern="^(?:[01]\d|2[0-3]):[0-5]\d$"
+            v-model="deadline" required
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
         <div class="flex flex-col w-full">
           <label for="">Categorie</label>
           <select
-            name=""
-            id=""
+            required
             class="bg-gray-200 rounded font-pop p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="categorie"
             @change="updatedData"
@@ -74,8 +73,7 @@
         <div class="flex flex-col w-full">
           <label for="">Materiaal</label>
           <select
-            name=""
-            id=""
+            required
             class="bg-gray-200 rounded font-pop p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             v-model="materiaal"
           >
@@ -88,7 +86,7 @@
           <label for="">Aantal</label>
           <input
             type="number"
-            v-model="aantal"
+            v-model="aantal" required
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
@@ -100,7 +98,7 @@
             DELETE
           </button>
           <button
-            @click="updateTask"
+            type="submit"
             class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
           >
             UPDATE
@@ -108,7 +106,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script lang="ts">
@@ -138,7 +136,15 @@ const types = [
   'Loges',
 ]
 
-const plaatsen = ['Antje', 'Lotte', 'Allesia', 'Bar', 'Toiletten', 'loges']
+const plaatsen = [
+  'Antje',
+  'Lotte',
+  'Aléssia',
+  'Bar',
+  'Toiletten',
+  'Loges',
+  'Magazijn',
+]
 
 const categorieen = [
   'geluid',
@@ -155,7 +161,6 @@ const categorieen = [
   'decoratie',
 ]
 
-//ref list with strings
 let listMateriaal = ref<string[]>([])
 
 export default {
@@ -232,14 +237,11 @@ export default {
     deadline.value = props.taskData.deadline
     materiaal.value = props.taskData.materiaal
 
-    // const currentData = props.taskData
-
     return {
       closeModal,
       types,
       plaatsen,
       categorieen,
-      // currentData,
       deleteTask,
       updateTask,
       naam,

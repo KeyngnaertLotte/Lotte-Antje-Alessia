@@ -7,10 +7,6 @@
         </div>
     </div>
 
-    <!-- <div v-if="error">
-      <p class="text-red-600">{{ error.message }}</p>
-    </div> -->
-
     <div class="row-start-6 row-span-full bg-white w-full h-full rounded-t-[3rem] p-6 flex flex-col  items-center justify-around ">
       <h1 class="text-5xl font-body font-bold text-custom-orange">Log in</h1>
       <div class="mt-6 w-full">

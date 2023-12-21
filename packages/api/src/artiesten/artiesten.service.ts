@@ -59,7 +59,6 @@ export class ArtiestenService {
     )
 
     if (itemExists) {
-      console.log('item exists', itemExists)
       itemExists.aantal = itemExists.aantal + materiaal.aantal
       // return this.artiestRepository.save(currentArtiest)
     } else {
@@ -92,7 +91,7 @@ export class ArtiestenService {
       categorie === 'toiletten' ||
       categorie === 'afval'
     ) {
-      type = 'loges'
+      type = 'Loges'
     }
     if (categorie === 'geluid' || categorie === 'instrumenten') {
       type = 'Podium - geluid'
@@ -110,11 +109,10 @@ export class ArtiestenService {
     }
     newTaak.type = type
 
-    console.log(newTaak)
-
     await this.takenService.create(newTaak)
+    await this.artiestRepository.save(currentArtiest)
 
-    return this.artiestRepository.save(currentArtiest)
+    return currentArtiest
   }
 
   findAll() {

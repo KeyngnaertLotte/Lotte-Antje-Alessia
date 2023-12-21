@@ -4,6 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Bezoeker } from './entities/bezoeker.entity'
 import { createBezoekerInputStub, bezoekerStub } from './stubs/bezoekers.stub'
+import { CreateBezoekerInput } from './dto/create-bezoeker.input'
 
 describe('BezoekersService', () => {
   let service: BezoekersService
@@ -17,6 +18,7 @@ describe('BezoekersService', () => {
           provide: getRepositoryToken(Bezoeker),
           useValue: {
             save: jest.fn().mockResolvedValue(bezoekerStub()),
+            findOneByOrFail: jest.fn().mockResolvedValue(bezoekerStub()),
           },
         },
       ],
@@ -32,7 +34,7 @@ describe('BezoekersService', () => {
     expect(service).toBeDefined()
   })
 
-  describe('create()', () => {
+  describe('create', () => {
     describe('when a bezoeker is created', () => {
       it('should call bezoekerRepo.save()', () => {
         const saveSpy = jest.spyOn(mockBezoekerRepository, 'save')
@@ -41,12 +43,38 @@ describe('BezoekersService', () => {
         expect(saveSpy).toHaveBeenCalledTimes(1)
       })
       it('shoul call bezoekerRepo.save() with the correct params', async() => {
+        const myTestBezoeker: Bezoeker = bezoekerStub()
         const saveSpy = jest.spyOn(mockBezoekerRepository, 'save')
-        const bezoeker = createBezoekerInputStub()
-
-        await service.create(bezoeker)
-        expect(saveSpy).toHaveBeenCalledWith(bezoeker)
+        
+        await service.create(myTestBezoeker)
+        expect(saveSpy).toHaveBeenCalledWith(myTestBezoeker)
+      })
+      it('should return the new bezoeker', async () => {
+        const myTestBezoeker = createBezoekerInputStub()
+        const myBezoekerOutput = bezoekerStub()
+        const r = await service.create(myTestBezoeker)
+        expect(r).toEqual(myBezoekerOutput)
       })
     })
   })
+
+  describe('findOneByUid', () => {
+      it('should call BezoekerRepository.findOne one time', async () => {
+        const findOneSpy = jest.spyOn(mockBezoekerRepository, 'findOneByOrFail')
+        await service.findOneByUid('IOWulnBz2bPXt8maT77b25H8M8N2')
+        expect(findOneSpy).toHaveBeenCalledTimes(1)
+      })
+
+      it('should call BezoekerRepository.findOne with the correct parameters', async () => {
+        const findOneSpy = jest.spyOn(mockBezoekerRepository, 'findOneByOrFail')
+        await service.findOneByUid('IOWulnBz2bPXt8maT77b25H8M8N2')
+        expect(findOneSpy).toHaveBeenCalledWith({ uid: 'IOWulnBz2bPXt8maT77b25H8M8N2' })
+      })
+
+      it('should return the correct bezoeker', async () => {
+        const myBezoeker = bezoekerStub()
+        const r = await service.findOneByUid('IOWulnBz2bPXt8maT77b25H8M8N2')
+        expect(r).toEqual(myBezoeker)
+      })
+    })
 })

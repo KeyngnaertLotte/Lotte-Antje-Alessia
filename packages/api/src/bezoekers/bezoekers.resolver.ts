@@ -27,10 +27,6 @@ export class BezoekersResolver {
     return this.bezoekersService.create(createBezoekerInput)
   }
 
-  // @Query(() => [Bezoeker], { name: 'bezoekers' })
-  // findAll() {
-  //   return this.bezoekersService.findAll();
-  // }
 
   @UseGuards(FirebaseGuard)
   @Query(() => Bezoeker, { name: 'bezoeker', nullable: true })

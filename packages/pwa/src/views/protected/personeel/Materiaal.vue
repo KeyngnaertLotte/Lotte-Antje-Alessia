@@ -1,6 +1,6 @@
 <template>
-  <div class="col-span-2 row-start-4 h-fit">
-    <div v-if="MateriaalByCategorie">
+  <div class="col-span-2 row-start-4 row-span-21 bg-white rounded-xl m-6 overflow-auto pb-6">
+    <div v-if="MateriaalByCategorie" >
       <div
         v-for="categorie in Object.keys(MateriaalByCategorie)"
         :key="categorie"
@@ -8,7 +8,7 @@
       >
         <button
           @click="toggleShow(categorie)"
-          class="mt-4 p-2 w-9/10 border-custom-brown border-1 flex justify-between focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+          class="mt-4 p-2 w-9/10 border-custom-brown rounded-lg border-1 flex justify-between focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         >
           <p>{{ categorie }}</p>
           <ChevronDown class="stroke-custom-brown" />

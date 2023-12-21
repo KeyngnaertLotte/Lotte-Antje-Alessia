@@ -7,11 +7,14 @@ import {
   artiestStub,
   benodigdhedenStub,
   createartiestInputStub,
+  materiaalStub,
+  resultMateriaalStub,
 } from './stubs/artiesten.stub'
 import { TakenService } from 'src/taken/taken.service'
 import { MateriaalService } from 'src/materiaal/materiaal.service'
 import { CreateArtiestenInput } from './dto/create-artiesten.input'
 import { UsersService } from 'src/users/users.service'
+import { CreateBenodigdhedenInput } from './dto/create-benodigdheden.input'
 
 describe('ArtiestenService', () => {
   let service: ArtiestenService
@@ -120,47 +123,21 @@ describe('ArtiestenService', () => {
   })
 
   describe('addMateriaalToArtiest', () => {
-    it('should add new materiaal to artiest', async () => {
-      // Arrange
+    it('should call add new materiaal to artiest 1 time', async () => {
       const saveSpy = jest
         .spyOn(mockArtiestenRepository, 'save')
-        .mockResolvedValue(benodigdhedenStub())
+        .mockResolvedValue(resultMateriaalStub())
+      const artiest = artiestStub()
+      const materiaal = materiaalStub()
+      await service.AddMateriaaltoArtiest(artiest.uid, materiaal)
+      expect(saveSpy).toBeCalledTimes(1)
     })
-
-    // it('should update existing materiaal quantity in artiest', async () => {
-    //   // Arrange
-    //   const uid = 'Kz5oJmB8iMMZOKKy8BT9O1BaYZx2';
-    //   const materiaal: CreateBenodigdhedenInput = {
-    //     item: 'Existing Item',
-    //     aantal: 3,
-    //     categorie: 'Existing Category',
-    //     podium: 'Existing Podium',
-    //     deadline: new Date(),
-    //   };
-
-    //   const findOneByUidSpy = jest.spyOn(service, 'findOneByUid').mockResolvedValue(artiestStub());
-    //   const checkMateriaalSpy = jest.spyOn(service.materiaalService, 'checkMateriaal').mockResolvedValue();
-    //   const saveSpy = jest.spyOn(service.artiestRepository, 'save').mockResolvedValue(artiestStub());
-
-    //   // Act
-    //   await service.addMateriaalToArtiest(uid, materiaal);
-
-    //   // Assert
-    //   expect(findOneByUidSpy).toHaveBeenCalledWith(uid);
-    //   expect(checkMateriaalSpy).toHaveBeenCalledWith(materiaal.item, materiaal.aantal);
-    //   expect(saveSpy).toHaveBeenCalled();
-    // });
-
-    // it('should create new benodigdheden and taken for new materiaal', async () => {
-    //   // Arrange
-    //   const uid = 'Kz5oJmB8iMMZOKKy8BT9O1BaYZx2';
-    //   const materiaal: CreateBenodigdhedenInput = {
-    //     item: 'New Item',
-    //     aantal: 5,
-    //     categorie: 'New Category',
-    //     podium: 'New Podium',
-    //     deadline: new Date(),
-    //   };
-    // });
+    it('should return the updated artiest', async () => {
+      const artiest = artiestStub()
+      const materiaal = materiaalStub()
+      const result = await service.AddMateriaaltoArtiest(artiest.uid, materiaal)
+      const expectedResult = resultMateriaalStub()
+      expect(result).toEqual(expectedResult)
+    })
   })
 })
