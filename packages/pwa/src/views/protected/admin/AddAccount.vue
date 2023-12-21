@@ -37,7 +37,7 @@
         name="nickname"
         id="nickname"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-        v-model="newUser.name"
+        v-model="newUser.name" required
       />
     </div>
 
@@ -54,7 +54,7 @@
           name="voornaam"
           id="voornaam"
           class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-          v-model="newUser.voornaam"
+          v-model="newUser.voornaam" required
         />
       </div>
       <div class="flex flex-col justify-center items-start w-1/2">
@@ -69,8 +69,8 @@
           name="achternaam"
           id="achternaam"
           class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-          v-model="newUser.achternaam"
-        />
+          v-model="newUser.achternaam" required
+        /> 
       </div>
     </div>
 
@@ -86,7 +86,7 @@
         name="email"
         id="email"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-        v-model="newUser.email"
+        v-model="newUser.email" required
       />
     </div>
 
@@ -102,7 +102,7 @@
         name="password"
         id="password"
         class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-        v-model="newUser.password"
+        v-model="newUser.password" required
       />
     </div>
 

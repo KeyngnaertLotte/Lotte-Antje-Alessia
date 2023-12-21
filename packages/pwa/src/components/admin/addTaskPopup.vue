@@ -1,5 +1,5 @@
 <template>
-  <div
+  <form @submit.prevent="createTask"
     class="block fixed z-1 left-0 top-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div class="bg-white w-9/10 h-9/10 rounded-lg relative">
@@ -16,7 +16,7 @@
           <label for="taskName">Taak naam</label>
           <input
             v-model="formData.taskName"
-            type="text"
+            type="text" required
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
@@ -33,7 +33,7 @@
                 type="radio"
                 name="type"
                 :id="option"
-                :value="option"
+                :value="option" required
                 class="mr-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
               />
               <label :for="option">{{ option }}</label>
@@ -44,8 +44,7 @@
           <label for="">Plaats</label>
           <select
             v-model="formData.selectedPlace"
-            name=""
-            id=""
+            required
             class="bg-gray-200 rounded font-pop  p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           >
             <option v-for="plaats in plaatsen">{{ plaats }}</option>
@@ -55,7 +54,8 @@
           <label for="">Deadline</label>
           <input
             type="time"
-            v-model="formData.deadline"
+            pattern="^(?:[01]\d|2[0-3]):[0-5]\d$"
+            v-model="formData.deadline" required
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
@@ -63,8 +63,7 @@
           <label for="">Categorie</label>
           <select
             v-model="formData.selectedCategory"
-            name=""
-            id=""
+            required
             class="bg-gray-200 rounded font-pop  p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
             @change="updatedData"
           >
@@ -74,8 +73,7 @@
         <div class="flex flex-col w-full">
           <label for="">Materiaal</label>
           <select
-            name=""
-            id=""
+            required
             v-model="formData.material"
             class="bg-gray-200 rounded font-pop  p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           >
@@ -88,13 +86,13 @@
           <label for="">Aantal</label>
           <input
             type="number"
-            v-model="formData.amount"
+            v-model="formData.amount" required
             class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
         <div class="flex flex-row justify-center w-full mt-10">
           <button
-            @click="createTask"
+            type="submit"
             class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
           >
             MAAK TAAK AAN
@@ -102,7 +100,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

@@ -1,13 +1,13 @@
 <template>
   <div
-    class="mt-6 col-span-2 row-span-20 flex flex-col items-center overflow-hidden relative"
+    class="col-span-2 row-start-4 row-span-21 bg-white rounded-xl m-6 overflow-hidden relative pt-6 flex flex-col justify-center items-center"
   >
     <!-- Render the first section if benodigdheden is available -->
     <div v-if="benodigdheden" class="flex flex-col items-center w-full mb-3 ">
-      <div class="w-9/10 flex-col items-center justify-center relative">
+      <div class="w-9/10 flex-col items-center justify-center relative h-full">
         <button
           @click="toggleShow('benodigdheden')"
-          class="p-2 w-full rounded border-1 flex justify-between bg-slate-300 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+          class="mt-4 p-2 w-full bg-custom-brown text-white rounded-lg border-1 flex justify-between focus:outline-none focus-visible:border-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange focus-visible:ring-2"
         >
           <p>Bestelde items</p>
           <ChevronDown />
@@ -16,7 +16,7 @@
         <transition name="slide-fade" class="border-2 rounded">
           <div
             v-if="isShow('benodigdheden')"
-            class="absolute left-0 right-0 bg-slate-300"
+            class="absolute left-0 right-0 border-2 bg-gray-200 border-custom-brown rounded-lg"
           >
             <div v-for="item in benodigdheden" :key="item.item">
               <div class="mx-4 mt-0 p-2 flex justify-between">
@@ -41,7 +41,7 @@
       >
         <button
           @click="toggleShow(categorie)"
-          class="my-4 p-2 w-full border-slate border-2 flex justify-between rounded focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+          class="mt-4 p-2 w-full border-custom-brown rounded-lg border-1 flex justify-between focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         >
           <p>{{ categorie }}</p>
           <ChevronDown class="" />

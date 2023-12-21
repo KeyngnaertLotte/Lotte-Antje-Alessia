@@ -3,12 +3,13 @@
     class="max-w-screen max-h-screen h-screen bg-custom-orange relative z-1 flex flex-col overflow-hidden md:max-w-1/2 md:absolute md:right-0"
     v-if="isVisible"
   >
-    <div class="flex justify-between p-4">
-      <div class="h-[80px]">
+    <div class="flex justify-between items-start p-4">
+      <div class="h-4/5 flex flex-col justify-center items-center">
         <button
           @click="toggleShow(languages)"
-          class="m-4 mb-0 p-2 min-w-full border-white border-1 flex justify-between"
+          class="m-4 mb-0 p-2 min-w-full flex justify-between"
         >
+          <Globe class="stroke-white" />
           <p class="text-white">
             {{
               $t('navigation.current.language', {
@@ -91,6 +92,7 @@ import {
   ListTodo,
   ClipboardCheck,
   ChevronDown,
+  Globe,
 } from 'lucide-vue-next'
 import useFirebase from '@/composables/useFirebase'
 import { useRouter } from 'vue-router'

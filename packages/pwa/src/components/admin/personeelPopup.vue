@@ -10,29 +10,30 @@
         <X class="h-10 w-10 stroke-white" />
       </button>
 
-      <div class="w-full h-full p-6">
+      <form @submit.prevent="updatePersoneel" class="w-full h-full p-6 flex flex-col justify-between items-center ">
         <h1 class="text-2xl font-bold mb-4 font-body">Pas personeel aan</h1>
-        <div class="flex flex-col w-full">
+        <div class="w-full flex flex-col justify-between items-center">
+          <div class="flex flex-col w-full mb-6">
           <label for="">Voornaam</label>
           <input
             type="text"
-            v-model="data.voornaam"
-            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
+            v-model="data.voornaam" required
+            class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mb-6">
           <label for="">Achternaam</label>
           <input
             type="text"
-            v-model="data.achternaam"
-            class="mt-1 block rounded-md border-2 border-gray-300 p-2 w-full"
+            v-model="data.achternaam" required
+            class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
           />
         </div>
         <div class="flex flex-col w-full">
           <p for="">Type</p>
           <div class="flex flex-row justify-between items-center mt-1">
             <select
-              class="bg-gray-200 rounded font-pop focus:outline-none w-full p-3"
+              class="mt-1 block w-full rounded-md border-2 border-gray-300 p-2 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
               v-model="data.type"
             >
               <option v-for="option in types" :key="option" :value="option">
@@ -40,6 +41,7 @@
               </option>
             </select>
           </div>
+        </div>
         </div>
         <div class="flex flex-row justify-between w-full mt-10">
           <button
@@ -49,13 +51,13 @@
             DELETE
           </button>
           <button
-            @click="updatePersoneel"
+            type="submit"
             class="py-1 bg-custom-orange text-white my-6 rounded w-1/5 self-end"
           >
             UPDATE
           </button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
