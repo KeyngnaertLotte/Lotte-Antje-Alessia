@@ -12,6 +12,8 @@ export const artiestStub = (): Artiest => {
   const a = new Artiest()
   a.naam = 'Be Right Back'
   a.uid = 'Kz5oJmB8iMMZOKKy8BT9O1BaYZx2'
+  a.podium = 'Lotte'
+  a.benodigdheden = []
   return a
 }
 
@@ -26,10 +28,35 @@ export const benodigdhedenStub = (): Artiest => {
   const a = new Artiest()
   a.benodigdheden = [
     {
-      item: 'cola',
+      item: 'Frisdrank',
       podium: 'Lotte',
       aantal: 1,
-      categorie: 'drank',
+      categorie: 'drinken',
+    },
+  ]
+  return a
+}
+
+export const materiaalStub = (): CreateBenodigdhedenInput => {
+  const m = new CreateBenodigdhedenInput()
+  m.item = 'Frisdrank'
+  m.aantal = 1
+  m.categorie = 'drinken'
+  m.deadline = '12:00'
+  return m
+}
+
+export const resultMateriaalStub = (): Artiest => {
+  const a = new Artiest()
+  a.uid = 'Kz5oJmB8iMMZOKKy8BT9O1BaYZx2'
+  a.naam = 'Be Right Back'
+  a.podium = 'Lotte'
+  a.benodigdheden = [
+    {
+      item: 'Frisdrank',
+      podium: 'Lotte',
+      aantal: 1,
+      categorie: 'drinken',
     },
   ]
   return a
