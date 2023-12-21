@@ -35,9 +35,6 @@
     "htmlWhitespaceSensitivity": "css",
     "useTabs": false
   },
-  "dependencies": {
-    "vue-qrcode-reader": "^5.4.1"
-  },
   "devDependencies": {
     "lerna": "^8.0.0"
   }
