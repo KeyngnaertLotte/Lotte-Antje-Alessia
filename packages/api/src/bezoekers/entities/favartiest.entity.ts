@@ -1,17 +1,16 @@
-// src/bezoekers/dto/favoartiest.input.ts
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql'
 
 @ObjectType()
 export class FavArtiest {
   @Field()
-  artiest: string;
+  artiest: string
 
   @Field()
-  startTime: string;
+  startTime: string
 
   @Field()
-  endTime: string;
+  endTime: string
 
   @Field()
-  color: string;
+  color: string
 }

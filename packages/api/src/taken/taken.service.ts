@@ -55,11 +55,7 @@ export class TakenService {
         { id: taak.id },
         { status: status },
       )
-  
-      console.log(updated)
-
-      return "Taak status geüpdatet"
-  
+      return 'Taak status geüpdatet'
     }
   }
 
@@ -72,8 +68,6 @@ export class TakenService {
     const taakObj = await this.findOneById(id)
     if (!taakObj) throw new Error('Taak niet gevonden')
     else {
-      console.log('taakObj', taakObj)
-
       await this.taakRepository.remove(taakObj)
       return `taak verwijderd`
     }

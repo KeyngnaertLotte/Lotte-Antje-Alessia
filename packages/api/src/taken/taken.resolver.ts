@@ -40,14 +40,8 @@ export class TakenResolver {
     return this.takenService.findByType(type)
   }
 
-  // @Query(() => Taak, { name: 'taakbyid' })
-  // async findOneById(@Args('id', { type: () => String }) id: string) {
-  //   console.log('id (resolver)', id)
-  //   console.log('test',await this.takenService.findOneById(id))
-  //   return await this.takenService.findOneById(id)
-  // }
-
   // PUT taak
+  @UseGuards(FirebaseGuard)
   @Mutation(() => String)
   updateTakenStatus(@Args('id') id: string, @Args('status') status: boolean) {
     return this.takenService.update(id, status)

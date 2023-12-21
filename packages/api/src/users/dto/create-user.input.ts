@@ -3,9 +3,6 @@ import { Role } from '../entities/user.entity'
 
 @InputType()
 export class CreateUserInput {
-  // @Field(() => String, { description: 'Example field (placeholder)' })
-  // uid: string
-
   @Field(() => String, { description: 'Optional locale of the current user' })
   locale?: string
 
@@ -15,6 +12,4 @@ export class CreateUserInput {
 
   @Field(() => String, { description: 'Optional role of the current user' })
   naam: string
-
-
 }

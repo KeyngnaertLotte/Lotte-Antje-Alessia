@@ -60,7 +60,6 @@ export class ArtiestenService {
 
     if (itemExists) {
       itemExists.aantal = itemExists.aantal + materiaal.aantal
-      // return this.artiestRepository.save(currentArtiest)
     } else {
       const newbenodigdheden = new Benodigdheden()
       newbenodigdheden.item = materiaal.item

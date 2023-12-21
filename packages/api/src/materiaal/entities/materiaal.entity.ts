@@ -1,30 +1,23 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { ObjectType, Field, ID } from '@nestjs/graphql'
+import { Column, Entity, ObjectIdColumn } from 'typeorm'
 
 @Entity()
 @ObjectType()
 export class Materiaal {
   @ObjectIdColumn()
-  @Field(()=> ID)
-  id: string;
-
-  // deze weg want naam van items zit in itemlijst
-  @Field()
-  @Column()
-  item: string;
+  @Field(() => ID)
+  id: string
 
   @Field()
   @Column()
-  categorie: string;
+  item: string
 
-  // deze weg want zit in itemlijst
   @Field()
   @Column()
-  aantal: number;
+  categorie: string
 
-  
-  
-  // @Column()
-  // @Field(() => [Itemlijst])
-  // items?: Itemlijst[];
+  @Field()
+  @Column()
+  aantal: number
+
 }

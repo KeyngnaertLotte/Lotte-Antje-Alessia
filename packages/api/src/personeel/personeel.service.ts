@@ -5,8 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Personeel } from './entities/personeel.entity'
 import { ObjectId } from 'mongodb'
-import { Takenlijst } from './entities/task.entity'
-import { Taak } from 'src/taken/entities/taken.entity'
 import { TakenService } from 'src/taken/taken.service'
 import { CreateTaakInput } from './dto/create-taak.input'
 import { UsersService } from 'src/users/users.service'
@@ -36,7 +34,6 @@ export class PersoneelService {
 
   // PUT takenlijst personeel met taak
   async AddTaak(uid: string, taakId: string) {
-    // const currentPersoneel = await this.findOneById(id)
     const personeel = await this.personeelRepository.findOne({
       where: { uid },
     })
@@ -76,7 +73,6 @@ export class PersoneelService {
       { id: personeel[0].id },
       { type: type },
     )
-
     console.log(updated)
 
     return `personeel met uid ${uid} geupdate`
@@ -150,7 +146,6 @@ export class PersoneelService {
     if (usernaam.includes(' ')) {
       const uservoor = usernaam.split(' ')[0]
       let userachter = usernaam.split(' ').slice(1).join(' ')
-      // userachter = userachter.join(' ')
 
       console.log(uservoor)
       console.log(userachter)
