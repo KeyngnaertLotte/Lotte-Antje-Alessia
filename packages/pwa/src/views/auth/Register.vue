@@ -31,7 +31,7 @@
         type="text"
         name="nickname"
         id="nickname"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 text-xl focus:rounded-lg focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="newUser.name" placeholder="Gebruikersnaam"
         />
     </div>
@@ -47,7 +47,7 @@
         type="email"
         name="email"
         id="email"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 text-xl focus:rounded-lg focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="newUser.email" placeholder="Email adres"
       />
     </div>
@@ -63,7 +63,7 @@
         type="password"
         name="password"
         id="password"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen pl-1 text-xl focus:rounded-lg focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
         v-model="newUser.password" placeholder="Wachtwoord"
         />
     </div>

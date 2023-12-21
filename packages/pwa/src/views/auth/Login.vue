@@ -15,33 +15,21 @@
       <h1 class="text-5xl font-body font-bold text-custom-orange">Log in</h1>
       <div class="mt-6 w-full">
       <div class="w-full flex justify-center">
-        <!-- <label
-        for="email"
-        class="text-md block font-pop font-bold tracking-wider text-custom-brown"
-      >
-        Email address
-      </label> -->
       <input
         type="email"
         name="email"
         id="email"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" 
-        v-model="loginCredentials.email" placeholder="Email adres"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2" 
+        v-model="loginCredentials.email" placeholder="Email adres" required
       />
     </div>
     <div class="w-full flex flex-col justify-center items-center m-t-4">
-      <!-- <label
-        for="password"
-        class="text-md block font-pop font-bold tracking-wider text-custom-brown"
-      >
-        Password
-      </label> -->
       <input
         type="password"
         name="password"
         id="password"
-        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-        v-model="loginCredentials.password" placeholder="Wachtwoord"
+        class="block font-pop w-9/10 border-b-2 border-custom-darkGreen p-1 text-xl focus:outline-none focus:rounded-lg focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+        v-model="loginCredentials.password" placeholder="Wachtwoord" required
       />
       <RouterLink
         to="/auth/forgot-password"

@@ -1,5 +1,6 @@
 <template>
-  <div class="flex flex-col items-center mx-4 mb-8">
+  <div class="flex flex-col lg:flex-row w-full items-center justify-center lg:items-start lg:py-15">
+  <div class="flex flex-col items-center mx-4 mb-8 w-9/10 ">
     <h1 class="font-header text-custom-darkGreen text-5xl mb-4">Antje</h1>
     <button
       v-for="artiest in lineUpAntje"
@@ -14,7 +15,7 @@
       </p>
     </button>
   </div>
-  <div class="flex flex-col items-center mx-4 mb-8">
+  <div class="flex flex-col items-center mx-4 mb-8 w-9/10 ">
     <h1 class="font-header text-custom-purple text-5xl mb-4">Lotte</h1>
     <button
       v-for="artiest in lineUpLotte"
@@ -29,7 +30,7 @@
       </p>
     </button>
   </div>
-  <div class="flex flex-col items-center mx-4">
+  <div class="flex flex-col items-center mx-4 w-9/10 ">
     <h1 class="font-header text-custom-orange text-5xl mb-4">Aléssia</h1>
     <button
       v-for="artiest in lineUpAlessia"
@@ -44,6 +45,7 @@
       </p>
     </button>
   </div>
+</div>
   <DetailArtiest
     v-if="isModalOpen"
     :artist="artist"
@@ -58,7 +60,6 @@ import DetailArtiest from '@/components/bezoeker/DetailArtiest.vue'
 import { ref, computed, type PropType } from 'vue'
 import { GET_LINEUP } from '@/graphql/artiest.query'
 import { useQuery } from '@vue/apollo-composable'
-import { ArrowUpToLine } from 'lucide-vue-next'
 
 const isModalOpen = ref(false)
 const artist = ref('Lotte')
@@ -106,8 +107,10 @@ export default {
       if (result) {
         isBezoeker.value = true
       }
+
       isModalOpen.value = true
       artist.value = artistName
+      console.log(artist.value)
     }
 
     const isArtistInFavorites = computed(() => {

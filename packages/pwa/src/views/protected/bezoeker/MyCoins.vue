@@ -6,14 +6,17 @@
         </div>
         <button @click="handleModal" class="bg-white px-4 py-2 text-custom-purple rounded-md font-pop font-bold mx-4 self-center hover:bg-custom-purple hover:border-white hover:border-2 hover:text-white focus:outline-none focus-visible:border-white  focus-visible:bg-custom-purple focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white">VOEG TOE</button>
       </div>
-    </div>
-  </div>
-  <SaldoPopup
-    :id="uid ?? ''"
-    v-if="isModalOpen"
-    @close-modal="handleCloseModal"
-  />
-</template>
+      <div class="mx-4 bg-white row-start-9 p-4 rounded-md col-span-2 row-span-15">
+        <p class="font-body text-xl font-bold">TRANSACTIES</p>
+        <div class="font-pop text-lg mt-5" v-if="bezoekerInfo && bezoekerInfo.bezoekerByUid">
+          <div v-for="(transactie, index) in reversedTransacties" :key="index" :class="['flex', 'justify-between', transactieColor(transactie.transactie)]">
+            <p>{{ transactie.transactie }}</p>
+            <p>€ {{ transactie.aantal }}</p>
+          </div>
+        </div>
+      </div>
+      <SaldoPopup :id="uid ?? ''" v-if="isModalOpen" @close-modal="handleCloseModal"/>
+  </template>
 
 <script lang="ts">
 import useCustomUser from '@/composables/useCustomUser'
