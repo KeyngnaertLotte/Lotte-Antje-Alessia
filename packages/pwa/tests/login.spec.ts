@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('🔐 Basic auth flow login', async ({ page }) => {
+test('🔐 inloggen', async ({ page }) => {
   // Open the page.
   await page.goto('http://localhost:5173/auth/login')
 
