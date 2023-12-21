@@ -46,7 +46,7 @@ let refetchFunction: any = null
 export default {
   setup() {
     const { customUser } = useCustomUser()
-    console.log('customUser: ', customUser.value?.uid)
+    // console.log('customUser: ', customUser.value?.uid)
 
     const { onResult: personeelResult } = useQuery(GET_PERSONEEL_BY_UID, {
       uid: customUser.value?.uid,
@@ -54,7 +54,7 @@ export default {
 
     personeelResult(result => {
       if (result.data) {
-        console.log('personeelResult: ', result.data.personeelByUid.type)
+        // console.log('personeelResult: ', result.data.personeelByUid.type)
         const type = result.data.personeelByUid.type
         const { onResult, refetch } = useQuery(GET_TAAK_BY_TYPE, {
           type,
@@ -63,23 +63,23 @@ export default {
 
         onResult(result => {
           if (result.data) {
-            console.log('TYPE: ', type)
+            // console.log('TYPE: ', type)
             takenInfo.value = result.data
-            console.log('takenInfo: ', takenInfo.value)
+            // console.log('takenInfo: ', takenInfo.value)
           }
         })
       }
     })
 
     const ClaimTaak = (taakId: string) => {
-      console.log('claim deze taak: ', taakId)
+      // console.log('claim deze taak: ', taakId)
       // voeg deze taak toe aan de taken van personeel
       const { mutate: addTaak } = useMutation(ADD_TAAK)
       addTaak({
         taakId: taakId,
         uid: customUser.value?.uid,
       })
-      console.log('taak geclaimd')
+      // console.log('taak geclaimd')
 
       // update de status van deze taak naar true dat die geclaimd is
       const { mutate: updateTaak } = useMutation(UPDATE_STATUS)
@@ -87,7 +87,7 @@ export default {
         id: taakId,
         status: true,
       })
-      console.log('taak geupdate')
+      // console.log('taak geupdate')
       refetchFunction()
     }
 

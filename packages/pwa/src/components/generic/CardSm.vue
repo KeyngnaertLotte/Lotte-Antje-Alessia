@@ -25,7 +25,7 @@ const color: Record<string, any> = {
 const colorAcces: Record<string, any> = {
     'materiaal': 'hover:bg-custom-lightGreen focus:bg-custom-lightGreen',
     'bonnetjes': 'hover:bg-custom-darkGreen focus:bg-custom-darkGreen',
-    'scanner': 'hover:bg-[#9BA0C2] focus:bg-[#9BA0C2]',
+    'scanner': 'hover:bg-custom-lightPurple focus:bg-custom-lightPurple',
     'item': 'hover:bg-custom-orange focus:bg-custom-orange',
     'saldo': 'hover:bg-custom-orange focus:bg-custom-orange',
 }
@@ -77,7 +77,7 @@ const handleClick = () => {
   >
     <p class="font-bold text-2xl self-start font-body px-3">{{ $t(`card.${$props.title}`) }}</p>
     <div class="flex justify-center items-center my-2">
-      <p v-if="$props.title === 'saldo'" class="font-pop font-extrabold text-3xl pt-4">
+      <p v-if="$props.title === 'saldo'" class="font-extrabold text-3xl pt-4">
         € {{ $props.value }}
       </p>
       <component v-else :is="icon" class="w-12 h-12" />
