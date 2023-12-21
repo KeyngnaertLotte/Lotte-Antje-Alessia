@@ -79,11 +79,7 @@ export class PersoneelService {
 
     console.log(updated)
 
-    const findUpdated = await this.personeelRepository.find({
-      where: { uid: uid },
-    })
-
-    return findUpdated[0]
+    return `personeel met uid ${uid} geupdate`
   }
 
   findAll() {
@@ -98,7 +94,7 @@ export class PersoneelService {
   }
 
   findOneByUid(uid: string): Promise<Personeel> {
-    return this.personeelRepository.findOneByOrFail({ uid })
+    return this.personeelRepository.findOne({ where: { uid } })
   }
 
   // DELETE taak bij personeel en in grote takenlijst
