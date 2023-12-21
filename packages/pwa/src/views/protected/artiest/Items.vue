@@ -3,7 +3,7 @@
     class="col-span-2 row-start-4 row-span-21 bg-white rounded-xl m-6 overflow-hidden relative pt-6 flex flex-col justify-center items-center"
   >
     <!-- Render the first section if benodigdheden is available -->
-    <div v-if="benodigdheden" class="flex flex-col items-center w-full mb-3 ">
+    <div v-if="benodigdheden" class="flex flex-col items-center w-full mb-3">
       <div class="w-9/10 flex-col items-center justify-center relative h-full">
         <button
           @click="toggleShow('benodigdheden')"
@@ -59,11 +59,18 @@
               >
                 <p>{{ item.item }}</p>
                 <div class="flex">
-                  <button @click="minusButtonClicked(item)" class="pr-6 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2">
+                  <button
+                    @click="minusButtonClicked(item)"
+                    class="pr-6 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+                  >
                     <MinusIcon class="" />
                   </button>
                   <p>{{ aantal[item.item] }}</p>
-                  <button data-testid='plus' @click="plusButtonClicked(item)" class="pl-6">
+                  <button
+                    data-testid="plus"
+                    @click="plusButtonClicked(item)"
+                    class="pl-6"
+                  >
                     <plus-icon class="" />
                   </button>
                 </div>
@@ -175,6 +182,7 @@ export default {
             })
             .catch(error => {
               console.error('Error creating item:', error)
+              alert(error.message)
             })
         }
       }
