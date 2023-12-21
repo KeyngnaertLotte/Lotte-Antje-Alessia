@@ -15,9 +15,9 @@ const icons: Record<string, any> = {
 
 // kleur kaartje aan de hand van de titel
 const color: Record<string, any> = {
-    'materiaal': 'bg-custom-greenblue',
-    'bonnetjes': 'bg-custom-green',
-    'scanner': 'bg-custom-blue',
+    'materiaal': 'bg-custom-darkGreen',
+    'bonnetjes': 'bg-custom-lightGreen',
+    'scanner': 'bg-custom-purple',
     'item': 'bg-custom-brown',
     'saldo': 'bg-custom-brown',
 }
