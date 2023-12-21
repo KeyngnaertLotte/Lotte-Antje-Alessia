@@ -102,7 +102,7 @@ const getPersoneelInfo = async () => {
     onResult(result => {
       if (result.data) {
         // console.log('Data:', result.data)
-        // personeelInfo.value = result.data // Update the ref with the fetched data
+        personeelInfo.value = result.data // Update the ref with the fetched data
         // console.log(
         //   'personeelInfo:',
         //   personeelInfo.value.personeelByUid.achternaam,
