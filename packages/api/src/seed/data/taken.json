@@ -24,7 +24,7 @@
         "category": "instrumenten",
         "deadline": "20:30",
         "naam": "Instrument Setup",
-        "plaats": "Alessia",
+        "plaats": "Aléssia",
         "type": "Allround",
         "materiaal": "Gitaar",
         "status": false
@@ -114,17 +114,17 @@
         "category": "decoratie",
         "deadline": "20:30",
         "naam": "Decoratie Opzet",
-        "plaats": "Alessia",
+        "plaats": "Aléssia",
         "type": "Allround",
         "materiaal": "Feestballonnen",
         "status": false
     },
     {
         "aantal": 5,
-        "category": "loges",
+        "category": "eten",
         "deadline": "20:30",
         "naam": "Pizza brengen loges",
-        "plaats": "loges",
+        "plaats": "Loges",
         "type": "Loges",
         "materiaal": "Pizza",
         "status": false
