@@ -1,51 +1,53 @@
 <template>
-  <div class="flex flex-col lg:flex-row w-full items-center justify-center lg:items-start lg:py-15">
-  <div class="flex flex-col items-center mx-4 mb-8 w-9/10 ">
-    <h1 class="font-header text-custom-darkGreen text-5xl mb-4">Antje</h1>
-    <button
-      v-for="artiest in lineUpAntje"
-      @click="() => openModal(artiest.naam)"
-      class="bg-custom-darkGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-custom-lightGreen focus:bg-custom-lightGreen"
-    >
-      <p class="font-body text-2xl font-bold text-white leading-none">
-        {{ artiest.naam }}
-      </p>
-      <p class="font-body text-xl text-white leading-none">
-        {{ artiest.tijd }}
-      </p>
-    </button>
+  <div
+    class="flex flex-col lg:flex-row w-full items-center justify-center lg:items-start lg:py-15"
+  >
+    <div class="flex flex-col items-center mx-4 mb-8 w-9/10">
+      <h1 class="font-header text-custom-darkGreen text-5xl mb-4">Antje</h1>
+      <button
+        v-for="artiest in lineUpAntje"
+        @click="() => openModal(artiest.naam)"
+        class="bg-custom-darkGreen my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-custom-lightGreen focus:bg-custom-lightGreen"
+      >
+        <p class="font-body text-2xl font-bold text-white leading-none">
+          {{ artiest.naam }}
+        </p>
+        <p class="font-body text-xl text-white leading-none">
+          {{ artiest.tijd }}
+        </p>
+      </button>
+    </div>
+    <div class="flex flex-col items-center mx-4 mb-8 w-9/10">
+      <h1 class="font-header text-custom-purple text-5xl mb-4">Lotte</h1>
+      <button
+        v-for="artiest in lineUpLotte"
+        @click="() => openModal(artiest.naam)"
+        class="bg-custom-purple my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-[#9BA0C2] hover:text-black focus:bg-[#9BA0C2]"
+      >
+        <p class="font-body text-2xl font-bold text-white leading-none">
+          {{ artiest.naam }}
+        </p>
+        <p class="font-body text-xl text-white leading-none">
+          {{ artiest.tijd }}
+        </p>
+      </button>
+    </div>
+    <div class="flex flex-col items-center mx-4 w-9/10">
+      <h1 class="font-header text-custom-orange text-5xl mb-4">Aléssia</h1>
+      <button
+        v-for="artiest in lineUpAlessia"
+        @click="() => openModal(artiest.naam)"
+        class="bg-custom-orange my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-custom-brown focus:bg-custom-brown"
+      >
+        <p class="font-body text-2xl font-bold text-white leading-none">
+          {{ artiest.naam }}
+        </p>
+        <p class="font-body text-xl text-white leading-none">
+          {{ artiest.tijd }}
+        </p>
+      </button>
+    </div>
   </div>
-  <div class="flex flex-col items-center mx-4 mb-8 w-9/10 ">
-    <h1 class="font-header text-custom-purple text-5xl mb-4">Lotte</h1>
-    <button
-      v-for="artiest in lineUpLotte"
-      @click="() => openModal(artiest.naam)"
-      class="bg-custom-purple my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-[#9BA0C2] hover:text-black focus:bg-[#9BA0C2]"
-    >
-      <p class="font-body text-2xl font-bold text-white leading-none">
-        {{ artiest.naam }}
-      </p>
-      <p class="font-body text-xl text-white leading-none">
-        {{ artiest.tijd }}
-      </p>
-    </button>
-  </div>
-  <div class="flex flex-col items-center mx-4 w-9/10 ">
-    <h1 class="font-header text-custom-orange text-5xl mb-4">Aléssia</h1>
-    <button
-      v-for="artiest in lineUpAlessia"
-      @click="() => openModal(artiest.naam)"
-      class="bg-custom-orange my-2 rounded-lg flex flex-col items-center leading-none py-3 w-full hover:bg-custom-brown focus:bg-custom-brown"
-    >
-      <p class="font-body text-2xl font-bold text-white leading-none">
-        {{ artiest.naam }}
-      </p>
-      <p class="font-body text-xl text-white leading-none">
-        {{ artiest.tijd }}
-      </p>
-    </button>
-  </div>
-</div>
   <DetailArtiest
     v-if="isModalOpen"
     :artist="artist"
@@ -80,7 +82,7 @@ export default {
     DetailArtiest,
   },
   setup(props) {
-    console.log('favorites', props)
+    // console.log('favorites', props)
 
     const { onResult } = useQuery(GET_LINEUP)
     onResult(result => {
@@ -99,7 +101,7 @@ export default {
 
     function openModal(artistName: string) {
       const url = window.location.href
-      console.log(url)
+      // console.log(url)
       // see if url has bezoeker
       const result = url.includes('bezoeker')
       console.log(result)
@@ -110,7 +112,7 @@ export default {
 
       isModalOpen.value = true
       artist.value = artistName
-      console.log(artist.value)
+      // console.log(artist.value)
     }
 
     const isArtistInFavorites = computed(() => {

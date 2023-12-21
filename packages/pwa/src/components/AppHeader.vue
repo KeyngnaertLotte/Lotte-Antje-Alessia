@@ -13,7 +13,10 @@
         <p>Hey</p>
         <p class="md:pl-3">{{ naam }}!</p>
       </div>
-      <button @click="toggleVisibility" class="focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white">
+      <button
+        @click="toggleVisibility"
+        class="focus:outline-none focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white"
+      >
         <AlignJustify class="h-12 w-12 fill-white md:h-8 md:w-8" />
       </button>
     </div>
@@ -44,7 +47,7 @@ export default {
   },
   setup(props) {
     const role = customUser.value?.role
-    let canReceiveNotification = true 
+    let canReceiveNotification = true
 
     function toggleVisibility() {
       isVisible.value = !isVisible.value
@@ -54,7 +57,7 @@ export default {
       'adminNotification:' + role?.toString().toLocaleLowerCase(),
       (data: any) => {
         if (canReceiveNotification) {
-          console.log('data:', data)
+          // console.log('data:', data)
           toast.info(data, { timeout: 5000 })
           canReceiveNotification = false
 
@@ -78,10 +81,10 @@ export default {
 </script>
 
 <style>
-  .Vue-Toastification__toast {
-    background-color: #777da7;
-    color: white;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
+.Vue-Toastification__toast {
+  background-color: #777da7;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
 </style>

@@ -10,11 +10,6 @@ const router = createRouter({
       path: '/',
       component: () => import('../views/Home.vue'),
     },
-    // delete lang
-    {
-      path: '/lang',
-      component: () => import('../views/Language.vue'),
-    },
 
     {
       path: '/bezoeker',
@@ -30,17 +25,9 @@ const router = createRouter({
           component: () => import('../views/protected/bezoeker/LineUp.vue'),
         },
         {
-          path: 'map',
-          component: () => import('../views/protected/bezoeker/Map.vue'),
-        },
-        {
           path: 'saldo',
           component: () => import('../views/protected/bezoeker/MyCoins.vue'),
         },
-        // {
-        //   path: 'new',
-        //   component: () => import('../views/protected/events/AddEvent.vue'),
-        // },
       ],
     },
 
