@@ -10,13 +10,6 @@
     <div class="mt-3" v-for="taken in takenInfo">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-1" v-for="taak in taken">
         <div class="flex items-center col-span-4">
-          <!-- <button
-            @click="ClaimTaak(taak.id)"
-            id="claimbutton"
-            class="px-3 py-1 bg-custom-orange text-white my-2 mx-2 rounded w-fit hover:bg-custom-brown focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
-          >
-            Claim
-          </button> -->
           <button
             @click="ClaimTaak(taak.id)"
             :id="taak.id"
@@ -43,7 +36,7 @@
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_TAAK_BY_TYPE } from '@/graphql/taak.query'
-import { UPDATE } from '@/graphql/taak.mutation'
+import { UPDATE_STATUS } from '@/graphql/taak.mutation'
 import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
 import { ADD_TAAK } from '@/graphql/personeel.mutation'
 import useCustomUser from '@/composables/useCustomUser'
@@ -72,9 +65,6 @@ export default {
             console.log('TYPE: ', type)
             takenInfo.value = result.data
             console.log('takenInfo: ', takenInfo.value)
-            const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
-              type: type,
-            })
           }
         })
       }
@@ -88,18 +78,19 @@ export default {
         taakId: taakId,
         uid: customUser.value?.uid,
       })
-      console.log('taak geclaimed')
+      console.log('taak geclaimd')
 
-      // verwijder deze taak uit de taken van de taak
-      const { mutate: updateTaak } = useMutation(UPDATE)
+      // update de status van deze taak naar true dat die geclaimd is
+      const { mutate: updateTaak } = useMutation(UPDATE_STATUS)
       updateTaak({
         id: taakId,
-        updateTakenInput: { status: true },
+        status: true,
       })
       console.log('taak geupdate')
+
+      // reload de pagina
       location.reload()
     }
-
 
     return {
       ClaimTaak,

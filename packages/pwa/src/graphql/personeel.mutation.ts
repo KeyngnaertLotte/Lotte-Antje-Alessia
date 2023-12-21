@@ -33,6 +33,12 @@ export const UPDATE_PERSONEEL = gql`
   }
 `
 
+export const REMOVE_TAAK_BIJ_PERSONEEL = gql`
+  mutation removeTaak($id: String!) {
+    removeTaak(id: $id)
+  }
+`
+
 export const ADD_TAAK = gql`
   mutation createTaakInput($taakId: String!, $uid: String!) {
     createTaakInput(taakId: $taakId, uid: $uid) {

@@ -47,24 +47,19 @@ export class TakenService {
   }
 
   // started!! afwerken
-  async update(id: string, updateTakenInput: UpdateTakenInput) {
+  async update(id: string, status: boolean) {
     const taak = await this.findOneById(id)
     if (!taak) throw new Error('Taak niet gevonden')
     else {
-      console.log('taak', taak)
-      console.log('updateTakenInput', updateTakenInput)
-      const updatedTaak = Object.assign(taak, updateTakenInput)
-      console.log('updatedTaak', updatedTaak)
-      if (updateTakenInput.aantal) {
-        if (updateTakenInput.aantal === taak.aantal) {
-          console.log('aantal is hetzelfde')
-        } else {
-          console.log('aantal is niet hetzelfde')
+      const updated = await this.taakRepository.update(
+        { id: taak.id },
+        { status: status },
+      )
+  
+      console.log(updated)
 
-        }
-      }
-      await this.taakRepository.save(updatedTaak)
-      return `taak ${id} geupdate`
+      return "Taak status geüpdatet"
+  
     }
   }
 

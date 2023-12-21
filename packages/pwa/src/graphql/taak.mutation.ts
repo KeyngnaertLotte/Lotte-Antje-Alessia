@@ -20,14 +20,22 @@ export const UPDATE_TAAK = gql`
 `
 
 // voor "alle open taken"
-export const UPDATE = gql`
-  mutation update($id: String!, $updateTakenInput: UpdateTakenInput!) {
-    updateTaken(updateTakenInput: $updateTakenInput, id: $id)
+export const UPDATE_STATUS = gql`
+  mutation update($id: String!, $status: Boolean!) {
+    updateTaken(status: $status, id: $id)
   }
 `
 
+// voor materiaal
 export const REMOVE_TAAK = gql`
   mutation RemoveTaak($id: String!) {
+    removeTaak(id: $id)
+  }
+`
+
+// voor "alle open taken"
+export const REMOVE_TASK_FROM_LIST = gql`
+  mutation Remove($id: String!) {
     removeTaak(id: $id)
   }
 `

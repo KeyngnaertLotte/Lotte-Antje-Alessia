@@ -50,10 +50,10 @@ export class TakenResolver {
   // PUT taak
   @Mutation(() => String)
   updateTaken(
-    @Args('updateTakenInput') updateTakenInput: UpdateTakenInput,
     @Args('id') id: string,
+    @Args('status') status: boolean,
   ) {
-    return this.takenService.update(id, updateTakenInput)
+    return this.takenService.update(id, status)
   }
 
  
