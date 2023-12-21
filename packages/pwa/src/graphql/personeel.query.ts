@@ -9,11 +9,13 @@ export const GET_PERSONEEL_BY_UID = gql`
       achternaam
       type
       takenlijst {
-        plaats
-        naam
-        category
+        id
+        status
         aantal
+        category
         deadline
+        naam
+        plaats
       }
     }
   }

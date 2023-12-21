@@ -12,16 +12,31 @@ export const CREATE_TASK = gql`
     }
   }
 `
-
+// voor materiaal
 export const UPDATE_TAAK = gql`
   mutation updateTaken($id: String!, $updateTakenInput: UpdateTakenInput!) {
     updateTaken(updateTakenInput: $updateTakenInput, id: $id)
   }
 `
 
+// voor "alle open taken"
+export const UPDATE_STATUS = gql`
+  mutation update($id: String!, $status: Boolean!) {
+    updateTaken(status: $status, id: $id)
+  }
+`
+
+// voor materiaal
 export const REMOVE_TAAK = gql`
   mutation RemoveTaak($id: String!) {
     removeTaak(id: $id)
+  }
+`
+
+// voor "alle open taken"
+export const REMOVE_TASK_FROM_LIST = gql`
+  mutation DeleteTaakInput($id: String!, $uid: String!) {
+    DeleteTaakInput(taakId: $id, uid: $uid)
   }
 `
 

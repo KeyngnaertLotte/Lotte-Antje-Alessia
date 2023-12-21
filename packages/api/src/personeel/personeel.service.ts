@@ -10,6 +10,7 @@ import { Taak } from 'src/taken/entities/taken.entity'
 import { TakenService } from 'src/taken/taken.service'
 import { CreateTaakInput } from './dto/create-taak.input'
 import { UsersService } from 'src/users/users.service'
+import { MateriaalService } from 'src/materiaal/materiaal.service'
 
 @Injectable()
 export class PersoneelService {
@@ -18,6 +19,7 @@ export class PersoneelService {
     private readonly personeelRepository: Repository<Personeel>,
     private readonly takenService: TakenService,
     private readonly usersService: UsersService,
+    private readonly materiaalService: MateriaalService,
   ) {}
 
   // CREATE personeel
@@ -102,45 +104,41 @@ export class PersoneelService {
   // DELETE taak bij personeel en in grote takenlijst
   async removeTaak(uid: string, taakId: string) {
     // check if personeel exists
-    const personeelObj = this.findOneByUid(uid)
+    const personeelObj = await this.findOneByUid(uid)
     if (!personeelObj) throw new Error('Personeel niet gevonden')
     else {
       // check if taak exists
-      const taakObj = this.takenService.findOneById(taakId)
+      const taakObj = await this.takenService.findOneById(taakId)
       if (!taakObj) throw new Error('Taak niet gevonden')
       else {
-        // delete taak uit takenlijst
-        const personeel = await this.personeelRepository.findOne({
-          where: { uid: uid },
-        })
 
-        const obj = new ObjectId(taakId)
+        console.log('personeelObj', personeelObj.takenlijst[0].id)
+        console.log('taakObj', taakObj.id)
 
-        // Find the index of the item with the given taakId in takenlijst
-        const index = personeel.takenlijst.findIndex(
-          taak => taak.id && String(taak.id) === String(obj),
+        const taakItem = personeelObj.takenlijst.find(
+          taak => taak.id && String(taak.id) === String(taakObj.id),
         )
 
-        if (index !== -1) {
-          // Remove the item from takenlijst
-          personeel.takenlijst.splice(index, 1)
+        console.log('taakItem', taakItem)
 
-          console.log('LIJST NA VERWIJDEREN: ', personeel.takenlijst)
+        // delete taakItem uit takenlijst
+        personeelObj.takenlijst.splice(personeelObj.takenlijst.indexOf(taakItem), 1)
 
-          // Save the updated personeel object
-          await this.personeelRepository.save(personeel)
-        }
+        console.log('personeelObj takenlijst', personeelObj.takenlijst)
+
+        // save personeel
+        await this.personeelRepository.save(personeelObj)
 
         // delete taak uit grote takenlijst
-        this.takenService.remove(taakId)
+        this.materiaalService.remove(taakId)
 
-        return personeel
+        return "Taak verwijderd uit personeelslijst en grote takenlijst"
       }
     }
   }
 
   async update(uid: string, updatePersoneel: UpdatePersoneelInput) {
-    // update artiest
+    // update personeel
     const personeel = this.findOneByUid(uid)
     await personeel.then(p => {
       p.voornaam = updatePersoneel?.voornaam

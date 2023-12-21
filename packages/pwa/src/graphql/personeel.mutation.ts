@@ -25,7 +25,36 @@ export const DELETE_PERSONEEL = gql`
 `
 
 export const UPDATE_PERSONEEL = gql`
-mutation UpdatePersoneel ($updatePersoneelInput: 
-  UpdatePersoneelInput!, $uid: String!) {
-  updatePersoneel(updatePersoneelInput: $updatePersoneelInput, uid: $uid)
-}`
+  mutation UpdatePersoneel(
+    $updatePersoneelInput: UpdatePersoneelInput!
+    $uid: String!
+  ) {
+    updatePersoneel(updatePersoneelInput: $updatePersoneelInput, uid: $uid)
+  }
+`
+
+export const REMOVE_TAAK_BIJ_PERSONEEL = gql`
+  mutation removeTaak($id: String!) {
+    removeTaak(id: $id)
+  }
+`
+
+export const ADD_TAAK = gql`
+  mutation createTaakInput($taakId: String!, $uid: String!) {
+    createTaakInput(taakId: $taakId, uid: $uid) {
+      id
+      type
+      voornaam
+      achternaam
+      takenlijst {
+        id
+        plaats
+        naam
+        status
+        category
+        aantal
+        deadline
+      }
+    }
+  }
+`

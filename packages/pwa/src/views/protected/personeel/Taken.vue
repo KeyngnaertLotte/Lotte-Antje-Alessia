@@ -10,12 +10,21 @@
     <div class="mt-3" v-for="taken in takenInfo">
       <div class="grid grid-cols-5 gap-y-3 grid-rows-1" v-for="taak in taken">
         <div class="flex items-center col-span-4">
-          <input
-            type="checkbox"
-            class="form-checkbox accent-custom-green h-5 w-5 mr-3 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
-            id="checkbox"
-          />
-          <label for="checkbox">{{ taak.naam }}</label>
+          <button
+            @click="ClaimTaak(taak.id)"
+            :id="taak.id"
+            class="px-3 py-1 text-white my-2 mx-2 rounded w-fit focus:outline-none focus-visible:border-custom-orange focus-visible:bg-custom-brown focus-visible:ring-2 focus-visible:ring-custom-orange"
+            :class="{
+              'bg-custom-orange': taak.status === false,
+              'hover:bg-custom-brown': taak.status === false,
+              'bg-gray-400': taak.status === true,
+              'hover:bg-gray-500': taak.status === true,
+            }"
+            :disabled="taak.status === true"
+          >
+            Claim
+          </button>
+          <label :for="taak.id">{{ taak.naam }}</label>
         </div>
         <p class="text-end col-span-1 self-center">{{ taak.deadline }}</p>
       </div>
@@ -27,35 +36,66 @@
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_TAAK_BY_TYPE } from '@/graphql/taak.query'
-type ShowState = { [key: string]: boolean }
+import { UPDATE_STATUS } from '@/graphql/taak.mutation'
+import { GET_PERSONEEL_BY_UID } from '@/graphql/personeel.query'
+import { ADD_TAAK } from '@/graphql/personeel.mutation'
+import useCustomUser from '@/composables/useCustomUser'
+import { useMutation } from '@vue/apollo-composable'
 
 const takenInfo = ref<any | null>(null)
-
+let refetchFunction: any = null
 export default {
   setup() {
-    const showState = ref<ShowState>({})
-    const { onResult } = useQuery(GET_TAAK_BY_TYPE, {
-      type: 'Podium - licht (Aléssia)',
+    const { customUser } = useCustomUser()
+    console.log('customUser: ', customUser.value?.uid)
+
+    const { onResult: personeelResult } = useQuery(GET_PERSONEEL_BY_UID, {
+      uid: customUser.value?.uid,
     })
 
-    const toggleShow = (category: string) => {
-      showState.value[category] = !showState.value[category]
-    }
+    
 
-    const isShow = (category: string) => {
-      return showState.value[category] || false
-    }
-
-    onResult(result => {
+    personeelResult(result => {
       if (result.data) {
-        takenInfo.value = result.data
-        console.log('takenInfo: ', takenInfo.value)
+        console.log('personeelResult: ', result.data.personeelByUid.type)
+        const type = result.data.personeelByUid.type
+        const { onResult, refetch } = useQuery(GET_TAAK_BY_TYPE, {
+          type,
+        })
+        refetchFunction = refetch
+
+        onResult(result => {
+          if (result.data) {
+            console.log('TYPE: ', type)
+            takenInfo.value = result.data
+            console.log('takenInfo: ', takenInfo.value)
+          }
+        })
       }
     })
 
+    const ClaimTaak = (taakId: string) => {
+      console.log('claim deze taak: ', taakId)
+      // voeg deze taak toe aan de taken van personeel
+      const { mutate: addTaak } = useMutation(ADD_TAAK)
+      addTaak({
+        taakId: taakId,
+        uid: customUser.value?.uid,
+      })
+      console.log('taak geclaimd')
+
+      // update de status van deze taak naar true dat die geclaimd is
+      const { mutate: updateTaak } = useMutation(UPDATE_STATUS)
+      updateTaak({
+        id: taakId,
+        status: true,
+      })
+      console.log('taak geupdate')
+      refetchFunction()
+    }
+
     return {
-      toggleShow,
-      isShow,
+      ClaimTaak,
       takenInfo,
     }
   },
