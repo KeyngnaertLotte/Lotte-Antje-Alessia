@@ -57,7 +57,6 @@ export class PersoneelResolver {
   }
 
   // get all personeel
-  // @UseGuards(FirebaseGuard)
   @UseGuards(FirebaseGuard)
   @Query(() => [Personeel], { name: 'personeel' })
   findAll(@FirebaseUser() currentUser: UserRecord) {
