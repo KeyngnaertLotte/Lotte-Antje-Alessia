@@ -32,7 +32,7 @@ describe('BezoekersService', () => {
     expect(service).toBeDefined()
   })
 
-  describe('create()', () => {
+  describe('create', () => {
     describe('when a bezoeker is created', () => {
       it('should call bezoekerRepo.save()', () => {
         const saveSpy = jest.spyOn(mockBezoekerRepository, 'save')
@@ -49,4 +49,24 @@ describe('BezoekersService', () => {
       })
     })
   })
+
+  describe('findOneByUid', () => {
+      it('should call BezoekerRepository.findOne one time', async () => {
+        const findOneSpy = jest.spyOn(mockBezoekerRepository, 'findOne')
+        await service.findOneByUid('IOWulnBz2bPXt8maT77b25H8M8N2')
+        expect(findOneSpy).toBeCalledTimes(1)
+      })
+
+      it('should call BezoekerRepository.findOne with the correct parameters', async () => {
+        const findOneSpy = jest.spyOn(mockBezoekerRepository, 'findOne')
+        await service.findOneByUid('IOWulnBz2bPXt8maT77b25H8M8N2')
+        expect(findOneSpy).toHaveBeenCalledWith({ where: { uid: 'IOWulnBz2bPXt8maT77b25H8M8N2' }})
+      })
+
+      it('should return the correct bezoeker', async () => {
+        const myBezoeker = bezoekerStub()
+        const r = await service.findOneByUid('IOWulnBz2bPXt8maT77b25H8M8N2')
+        expect(r).toEqual(myBezoeker)
+      })
+    })
 })
