@@ -37,5 +37,8 @@
   },
   "devDependencies": {
     "lerna": "^8.0.0"
+  },
+  "dependencies": {
+    "mongodb-memory-server": "^9.1.3"
   }
 }
