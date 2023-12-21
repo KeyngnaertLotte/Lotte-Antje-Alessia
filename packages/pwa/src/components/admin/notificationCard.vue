@@ -1,5 +1,7 @@
 <template>
-  <div class="row-span-full col-span-2 p-6 bg-white rounded-lg shadow-md col-start-6">
+  <div
+    class="row-span-full col-span-2 p-6 bg-white rounded-lg shadow-md col-start-6"
+  >
     <h1 class="text-2xl font-bold font-body">Stuur melding</h1>
     <div class="flex flex-col justify-start h-full gap-4 mt-2">
       <div>
@@ -63,7 +65,7 @@
         v-model="messageContent"
         cols="50"
         rows="3"
-        class="w-full block font-pop border-2 rounded-md p-1 bg-white h-7/10 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
+        class="w-full block border-2 rounded-md p-1 bg-white h-7/10 focus:outline-none focus-visible:border-custom-orange focus-visible:ring-2 focus-visible:ring-custom-brown focus-visible:ring-2"
       ></textarea>
 
       <!-- Message Sent content -->
@@ -82,93 +84,91 @@
     </div>
   </div>
 </template>
-  
-<script lang="ts">
-import { ref, watch, watchEffect } from 'vue';
-import useRealtime from '@/composables/useRealtime';
 
-const { emit } = useRealtime();
+<script lang="ts">
+import { ref, watch, watchEffect } from 'vue'
+import useRealtime from '@/composables/useRealtime'
+
+const { emit } = useRealtime()
 
 export default {
   setup() {
-    const allChecked = ref(false);
-    const visitorsChecked = ref(false);
-    const artistsChecked = ref(false);
-    const personeelChecked = ref(false);
+    const allChecked = ref(false)
+    const visitorsChecked = ref(false)
+    const artistsChecked = ref(false)
+    const personeelChecked = ref(false)
 
-    const isAllDisabled = ref(false);
-    const messageContent = ref('');
-    const messageSent = ref(false);
+    const isAllDisabled = ref(false)
+    const messageContent = ref('')
+    const messageSent = ref(false)
 
     const disableOthers = () => {
       if (!allChecked.value) {
         isAllDisabled.value =
-          visitorsChecked.value || artistsChecked.value || personeelChecked.value;
+          visitorsChecked.value ||
+          artistsChecked.value ||
+          personeelChecked.value
       }
-    };
-  
-      const sendMessage = () => {
-        if (messageContent.value === '') {
-          alert('Gelieve een bericht in te vullen');
-        }
-        else if (!allChecked.value && !visitorsChecked.value && !artistsChecked.value && !personeelChecked.value){
-          alert('Gelieve een doelgroep te selecteren');
-        }
-        else{
-        messageSent.value = true;
+    }
 
-// Reset the message sent state after 5 seconds
-setTimeout(() => {
-  messageSent.value = false;
-  messageContent.value = ''; // Optionally clear the message input
-}, 5000);
-        console.log('send');
-        console.log(messageContent.value);
+    const sendMessage = () => {
+      if (messageContent.value === '') {
+        alert('Gelieve een bericht in te vullen')
+      } else if (
+        !allChecked.value &&
+        !visitorsChecked.value &&
+        !artistsChecked.value &&
+        !personeelChecked.value
+      ) {
+        alert('Gelieve een doelgroep te selecteren')
+      } else {
+        messageSent.value = true
+
+        setTimeout(() => {
+          messageSent.value = false
+          messageContent.value = ''
+        }, 5000)
+        console.log('send')
+        console.log(messageContent.value)
         if (allChecked.value) {
-          console.log('all');
+          console.log('all')
           emit('adminNotification:bezoeker', messageContent.value)
-            emit('adminNotification:artiest', messageContent.value)
-            emit('adminNotification:personeel', messageContent.value)
+          emit('adminNotification:artiest', messageContent.value)
+          emit('adminNotification:personeel', messageContent.value)
         }
         if (visitorsChecked.value) {
-          console.log('visitors');
+          console.log('visitors')
           emit('adminNotification:bezoeker', messageContent.value)
         }
         if (artistsChecked.value) {
-          console.log('artists');
+          console.log('artists')
           emit('adminNotification:artiest', messageContent.value)
-
-        }if (personeelChecked.value) {
-          console.log('personeel');
+        }
+        if (personeelChecked.value) {
+          console.log('personeel')
           emit('adminNotification:personeel', messageContent.value)
         }
-        if (!allChecked.value && !visitorsChecked.value && !artistsChecked.value && !personeelChecked.value) {
-          console.log('none');
+        if (
+          !allChecked.value &&
+          !visitorsChecked.value &&
+          !artistsChecked.value &&
+          !personeelChecked.value
+        ) {
+          console.log('none')
         }
-      };
-
+      }
     }
 
+    watchEffect(() => {
+      messageSent.value = false
+    })
 
+    watch([visitorsChecked, artistsChecked, personeelChecked], () => {
+      isAllDisabled.value =
+        visitorsChecked.value || artistsChecked.value || personeelChecked.value
+    })
 
-
-
-
-
-
-
-      watchEffect(() => {
-      // Reset the message sent state when any checkbox changes
-      messageSent.value = false;
-    });
-
-
-      watch([visitorsChecked, artistsChecked, personeelChecked], () => {
-        isAllDisabled.value =
-          visitorsChecked.value || artistsChecked.value || personeelChecked.value;
-      });
-  
-      return {
+    return {
       allChecked,
       visitorsChecked,
       artistsChecked,
@@ -178,8 +178,7 @@ setTimeout(() => {
       isAllDisabled,
       messageContent,
       messageSent,
-    };
+    }
   },
-};
+}
 </script>
-  

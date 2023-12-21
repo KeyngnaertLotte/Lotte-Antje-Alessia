@@ -69,8 +69,8 @@ import { UPDATE_TYPE, DELETE_PERSONEEL } from '@/graphql/personeel.mutation'
 import { useMutation } from '@vue/apollo-composable'
 import { onActivated, onBeforeMount, onMounted, onUpdated, ref } from 'vue'
 import { Pencil } from 'lucide-vue-next'
-import personeelPopup from '@/components/admin/personeelPopup.vue'
-import notificationCard from '@/components/admin/notificationCard.vue'
+import personeelPopup from '@/components/admin/PersoneelPopup.vue'
+import notificationCard from '@/components/admin/NotificationCard.vue'
 
 const isModalOpen = ref(false)
 const selectedItem = ref<any | null>(null)

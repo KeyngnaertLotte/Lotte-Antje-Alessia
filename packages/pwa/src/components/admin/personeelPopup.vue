@@ -5,7 +5,7 @@
     <div class="bg-white w-6/10 h-7/10 rounded-lg relative">
       <button
         @click="closeModal"
-        class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-[#D5573B] rounded-lg h-12 w-12 flex justify-center items-center"
+        class="absolute top-[-1rem] right-[-0.5rem] flex flex-row justify-end bg-custom-orange rounded-lg h-12 w-12 flex justify-center items-center"
       >
         <X class="h-10 w-10 stroke-white" />
       </button>
